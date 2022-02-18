@@ -182,19 +182,17 @@ public class IlographExporter extends AbstractExporter {
         String name;
         String type;
         String description;
-        ElementStyle elementStyle;
+        ElementStyle elementStyle = workspace.getViews().getConfiguration().getStyles().findElementStyle(element);
 
         if (element instanceof StaticStructureElementInstance) {
             StaticStructureElementInstance elementInstance = (StaticStructureElementInstance)element;
             name = elementInstance.getElement().getName();
             type = typeOf(workspace, elementInstance.getElement(), true);
             description = elementInstance.getElement().getDescription();
-            elementStyle = workspace.getViews().getConfiguration().getStyles().findElementStyle(elementInstance.getElement());
         } else {
             name = element.getName();
             type = typeOf(workspace, element, true);
             description = element.getDescription();
-            elementStyle = workspace.getViews().getConfiguration().getStyles().findElementStyle(element);
         }
 
         writer.indent();

@@ -182,7 +182,6 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
             name = elementInstance.getElement().getName();
             description = elementInstance.getElement().getDescription();
             type = typeOf(view, elementInstance.getElement(), true);
-            elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(elementInstance.getElement());
         }
 
         String nodeOpeningSymbol = "[";

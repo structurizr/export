@@ -237,7 +237,6 @@ public class DOTExporter extends AbstractDiagramExporter {
             description = elementInstance.getElement().getDescription();
             type = typeOf(view, elementInstance.getElement(), true);
             shape = shapeOf(view, elementInstance.getElement());
-            elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(elementInstance.getElement());
         }
 
         if (StringUtils.isNullOrEmpty(name)) {

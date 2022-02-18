@@ -107,11 +107,7 @@ public abstract class AbstractExporter {
     }
 
     protected ElementStyle findElementStyle(View view, Element element) {
-        if (element instanceof StaticStructureElementInstance) {
-            return findElementStyle(view, ((StaticStructureElementInstance)element).getElement());
-        } else {
-            return view.getViewSet().getConfiguration().getStyles().findElementStyle(element);
-        }
+        return view.getViewSet().getConfiguration().getStyles().findElementStyle(element);
     }
 
     protected RelationshipStyle findRelationshipStyle(View view, Relationship relationship) {

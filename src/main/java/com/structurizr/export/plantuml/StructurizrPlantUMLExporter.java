@@ -338,8 +338,12 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         String description = "";
         String technology = relationship.getTechnology();
 
-        if (!StringUtils.isNullOrEmpty(relationshipView.getOrder())) {
-            description = relationshipView.getOrder() + ". ";
+        if (view instanceof DynamicView && useSequenceDiagrams(view)) {
+            // do nothing - sequence diagrams don't need the order
+        } else {
+            if (!StringUtils.isNullOrEmpty(relationshipView.getOrder())) {
+                description = relationshipView.getOrder() + ". ";
+            }
         }
 
         description += (hasValue(relationshipView.getDescription()) ? relationshipView.getDescription() : hasValue(relationshipView.getRelationship().getDescription()) ? relationshipView.getRelationship().getDescription() : "");

@@ -1,8 +1,9 @@
 # Changelog
 
-## 1.4.0 (unreleased)
+## 1.4.0 (unreleased on Maven Central)
 
 - Package change from `com.structurizr.io` to `com.structurizr.export`.
+- Fixes #4 (Remove sequence numeration from messages in PlantUML Sequence diagrams for dynamic views).
 
 ## 1.3.0 (29th December 2021)
 

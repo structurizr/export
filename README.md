@@ -14,7 +14,7 @@ and is available on Maven Central, for inclusion in your own Java applications:
 
 - groupId: `com.structurizr`
 - artifactId: `structurizr-export`
-- version: `1.3.0`
+- version: `1.4.0`
 
 ## Links
 

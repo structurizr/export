@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.structurizr:structurizr-client:1.11.0'
+    implementation 'com.structurizr:structurizr-client:1.12.1'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
 }
@@ -23,7 +23,7 @@ targetCompatibility = 1.8
 
 description = 'Structurizr Export'
 group = 'com.structurizr'
-version = '1.4.0'
+version = '1.4.1'
 
 test {
     useJUnitPlatform()

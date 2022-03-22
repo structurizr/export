@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.1 (unreleased)
+
+- Adds support for relationship colours in the Ilograph export.
+
 ## 1.4.0 (20th February 2022)
 
 - Package change from `com.structurizr.io` to `com.structurizr.export`.

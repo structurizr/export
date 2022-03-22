@@ -97,6 +97,7 @@ perspectives:
         to: "3"
         label: "Reads from and writes to"
         description: "JDBC/SSL"
+        color: "#707070"
 
   - name: Deployment - Default
     relations:
@@ -104,12 +105,15 @@ perspectives:
         to: "16"
         label: "Reads from and writes to"
         description: "JDBC/SSL"
+        color: "#707070"
       - from: "10"
         to: "11"
         label: "Forwards requests to"
         description: "HTTPS"
+        color: "#707070"
       - from: "11"
         to: "9"
         label: "Forwards requests to"
         description: "HTTPS"
+        color: "#707070"
 

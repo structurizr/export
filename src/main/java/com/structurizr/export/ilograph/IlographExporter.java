@@ -5,9 +5,7 @@ import com.structurizr.export.AbstractExporter;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
-import com.structurizr.view.DynamicView;
-import com.structurizr.view.ElementStyle;
-import com.structurizr.view.RelationshipView;
+import com.structurizr.view.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -118,7 +116,7 @@ public class IlographExporter extends AbstractExporter {
 
         writer.outdent();
 
-        writeRelationshipsForStaticStructurePerspective(relationships, writer);
+        writeRelationshipsForStaticStructurePerspective(workspace.getViews().getConfiguration(), relationships, writer);
 
         for (DynamicView dynamicView : workspace.getViews().getDynamicViews()) {
             writeDynamicView(dynamicView, writer);
@@ -213,7 +211,7 @@ public class IlographExporter extends AbstractExporter {
         writer.outdent();
     }
 
-    private void writeRelationshipsForStaticStructurePerspective(Collection<Relationship> relationships, IndentingWriter writer) throws Exception {
+    private void writeRelationshipsForStaticStructurePerspective(Configuration configuration, Collection<Relationship> relationships, IndentingWriter writer) throws Exception {
         writer.writeLine("perspectives:");
         writer.indent();
         writer.writeLine("- name: Static Structure");
@@ -222,6 +220,8 @@ public class IlographExporter extends AbstractExporter {
         writer.indent();
 
         for (Relationship relationship : relationships) {
+            RelationshipStyle relationshipStyle = configuration.getStyles().findRelationshipStyle(relationship);
+
             writer.writeLine(String.format("- from: \"%s\"", relationship.getSourceId()));
             writer.indent();
             writer.writeLine(String.format("to: \"%s\"", relationship.getDestinationId()));
@@ -232,6 +232,10 @@ public class IlographExporter extends AbstractExporter {
 
             if (!StringUtils.isNullOrEmpty(relationship.getTechnology())) {
                 writer.writeLine(String.format("description: \"%s\"", relationship.getTechnology()));
+            }
+
+            if (!StringUtils.isNullOrEmpty(relationshipStyle.getColor())) {
+                writer.writeLine(String.format("color: \"%s\"", relationshipStyle.getColor()));
             }
 
             writer.writeLine();
@@ -252,6 +256,8 @@ public class IlographExporter extends AbstractExporter {
         int count = 0;
         for (RelationshipView relationshipView : dynamicView.getRelationships()) {
             Relationship relationship = relationshipView.getRelationship();
+            RelationshipStyle relationshipStyle = dynamicView.getViewSet().getConfiguration().getStyles().findRelationshipStyle(relationship);
+
             if (count == 0) {
                 writer.indent();
                 writer.writeLine(String.format("start: \"%s\"", relationship.getSourceId()));
@@ -275,6 +281,11 @@ public class IlographExporter extends AbstractExporter {
             if (!StringUtils.isNullOrEmpty(relationship.getTechnology())) {
                 writer.writeLine(String.format("description: \"%s\"", relationship.getTechnology()));
             }
+
+            if (!StringUtils.isNullOrEmpty(relationshipStyle.getColor())) {
+                writer.writeLine(String.format("color: \"%s\"", relationshipStyle.getColor()));
+            }
+
             writer.outdent();
 
             writer.writeLine();
@@ -303,6 +314,8 @@ public class IlographExporter extends AbstractExporter {
         writer.indent();
 
         for (Relationship relationship : relationships) {
+            RelationshipStyle relationshipStyle = workspace.getViews().getConfiguration().getStyles().findRelationshipStyle(relationship);
+
             writer.writeLine(String.format("- from: \"%s\"", relationship.getSourceId()));
             writer.indent();
             writer.writeLine(String.format("to: \"%s\"", relationship.getDestinationId()));
@@ -313,6 +326,10 @@ public class IlographExporter extends AbstractExporter {
 
             if (!StringUtils.isNullOrEmpty(relationship.getTechnology())) {
                 writer.writeLine(String.format("description: \"%s\"", relationship.getTechnology()));
+            }
+
+            if (!StringUtils.isNullOrEmpty(relationshipStyle.getColor())) {
+                writer.writeLine(String.format("color: \"%s\"", relationshipStyle.getColor()));
             }
 
             writer.outdent();

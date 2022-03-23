@@ -366,9 +366,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
                             idOf(relationship.getDestination()),
                             description));
         } else {
-            if (style.getDashed() == null) {
-                style.setDashed(true);
-            }
+            boolean solid = style.getStyle() == LineStyle.Solid || false == style.getDashed();
 
             String arrowStart;
             String arrowEnd;
@@ -379,11 +377,11 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             }
 
             if (relationshipView.isResponse() != null && relationshipView.isResponse()) {
-                arrowStart = style.getDashed() ? "<." : "<-";
-                arrowEnd = style.getDashed() ? "." : "-";
+                arrowStart = solid ? "<-" : "<.";
+                arrowEnd = solid ? "-" : ".";
             } else {
-                arrowStart = style.getDashed() ? "." : "-";
-                arrowEnd = style.getDashed() ? ".>" : "->";
+                arrowStart = solid ? "-" : ".";
+                arrowEnd = solid ? "->" : ".>";
             }
 
             if (!isVisible(view, relationshipView)) {

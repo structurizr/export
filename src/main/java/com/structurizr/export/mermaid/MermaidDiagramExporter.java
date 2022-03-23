@@ -245,12 +245,9 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
             destination = relationship.getSource();
         }
 
+        boolean solid = style.getStyle() == LineStyle.Solid || false == style.getDashed();
         // solid: A-- text -->B
         // dotted: A-. text .->B
-
-        if (style.getDashed() == null) {
-            style.setDashed(true);
-        }
 
         String description = relationshipView.getDescription();
         if (StringUtils.isNullOrEmpty(description)) {
@@ -264,10 +261,10 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
         writer.writeLine(
                 format("%s-%s \"<div>%s</div><div style='font-size: 70%%'>%s</div>\" %s->%s",
                         source.getId(),
-                        style.getDashed() ? "." : "-",
+                        solid ? "-" : ".",
                         lines(description),
                         !StringUtils.isNullOrEmpty(relationship.getTechnology()) ? "[" + relationship.getTechnology() + "]" : "",
-                        style.getDashed() ? "." : "-",
+                        solid ? "-" : ".",
                         destination.getId()
                 )
         );

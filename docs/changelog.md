@@ -3,6 +3,7 @@
 ## 1.4.1 (unreleased)
 
 - Adds support for relationship colours in the Ilograph export.
+- Adds support for the new relationship line style property.
 
 ## 1.4.0 (20th February 2022)
 

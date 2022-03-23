@@ -336,13 +336,15 @@ public class DOTExporter extends AbstractDiagramExporter {
             }
         }
 
+        boolean solid = relationshipStyle.getStyle() == LineStyle.Solid || false == relationshipStyle.getDashed();
+
         writer.writeLine(String.format("%s -> %s [id=%s, label=<%s%s>, style=\"%s\", color=\"%s\", fontcolor=\"%s\"%s]",
                 source.getId(),
                 destination.getId(),
                 relationshipView.getId(),
                 description,
                 technology,
-                relationshipStyle.getDashed() ? "dashed" : "solid",
+                solid ? "solid" : "dashed",
                 relationshipStyle.getColor(),
                 relationshipStyle.getColor(),
                 clusterConfig

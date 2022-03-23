@@ -1,10 +1,14 @@
 package com.structurizr.export.mermaid;
 
 import com.structurizr.export.AbstractDiagramExporter;
+import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static java.lang.String.format;
 
@@ -16,6 +20,8 @@ import static java.lang.String.format;
  * Deployment node -&gt; deployment node relationships are not rendered.
  */
 public class MermaidDiagramExporter extends AbstractDiagramExporter {
+
+    public static final String MERMAID_SEQUENCE_DIAGRAMS_PROPERTY = "mermaid.sequenceDiagrams";
 
     private int groupId = 0;
 
@@ -170,6 +176,81 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     }
 
     @Override
+    public Diagram export(DynamicView view) {
+        if (useSequenceDiagrams(view)) {
+            IndentingWriter writer = new IndentingWriter();
+            writer.writeLine("sequenceDiagram");
+            writer.writeLine();
+            writer.indent();
+
+            Set<Element> elements = new LinkedHashSet<>();
+            for (RelationshipView relationshipView : view.getRelationships()) {
+                elements.add(relationshipView.getRelationship().getSource());
+                elements.add(relationshipView.getRelationship().getDestination());
+            }
+
+            for (Element element : elements) {
+                ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(element);
+                String shape = "participant";
+                if (elementStyle.getShape() == Shape.Person) {
+                    shape = "actor";
+                }
+
+                String type = typeOf(view, element, true);
+
+                if (false == elementStyle.getMetadata()) {
+                    type = "";
+                } else {
+                    type = "<br />" + type;
+                }
+
+                writer.writeLine(String.format("%s %s as %s%s", shape, element.getId(), element.getName(), type));
+            }
+
+            writer.writeLine();
+
+            for (RelationshipView relationshipView : view.getRelationships()) {
+                Relationship relationship = relationshipView.getRelationship();
+                RelationshipStyle style = view.getViewSet().getConfiguration().getStyles().findRelationshipStyle(relationship);
+
+                String description = relationshipView.getDescription();
+                if (StringUtils.isNullOrEmpty(description)) {
+                    description = relationship.getDescription();
+                }
+
+                String sourceId = relationship.getSourceId();
+                String destinationId = relationship.getDestinationId();
+
+                if (relationshipView.isResponse()) {
+                    sourceId = relationship.getDestinationId();
+                    destinationId = relationship.getSourceId();
+                }
+
+                String technology = !StringUtils.isNullOrEmpty(relationship.getTechnology()) ? "<br />[" + relationship.getTechnology() + "]" : "";
+
+                String arrow;
+
+                if (!relationshipView.isResponse()) {
+                    arrow = "->>";
+                } else {
+                    arrow = "-->>";
+                }
+
+                writer.writeLine(String.format("%s%s%s: %s%s",
+                        sourceId,
+                        arrow,
+                        destinationId,
+                        description,
+                        technology));
+            }
+
+            return new Diagram(view, writer.toString());
+        } else {
+            return super.export(view);
+        }
+    }
+
+    @Override
     protected void writeElement(View view, Element element, IndentingWriter writer) {
         ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(element);
 
@@ -294,6 +375,10 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
         }
 
         return buf.toString();
+    }
+
+    protected boolean useSequenceDiagrams(View view) {
+        return "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(MERMAID_SEQUENCE_DIAGRAMS_PROPERTY, "false"));
     }
 
 }

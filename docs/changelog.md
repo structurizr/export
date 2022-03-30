@@ -1,10 +1,11 @@
 # Changelog
 
-## 1.4.1 (unreleased)
+## 1.5.0 (30th March 2022)
 
 - Adds support for relationship colours in the Ilograph export.
 - Adds support for the new relationship line style property.
 - Adds support for Mermaid sequence diagrams (#6).
+- Adds support for custom views and elements.
 
 ## 1.4.0 (20th February 2022)
 

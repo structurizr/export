@@ -22,7 +22,14 @@ public class IlographExporter extends AbstractExporter {
         writer.indent();
 
         Model model = workspace.getModel();
-        List<StaticStructureElement> elements = new ArrayList<>();
+        List<GroupableElement> elements = new ArrayList<>();
+
+        List<CustomElement> customElements = new ArrayList<>(model.getCustomElements());
+        customElements.sort(Comparator.comparing(CustomElement::getId));
+        for (CustomElement customElement : customElements) {
+            writeElement(writer, workspace, customElement);
+            elements.add(customElement);
+        }
 
         List<Person> people = new ArrayList<>(model.getPeople());
         people.sort(Comparator.comparing(Person::getId));
@@ -80,9 +87,10 @@ public class IlographExporter extends AbstractExporter {
         Set<Relationship> relationships = new LinkedHashSet<>();
         Set<Class> elementTypes = new HashSet<>();
 
+        elementTypes.add(CustomElement.class);
         elementTypes.add(Person.class);
         elementTypes.add(SoftwareSystem.class);
-        for (StaticStructureElement element : elements) {
+        for (GroupableElement element : elements) {
             List<Relationship> sortedRelationships = new ArrayList<>(element.getRelationships());
             sortedRelationships.sort(Comparator.comparing(Relationship::getId));
             for (Relationship relationship : sortedRelationships) {
@@ -93,7 +101,7 @@ public class IlographExporter extends AbstractExporter {
         }
 
         elementTypes.add(Container.class);
-        for (StaticStructureElement element : elements) {
+        for (GroupableElement element : elements) {
             List<Relationship> sortedRelationships = new ArrayList<>(element.getRelationships());
             sortedRelationships.sort(Comparator.comparing(Relationship::getId));
             for (Relationship relationship : sortedRelationships) {
@@ -104,7 +112,7 @@ public class IlographExporter extends AbstractExporter {
         }
 
         elementTypes.add(Component.class);
-        for (StaticStructureElement element : elements) {
+        for (GroupableElement element : elements) {
             List<Relationship> sortedRelationships = new ArrayList<>(element.getRelationships());
             sortedRelationships.sort(Comparator.comparing(Relationship::getId));
             for (Relationship relationship : sortedRelationships) {

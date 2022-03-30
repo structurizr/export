@@ -3,10 +3,7 @@ package com.structurizr.export.dot;
 import com.structurizr.Workspace;
 import com.structurizr.export.AbstractExporterTests;
 import com.structurizr.export.Diagram;
-import com.structurizr.export.plantuml.StructurizrPlantUMLExporter;
-import com.structurizr.model.Component;
-import com.structurizr.model.Container;
-import com.structurizr.model.SoftwareSystem;
+import com.structurizr.model.*;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.*;
 import org.junit.jupiter.api.Test;
@@ -14,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Collection;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DOTDiagramExporterTests extends AbstractExporterTests {
 
@@ -344,6 +341,33 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "  }\n" +
                 "\n" +
                 "\n" +
+                "}", diagram.getDefinition());
+    }
+
+    @Test
+    public void test_renderCustomView() {
+        Workspace workspace = new Workspace("Name", "Description");
+        Model model = workspace.getModel();
+
+        CustomElement a = model.addCustomElement("A");
+        CustomElement b = model.addCustomElement("B", "Custom", "Description");
+        a.uses(b, "Uses");
+
+        CustomView view = workspace.getViews().createCustomView("key", "Title", "Description");
+        view.addDefaultElements();
+
+        Diagram diagram = new DOTExporter().export(view);
+        assertEquals("digraph {\n" +
+                "  compound=true\n" +
+                "  graph [fontname=\"Arial\", rankdir=TB, ranksep=1.0, nodesep=1.0]\n" +
+                "  node [fontname=\"Arial\", shape=box, margin=\"0.4,0.3\"]\n" +
+                "  edge [fontname=\"Arial\"]\n" +
+                "  label=<<br /><font point-size=\"34\">Title</font><br /><font point-size=\"24\">Description</font>>\n" +
+                "\n" +
+                "  1 [id=1,shape=rect, label=<<font point-size=\"34\">A</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
+                "  2 [id=2,shape=rect, label=<<font point-size=\"34\">B</font><br /><font point-size=\"19\">[Custom]</font><br /><br /><font point-size=\"24\">Description</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
+                "\n" +
+                "  1 -> 2 [id=3, label=<<font point-size=\"24\">Uses</font>>, style=\"dashed\", color=\"#707070\", fontcolor=\"#707070\"]\n" +
                 "}", diagram.getDefinition());
     }
 

@@ -3,10 +3,7 @@ package com.structurizr.export.mermaid;
 import com.structurizr.Workspace;
 import com.structurizr.export.AbstractExporterTests;
 import com.structurizr.export.Diagram;
-import com.structurizr.export.plantuml.StructurizrPlantUMLExporter;
-import com.structurizr.model.Component;
-import com.structurizr.model.Container;
-import com.structurizr.model.SoftwareSystem;
+import com.structurizr.model.*;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.*;
 import org.junit.jupiter.api.Test;
@@ -14,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Collection;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MermaidDiagramExporterTests extends AbstractExporterTests {
 
@@ -274,6 +271,30 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
                 "    style 3 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
                 "  end\n" +
                 "\n", diagram.getDefinition());
+    }
+
+    @Test
+    public void test_renderCustomView() {
+        Workspace workspace = new Workspace("Name", "Description");
+        Model model = workspace.getModel();
+
+        CustomElement a = model.addCustomElement("A");
+        CustomElement b = model.addCustomElement("B", "Custom", "Description");
+        a.uses(b, "Uses");
+
+        CustomView view = workspace.getViews().createCustomView("key", "Title", "Description");
+        view.addDefaultElements();
+
+        Diagram diagram = new MermaidDiagramExporter().export(view);
+        assertEquals("graph TB\n" +
+                "  linkStyle default fill:#ffffff\n" +
+                "\n" +
+                "  1[\"<div style='font-weight: bold'>A</div><div style='font-size: 70%; margin-top: 0px'></div>\"]\n" +
+                "  style 1 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
+                "  2[\"<div style='font-weight: bold'>B</div><div style='font-size: 70%; margin-top: 0px'>[Custom]</div><div style='font-size: 80%; margin-top:10px'>Description</div>\"]\n" +
+                "  style 2 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
+                "\n" +
+                "  1-. \"<div>Uses</div><div style='font-size: 70%'></div>\" .->2", diagram.getDefinition());
     }
 
 }

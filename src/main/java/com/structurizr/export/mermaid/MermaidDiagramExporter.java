@@ -198,7 +198,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
                 String type = typeOf(view, element, true);
 
-                if (false == elementStyle.getMetadata()) {
+                if (StringUtils.isNullOrEmpty(type) || false == elementStyle.getMetadata()) {
                     type = "";
                 } else {
                     type = "<br />" + type;

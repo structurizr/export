@@ -57,25 +57,30 @@ public abstract class AbstractExporter {
     }
 
     private String typeOf(Configuration configuration, Element e, boolean includeMetadataSymbols) {
-        String terminology = configuration.getTerminology().findTerminology(e);
         String type = "";
 
         if (e instanceof Person) {
-            type = terminology;
+            type = configuration.getTerminology().findTerminology(e);
         } else if (e instanceof SoftwareSystem) {
-            type = terminology;
+            type = configuration.getTerminology().findTerminology(e);
         } else if (e instanceof Container) {
             Container container = (Container)e;
-            type = terminology + (hasValue(container.getTechnology()) ? ": " + container.getTechnology() : "");
+            type = configuration.getTerminology().findTerminology(e) + (hasValue(container.getTechnology()) ? ": " + container.getTechnology() : "");
         } else if (e instanceof Component) {
             Component component = (Component)e;
-            type = terminology + (hasValue(component.getTechnology()) ? ": " + component.getTechnology() : "");
+            type = configuration.getTerminology().findTerminology(e) + (hasValue(component.getTechnology()) ? ": " + component.getTechnology() : "");
         } else if (e instanceof DeploymentNode) {
             DeploymentNode deploymentNode = (DeploymentNode)e;
-            type = terminology + (hasValue(deploymentNode.getTechnology()) ? ": " + deploymentNode.getTechnology() : "");
+            type = configuration.getTerminology().findTerminology(e) + (hasValue(deploymentNode.getTechnology()) ? ": " + deploymentNode.getTechnology() : "");
         } else if (e instanceof InfrastructureNode) {
             InfrastructureNode infrastructureNode = (InfrastructureNode)e;
-            type = terminology + (hasValue(infrastructureNode.getTechnology()) ? ": " + infrastructureNode.getTechnology() : "");
+            type = configuration.getTerminology().findTerminology(e) + (hasValue(infrastructureNode.getTechnology()) ? ": " + infrastructureNode.getTechnology() : "");
+        } else if (e instanceof CustomElement) {
+            type = ((CustomElement)e).getMetadata();
+        }
+
+        if (StringUtils.isNullOrEmpty(type)) {
+            return type;
         }
 
         if (includeMetadataSymbols) {

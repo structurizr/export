@@ -150,6 +150,11 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
+    public Diagram export(CustomView view) {
+        return null;
+    }
+
+    @Override
     public Diagram export(DynamicView view) {
         if (useSequenceDiagrams(view)) {
             throw new UnsupportedOperationException("Sequence diagrams are not supported by C4-PlantUML");
@@ -160,6 +165,10 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void writeElement(View view, Element element, IndentingWriter writer) {
+        if (element instanceof CustomElement) {
+            return;
+        }
+
         Element elementToWrite = element;
         String id = idOf(element);
 
@@ -275,6 +284,10 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         Relationship relationship = relationshipView.getRelationship();
         Element source = relationship.getSource();
         Element destination = relationship.getDestination();
+
+        if (source instanceof CustomElement || destination instanceof CustomElement) {
+            return;
+        }
 
         if (relationshipView.isResponse() != null && relationshipView.isResponse()) {
             source = relationship.getDestination();

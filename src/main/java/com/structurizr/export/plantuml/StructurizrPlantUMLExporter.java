@@ -306,7 +306,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
                 description = "\\n\\n" + description;
             }
 
-            if (false == elementStyle.getMetadata()) {
+            if (StringUtils.isNullOrEmpty(type) || false == elementStyle.getMetadata()) {
                 type = "";
             } else {
                 type = String.format("\\n<size:10>%s</size>", type);

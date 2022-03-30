@@ -3,9 +3,7 @@ package com.structurizr.export.plantuml;
 import com.structurizr.Workspace;
 import com.structurizr.export.AbstractExporterTests;
 import com.structurizr.export.Diagram;
-import com.structurizr.model.Component;
-import com.structurizr.model.Container;
-import com.structurizr.model.SoftwareSystem;
+import com.structurizr.model.*;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.*;
 import org.junit.jupiter.api.Test;
@@ -742,6 +740,52 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "\n" +
                 "rectangle \"==Software\\nSystem\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> as SoftwareSystem\n" +
                 "\n" +
+                "@enduml", diagram.getDefinition());
+    }
+
+    @Test
+    public void test_renderCustomView() {
+        Workspace workspace = new Workspace("Name", "Description");
+        Model model = workspace.getModel();
+
+        CustomElement a = model.addCustomElement("A");
+        CustomElement b = model.addCustomElement("B", "Custom", "Description");
+        a.uses(b, "Uses");
+
+        CustomView view = workspace.getViews().createCustomView("key", "Title", "Description");
+        view.addDefaultElements();
+
+        Diagram diagram = new StructurizrPlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "title Title\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "skinparam {\n" +
+                "  shadowing false\n" +
+                "  arrowFontSize 10\n" +
+                "  defaultTextAlignment center\n" +
+                "  wrapWidth 200\n" +
+                "  maxMessageSize 100\n" +
+                "}\n" +
+                "\n" +
+                "hide stereotype\n" +
+                "\n" +
+                "skinparam rectangle<<1>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "}\n" +
+                "skinparam rectangle<<2>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "}\n" +
+                "\n" +
+                "rectangle \"==A\" <<1>> as 1\n" +
+                "rectangle \"==B\\n<size:10>[Custom]</size>\\n\\nDescription\" <<2>> as 2\n" +
+                "\n" +
+                "1 .[#707070,thickness=2].> 2 : \"<color:#707070>Uses\"\n" +
                 "@enduml", diagram.getDefinition());
     }
 

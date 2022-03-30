@@ -25,6 +25,13 @@ public abstract class AbstractDiagramExporter extends AbstractExporter {
 
         Collection<Diagram> diagrams = new ArrayList<>();
 
+        for (CustomView view : workspace.getViews().getCustomViews()) {
+            Diagram diagram = export(view);
+            if (diagram != null) {
+                diagrams.add(diagram);
+            }
+        }
+
         for (SystemLandscapeView view : workspace.getViews().getSystemLandscapeViews()) {
             Diagram diagram = export(view);
             if (diagram != null) {
@@ -68,6 +75,39 @@ public abstract class AbstractDiagramExporter extends AbstractExporter {
         }
 
         return diagrams;
+    }
+
+    public Diagram export(CustomView view) {
+        Diagram diagram = export(view, null);
+
+        if (isAnimationSupported(view) && !view.getAnimations().isEmpty()) {
+            for (Animation animation : view.getAnimations()) {
+                Diagram frame = export(view, animation.getOrder());
+                diagram.addFrame(frame);
+            }
+        }
+
+        return diagram;
+    }
+
+    private Diagram export(CustomView view, Integer animationStep) {
+        this.frame = animationStep;
+
+        IndentingWriter writer = new IndentingWriter();
+        writeHeader(view, writer);
+
+        List<GroupableElement> elements = new ArrayList<>();
+        for (ElementView elementView : view.getElements()) {
+            elements.add((CustomElement)elementView.getElement());
+        }
+
+        writeElements(view, elements, writer);
+
+        writer.writeLine();
+        writeRelationships(view, writer);
+        writeFooter(view, writer);
+
+        return new Diagram(view, writer.toString());
     }
 
     public Diagram export(SystemLandscapeView view) {

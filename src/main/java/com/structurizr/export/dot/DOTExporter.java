@@ -251,7 +251,7 @@ public class DOTExporter extends AbstractDiagramExporter {
             description = String.format("<br /><br /><font point-size=\"%s\">%s</font>", descriptionFontSize, breakText(elementStyle.getWidth(), descriptionFontSize, escape(description)));
         }
 
-        if (false == elementStyle.getMetadata()) {
+        if (StringUtils.isNullOrEmpty(type) || false == elementStyle.getMetadata()) {
             type = "";
         } else {
             type = String.format("<br /><font point-size=\"%s\">%s</font>", metadataFontSize, type);

@@ -302,9 +302,9 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     public void test_renderInfrastructureNodeWithTechnology() {
         Workspace workspace = new Workspace("Name", "Description");
         DeploymentNode deploymentNode = workspace.getModel().addDeploymentNode("Deployment node");
-        deploymentNode.addInfrastructureNode("Infrastructure node", "", "technology");
+        deploymentNode.addInfrastructureNode("Infrastructure node", "description", "technology");
 
-        DeploymentView view = workspace.getViews().createDeploymentView("key", "description");
+        DeploymentView view = workspace.getViews().createDeploymentView("key", "view description");
         view.addDefaultElements();
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
@@ -318,7 +318,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml\n" +
                 "\n" +
                 "Deployment_Node(Default.Deploymentnode, \"Deployment node\", $tags=\"Element+Deployment Node\") {\n" +
-                "  Deployment_Node(Default.Deploymentnode.Infrastructurenode, \"Infrastructure node\", \"technology\", $tags=\"Element+Infrastructure Node\")\n" +
+                "  Deployment_Node(Default.Deploymentnode.Infrastructurenode, \"Infrastructure node\", \"technology\", \"description\", $tags=\"Element+Infrastructure Node\")\n" +
                 "}\n" +
                 "\n" +
                 "\n" +

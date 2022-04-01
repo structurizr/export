@@ -144,6 +144,7 @@
                             {
                                 "id": "10",
                                 "tags": "Element,Infrastructure Node,Amazon Web Services - Route 53",
+                                "description": "High available cloud DNS web service",
                                 "name": "Route 53",
                                 "relationships": [
                                     {

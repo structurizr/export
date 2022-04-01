@@ -241,9 +241,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             if (StringUtils.isNullOrEmpty(infrastructureNode.getTechnology())) {
                 writer.writeLine(format("Deployment_Node(%s, \"%s\", $tags=\"%s\")%s", idOf(infrastructureNode), name, tagsOf(elementToWrite), url));
             } else {
-                if (StringUtils.isNullOrEmpty(infrastructureNode.getTechnology())) {
-                    writer.writeLine(format("Deployment_Node(%s, \"%s\", \"%s\", $tags=\"%s\")%s", idOf(infrastructureNode), name, infrastructureNode.getTechnology(), tagsOf(elementToWrite), url));
-                }
+                writer.writeLine(format("Deployment_Node(%s, \"%s\", \"%s\", $tags=\"%s\")%s", idOf(infrastructureNode), name, infrastructureNode.getTechnology(), tagsOf(elementToWrite), url));
             }
         }
 

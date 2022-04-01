@@ -3,9 +3,7 @@ package com.structurizr.export.plantuml;
 import com.structurizr.Workspace;
 import com.structurizr.export.AbstractExporterTests;
 import com.structurizr.export.Diagram;
-import com.structurizr.model.Component;
-import com.structurizr.model.Container;
-import com.structurizr.model.SoftwareSystem;
+import com.structurizr.model.*;
 import com.structurizr.util.WorkspaceUtils;
 import com.structurizr.view.*;
 import org.junit.jupiter.api.Test;
@@ -300,4 +298,31 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "@enduml", diagram.getDefinition());
     }
 
+    @Test
+    public void test_renderInfrastructureNodeWithTechnology() {
+        Workspace workspace = new Workspace("Name", "Description");
+        DeploymentNode deploymentNode = workspace.getModel().addDeploymentNode("Deployment node");
+        deploymentNode.addInfrastructureNode("Infrastructure node", "description", "technology");
+
+        DeploymentView view = workspace.getViews().createDeploymentView("key", "view description");
+        view.addDefaultElements();
+
+        Diagram diagram = new C4PlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "title Deployment - Default\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml\n" +
+                "\n" +
+                "Deployment_Node(Default.Deploymentnode, \"Deployment node\", $tags=\"Element+Deployment Node\") {\n" +
+                "  Deployment_Node(Default.Deploymentnode.Infrastructurenode, \"Infrastructure node\", \"technology\", \"description\", $tags=\"Element+Infrastructure Node\")\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "SHOW_LEGEND()\n" +
+                "@enduml", diagram.getDefinition());
+    }
 }

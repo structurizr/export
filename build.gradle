@@ -23,7 +23,7 @@ targetCompatibility = 1.8
 
 description = 'Structurizr Export'
 group = 'com.structurizr'
-version = '1.5.0'
+version = '1.5.1'
 
 test {
     useJUnitPlatform()

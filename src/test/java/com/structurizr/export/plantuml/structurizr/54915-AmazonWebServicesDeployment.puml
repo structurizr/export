@@ -83,8 +83,8 @@ node "Amazon Web Services\n[Deployment Node]" <<Default.AmazonWebServices>> as D
 
     }
 
-    rectangle "==Elastic Load Balancer\n<size:10>[Infrastructure Node]</size>" <<Default.AmazonWebServices.USEast1.ElasticLoadBalancer>> as Default.AmazonWebServices.USEast1.ElasticLoadBalancer
-    rectangle "==Route 53\n<size:10>[Infrastructure Node]</size>" <<Default.AmazonWebServices.USEast1.Route53>> as Default.AmazonWebServices.USEast1.Route53
+    rectangle "==Elastic Load Balancer\n<size:10>[Infrastructure Node]</size>\n\nAutomatically distributes incoming application traffic." <<Default.AmazonWebServices.USEast1.ElasticLoadBalancer>> as Default.AmazonWebServices.USEast1.ElasticLoadBalancer
+    rectangle "==Route 53\n<size:10>[Infrastructure Node]</size>\n\nHighly available and scalable cloud DNS service." <<Default.AmazonWebServices.USEast1.Route53>> as Default.AmazonWebServices.USEast1.Route53
   }
 
 }

@@ -128,6 +128,7 @@
                             {
                                 "id": "11",
                                 "tags": "Element,Infrastructure Node,Amazon Web Services - Elastic Load Balancing",
+                                "description": "Automatically distributes incoming application traffic.",
                                 "name": "Elastic Load Balancer",
                                 "relationships": [
                                     {
@@ -144,7 +145,7 @@
                             {
                                 "id": "10",
                                 "tags": "Element,Infrastructure Node,Amazon Web Services - Route 53",
-                                "description": "High available cloud DNS web service",
+                                "description": "Highly available and scalable cloud DNS service.",
                                 "name": "Route 53",
                                 "relationships": [
                                     {

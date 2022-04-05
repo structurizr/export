@@ -81,12 +81,14 @@ resources:
           - id: "10"
             name: "Route 53"
             subtitle: "[Infrastructure Node]"
+            description: "Highly available and scalable cloud DNS service."
             backgroundColor: "#ffffff"
             color: "#693cc5"
 
           - id: "11"
             name: "Elastic Load Balancer"
             subtitle: "[Infrastructure Node]"
+            description: "Automatically distributes incoming application traffic."
             backgroundColor: "#ffffff"
             color: "#693cc5"
 

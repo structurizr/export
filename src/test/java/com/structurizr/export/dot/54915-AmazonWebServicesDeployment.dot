@@ -63,8 +63,8 @@ digraph {
 
       }
 
-      11 [id=11,shape=rect, label=<<font point-size="34">Elastic Load Balancer</font><br /><font point-size="19">[Infrastructure Node]</font>>, style=filled, color="#693cc5", fillcolor="#ffffff", fontcolor="#693cc5"]
-      10 [id=10,shape=rect, label=<<font point-size="34">Route 53</font><br /><font point-size="19">[Infrastructure Node]</font>>, style=filled, color="#693cc5", fillcolor="#ffffff", fontcolor="#693cc5"]
+      11 [id=11,shape=rect, label=<<font point-size="34">Elastic Load Balancer</font><br /><font point-size="19">[Infrastructure Node]</font><br /><br /><font point-size="24">Automatically distributes<br />incoming application traffic.</font>>, style=filled, color="#693cc5", fillcolor="#ffffff", fontcolor="#693cc5"]
+      10 [id=10,shape=rect, label=<<font point-size="34">Route 53</font><br /><font point-size="19">[Infrastructure Node]</font><br /><br /><font point-size="24">Highly available and scalable<br />cloud DNS service.</font>>, style=filled, color="#693cc5", fillcolor="#ffffff", fontcolor="#693cc5"]
     }
 
   }

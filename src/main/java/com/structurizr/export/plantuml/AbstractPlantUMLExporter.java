@@ -4,9 +4,7 @@ import com.structurizr.export.AbstractDiagramExporter;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
-import com.structurizr.view.DynamicView;
-import com.structurizr.view.Shape;
-import com.structurizr.view.View;
+import com.structurizr.view.*;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,6 +17,18 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     public static final String PLANTUML_LEGEND_PROPERTY = "plantuml.legend";
     public static final String PLANTUML_INCLUDES_PROPERTY = "plantuml.includes";
     public static final String PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY = "plantuml.sequenceDiagrams";
+
+    /**
+     * <p>Set this property to <code>true</code> by calling {@link Configuration#addProperty(String, String)} in your
+     * {@link ViewSet} in order to have all {@link ModelItem#getProperties()} (for {@link Component}s and
+     * {@link Relationship}s) being printed in the PlantUML diagrams.</p>
+     *
+     * <p>The default value is <code>false</code>.</p>
+     *
+     * @see ViewSet#getConfiguration()
+     * @see Configuration#getProperties()
+     */
+    public static final String PLANTUML_ADD_PROPERTIES_PROPERTY = "plantuml.addProperties";
 
     private final Map<String, String> skinParams = new LinkedHashMap<>();
 

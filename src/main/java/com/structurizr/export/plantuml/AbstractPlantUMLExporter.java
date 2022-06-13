@@ -20,15 +20,29 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
 
     /**
      * <p>Set this property to <code>true</code> by calling {@link Configuration#addProperty(String, String)} in your
-     * {@link ViewSet} in order to have all {@link ModelItem#getProperties()} (for {@link Component}s and
-     * {@link Relationship}s) being printed in the PlantUML diagrams.</p>
+     * {@link ViewSet} in order to have all {@link ModelItem#getProperties()} for {@link Component}s
+     * being printed in the PlantUML diagrams.</p>
      *
      * <p>The default value is <code>false</code>.</p>
      *
      * @see ViewSet#getConfiguration()
      * @see Configuration#getProperties()
      */
-    public static final String PLANTUML_ADD_PROPERTIES_PROPERTY = "plantuml.addProperties";
+    public static final String C4PLANTUML_ADD_ELEMENT_PROPERTIES_PROPERTY = "c4plantuml.elementProperties";
+
+    /**
+     * <p>Set this property to <code>true</code> by calling {@link Configuration#addProperty(String, String)} in your
+     * {@link ViewSet} in order to have all {@link ModelItem#getProperties()} for {@link Relationship}s being
+     * printed in the PlantUML diagrams.</p>
+     *
+     * <p>The default value is <code>false</code>.</p>
+     *
+     * @see ViewSet#getConfiguration()
+     * @see Configuration#getProperties()
+     */
+    public static final String C4PLANTUML_ADD_RELATIONSHIP_PROPERTIES_PROPERTY = "c4plantuml.relationshipProperties";
+
+
 
     private final Map<String, String> skinParams = new LinkedHashMap<>();
 

@@ -340,7 +340,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         relationship.addProperty("Prop1", "Value1");
         relationship.addProperty("Prop2", "Value2");
 
-        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.PLANTUML_ADD_PROPERTIES_PROPERTY, "true");
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_ADD_ELEMENT_PROPERTIES_PROPERTY, Boolean.TRUE.toString());
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_ADD_RELATIONSHIP_PROPERTIES_PROPERTY, Boolean.TRUE.toString());
         ContainerView view = workspace.getViews().createContainerView(softwareSystem, "containerView", "");
         view.addDefaultElements();
 

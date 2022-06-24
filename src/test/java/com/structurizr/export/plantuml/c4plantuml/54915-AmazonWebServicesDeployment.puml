@@ -8,17 +8,17 @@ left to right direction
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
 
-Deployment_Node(Default.AmazonWebServices, "Amazon Web Services", $tags="Element+Deployment Node+Amazon Web Services - Cloud") {
-  Deployment_Node(Default.AmazonWebServices.USEast1, "US-East-1", $tags="Element+Deployment Node+Amazon Web Services - Region") {
-    Deployment_Node(Default.AmazonWebServices.USEast1.AmazonRDS, "Amazon RDS", $tags="Element+Deployment Node+Amazon Web Services - RDS") {
-      Deployment_Node(Default.AmazonWebServices.USEast1.AmazonRDS.MySQL, "MySQL", $tags="Element+Deployment Node+Amazon Web Services - RDS MySQL instance") {
+Deployment_Node(Default.AmazonWebServices, "Amazon Web Services", $tags="Element+Deployment Node+Amazon Web Services - Cloud", $sprite="img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/AWS-Cloud_light-bg@4x.png") {
+  Deployment_Node(Default.AmazonWebServices.USEast1, "US-East-1", $tags="Element+Deployment Node+Amazon Web Services - Region", $sprite="img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Region_light-bg@4x.png") {
+    Deployment_Node(Default.AmazonWebServices.USEast1.AmazonRDS, "Amazon RDS", $tags="Element+Deployment Node+Amazon Web Services - RDS", $sprite="img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-RDS_light-bg@4x.png") {
+      Deployment_Node(Default.AmazonWebServices.USEast1.AmazonRDS.MySQL, "MySQL", $tags="Element+Deployment Node+Amazon Web Services - RDS MySQL instance", $sprite="img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-RDS_MySQL_instance_light-bg@4x.png") {
         ContainerDb(Default.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Database", "Relational database schema", "Stores information regarding the veterinarians, the clients, and their pets.", $tags="Element+Container+Database+Container Instance")
       }
 
     }
 
-    Deployment_Node(Default.AmazonWebServices.USEast1.Autoscalinggroup, "Autoscaling group", $tags="Element+Deployment Node+Amazon Web Services - Auto Scaling") {
-      Deployment_Node(Default.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2, "Amazon EC2", $tags="Element+Deployment Node+Amazon Web Services - EC2") {
+    Deployment_Node(Default.AmazonWebServices.USEast1.Autoscalinggroup, "Autoscaling group", $tags="Element+Deployment Node+Amazon Web Services - Auto Scaling", $sprite="img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/AWS-Auto-Scaling_light-bg@4x.png") {
+      Deployment_Node(Default.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2, "Amazon EC2", $tags="Element+Deployment Node+Amazon Web Services - EC2", $sprite="img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-EC2_light-bg@4x.png") {
         Container(Default.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Web Application", "Java and Spring Boot", "Allows employees to view and manage information regarding the veterinarians, the clients, and their pets.", $tags="Element+Container+Spring Boot Application+Container Instance")
       }
 

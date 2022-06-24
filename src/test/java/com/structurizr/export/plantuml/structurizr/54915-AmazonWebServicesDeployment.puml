@@ -67,17 +67,17 @@ skinparam rectangle<<Default.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC
   roundCorner 20
 }
 
-node "Amazon Web Services\n[Deployment Node]" <<Default.AmazonWebServices>> as Default.AmazonWebServices {
-  node "US-East-1\n[Deployment Node]" <<Default.AmazonWebServices.USEast1>> as Default.AmazonWebServices.USEast1 {
-    node "Amazon RDS\n[Deployment Node]" <<Default.AmazonWebServices.USEast1.AmazonRDS>> as Default.AmazonWebServices.USEast1.AmazonRDS {
-      node "MySQL\n[Deployment Node]" <<Default.AmazonWebServices.USEast1.AmazonRDS.MySQL>> as Default.AmazonWebServices.USEast1.AmazonRDS.MySQL {
+node "<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/AWS-Cloud_light-bg@4x.png> Amazon Web Services\n[Deployment Node]" <<Default.AmazonWebServices>> as Default.AmazonWebServices {
+  node "<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Region_light-bg@4x.png> US-East-1\n[Deployment Node]" <<Default.AmazonWebServices.USEast1>> as Default.AmazonWebServices.USEast1 {
+    node "<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-RDS_light-bg@4x.png> Amazon RDS\n[Deployment Node]" <<Default.AmazonWebServices.USEast1.AmazonRDS>> as Default.AmazonWebServices.USEast1.AmazonRDS {
+      node "<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-RDS_MySQL_instance_light-bg@4x.png> MySQL\n[Deployment Node]" <<Default.AmazonWebServices.USEast1.AmazonRDS.MySQL>> as Default.AmazonWebServices.USEast1.AmazonRDS.MySQL {
         database "==Database\n<size:10>[Container: Relational database schema]</size>\n\nStores information regarding the veterinarians, the clients, and their pets." <<Default.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1>> as Default.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1
       }
 
     }
 
-    node "Autoscaling group\n[Deployment Node]" <<Default.AmazonWebServices.USEast1.Autoscalinggroup>> as Default.AmazonWebServices.USEast1.Autoscalinggroup {
-      node "Amazon EC2\n[Deployment Node]" <<Default.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2>> as Default.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2 {
+    node "<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/AWS-Auto-Scaling_light-bg@4x.png> Autoscaling group\n[Deployment Node]" <<Default.AmazonWebServices.USEast1.Autoscalinggroup>> as Default.AmazonWebServices.USEast1.Autoscalinggroup {
+      node "<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-EC2_light-bg@4x.png> Amazon EC2\n[Deployment Node]" <<Default.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2>> as Default.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2 {
         rectangle "==Web Application\n<size:10>[Container: Java and Spring Boot]</size>\n\nAllows employees to view and manage information regarding the veterinarians, the clients, and their pets." <<Default.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1>> as Default.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1
       }
 

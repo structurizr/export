@@ -9,8 +9,10 @@ import com.structurizr.view.*;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.lang.String.format;
 
@@ -207,9 +209,22 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             url = "";
         }
 
+        Set<String> tags = deploymentNode.getTagsAsSet();
+        Styles styles = view.getViewSet().getConfiguration().getStyles();
+        String icon = null;
+        for (String tag : tags) {
+            ElementStyle elementStyle = styles.findElementStyle(tag);
+            if (elementStyle != null) {
+                // note: we should probably introduce a scale attribute to configure the image scale
+                if (elementStyle.getIcon() != null) {
+                    icon = format("<img:%s>", elementStyle.getIcon());
+                }
+            }
+        }
+        String name = deploymentNode.getName() + (deploymentNode.getInstances() > 1 ? " (x" + deploymentNode.getInstances() + ")" : "");
         writer.writeLine(
                 format("node \"%s\\n%s\" <<%s>> as %s%s {",
-                        deploymentNode.getName() + (deploymentNode.getInstances() > 1 ? " (x" + deploymentNode.getInstances() + ")" : ""),
+                        Stream.of(icon, name).filter(Objects::nonNull).collect(Collectors.joining(" ")),
                         typeOf(view, deploymentNode, true),
                         idOf(deploymentNode),
                         idOf(deploymentNode),

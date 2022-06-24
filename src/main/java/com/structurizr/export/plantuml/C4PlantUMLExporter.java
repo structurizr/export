@@ -6,6 +6,10 @@ import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import static java.lang.String.format;
 
 public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
@@ -115,26 +119,34 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             url = "";
         }
 
-        if (StringUtils.isNullOrEmpty(deploymentNode.getTechnology())) {
-            writer.writeLine(
-                    format("Deployment_Node(%s, \"%s\", $tags=\"%s\")%s {",
-                            idOf(deploymentNode),
-                            deploymentNode.getName() + (deploymentNode.getInstances() > 1 ? " (x" + deploymentNode.getInstances() + ")" : ""),
-                            tagsOf(deploymentNode),
-                            url
-                    )
-            );
-        } else {
-            writer.writeLine(
-                    format("Deployment_Node(%s, \"%s\", \"%s\", $tags=\"%s\")%s {",
-                            idOf(deploymentNode),
-                            deploymentNode.getName() + (deploymentNode.getInstances() > 1 ? " (x" + deploymentNode.getInstances() + ")" : ""),
-                            deploymentNode.getTechnology(),
-                            tagsOf(deploymentNode),
-                            url
-                    )
-            );
+        String icon = null;
+        Set<String> tags = deploymentNode.getTagsAsSet();
+        Styles styles = view.getViewSet().getConfiguration().getStyles();
+        for (String tag : tags) {
+            ElementStyle elementStyle = styles.findElementStyle(tag);
+            if (elementStyle != null) {
+                icon = elementStyle.getIcon();
+            }
         }
+
+        List<String> args = new ArrayList<>();
+        args.add(idOf(deploymentNode));
+        args.add(format("\"%s\"", deploymentNode.getName() + (deploymentNode.getInstances() > 1 ? " (x" + deploymentNode.getInstances() + ")" : "")));
+        if (!StringUtils.isNullOrEmpty(deploymentNode.getTechnology())) {
+            args.add(format("\"%s\"", deploymentNode.getTechnology()));
+        }
+        args.add(format("$tags=\"%s\"", tagsOf(deploymentNode)));
+        if (!StringUtils.isNullOrEmpty(icon)) {
+            // note: we should probably introduce a scale attribute to configure the image scale
+            args.add(format("$sprite=\"img:%s\"", icon));
+        }
+
+        writer.writeLine(
+                format("Deployment_Node(%s)%s {",
+                        String.join(", ", args),
+                        url
+                )
+        );
         writer.indent();
 
         if (!isVisible(view, deploymentNode)) {

@@ -1,6 +1,7 @@
 package com.structurizr.export.dot;
 
-import com.structurizr.export.AbstractDiagramExporter;
+import com.structurizr.export.DiagramExporter;
+import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
@@ -9,7 +10,7 @@ import com.structurizr.view.*;
 /**
  * Exports Structurizr views to Graphviz DOT definitions.
  */
-public class DOTExporter extends AbstractDiagramExporter {
+public class DOTExporter extends DiagramExporter {
 
     private static final String DEFAULT_FONT = "Arial";
 
@@ -415,6 +416,11 @@ public class DOTExporter extends AbstractDiagramExporter {
         }
 
         return null;
+    }
+
+    @Override
+    protected Diagram createDiagram(View view, String definition) {
+        return new DOTDiagram(view, definition);
     }
 
 }

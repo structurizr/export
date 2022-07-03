@@ -25,11 +25,6 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected boolean isAnimationSupported(View view) {
-        return true;
-    }
-
-    @Override
     protected void writeHeader(View view, IndentingWriter writer) {
         super.writeHeader(view, writer);
 
@@ -249,7 +244,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             writeRelationships(view, writer);
             writeFooter(view, writer);
 
-            return new Diagram(view, writer.toString());
+            return createDiagram(view, writer.toString());
         } else {
             return super.export(view);
         }

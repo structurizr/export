@@ -1,6 +1,7 @@
 package com.structurizr.export.plantuml;
 
-import com.structurizr.export.AbstractDiagramExporter;
+import com.structurizr.export.DiagramExporter;
+import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
@@ -13,12 +14,13 @@ import java.util.Map;
 
 import static java.lang.String.format;
 
-public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
+public abstract class AbstractPlantUMLExporter extends DiagramExporter {
 
     public static final String PLANTUML_TITLE_PROPERTY = "plantuml.title";
     public static final String PLANTUML_LEGEND_PROPERTY = "plantuml.legend";
     public static final String PLANTUML_INCLUDES_PROPERTY = "plantuml.includes";
     public static final String PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY = "plantuml.sequenceDiagrams";
+    public static final String PLANTUML_ANIMATION_PROPERTY = "plantuml.animation";
 
     private final Map<String, String> skinParams = new LinkedHashMap<>();
 
@@ -168,6 +170,11 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     }
 
     @Override
+    protected boolean isAnimationSupported(View view) {
+        return "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(PLANTUML_ANIMATION_PROPERTY, "false"));
+    }
+
+    @Override
     protected void writeHeader(View view, IndentingWriter writer) {
         writer.writeLine("@startuml");
 
@@ -224,6 +231,11 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     @Override
     protected void writeFooter(View view, IndentingWriter writer) {
         writer.writeLine("@enduml");
+    }
+
+    @Override
+    protected Diagram createDiagram(View view, String definition) {
+        return new PlantUMLDiagram(view, definition);
     }
 
 }

@@ -1,7 +1,8 @@
 # Changelog
 
-## 1.5.1 (unreleased to Maven Central)
+## 1.6.0 (unreleased to Maven Central)
 
+- `com.structurizr.export.DiagramExporter` and `com.structurizr.export.WorkspaceExporter` can now be extended to build custom exporters.
 - Fixes the rendering of infrastructure nodes in C4-PlantUML deployment diagrams (#8).
 
 ## 1.5.0 (30th March 2022)

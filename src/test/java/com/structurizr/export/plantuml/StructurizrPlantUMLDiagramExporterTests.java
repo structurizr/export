@@ -18,6 +18,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
     @Test
     public void test_BigBankPlcExample() throws Exception {
         Workspace workspace = WorkspaceUtils.loadWorkspaceFromJson(new File("./src/test/structurizr-36141-workspace.json"));
+        workspace.getViews().getConfiguration().addProperty(StructurizrPlantUMLExporter.PLANTUML_ANIMATION_PROPERTY, "true");
+
         StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
 
         Collection<Diagram> diagrams = exporter.export(workspace);

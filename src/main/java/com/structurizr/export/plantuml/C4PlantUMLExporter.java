@@ -16,11 +16,6 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected boolean isAnimationSupported(View view) {
-        return !(view instanceof DynamicView);
-    }
-
-    @Override
     protected void writeHeader(View view, IndentingWriter writer) {
         super.writeHeader(view, writer);
 
@@ -307,4 +302,8 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         }
     }
 
+    @Override
+    protected boolean isAnimationSupported(View view) {
+        return !(view instanceof DynamicView) && super.isAnimationSupported(view);
+    }
 }

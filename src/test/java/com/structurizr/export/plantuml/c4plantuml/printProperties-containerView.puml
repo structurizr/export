@@ -1,0 +1,27 @@
+@startuml
+title SoftwareSystem - Containers
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+System_Boundary("SoftwareSystem_boundary", "SoftwareSystem") {
+  WithoutPropertyHeader()
+  AddProperty("IP","127.0.0.1")
+  AddProperty("Region","East")
+  Container(SoftwareSystem.Container1, "Container 1", "", $tags="Element+Container")
+  WithoutPropertyHeader()
+  AddProperty("IP","127.0.0.2")
+  AddProperty("Region","West")
+  Container(SoftwareSystem.Container2, "Container 2", "", $tags="Element+Container")
+}
+
+WithoutPropertyHeader()
+AddProperty("Prop1","Value1")
+AddProperty("Prop2","Value2")
+Rel_D(SoftwareSystem.Container1, SoftwareSystem.Container2, "", $tags="Relationship")
+
+SHOW_LEGEND()
+@enduml

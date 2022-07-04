@@ -338,4 +338,29 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "SHOW_LEGEND()\n" +
                 "@enduml", diagram.getDefinition());
     }
+
+    @Test
+    public void test_printProperties() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+        SoftwareSystem softwareSystem = workspace.getModel().addSoftwareSystem("SoftwareSystem");
+        Container container1 = softwareSystem.addContainer("Container 1");
+        container1.addProperty("IP", "127.0.0.1");
+        container1.addProperty("Region", "East");
+        Container container2 = softwareSystem.addContainer("Container 2");
+        container2.addProperty("Region", "West");
+        container2.addProperty("IP", "127.0.0.2");
+        Relationship relationship = container1.uses(container2, "");
+        relationship.addProperty("Prop1", "Value1");
+        relationship.addProperty("Prop2", "Value2");
+
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_ADD_ELEMENT_PROPERTIES_PROPERTY, Boolean.TRUE.toString());
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_ADD_RELATIONSHIP_PROPERTIES_PROPERTY, Boolean.TRUE.toString());
+        ContainerView view = workspace.getViews().createContainerView(softwareSystem, "containerView", "");
+        view.addDefaultElements();
+
+        Diagram diagram = new C4PlantUMLExporter().export(view);
+
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/printProperties-containerView.puml"));
+        assertEquals(expected, diagram.getDefinition());
+    }
 }

@@ -6,6 +6,8 @@ import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
+import java.util.Map;
+
 import static java.lang.String.format;
 
 public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
@@ -176,6 +178,10 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             url = "";
         }
 
+        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ADD_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
+            addProperties(view, writer, element);
+        }
+
         if (element instanceof StaticStructureElementInstance) {
             StaticStructureElementInstance elementInstance = (StaticStructureElementInstance)element;
             element = elementInstance.getElement();
@@ -292,6 +298,10 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             return;
         }
 
+        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ADD_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
+            addProperties(view, writer, relationship);
+        }
+
         if (relationshipView.isResponse() != null && relationshipView.isResponse()) {
             source = relationship.getDestination();
             destination = relationship.getSource();
@@ -312,6 +322,18 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         }
     }
 
+    private void addProperties(View view, IndentingWriter writer, ModelItem element) {
+        if ("true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ADD_ELEMENT_PROPERTIES_PROPERTY, "false"))) {
+            Map<String, String> properties = element.getProperties();
+            if (!properties.isEmpty()) {
+                writer.writeLine("WithoutPropertyHeader()");
+                properties.keySet().stream().sorted().forEach(key ->
+                        writer.writeLine(String.format("AddProperty(\"%s\",\"%s\")", key, properties.get(key)))
+                );
+            }
+        }
+    }
+
     @Override
     protected boolean isAnimationSupported(View view) {
         return !(view instanceof DynamicView) && super.isAnimationSupported(view);
@@ -320,5 +342,5 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     protected boolean includeTags(View view) {
         return "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_TAGS_PROPERTY, "false"));
     }
-
+    
 }

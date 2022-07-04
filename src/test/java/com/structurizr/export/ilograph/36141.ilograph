@@ -629,4 +629,3 @@ perspectives:
         label: "Reads from and writes to"
         description: "JDBC"
         color: "#707070"
-

@@ -14,6 +14,30 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     public static final String C4PLANTUML_TAGS_PROPERTY = "c4plantuml.tags";
 
+    /**
+     * <p>Set this property to <code>true</code> by calling {@link Configuration#addProperty(String, String)} in your
+     * {@link ViewSet} in order to have all {@link ModelItem#getProperties()} for {@link Component}s
+     * being printed in the PlantUML diagrams.</p>
+     *
+     * <p>The default value is <code>false</code>.</p>
+     *
+     * @see ViewSet#getConfiguration()
+     * @see Configuration#getProperties()
+     */
+    public static final String C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY = "c4plantuml.elementProperties";
+
+    /**
+     * <p>Set this property to <code>true</code> by calling {@link Configuration#addProperty(String, String)} in your
+     * {@link ViewSet} in order to have all {@link ModelItem#getProperties()} for {@link Relationship}s being
+     * printed in the PlantUML diagrams.</p>
+     *
+     * <p>The default value is <code>false</code>.</p>
+     *
+     * @see ViewSet#getConfiguration()
+     * @see Configuration#getProperties()
+     */
+    public static final String C4PLANTUML_RELATIONSHIP_PROPERTIES_PROPERTY = "c4plantuml.relationshipProperties";
+
     private int groupId = 0;
 
     public C4PlantUMLExporter() {
@@ -178,7 +202,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             url = "";
         }
 
-        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ADD_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
+        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
             addProperties(view, writer, element);
         }
 
@@ -298,7 +322,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             return;
         }
 
-        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ADD_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
+        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
             addProperties(view, writer, relationship);
         }
 
@@ -323,7 +347,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     private void addProperties(View view, IndentingWriter writer, ModelItem element) {
-        if ("true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ADD_ELEMENT_PROPERTIES_PROPERTY, "false"))) {
+        if ("true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY, "false"))) {
             Map<String, String> properties = element.getProperties();
             if (!properties.isEmpty()) {
                 writer.writeLine("WithoutPropertyHeader()");

@@ -1,5 +1,6 @@
 package com.structurizr.export.plantuml;
 
+import com.structurizr.export.AbstractDiagramExporter;
 import com.structurizr.export.DiagramExporter;
 import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
@@ -12,39 +13,13 @@ import java.util.Map;
 
 import static java.lang.String.format;
 
-public abstract class AbstractPlantUMLExporter extends DiagramExporter {
+public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
 
     public static final String PLANTUML_TITLE_PROPERTY = "plantuml.title";
     public static final String PLANTUML_LEGEND_PROPERTY = "plantuml.legend";
     public static final String PLANTUML_INCLUDES_PROPERTY = "plantuml.includes";
     public static final String PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY = "plantuml.sequenceDiagrams";
     public static final String PLANTUML_ANIMATION_PROPERTY = "plantuml.animation";
-
-    /**
-     * <p>Set this property to <code>true</code> by calling {@link Configuration#addProperty(String, String)} in your
-     * {@link ViewSet} in order to have all {@link ModelItem#getProperties()} for {@link Component}s
-     * being printed in the PlantUML diagrams.</p>
-     *
-     * <p>The default value is <code>false</code>.</p>
-     *
-     * @see ViewSet#getConfiguration()
-     * @see Configuration#getProperties()
-     */
-    public static final String C4PLANTUML_ADD_ELEMENT_PROPERTIES_PROPERTY = "c4plantuml.elementProperties";
-
-    /**
-     * <p>Set this property to <code>true</code> by calling {@link Configuration#addProperty(String, String)} in your
-     * {@link ViewSet} in order to have all {@link ModelItem#getProperties()} for {@link Relationship}s being
-     * printed in the PlantUML diagrams.</p>
-     *
-     * <p>The default value is <code>false</code>.</p>
-     *
-     * @see ViewSet#getConfiguration()
-     * @see Configuration#getProperties()
-     */
-    public static final String C4PLANTUML_ADD_RELATIONSHIP_PROPERTIES_PROPERTY = "c4plantuml.relationshipProperties";
-
-
 
     private final Map<String, String> skinParams = new LinkedHashMap<>();
 

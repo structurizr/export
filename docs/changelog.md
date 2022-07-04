@@ -2,8 +2,9 @@
 
 ## 1.6.0 (unreleased to Maven Central)
 
-- `com.structurizr.export.DiagramExporter` and `com.structurizr.export.WorkspaceExporter` can now be extended to build custom exporters.
-- Fixes the rendering of infrastructure nodes in C4-PlantUML deployment diagrams (#8).
+- `com.structurizr.export.DiagramExporter` and `com.structurizr.export.WorkspaceExporter` can now be implemented to build custom exporters, for use with the Structurizr CLI `export` command.
+- Resolves #2 (Allow to export properties to C4Plantuml files).
+- Resolves #8 (fixes the rendering of infrastructure nodes in C4-PlantUML deployment diagrams).
 - Resolves #17 (tags are no longer included by default in the C4-PlantUML export, and can be configured via a view set property named `c4plantuml.tags`).
 
 ## 1.5.0 (30th March 2022)

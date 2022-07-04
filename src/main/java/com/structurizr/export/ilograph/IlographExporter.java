@@ -1,8 +1,9 @@
 package com.structurizr.export.ilograph;
 
 import com.structurizr.Workspace;
-import com.structurizr.export.WorkspaceExporter;
+import com.structurizr.export.AbstractWorkspaceExporter;
 import com.structurizr.export.IndentingWriter;
+import com.structurizr.export.WorkspaceExport;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
@@ -13,9 +14,9 @@ import java.util.stream.Collectors;
 /**
  * Exports a Structurizr workspace to the Ilograph definition language, for use with https://app.ilograph.com/
  */
-public class IlographExporter extends WorkspaceExporter {
+public class IlographExporter extends AbstractWorkspaceExporter {
 
-    public String export(Workspace workspace) throws Exception {
+    public WorkspaceExport export(Workspace workspace) {
         IndentingWriter writer = new IndentingWriter();
         writer.writeLine("resources:");
         writer.writeLine();
@@ -140,10 +141,10 @@ public class IlographExporter extends WorkspaceExporter {
             writeDeploymentEnvironment(workspace, deploymentEnvironment, writer);
         }
 
-        return writer.toString();
+        return new IlographWorkspaceExport(writer.toString());
     }
 
-    private void writeDeploymentNode(Workspace workspace, DeploymentNode deploymentNode, IndentingWriter writer) throws Exception {
+    private void writeDeploymentNode(Workspace workspace, DeploymentNode deploymentNode, IndentingWriter writer) {
         writeElement(writer, workspace, deploymentNode);
 
         boolean hasChildren = !deploymentNode.getChildren().isEmpty() || !deploymentNode.getInfrastructureNodes().isEmpty() || !deploymentNode.getSoftwareSystemInstances().isEmpty() || !deploymentNode.getContainerInstances().isEmpty();
@@ -182,7 +183,7 @@ public class IlographExporter extends WorkspaceExporter {
         writer.outdent();
     }
 
-    private void writeElement(IndentingWriter writer, Workspace workspace, Element element) throws Exception {
+    private void writeElement(IndentingWriter writer, Workspace workspace, Element element) {
         writer.writeLine(String.format("- id: \"%s\"", element.getId()));
 
         String name;
@@ -219,7 +220,7 @@ public class IlographExporter extends WorkspaceExporter {
         writer.outdent();
     }
 
-    private void writeRelationshipsForStaticStructurePerspective(Configuration configuration, Collection<Relationship> relationships, IndentingWriter writer) throws Exception {
+    private void writeRelationshipsForStaticStructurePerspective(Configuration configuration, Collection<Relationship> relationships, IndentingWriter writer) {
         writer.writeLine("perspectives:");
         writer.indent();
         writer.writeLine("- name: Static Structure");
@@ -255,7 +256,7 @@ public class IlographExporter extends WorkspaceExporter {
         writer.outdent();
     }
 
-    private void writeDynamicView(DynamicView dynamicView, IndentingWriter writer) throws Exception {
+    private void writeDynamicView(DynamicView dynamicView, IndentingWriter writer) {
         writer.indent();
         writer.writeLine("- name: Dynamic - " + dynamicView.getName());
         writer.indent();
@@ -306,7 +307,7 @@ public class IlographExporter extends WorkspaceExporter {
         writer.outdent();
     }
 
-    private void writeDeploymentEnvironment(Workspace workspace, String deploymentEnvironment, IndentingWriter writer) throws Exception {
+    private void writeDeploymentEnvironment(Workspace workspace, String deploymentEnvironment, IndentingWriter writer) {
         writer.indent();
         writer.writeLine("- name: Deployment - " + deploymentEnvironment);
         writer.indent();
@@ -385,11 +386,6 @@ public class IlographExporter extends WorkspaceExporter {
         Element destination = relationship.getDestination();
 
         return elementTypes.contains(source.getClass()) && elementTypes.contains(destination.getClass());
-    }
-
-    @Override
-    public String getFileExtension() {
-        return "idl";
     }
 
 }

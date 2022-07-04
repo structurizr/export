@@ -118,4 +118,3 @@ perspectives:
         label: "Forwards requests to"
         description: "HTTPS"
         color: "#707070"
-

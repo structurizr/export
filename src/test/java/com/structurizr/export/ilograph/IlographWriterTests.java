@@ -3,6 +3,7 @@ package com.structurizr.export.ilograph;
 import com.structurizr.Workspace;
 import com.structurizr.export.AbstractExporterTests;
 import com.structurizr.export.Diagram;
+import com.structurizr.export.WorkspaceExport;
 import com.structurizr.export.dot.DOTExporter;
 import com.structurizr.model.CustomElement;
 import com.structurizr.model.Model;
@@ -21,10 +22,10 @@ public class IlographWriterTests extends AbstractExporterTests {
     public void test_BigBankPlcExample() throws Exception {
         Workspace workspace = WorkspaceUtils.loadWorkspaceFromJson(new File("./src/test/structurizr-36141-workspace.json"));
         IlographExporter ilographExporter = new IlographExporter();
-        String definition = ilographExporter.export(workspace);
+        WorkspaceExport export = ilographExporter.export(workspace);
 
         String expected = readFile(new File("./src/test/java/com/structurizr/export/ilograph/36141.ilograph"));
-        assertEquals(expected, definition);
+        assertEquals(expected, export.getDefinition());
     }
 
     @Test
@@ -32,10 +33,10 @@ public class IlographWriterTests extends AbstractExporterTests {
         Workspace workspace = WorkspaceUtils.loadWorkspaceFromJson(new File("./src/test/structurizr-54915-workspace.json"));
         ThemeUtils.loadThemes(workspace);
         IlographExporter ilographExporter = new IlographExporter();
-        String definition = ilographExporter.export(workspace);
+        WorkspaceExport export = ilographExporter.export(workspace);
 
         String expected = readFile(new File("./src/test/java/com/structurizr/export/ilograph/54915.ilograph"));
-        assertEquals(expected, definition);
+        assertEquals(expected, export.getDefinition());
     }
 
     @Test
@@ -47,7 +48,7 @@ public class IlographWriterTests extends AbstractExporterTests {
         CustomElement b = model.addCustomElement("B", "Custom", "Description");
         a.uses(b, "Uses");
 
-        String idl = new IlographExporter().export(workspace);
+        WorkspaceExport export = new IlographExporter().export(workspace);
         assertEquals("resources:\n" +
                 "\n" +
                 "  - id: \"1\"\n" +
@@ -69,8 +70,7 @@ public class IlographWriterTests extends AbstractExporterTests {
                 "      - from: \"1\"\n" +
                 "        to: \"2\"\n" +
                 "        label: \"Uses\"\n" +
-                "        color: \"#707070\"\n" +
-                "\n", idl);
+                "        color: \"#707070\"\n", export.getDefinition());
     }
 
 }

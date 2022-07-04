@@ -1,6 +1,6 @@
 package com.structurizr.export.websequencediagrams;
 
-import com.structurizr.export.DiagramExporter;
+import com.structurizr.export.AbstractDiagramExporter;
 import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
@@ -17,7 +17,7 @@ import java.util.Set;
  * both synchronous and asynchronous. It doesn't support return messages,
  * parallel behaviour, etc.
  */
-public class WebSequenceDiagramsExporter extends DiagramExporter {
+public class WebSequenceDiagramsExporter extends AbstractDiagramExporter {
 
     private static final String SYNCHRONOUS_INTERACTION = "->";
     private static final String ASYNCHRONOUS_INTERACTION = "->>";

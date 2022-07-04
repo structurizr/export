@@ -1,7 +1,7 @@
 package com.structurizr.export.ilograph;
 
 import com.structurizr.Workspace;
-import com.structurizr.export.AbstractExporter;
+import com.structurizr.export.WorkspaceExporter;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  * Exports a Structurizr workspace to the Ilograph definition language, for use with https://app.ilograph.com/
  */
-public class IlographExporter extends AbstractExporter {
+public class IlographExporter extends WorkspaceExporter {
 
     public String export(Workspace workspace) throws Exception {
         IndentingWriter writer = new IndentingWriter();
@@ -385,6 +385,11 @@ public class IlographExporter extends AbstractExporter {
         Element destination = relationship.getDestination();
 
         return elementTypes.contains(source.getClass()) && elementTypes.contains(destination.getClass());
+    }
+
+    @Override
+    public String getFileExtension() {
+        return "idl";
     }
 
 }

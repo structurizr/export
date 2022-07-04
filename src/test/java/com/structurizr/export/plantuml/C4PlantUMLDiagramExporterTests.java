@@ -18,8 +18,9 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_BigBankPlcExample() throws Exception {
         Workspace workspace = WorkspaceUtils.loadWorkspaceFromJson(new File("./src/test/structurizr-36141-workspace.json"));
-        C4PlantUMLExporter exporter = new C4PlantUMLExporter();
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
 
+        C4PlantUMLExporter exporter = new C4PlantUMLExporter();
         Collection<Diagram> diagrams = exporter.export(workspace);
         assertEquals(7, diagrams.size());
 
@@ -65,6 +66,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         Workspace workspace = WorkspaceUtils.loadWorkspaceFromJson(new File("./src/test/structurizr-54915-workspace.json"));
         ThemeUtils.loadThemes(workspace);
         workspace.getViews().getDeploymentViews().iterator().next().enableAutomaticLayout(AutomaticLayout.RankDirection.LeftRight, 300, 300);
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
 
         C4PlantUMLExporter exporter = new C4PlantUMLExporter();
         Collection<Diagram> diagrams = exporter.export(workspace);
@@ -78,6 +80,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_GroupsExample() throws Exception {
         Workspace workspace = WorkspaceUtils.loadWorkspaceFromJson(new File("./src/test/groups.json"));
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
         ThemeUtils.loadThemes(workspace);
 
         C4PlantUMLExporter exporter = new C4PlantUMLExporter();
@@ -100,6 +103,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_renderContainerDiagramWithExternalContainers() {
         Workspace workspace = new Workspace("Name", "Description");
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
+
         SoftwareSystem softwareSystem1 = workspace.getModel().addSoftwareSystem("Software System 1");
         Container container1 = softwareSystem1.addContainer("Container 1");
         SoftwareSystem softwareSystem2 = workspace.getModel().addSoftwareSystem("Software System 2");
@@ -162,6 +167,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_renderComponentDiagramWithExternalComponents() {
         Workspace workspace = new Workspace("Name", "Description");
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
+
         SoftwareSystem softwareSystem1 = workspace.getModel().addSoftwareSystem("Software System 1");
         Container container1 = softwareSystem1.addContainer("Container 1");
         Component component1 = container1.addComponent("Component 1");
@@ -225,6 +232,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_renderDiagramWithElementUrls() {
         Workspace workspace = new Workspace("Name", "Description");
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
+
         SoftwareSystem softwareSystem = workspace.getModel().addSoftwareSystem("Software System");
         softwareSystem.setUrl("https://structurizr.com");
 
@@ -255,6 +264,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "Description");
         view.addDefaultElements();
 
+        view.getViewSet().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
         view.getViewSet().getConfiguration().addProperty(C4PlantUMLExporter.PLANTUML_INCLUDES_PROPERTY, "styles.puml");
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
@@ -277,6 +287,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_renderDiagramWithNewLineCharacterInElementName() {
         Workspace workspace = new Workspace("Name", "Description");
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
+
         workspace.getModel().addSoftwareSystem("Software\nSystem");
 
         SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "Description");
@@ -301,6 +313,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_renderInfrastructureNodeWithTechnology() {
         Workspace workspace = new Workspace("Name", "Description");
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
         DeploymentNode deploymentNode = workspace.getModel().addDeploymentNode("Deployment node");
         deploymentNode.addInfrastructureNode("Infrastructure node", "description", "technology");
 

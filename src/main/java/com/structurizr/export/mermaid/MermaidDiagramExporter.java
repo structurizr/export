@@ -1,6 +1,6 @@
 package com.structurizr.export.mermaid;
 
-import com.structurizr.export.AbstractDiagramExporter;
+import com.structurizr.export.DiagramExporter;
 import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
@@ -19,7 +19,7 @@ import static java.lang.String.format;
  * System landscape, system context, container, component, dynamic and deployment diagrams are supported.
  * Deployment node -&gt; deployment node relationships are not rendered.
  */
-public class MermaidDiagramExporter extends AbstractDiagramExporter {
+public class MermaidDiagramExporter extends DiagramExporter {
 
     public static final String MERMAID_SEQUENCE_DIAGRAMS_PROPERTY = "mermaid.sequenceDiagrams";
 
@@ -244,7 +244,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
                         technology));
             }
 
-            return new Diagram(view, writer.toString());
+            return createDiagram(view, writer.toString());
         } else {
             return super.export(view);
         }
@@ -379,6 +379,11 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
     protected boolean useSequenceDiagrams(View view) {
         return "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(MERMAID_SEQUENCE_DIAGRAMS_PROPERTY, "false"));
+    }
+
+    @Override
+    protected Diagram createDiagram(View view, String definition) {
+        return new MermaidDiagram(view, definition);
     }
 
 }

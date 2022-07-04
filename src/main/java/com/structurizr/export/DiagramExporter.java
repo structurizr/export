@@ -8,7 +8,7 @@ import com.structurizr.view.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class AbstractDiagramExporter extends AbstractExporter {
+public abstract class DiagramExporter extends Exporter {
 
     private Object frame = null;
 
@@ -107,7 +107,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter {
         writeRelationships(view, writer);
         writeFooter(view, writer);
 
-        return new Diagram(view, writer.toString());
+        return createDiagram(view, writer.toString());
     }
 
     public Diagram export(SystemLandscapeView view) {
@@ -201,7 +201,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter {
         writeRelationships(view, writer);
         writeFooter(view, writer);
 
-        return new Diagram(view, writer.toString());
+        return createDiagram(view, writer.toString());
     }
 
     public Diagram export(ContainerView view) {
@@ -264,7 +264,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter {
 
         writeFooter(view, writer);
 
-        return new Diagram(view, writer.toString());
+        return createDiagram(view, writer.toString());
     }
 
     public Diagram export(ComponentView view) {
@@ -326,7 +326,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter {
 
         writeFooter(view, writer);
 
-        return new Diagram(view, writer.toString());
+        return createDiagram(view, writer.toString());
     }
 
     public Diagram export(DynamicView view) {
@@ -432,7 +432,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter {
         writeRelationships(view, writer);
         writeFooter(view, writer);
 
-        return new Diagram(view, writer.toString());
+        return createDiagram(view, writer.toString());
     }
 
     public Diagram export(DeploymentView view) {
@@ -462,7 +462,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter {
         writeRelationships(view, writer);
         writeFooter(view, writer);
 
-        return new Diagram(view, writer.toString());
+        return createDiagram(view, writer.toString());
     }
 
     private void write(DeploymentView view, DeploymentNode deploymentNode, IndentingWriter writer) {
@@ -625,5 +625,6 @@ public abstract class AbstractDiagramExporter extends AbstractExporter {
         return true;
     }
 
-
+    protected abstract Diagram createDiagram(View view, String definition);
+    
 }

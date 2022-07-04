@@ -5,7 +5,7 @@ import com.structurizr.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Diagram {
+public abstract class Diagram {
 
     private View view;
     private String definition;
@@ -41,5 +41,7 @@ public class Diagram {
     public List<Diagram> getFrames() {
         return new ArrayList<>(frames);
     }
+
+    public abstract String getFileExtension();
 
 }

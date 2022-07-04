@@ -5,10 +5,7 @@ import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public abstract class AbstractExporter {
+public abstract class Exporter {
 
     protected String breakText(int maxWidth, int fontSize, String s) {
         if (StringUtils.isNullOrEmpty(s)) {

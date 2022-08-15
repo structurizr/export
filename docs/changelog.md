@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.6.0 (unreleased to Maven Central)
+## 1.6.0 (15th August 2022)
 
 - `com.structurizr.export.DiagramExporter` and `com.structurizr.export.WorkspaceExporter` can now be implemented to build custom exporters, for use with the Structurizr CLI `export` command.
 - Resolves #2 (Allow to export properties to C4Plantuml files).

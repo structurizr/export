@@ -157,7 +157,7 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     }
 
     private String filter(String s) {
-        return s.replaceAll("\\W", "");
+        return s.replaceAll("(?U)\\W", "");
     }
 
     protected boolean includeTitle(View view) {

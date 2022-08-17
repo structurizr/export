@@ -791,4 +791,36 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "@enduml", diagram.getDefinition());
     }
 
+    @Test
+    void renderWorkspaceWithUnicodeElementName() {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addPerson("Пользователь");
+        workspace.getViews().createSystemLandscapeView("key", "Description").addDefaultElements();
+
+        assertEquals("@startuml\n" +
+                "title System Landscape\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "skinparam {\n" +
+                "  shadowing false\n" +
+                "  arrowFontSize 10\n" +
+                "  defaultTextAlignment center\n" +
+                "  wrapWidth 200\n" +
+                "  maxMessageSize 100\n" +
+                "}\n" +
+                "\n" +
+                "hide stereotype\n" +
+                "\n" +
+                "skinparam rectangle<<Пользователь>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "}\n" +
+                "\n" +
+                "rectangle \"==Пользователь\\n<size:10>[Person]</size>\" <<Пользователь>> as Пользователь\n" +
+                "\n" +
+                "@enduml", new StructurizrPlantUMLExporter().export(workspace).stream().findFirst().get().getDefinition());
+    }
+
 }

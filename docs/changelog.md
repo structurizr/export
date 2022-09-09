@@ -3,6 +3,7 @@
 ## 1.6.1 (unreleased to Maven Central)
 
 - Fixes #15 (PlantUML export fails when element names are Unicode characters)
+- Fixes an issue with the last character of workspace exports being stripped. 
 
 ## 1.6.0 (15th August 2022)
 

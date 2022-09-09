@@ -366,6 +366,17 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             String arrowStart;
             String arrowEnd;
             String relationshipStyle = style.getColor();
+            String direction = "";
+
+            if (relationship.hasTag("right")) {
+                direction = "right";
+            } else if (relationship.hasTag("left")) {
+                direction = "left";
+            } else if (relationship.hasTag("up")) {
+                direction = "up";
+            } else if (relationship.hasTag("down")) {
+                direction = "down";
+            }
 
             if (style.getThickness() != null) {
                 relationshipStyle += ",thickness=" + style.getThickness();
@@ -383,11 +394,12 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
                 relationshipStyle = "hidden";
             }
 
-            // 1 .[#rrggbb,thickness=n].> 2 : "...\n<size:8>...</size>
+            // 1 .[#rrggbb,thickness=n]direction.> 2 : "...\n<size:8>...</size>
             writer.writeLine(format("%s %s[%s]%s %s : \"<color:%s>%s%s\"",
                     idOf(relationship.getSource()),
                     arrowStart,
                     relationshipStyle,
+                    direction,
                     arrowEnd,
                     idOf(relationship.getDestination()),
                     style.getColor(),

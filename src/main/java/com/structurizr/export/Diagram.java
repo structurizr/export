@@ -11,15 +11,11 @@ public abstract class Diagram {
     private String definition;
 
     private List<Diagram> frames = new ArrayList<>();
+    private Legend legend;
 
     public Diagram(View view, String definition) {
         this.view = view;
-
-        if (definition.length() > 0) {
-            this.definition = definition.substring(0, definition.length() - 1);
-        } else {
-            this.definition = definition;
-        }
+        this.definition = definition;
     }
 
     public String getKey() {
@@ -40,6 +36,14 @@ public abstract class Diagram {
 
     public List<Diagram> getFrames() {
         return new ArrayList<>(frames);
+    }
+
+    public Legend getLegend() {
+        return legend;
+    }
+
+    public void setLegend(Legend legend) {
+        this.legend = legend;
     }
 
     public abstract String getFileExtension();

@@ -87,6 +87,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
             }
         }
 
+        diagram.setLegend(createLegend(view));
         return diagram;
     }
 
@@ -120,6 +121,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
             }
         }
 
+        diagram.setLegend(createLegend(view));
         return diagram;
     }
 
@@ -138,6 +140,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
             }
         }
 
+        diagram.setLegend(createLegend(view));
         return diagram;
     }
 
@@ -214,6 +217,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
             }
         }
 
+        diagram.setLegend(createLegend(view));
         return diagram;
     }
 
@@ -277,6 +281,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
             }
         }
 
+        diagram.setLegend(createLegend(view));
         return diagram;
     }
 
@@ -344,6 +349,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
             }
         }
 
+        diagram.setLegend(createLegend(view));
         return diagram;
     }
 
@@ -445,6 +451,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
             }
         }
 
+        diagram.setLegend(createLegend(view));
         return diagram;
     }
 
@@ -626,5 +633,9 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
     }
 
     protected abstract Diagram createDiagram(View view, String definition);
-    
+
+    protected Legend createLegend(View view) {
+        return null;
+    }
+
 }

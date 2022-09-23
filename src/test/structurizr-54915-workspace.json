@@ -20,22 +20,23 @@
                     },
                     {
                         "id": "2",
-                        "tags": "Element,Container,Spring Boot Application",
+                        "tags": "Element,Container,Application",
                         "name": "Web Application",
                         "description": "Allows employees to view and manage information regarding the veterinarians, the clients, and their pets.",
                         "relationships": [
                             {
                                 "id": "4",
-                                "tags": "Relationship,Synchronous",
+                                "tags": "Relationship",
                                 "sourceId": "2",
                                 "destinationId": "3",
                                 "description": "Reads from and writes to",
-                                "technology": "JDBC/SSL"
+                                "technology": "MySQL Protocol/SSL"
                             }
                         ],
                         "technology": "Java and Spring Boot"
                     }
-                ]
+                ],
+                "documentation": {}
             }
         ],
         "deploymentNodes": [
@@ -43,130 +44,141 @@
                 "id": "5",
                 "tags": "Element,Deployment Node,Amazon Web Services - Cloud",
                 "name": "Amazon Web Services",
-                "environment": "Default",
+                "environment": "Live",
                 "instances": 1,
                 "children": [
                     {
                         "id": "6",
                         "tags": "Element,Deployment Node,Amazon Web Services - Region",
                         "name": "US-East-1",
-                        "environment": "Default",
+                        "environment": "Live",
                         "instances": 1,
                         "children": [
                             {
-                                "id": "14",
+                                "id": "12",
                                 "tags": "Element,Deployment Node,Amazon Web Services - RDS",
                                 "name": "Amazon RDS",
-                                "environment": "Default",
+                                "environment": "Live",
                                 "instances": 1,
                                 "children": [
                                     {
-                                        "id": "15",
+                                        "id": "13",
                                         "tags": "Element,Deployment Node,Amazon Web Services - RDS MySQL instance",
                                         "name": "MySQL",
-                                        "environment": "Default",
+                                        "environment": "Live",
                                         "instances": 1,
                                         "containerInstances": [
                                             {
-                                                "id": "16",
+                                                "id": "14",
                                                 "tags": "Container Instance",
-                                                "environment": "Default",
-                                                "containerId": "3",
+                                                "environment": "Live",
+                                                "deploymentGroups": [
+                                                    "Default"
+                                                ],
                                                 "instanceId": 1,
-                                                "properties": {}
+                                                "containerId": "3"
                                             }
                                         ],
                                         "children": [],
+                                        "softwareSystemInstances": [],
                                         "infrastructureNodes": []
                                     }
                                 ],
+                                "softwareSystemInstances": [],
                                 "containerInstances": [],
                                 "infrastructureNodes": []
                             },
                             {
-                                "id": "7",
+                                "id": "9",
                                 "tags": "Element,Deployment Node,Amazon Web Services - Auto Scaling",
                                 "name": "Autoscaling group",
-                                "environment": "Default",
+                                "environment": "Live",
                                 "instances": 1,
                                 "children": [
                                     {
-                                        "id": "8",
+                                        "id": "10",
                                         "tags": "Element,Deployment Node,Amazon Web Services - EC2",
                                         "name": "Amazon EC2",
-                                        "environment": "Default",
+                                        "environment": "Live",
                                         "instances": 1,
                                         "containerInstances": [
                                             {
-                                                "id": "9",
+                                                "id": "11",
                                                 "tags": "Container Instance",
                                                 "relationships": [
                                                     {
-                                                        "id": "17",
-                                                        "sourceId": "9",
-                                                        "destinationId": "16",
+                                                        "id": "15",
+                                                        "sourceId": "11",
+                                                        "destinationId": "14",
                                                         "description": "Reads from and writes to",
-                                                        "technology": "JDBC/SSL",
+                                                        "technology": "MySQL Protocol/SSL",
                                                         "linkedRelationshipId": "4"
                                                     }
                                                 ],
-                                                "environment": "Default",
-                                                "containerId": "2",
+                                                "environment": "Live",
+                                                "deploymentGroups": [
+                                                    "Default"
+                                                ],
                                                 "instanceId": 1,
-                                                "properties": {}
+                                                "containerId": "2"
                                             }
                                         ],
                                         "children": [],
+                                        "softwareSystemInstances": [],
                                         "infrastructureNodes": []
                                     }
                                 ],
+                                "softwareSystemInstances": [],
                                 "containerInstances": [],
                                 "infrastructureNodes": []
                             }
                         ],
                         "infrastructureNodes": [
                             {
-                                "id": "11",
+                                "id": "8",
                                 "tags": "Element,Infrastructure Node,Amazon Web Services - Elastic Load Balancing",
-                                "description": "Automatically distributes incoming application traffic.",
                                 "name": "Elastic Load Balancer",
+                                "description": "Automatically distributes incoming application traffic.",
                                 "relationships": [
                                     {
-                                        "id": "13",
-                                        "tags": "Relationship,Synchronous",
-                                        "sourceId": "11",
-                                        "destinationId": "9",
-                                        "description": "Forwards requests to",
-                                        "technology": "HTTPS"
-                                    }
-                                ],
-                                "environment": "Default"
-                            },
-                            {
-                                "id": "10",
-                                "tags": "Element,Infrastructure Node,Amazon Web Services - Route 53",
-                                "description": "Highly available and scalable cloud DNS service.",
-                                "name": "Route 53",
-                                "relationships": [
-                                    {
-                                        "id": "12",
-                                        "tags": "Relationship,Synchronous",
-                                        "sourceId": "10",
+                                        "id": "17",
+                                        "tags": "Relationship",
+                                        "sourceId": "8",
                                         "destinationId": "11",
                                         "description": "Forwards requests to",
                                         "technology": "HTTPS"
                                     }
                                 ],
-                                "environment": "Default"
+                                "environment": "Live"
+                            },
+                            {
+                                "id": "7",
+                                "tags": "Element,Infrastructure Node,Amazon Web Services - Route 53",
+                                "name": "Route 53",
+                                "description": "Highly available and scalable cloud DNS service.",
+                                "relationships": [
+                                    {
+                                        "id": "16",
+                                        "tags": "Relationship",
+                                        "sourceId": "7",
+                                        "destinationId": "8",
+                                        "description": "Forwards requests to",
+                                        "technology": "HTTPS"
+                                    }
+                                ],
+                                "environment": "Live"
                             }
                         ],
+                        "softwareSystemInstances": [],
                         "containerInstances": []
                     }
                 ],
+                "softwareSystemInstances": [],
                 "containerInstances": [],
                 "infrastructureNodes": []
             }
         ],
+        "customElements": [],
         "people": []
     },
     "documentation": {
@@ -178,100 +190,113 @@
         "deploymentViews": [
             {
                 "softwareSystemId": "1",
-                "description": "An example deployment diagram.",
                 "key": "AmazonWebServicesDeployment",
-                "paperSize": "A4_Landscape",
+                "order": 1,
+                "paperSize": "A3_Landscape",
+                "dimensions": {
+                    "width": 3925,
+                    "height": 1816
+                },
+                "automaticLayout": {
+                    "implementation": "Graphviz",
+                    "rankDirection": "LeftRight",
+                    "rankSeparation": 300,
+                    "nodeSeparation": 300,
+                    "edgeSeparation": 0,
+                    "vertices": false
+                },
+                "environment": "Live",
                 "animations": [
                     {
                         "order": 1,
                         "elements": [
                             "5",
                             "6",
-                            "10"
+                            "7"
                         ]
                     },
                     {
                         "order": 2,
                         "elements": [
-                            "11"
+                            "8"
                         ],
                         "relationships": [
-                            "12"
+                            "16"
                         ]
                     },
                     {
                         "order": 3,
                         "elements": [
-                            "7",
-                            "8",
-                            "9"
+                            "11",
+                            "9",
+                            "10"
                         ],
                         "relationships": [
-                            "13"
+                            "17"
                         ]
                     },
                     {
                         "order": 4,
                         "elements": [
-                            "14",
-                            "15",
-                            "16"
+                            "12",
+                            "13",
+                            "14"
                         ],
                         "relationships": [
-                            "17"
+                            "15"
                         ]
                     }
                 ],
                 "elements": [
                     {
                         "id": "11",
-                        "x": 1050,
-                        "y": 320
+                        "x": 1987,
+                        "y": 672
+                    },
+                    {
+                        "id": "12",
+                        "x": 175,
+                        "y": 175
+                    },
+                    {
+                        "id": "13",
+                        "x": 175,
+                        "y": 175
                     },
                     {
                         "id": "14",
-                        "x": 0,
-                        "y": 0
-                    },
-                    {
-                        "id": "15",
-                        "x": 0,
-                        "y": 0
-                    },
-                    {
-                        "id": "16",
-                        "x": 2640,
-                        "y": 320
+                        "x": 2887,
+                        "y": 672
                     },
                     {
                         "id": "5",
-                        "x": 0,
-                        "y": 0
+                        "x": 175,
+                        "y": 175
                     },
                     {
                         "id": "6",
-                        "x": 0,
-                        "y": 0
+                        "x": 175,
+                        "y": 175
                     },
                     {
                         "id": "7",
-                        "x": 0,
-                        "y": 0
+                        "x": 487,
+                        "y": 672
                     },
                     {
                         "id": "8",
-                        "x": 0,
-                        "y": 0
+                        "x": 1237,
+                        "y": 672
                     },
                     {
                         "id": "9",
-                        "x": 1845,
-                        "y": 320
+                        "x": 175,
+                        "y": 175
                     },
                     {
                         "id": "10",
-                        "x": 255,
-                        "y": 320
+                        "x": 175,
+                        "y": 175
                     }
                 ],
                 "relationships": [
@@ -279,13 +304,12 @@
                         "id": "17"
                     },
                     {
-                        "id": "13"
+                        "id": "16"
                     },
                     {
-                        "id": "12"
+                        "id": "15"
                     }
-                ],
-                "environment": "Default"
+                ]
             }
         ],
         "configuration": {
@@ -293,19 +317,21 @@
             "styles": {
                 "elements": [
                     {
-                        "tag": "Spring Boot Application",
+                        "tag": "Element",
                         "background": "#ffffff",
                         "shape": "RoundedBox"
+                    },
+                    {
+                        "tag": "Container",
+                        "background": "#ffffff"
+                    },
+                    {
+                        "tag": "Application",
+                        "background": "#ffffff"
                     },
                     {
                         "tag": "Database",
-                        "background": "#ffffff",
                         "shape": "Cylinder"
-                    },
-                    {
-                        "tag": "Infrastructure Node",
-                        "background": "#ffffff",
-                        "shape": "RoundedBox"
                     }
                 ],
                 "relationships": []
@@ -314,9 +340,9 @@
                 "https://static.structurizr.com/themes/amazon-web-services-2020.04.30/theme.json"
             ],
             "terminology": {},
-            "lastSavedView": "AmazonWebServicesDeployment",
-            "viewSortOrder": "Default"
+            "lastSavedView": "AmazonWebServicesDeployment"
         },
+        "customViews": [],
         "systemLandscapeViews": [],
         "systemContextViews": [],
         "containerViews": [],

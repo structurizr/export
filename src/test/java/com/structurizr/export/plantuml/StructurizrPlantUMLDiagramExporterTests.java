@@ -30,6 +30,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         assertEquals(expected, diagram.getDefinition());
         assertEquals(3, diagram.getFrames().size());
 
+        //assertEquals("", diagram.getLegend().getDefinition());
+
         diagram = diagrams.stream().filter(d -> d.getKey().equals("SystemContext")).findFirst().get();
         expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/36141-SystemContext.puml"));
         assertEquals(expected, diagram.getDefinition());
@@ -81,6 +83,9 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         Diagram diagram = diagrams.stream().findFirst().get();
         String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/54915-AmazonWebServicesDeployment.puml"));
         assertEquals(expected, diagram.getDefinition());
+
+        expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/54915-AmazonWebServicesDeployment-Legend.puml"));
+        assertEquals(expected, diagram.getLegend().getDefinition());
     }
 
     @Test
@@ -821,6 +826,100 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "rectangle \"==Пользователь\\n<size:10>[Person]</size>\" <<Пользователь>> as Пользователь\n" +
                 "\n" +
                 "@enduml", new StructurizrPlantUMLExporter().export(workspace).stream().findFirst().get().getDefinition());
+    }
+
+    @Test
+    public void testLegend() {
+        Workspace workspace = new Workspace("Name", "Description");
+        Model model = workspace.getModel();
+
+        CustomElement a = model.addCustomElement("A");
+        a.addTags("Tag 1");
+        CustomElement b = model.addCustomElement("B");
+        b.addTags("Tag 2");
+        a.uses(b, "...").addTags("Tag 3");
+        b.uses(a, "...").addTags("Tag 4");
+
+        CustomView view = workspace.getViews().createCustomView("key", "Title", "Description");
+        view.addDefaultElements();
+
+        Diagram diagram = new StructurizrPlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "\n" +
+                "skinparam {\n" +
+                "  shadowing false\n" +
+                "  arrowFontSize 15\n" +
+                "  defaultTextAlignment center\n" +
+                "  wrapWidth 100\n" +
+                "  maxMessageSize 100\n" +
+                "}\n" +
+                "hide stereotype\n" +
+                "\n" +
+                "skinparam rectangle<<_transparent>> {\n" +
+                "  BorderColor transparent\n" +
+                "  BackgroundColor transparent\n" +
+                "  FontColor transparent\n" +
+                "}\n" +
+                "\n" +
+                "skinparam rectangle<<1>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "}\n" +
+                "rectangle \"==Element\" <<1>>\n" +
+                "\n" +
+                "rectangle \".\" <<_transparent>> as 2\n" +
+                "2 .[#707070,thickness=2].> 2 : \"<color:#707070>Relationship\"\n" +
+                "\n" +
+                "\n" +
+                "@enduml", diagram.getLegend().getDefinition());
+
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Tag 1").background("#ff0000").color("#ffffff").shape(Shape.RoundedBox);
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Tag 2").background("#00ff00").color("#ffffff").shape(Shape.Hexagon);
+        workspace.getViews().getConfiguration().getStyles().addRelationshipStyle("Tag 3").color("#0000ff");
+        workspace.getViews().getConfiguration().getStyles().addRelationshipStyle("Tag 4").color("#ff00ff").thickness(3).style(LineStyle.Solid);
+
+        diagram = new StructurizrPlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "\n" +
+                "skinparam {\n" +
+                "  shadowing false\n" +
+                "  arrowFontSize 15\n" +
+                "  defaultTextAlignment center\n" +
+                "  wrapWidth 100\n" +
+                "  maxMessageSize 100\n" +
+                "}\n" +
+                "hide stereotype\n" +
+                "\n" +
+                "skinparam rectangle<<_transparent>> {\n" +
+                "  BorderColor transparent\n" +
+                "  BackgroundColor transparent\n" +
+                "  FontColor transparent\n" +
+                "}\n" +
+                "\n" +
+                "skinparam rectangle<<1>> {\n" +
+                "  BackgroundColor #ff0000\n" +
+                "  FontColor #ffffff\n" +
+                "  BorderColor #b20000\n" +
+                "  roundCorner 20\n" +
+                "}\n" +
+                "rectangle \"==Tag 1\" <<1>>\n" +
+                "\n" +
+                "skinparam hexagon<<2>> {\n" +
+                "  BackgroundColor #00ff00\n" +
+                "  FontColor #ffffff\n" +
+                "  BorderColor #00b200\n" +
+                "}\n" +
+                "hexagon \"==Tag 2\" <<2>>\n" +
+                "\n" +
+                "rectangle \".\" <<_transparent>> as 3\n" +
+                "3 .[#0000ff,thickness=2].> 3 : \"<color:#0000ff>Tag 3\"\n" +
+                "\n" +
+                "rectangle \".\" <<_transparent>> as 4\n" +
+                "4 -[#ff00ff,thickness=3]-> 4 : \"<color:#ff00ff>Tag 4\"\n" +
+                "\n" +
+                "\n" +
+                "@enduml", diagram.getLegend().getDefinition());
     }
 
 }

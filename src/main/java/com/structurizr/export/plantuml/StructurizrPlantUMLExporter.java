@@ -2,14 +2,12 @@ package com.structurizr.export.plantuml;
 
 import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
+import com.structurizr.export.Legend;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
-import java.util.Comparator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
@@ -397,4 +395,143 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         }
     }
 
+    @Override
+    protected Legend createLegend(View view) {
+        IndentingWriter writer = new IndentingWriter();
+        int id = 0;
+
+        writer.writeLine("@startuml");
+        writer.writeLine();
+
+        writer.writeLine("skinparam {");
+        writer.indent();
+        writer.writeLine("shadowing false");
+        writer.writeLine("arrowFontSize 15");
+        writer.writeLine("defaultTextAlignment center");
+        writer.writeLine("wrapWidth 100");
+        writer.writeLine("maxMessageSize 100");
+        writer.outdent();
+        writer.writeLine("}");
+
+        writer.writeLine("hide stereotype");
+        writer.writeLine();
+
+        writer.writeLine("skinparam rectangle<<_transparent>> {");
+        writer.indent();
+        writer.writeLine("BorderColor transparent");
+        writer.writeLine("BackgroundColor transparent");
+        writer.writeLine("FontColor transparent");
+        writer.outdent();
+        writer.writeLine("}");
+        writer.writeLine();
+
+        Map<String,ElementStyle> elementStyles = new HashMap<>();
+        List<Element> elements = view.getElements().stream().map(ElementView::getElement).collect(Collectors.toList());
+        for (Element element : elements) {
+            ElementStyle elementStyle = findElementStyle(view, element);
+
+            if (element instanceof DeploymentNode) {
+                // deployment node backgrounds are always white
+                elementStyle.setBackground("#ffffff");
+            }
+
+            if (!StringUtils.isNullOrEmpty(elementStyle.getTag()) ) {
+                elementStyles.put(elementStyle.getTag(), elementStyle);
+            };
+        }
+
+        List<ElementStyle> sortedElementStyles = elementStyles.values().stream().sorted(Comparator.comparing(ElementStyle::getTag)).collect(Collectors.toList());;
+        for (ElementStyle elementStyle : sortedElementStyles) {
+            id++;
+            Shape shape = elementStyle.getShape();
+            String type = plantUMLShapeOf(elementStyle.getShape());
+            if ("actor".equals(type)) {
+                type = "rectangle"; // the actor shape is not supported in this implementation
+            }
+            String background = elementStyle.getBackground();
+            String stroke = elementStyle.getStroke();
+            String color = elementStyle.getColor();
+
+            if (view instanceof DynamicView && useSequenceDiagrams(view)) {
+                type = "sequenceParticipant";
+            }
+
+            writer.writeLine(format("skinparam %s<<%s>> {", type, id));
+            writer.indent();
+            writer.writeLine(String.format("BackgroundColor %s", background));
+            writer.writeLine(String.format("FontColor %s", color));
+            writer.writeLine(String.format("BorderColor %s", stroke));
+
+            if (shape == Shape.RoundedBox) {
+                writer.writeLine("roundCorner 20");
+            }
+            writer.outdent();
+            writer.writeLine("}");
+
+            String description = elementStyle.getTag();
+            if (description.startsWith("Element,")) {
+                description = description.substring("Element,".length());
+            }
+            description = description.replaceAll(",", ", ");
+
+            writer.writeLine(format("%s \"==%s\" <<%s>>",
+                    type,
+                    description,
+                    id)
+            );
+            writer.writeLine();
+        }
+
+        Map<String,RelationshipStyle> relationshipStyles = new HashMap<>();
+        List<Relationship> relationships = view.getRelationships().stream().map(RelationshipView::getRelationship).collect(Collectors.toList());
+        for (Relationship relationship : relationships) {
+            RelationshipStyle relationshipStyle = findRelationshipStyle(view, relationship);
+
+            if (!StringUtils.isNullOrEmpty(relationshipStyle.getTag())) {
+                relationshipStyles.put(relationshipStyle.getTag(), relationshipStyle);
+            }
+        }
+
+        List<RelationshipStyle> sortedRelationshipStyles = relationshipStyles.values().stream().sorted(Comparator.comparing(RelationshipStyle::getTag)).collect(Collectors.toList());;
+        for (RelationshipStyle relationshipStyle : sortedRelationshipStyles) {
+            id++;
+
+            String description = relationshipStyle.getTag();
+            if (description.startsWith("Relationship,")) {
+                description = description.substring("Relationship,".length());
+            }
+            description = description.replaceAll(",", ", ");
+
+            writer.writeLine(format("rectangle \".\" <<_transparent>> as %s", id));
+
+            boolean solid = relationshipStyle.getStyle() == LineStyle.Solid || false == relationshipStyle.getDashed();
+
+            String arrowStart = solid ? "-" : ".";
+            String arrowEnd = solid ? "->" : ".>";
+            String buf = relationshipStyle.getColor();
+
+            if (relationshipStyle.getThickness() != null) {
+                buf += ",thickness=" + relationshipStyle.getThickness();
+            }
+
+            // 1 .[#rrggbb,thickness=n].> 2 : "..."
+            writer.writeLine(format("%s %s[%s]%s %s : \"<color:%s>%s\"",
+                    id,
+                    arrowStart,
+                    buf,
+                    arrowEnd,
+                    id,
+                    relationshipStyle.getColor(),
+                    description)
+            );
+
+            writer.writeLine();
+        }
+
+        writer.writeLine();
+
+        writer.writeLine("@enduml");
+
+        return new Legend(writer.toString());
+    }
 }

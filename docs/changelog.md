@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7.0 (unreleased to Maven Central)
+
+- Adds the ability to export a diagram legend when using the `StructurizrPlantUMLExporter`. 
+
 ## 1.6.1 (9th September 2022)
 
 - Fixes #15 (PlantUML export fails when element names are Unicode characters)

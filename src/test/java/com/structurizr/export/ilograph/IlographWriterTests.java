@@ -70,7 +70,7 @@ public class IlographWriterTests extends AbstractExporterTests {
                 "      - from: \"1\"\n" +
                 "        to: \"2\"\n" +
                 "        label: \"Uses\"\n" +
-                "        color: \"#707070\"\n\n", export.getDefinition());
+                "        color: \"#707070\"\n", export.getDefinition());
     }
 
 }

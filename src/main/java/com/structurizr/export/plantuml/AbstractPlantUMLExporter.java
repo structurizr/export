@@ -1,12 +1,13 @@
 package com.structurizr.export.plantuml;
 
 import com.structurizr.export.AbstractDiagramExporter;
-import com.structurizr.export.DiagramExporter;
 import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
-import com.structurizr.view.*;
+import com.structurizr.view.DynamicView;
+import com.structurizr.view.Shape;
+import com.structurizr.view.View;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -42,6 +43,10 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
             return "node";
         }
 
+        return plantUMLShapeOf(shape);
+    }
+
+    String plantUMLShapeOf(Shape shape) {
         switch(shape) {
             case Person:
             case Robot:
@@ -206,6 +211,10 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
             writer.writeLine();
         }
 
+        writeSkinParams(writer);
+    }
+
+    protected void writeSkinParams(IndentingWriter writer) {
         if (!skinParams.isEmpty()) {
             writer.writeLine("skinparam {");
             writer.indent();

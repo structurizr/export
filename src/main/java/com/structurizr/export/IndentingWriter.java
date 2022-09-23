@@ -51,7 +51,12 @@ public final class IndentingWriter {
 
     @Override
     public String toString() {
-        return buf.toString();
+        String s = buf.toString();
+        if (s.endsWith("\n")) {
+            s = s.substring(0, s.length()-1);
+        }
+
+        return s;
     }
 
 }

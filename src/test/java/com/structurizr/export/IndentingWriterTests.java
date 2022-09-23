@@ -24,7 +24,7 @@ public class IndentingWriterTests {
                 "  Line 2\n" +
                 "    Line 3\n" +
                 "  Line 4\n" +
-                "Line 4\n", writer.toString());
+                "Line 4", writer.toString());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class IndentingWriterTests {
                 "    Line 2\n" +
                 "        Line 3\n" +
                 "    Line 4\n" +
-                "Line 4\n", writer.toString());
+                "Line 4", writer.toString());
     }
 
     @Test
@@ -70,7 +70,7 @@ public class IndentingWriterTests {
                 "\tLine 2\n" +
                 "\t\tLine 3\n" +
                 "\tLine 4\n" +
-                "Line 4\n", writer.toString());
+                "Line 4", writer.toString());
     }
 
 }

@@ -4,7 +4,7 @@ resources:
     name: "Spring PetClinic"
     subtitle: "[Software System]"
     description: "Allows employees to view and manage information regarding the veterinarians, the clients, and their pets."
-    backgroundColor: "#dddddd"
+    backgroundColor: "#ffffff"
     color: "#000000"
 
     children:
@@ -36,56 +36,56 @@ resources:
         color: "#147eba"
 
         children:
-          - id: "14"
+          - id: "12"
             name: "Amazon RDS"
             subtitle: "[Deployment Node]"
             backgroundColor: "#ffffff"
             color: "#3b48cc"
 
             children:
-              - id: "15"
+              - id: "13"
                 name: "MySQL"
                 subtitle: "[Deployment Node]"
                 backgroundColor: "#ffffff"
                 color: "#3b48cc"
 
                 children:
-                  - id: "16"
+                  - id: "14"
                     name: "Database"
                     subtitle: "[Container: Relational database schema]"
                     description: "Stores information regarding the veterinarians, the clients, and their pets."
                     backgroundColor: "#ffffff"
                     color: "#000000"
 
-          - id: "7"
+          - id: "9"
             name: "Autoscaling group"
             subtitle: "[Deployment Node]"
             backgroundColor: "#ffffff"
             color: "#cc2264"
 
             children:
-              - id: "8"
+              - id: "10"
                 name: "Amazon EC2"
                 subtitle: "[Deployment Node]"
                 backgroundColor: "#ffffff"
                 color: "#d86613"
 
                 children:
-                  - id: "9"
+                  - id: "11"
                     name: "Web Application"
                     subtitle: "[Container: Java and Spring Boot]"
                     description: "Allows employees to view and manage information regarding the veterinarians, the clients, and their pets."
                     backgroundColor: "#ffffff"
                     color: "#000000"
 
-          - id: "10"
+          - id: "7"
             name: "Route 53"
             subtitle: "[Infrastructure Node]"
             description: "Highly available and scalable cloud DNS service."
             backgroundColor: "#ffffff"
             color: "#693cc5"
 
-          - id: "11"
+          - id: "8"
             name: "Elastic Load Balancer"
             subtitle: "[Infrastructure Node]"
             description: "Automatically distributes incoming application traffic."
@@ -98,24 +98,23 @@ perspectives:
       - from: "2"
         to: "3"
         label: "Reads from and writes to"
-        description: "JDBC/SSL"
+        description: "MySQL Protocol/SSL"
         color: "#707070"
 
-  - name: Deployment - Default
+  - name: Deployment - Live
     relations:
-      - from: "9"
-        to: "16"
+      - from: "11"
+        to: "14"
         label: "Reads from and writes to"
-        description: "JDBC/SSL"
+        description: "MySQL Protocol/SSL"
         color: "#707070"
-      - from: "10"
+      - from: "7"
+        to: "8"
+        label: "Forwards requests to"
+        description: "HTTPS"
+        color: "#707070"
+      - from: "8"
         to: "11"
         label: "Forwards requests to"
         description: "HTTPS"
         color: "#707070"
-      - from: "11"
-        to: "9"
-        label: "Forwards requests to"
-        description: "HTTPS"
-        color: "#707070"
-

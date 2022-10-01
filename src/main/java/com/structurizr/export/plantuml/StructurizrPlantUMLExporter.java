@@ -7,12 +7,17 @@ import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
 public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
+
+    private static final double MAX_ICON_SIZE = 50.0;
 
     public StructurizrPlantUMLExporter() {
         addSkinParam("shadowing", "false");
@@ -193,6 +198,14 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startDeploymentNodeBoundary(DeploymentView view, DeploymentNode deploymentNode, IndentingWriter writer) {
+        ElementStyle elementStyle = findElementStyle(view, deploymentNode);
+
+        String icon = "";
+        if (elementStyleHasSupportedIcon(elementStyle)) {
+            double scale = calculateIconScale(elementStyle);
+            icon = "\\n\\n<img:" + elementStyle.getIcon() + "{scale=" + scale + "}>";
+        }
+
         String url = deploymentNode.getUrl();
         if (!StringUtils.isNullOrEmpty(url)) {
             url = " [[" + url + "]]";
@@ -201,9 +214,10 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         }
 
         writer.writeLine(
-                format("node \"%s\\n%s\" <<%s>> as %s%s {",
+                format("node \"%s\\n%s%s\" <<%s>> as %s%s {",
                         deploymentNode.getName() + (deploymentNode.getInstances() > 1 ? " (x" + deploymentNode.getInstances() + ")" : ""),
                         typeOf(view, deploymentNode, true),
+                        icon,
                         idOf(deploymentNode),
                         idOf(deploymentNode),
                         url
@@ -268,6 +282,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             String name = element.getName();
             String description = element.getDescription();
             String type = typeOf(view, element, true);
+            String icon = "";
 
             String url = element.getUrl();
             if (!StringUtils.isNullOrEmpty(url)) {
@@ -305,12 +320,18 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
                 type = String.format("\\n<size:10>%s</size>", type);
             }
 
+            if (elementStyleHasSupportedIcon(elementStyle)) {
+                double scale = calculateIconScale(elementStyle);
+                icon = "\\n\\n<img:" + elementStyle.getIcon() + "{scale=" + scale + "}>";
+            }
+
             String id = idOf(element);
 
-            writer.writeLine(format("%s \"==%s%s%s\" <<%s>> as %s%s",
+            writer.writeLine(format("%s \"==%s%s%s%s\" <<%s>> as %s%s",
                     shape,
                     name,
                     type,
+                    icon,
                     description,
                     id,
                     id,
@@ -474,9 +495,16 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             }
             description = description.replaceAll(",", ", ");
 
-            writer.writeLine(format("%s \"==%s\" <<%s>>",
+            String icon = "";
+            if (elementStyleHasSupportedIcon(elementStyle)) {
+                double scale = calculateIconScale(elementStyle);
+                icon = "\\n\\n<img:" + elementStyle.getIcon() + "{scale=" + scale + "}>";
+            }
+
+            writer.writeLine(format("%s \"==%s%s\" <<%s>>",
                     type,
                     description,
+                    icon,
                     id)
             );
             writer.writeLine();
@@ -534,4 +562,28 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
         return new Legend(writer.toString());
     }
+
+    private boolean elementStyleHasSupportedIcon(ElementStyle elementStyle) {
+        return !StringUtils.isNullOrEmpty(elementStyle.getIcon()) && elementStyle.getIcon().startsWith("http");
+    }
+
+    private double calculateIconScale(ElementStyle elementStyle) {
+        String icon = elementStyle.getIcon();
+        double scale = 0.5;
+
+        try {
+            URL url = new URL(icon);
+            BufferedImage bi = ImageIO.read(url);
+
+            int width = bi.getWidth();
+            int height = bi.getHeight();
+
+            scale = MAX_ICON_SIZE / Math.max(width, height);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return scale;
+    }
+
 }

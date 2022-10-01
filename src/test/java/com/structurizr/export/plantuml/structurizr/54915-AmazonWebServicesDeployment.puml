@@ -73,24 +73,24 @@ skinparam rectangle<<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.W
   roundCorner 20
 }
 
-node "Amazon Web Services\n[Deployment Node]" <<Live.AmazonWebServices>> as Live.AmazonWebServices {
-  node "US-East-1\n[Deployment Node]" <<Live.AmazonWebServices.USEast1>> as Live.AmazonWebServices.USEast1 {
-    node "Amazon RDS\n[Deployment Node]" <<Live.AmazonWebServices.USEast1.AmazonRDS>> as Live.AmazonWebServices.USEast1.AmazonRDS {
-      node "MySQL\n[Deployment Node]" <<Live.AmazonWebServices.USEast1.AmazonRDS.MySQL>> as Live.AmazonWebServices.USEast1.AmazonRDS.MySQL {
+node "Amazon Web Services\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/AWS-Cloud_light-bg@4x.png{scale=0.35714285714285715}>" <<Live.AmazonWebServices>> as Live.AmazonWebServices {
+  node "US-East-1\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Region_light-bg@4x.png{scale=0.35714285714285715}>" <<Live.AmazonWebServices.USEast1>> as Live.AmazonWebServices.USEast1 {
+    node "Amazon RDS\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-RDS_light-bg@4x.png{scale=0.16666666666666666}>" <<Live.AmazonWebServices.USEast1.AmazonRDS>> as Live.AmazonWebServices.USEast1.AmazonRDS {
+      node "MySQL\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-RDS_MySQL_instance_light-bg@4x.png{scale=0.25}>" <<Live.AmazonWebServices.USEast1.AmazonRDS.MySQL>> as Live.AmazonWebServices.USEast1.AmazonRDS.MySQL {
         database "==Database\n<size:10>[Container: Relational database schema]</size>\n\nStores information regarding the veterinarians, the clients, and their pets." <<Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1>> as Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1
       }
 
     }
 
-    node "Autoscaling group\n[Deployment Node]" <<Live.AmazonWebServices.USEast1.Autoscalinggroup>> as Live.AmazonWebServices.USEast1.Autoscalinggroup {
-      node "Amazon EC2\n[Deployment Node]" <<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2>> as Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2 {
+    node "Autoscaling group\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/AWS-Auto-Scaling_light-bg@4x.png{scale=0.16666666666666666}>" <<Live.AmazonWebServices.USEast1.Autoscalinggroup>> as Live.AmazonWebServices.USEast1.Autoscalinggroup {
+      node "Amazon EC2\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-EC2_light-bg@4x.png{scale=0.16666666666666666}>" <<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2>> as Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2 {
         rectangle "==Web Application\n<size:10>[Container: Java and Spring Boot]</size>\n\nAllows employees to view and manage information regarding the veterinarians, the clients, and their pets." <<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1>> as Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1
       }
 
     }
 
-    rectangle "==Elastic Load Balancer\n<size:10>[Infrastructure Node]</size>\n\nAutomatically distributes incoming application traffic." <<Live.AmazonWebServices.USEast1.ElasticLoadBalancer>> as Live.AmazonWebServices.USEast1.ElasticLoadBalancer
-    rectangle "==Route 53\n<size:10>[Infrastructure Node]</size>\n\nHighly available and scalable cloud DNS service." <<Live.AmazonWebServices.USEast1.Route53>> as Live.AmazonWebServices.USEast1.Route53
+    rectangle "==Elastic Load Balancer\n<size:10>[Infrastructure Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Elastic-Load-Balancing_light-bg@4x.png{scale=0.16666666666666666}>\n\nAutomatically distributes incoming application traffic." <<Live.AmazonWebServices.USEast1.ElasticLoadBalancer>> as Live.AmazonWebServices.USEast1.ElasticLoadBalancer
+    rectangle "==Route 53\n<size:10>[Infrastructure Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-Route-53_light-bg@4x.png{scale=0.16666666666666666}>\n\nHighly available and scalable cloud DNS service." <<Live.AmazonWebServices.USEast1.Route53>> as Live.AmazonWebServices.USEast1.Route53
   }
 
 }

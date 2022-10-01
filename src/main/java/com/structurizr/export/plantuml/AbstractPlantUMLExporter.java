@@ -39,10 +39,6 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     String plantUMLShapeOf(View view, Element element) {
         Shape shape = findElementStyle(view, element).getShape();
 
-        if (element instanceof DeploymentNode) {
-            return "node";
-        }
-
         return plantUMLShapeOf(shape);
     }
 

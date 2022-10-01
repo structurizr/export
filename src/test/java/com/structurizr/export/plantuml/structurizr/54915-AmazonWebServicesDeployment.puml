@@ -13,25 +13,25 @@ skinparam {
 
 hide stereotype
 
-skinparam node<<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2>> {
+skinparam rectangle<<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2>> {
   BackgroundColor #ffffff
   FontColor #d86613
   BorderColor #d86613
   roundCorner 20
 }
-skinparam node<<Live.AmazonWebServices.USEast1.AmazonRDS>> {
+skinparam rectangle<<Live.AmazonWebServices.USEast1.AmazonRDS>> {
   BackgroundColor #ffffff
   FontColor #3b48cc
   BorderColor #3b48cc
   roundCorner 20
 }
-skinparam node<<Live.AmazonWebServices>> {
+skinparam rectangle<<Live.AmazonWebServices>> {
   BackgroundColor #ffffff
   FontColor #232f3e
   BorderColor #232f3e
   roundCorner 20
 }
-skinparam node<<Live.AmazonWebServices.USEast1.Autoscalinggroup>> {
+skinparam rectangle<<Live.AmazonWebServices.USEast1.Autoscalinggroup>> {
   BackgroundColor #ffffff
   FontColor #cc2264
   BorderColor #cc2264
@@ -48,7 +48,7 @@ skinparam rectangle<<Live.AmazonWebServices.USEast1.ElasticLoadBalancer>> {
   BorderColor #693cc5
   roundCorner 20
 }
-skinparam node<<Live.AmazonWebServices.USEast1.AmazonRDS.MySQL>> {
+skinparam rectangle<<Live.AmazonWebServices.USEast1.AmazonRDS.MySQL>> {
   BackgroundColor #ffffff
   FontColor #3b48cc
   BorderColor #3b48cc
@@ -60,7 +60,7 @@ skinparam rectangle<<Live.AmazonWebServices.USEast1.Route53>> {
   BorderColor #693cc5
   roundCorner 20
 }
-skinparam node<<Live.AmazonWebServices.USEast1>> {
+skinparam rectangle<<Live.AmazonWebServices.USEast1>> {
   BackgroundColor #ffffff
   FontColor #147eba
   BorderColor #147eba
@@ -73,17 +73,17 @@ skinparam rectangle<<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.W
   roundCorner 20
 }
 
-node "Amazon Web Services\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/AWS-Cloud_light-bg@4x.png{scale=0.35714285714285715}>" <<Live.AmazonWebServices>> as Live.AmazonWebServices {
-  node "US-East-1\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Region_light-bg@4x.png{scale=0.35714285714285715}>" <<Live.AmazonWebServices.USEast1>> as Live.AmazonWebServices.USEast1 {
-    node "Amazon RDS\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-RDS_light-bg@4x.png{scale=0.16666666666666666}>" <<Live.AmazonWebServices.USEast1.AmazonRDS>> as Live.AmazonWebServices.USEast1.AmazonRDS {
-      node "MySQL\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-RDS_MySQL_instance_light-bg@4x.png{scale=0.25}>" <<Live.AmazonWebServices.USEast1.AmazonRDS.MySQL>> as Live.AmazonWebServices.USEast1.AmazonRDS.MySQL {
+rectangle "Amazon Web Services\n<size:10>[Deployment Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/AWS-Cloud_light-bg@4x.png{scale=0.35714285714285715}>" <<Live.AmazonWebServices>> as Live.AmazonWebServices {
+  rectangle "US-East-1\n<size:10>[Deployment Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Region_light-bg@4x.png{scale=0.35714285714285715}>" <<Live.AmazonWebServices.USEast1>> as Live.AmazonWebServices.USEast1 {
+    rectangle "Amazon RDS\n<size:10>[Deployment Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-RDS_light-bg@4x.png{scale=0.16666666666666666}>" <<Live.AmazonWebServices.USEast1.AmazonRDS>> as Live.AmazonWebServices.USEast1.AmazonRDS {
+      rectangle "MySQL\n<size:10>[Deployment Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-RDS_MySQL_instance_light-bg@4x.png{scale=0.25}>" <<Live.AmazonWebServices.USEast1.AmazonRDS.MySQL>> as Live.AmazonWebServices.USEast1.AmazonRDS.MySQL {
         database "==Database\n<size:10>[Container: Relational database schema]</size>\n\nStores information regarding the veterinarians, the clients, and their pets." <<Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1>> as Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1
       }
 
     }
 
-    node "Autoscaling group\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/AWS-Auto-Scaling_light-bg@4x.png{scale=0.16666666666666666}>" <<Live.AmazonWebServices.USEast1.Autoscalinggroup>> as Live.AmazonWebServices.USEast1.Autoscalinggroup {
-      node "Amazon EC2\n[Deployment Node]\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-EC2_light-bg@4x.png{scale=0.16666666666666666}>" <<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2>> as Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2 {
+    rectangle "Autoscaling group\n<size:10>[Deployment Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/AWS-Auto-Scaling_light-bg@4x.png{scale=0.16666666666666666}>" <<Live.AmazonWebServices.USEast1.Autoscalinggroup>> as Live.AmazonWebServices.USEast1.Autoscalinggroup {
+      rectangle "Amazon EC2\n<size:10>[Deployment Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-EC2_light-bg@4x.png{scale=0.16666666666666666}>" <<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2>> as Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2 {
         rectangle "==Web Application\n<size:10>[Container: Java and Spring Boot]</size>\n\nAllows employees to view and manage information regarding the veterinarians, the clients, and their pets." <<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1>> as Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1
       }
 

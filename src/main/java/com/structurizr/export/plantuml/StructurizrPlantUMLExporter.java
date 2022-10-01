@@ -214,7 +214,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         }
 
         writer.writeLine(
-                format("node \"%s\\n%s%s\" <<%s>> as %s%s {",
+                format("rectangle \"%s\\n<size:10>%s</size>%s\" <<%s>> as %s%s {",
                         deploymentNode.getName() + (deploymentNode.getInstances() > 1 ? " (x" + deploymentNode.getInstances() + ")" : ""),
                         typeOf(view, deploymentNode, true),
                         icon,
@@ -469,6 +469,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             if ("actor".equals(type)) {
                 type = "rectangle"; // the actor shape is not supported in this implementation
             }
+
             String background = elementStyle.getBackground();
             String stroke = elementStyle.getStroke();
             String color = elementStyle.getColor();

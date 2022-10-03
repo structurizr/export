@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.7.0 (unreleased to Maven Central)
+## 1.7.0 (3rd October 2022)
 
 - Adds the ability to export a diagram legend when using the `StructurizrPlantUMLExporter`.
 - Adds support for icons to the  `StructurizrPlantUMLExporter` (HTTP/HTTPS icon URLs only).

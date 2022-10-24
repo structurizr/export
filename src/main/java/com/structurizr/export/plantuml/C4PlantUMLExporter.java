@@ -40,6 +40,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     public static final String C4PLANTUML_RELATIONSHIP_PROPERTIES_PROPERTY = "c4plantuml.relationshipProperties";
 
     public static final String C4PLANTUML_SPRITE = "c4plantuml.sprite";
+    public static final String C4PLANTUML_SHADOW = "c4plantuml.shadow";
 
     private int groupId = 0;
 
@@ -92,12 +93,13 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
                     ElementStyle elementStyle = elementStyles.get(tagList);
                     tagList = tagList.replaceFirst("Element,", "");
 
-                    writer.writeLine(String.format("AddElementTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $sprite=\"%s\")",
+                    writer.writeLine(String.format("AddElementTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $sprite=\"%s\", $shadowing=\"%s\")",
                             tagList,
                             elementStyle.getBackground(),
                             elementStyle.getStroke(),
                             elementStyle.getColor(),
-                            elementStyle.getProperties().getOrDefault(C4PLANTUML_SPRITE, "")
+                            elementStyle.getProperties().getOrDefault(C4PLANTUML_SPRITE, ""),
+                            elementStyle.getProperties().getOrDefault(C4PLANTUML_SHADOW, "")
                     ));
                 }
             }

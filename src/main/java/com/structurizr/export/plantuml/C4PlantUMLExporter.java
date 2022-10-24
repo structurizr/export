@@ -6,6 +6,7 @@ import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static java.lang.String.format;
@@ -38,6 +39,8 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
      */
     public static final String C4PLANTUML_RELATIONSHIP_PROPERTIES_PROPERTY = "c4plantuml.relationshipProperties";
 
+    public static final String C4PLANTUML_SPRITE = "c4plantuml.sprite";
+
     private int groupId = 0;
 
     public C4PlantUMLExporter() {
@@ -63,6 +66,57 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         }
 
         writeIncludes(view, writer);
+
+        if (includeTags(view)) {
+            Map<String,ElementStyle> elementStyles = new HashMap<>();
+            Map<String,RelationshipStyle> relationshipStyles = new HashMap<>();
+
+            for (ElementView elementView : view.getElements()) {
+                Element element = elementView.getElement();
+                ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(element);
+
+                elementStyles.put(elementStyle.getTag(), elementStyle);
+            }
+
+            for (RelationshipView relationshipView : view.getRelationships()) {
+                Relationship relationship = relationshipView.getRelationship();
+                RelationshipStyle relationshipStyle = view.getViewSet().getConfiguration().getStyles().findRelationshipStyle(relationship);
+
+                relationshipStyles.put(relationshipStyle.getTag(), relationshipStyle);
+            }
+
+            if (!elementStyles.isEmpty()) {
+                writer.writeLine();
+
+                for (String tagList : elementStyles.keySet()) {
+                    ElementStyle elementStyle = elementStyles.get(tagList);
+                    tagList = tagList.replaceFirst("Element,", "");
+
+                    writer.writeLine(String.format("AddElementTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $sprite=\"%s\")",
+                            tagList,
+                            elementStyle.getBackground(),
+                            elementStyle.getStroke(),
+                            elementStyle.getColor(),
+                            elementStyle.getProperties().getOrDefault(C4PLANTUML_SPRITE, "")
+                    ));
+                }
+            }
+
+            if (!relationshipStyles.isEmpty()) {
+                writer.writeLine();
+
+                for (String tagList : relationshipStyles.keySet()) {
+                    RelationshipStyle relationshipStyle = relationshipStyles.get(tagList);
+                    tagList = tagList.replaceFirst("Relationship,", "");
+
+                    writer.writeLine(String.format("AddRelTag(\"%s\", $textColor=\"%s\", $lineColor=\"%s\")",
+                            tagList,
+                            relationshipStyle.getColor(),
+                            relationshipStyle.getColor()
+                    ));
+                }
+            }
+        }
 
         writer.writeLine();
     }
@@ -193,6 +247,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         }
 
         Element elementToWrite = element;
+        ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(element);
         String id = idOf(element);
 
         String url = element.getUrl();
@@ -243,7 +298,6 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             }
         } else if (element instanceof Container) {
             Container container = (Container)element;
-            ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(element);
             String shape = "";
             if (elementStyle.getShape() == Shape.Cylinder) {
                 shape = "Db";
@@ -279,14 +333,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     private String tagsOf(View view, Element element) {
         if (includeTags(view)) {
-            String tags;
-            if (element instanceof StaticStructureElementInstance) {
-                tags = ((StaticStructureElementInstance) element).getElement().getTags() + "," + element.getTags();
-            } else {
-                tags = element.getTags();
-            }
-
-            return tags.replaceAll(",", "+");
+            return view.getViewSet().getConfiguration().getStyles().findElementStyle(element).getTag().replaceFirst("Element,", "");
         } else {
             return "";
         }
@@ -294,19 +341,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     private String tagsOf(View view, Relationship relationship) {
         if (includeTags(view)) {
-            String tags;
-
-            if (!StringUtils.isNullOrEmpty(relationship.getLinkedRelationshipId())) {
-                tags = relationship.getModel().getRelationship(relationship.getLinkedRelationshipId()).getTags();
-
-                if (!StringUtils.isNullOrEmpty(relationship.getTags())) {
-                    tags = tags + "," + relationship.getTags();
-                }
-            } else {
-                tags = relationship.getTags();
-            }
-
-            return tags.replaceAll(",", "+");
+            return view.getViewSet().getConfiguration().getStyles().findRelationshipStyle(relationship).getTag().replaceFirst("Relationship,", "");
         } else {
             return "";
         }

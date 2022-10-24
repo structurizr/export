@@ -1,0 +1,51 @@
+@startuml
+title Spring PetClinic - Deployment - Live
+
+left to right direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+AddElementTag("Container,Application", $bgColor="#ffffff", $borderColor="#b2b2b2", $fontColor="#000000", $sprite="")
+AddElementTag("Amazon Web Services - RDS", $bgColor="#ffffff", $borderColor="#3b48cc", $fontColor="#3b48cc", $sprite="")
+AddElementTag("Amazon Web Services - Auto Scaling", $bgColor="#ffffff", $borderColor="#cc2264", $fontColor="#cc2264", $sprite="")
+AddElementTag("Amazon Web Services - Route 53", $bgColor="#ffffff", $borderColor="#693cc5", $fontColor="#693cc5", $sprite="")
+AddElementTag("Amazon Web Services - EC2", $bgColor="#ffffff", $borderColor="#d86613", $fontColor="#d86613", $sprite="")
+AddElementTag("Amazon Web Services - Region", $bgColor="#ffffff", $borderColor="#147eba", $fontColor="#147eba", $sprite="")
+AddElementTag("Amazon Web Services - Elastic Load Balancing", $bgColor="#ffffff", $borderColor="#693cc5", $fontColor="#693cc5", $sprite="")
+AddElementTag("Amazon Web Services - RDS MySQL instance", $bgColor="#ffffff", $borderColor="#3b48cc", $fontColor="#3b48cc", $sprite="")
+AddElementTag("Container,Database", $bgColor="#ffffff", $borderColor="#b2b2b2", $fontColor="#000000", $sprite="")
+AddElementTag("Amazon Web Services - Cloud", $bgColor="#ffffff", $borderColor="#232f3e", $fontColor="#232f3e", $sprite="")
+
+AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070")
+
+Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $tags="Amazon Web Services - Cloud") {
+  Deployment_Node(Live.AmazonWebServices.USEast1, "US-East-1", $tags="Amazon Web Services - Region") {
+    Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS, "Amazon RDS", $tags="Amazon Web Services - RDS") {
+      Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL, "MySQL", $tags="Amazon Web Services - RDS MySQL instance") {
+        ContainerDb(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Database", "Relational database schema", "Stores information regarding the veterinarians, the clients, and their pets.", $tags="Container,Database")
+      }
+
+    }
+
+    Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup, "Autoscaling group", $tags="Amazon Web Services - Auto Scaling") {
+      Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2, "Amazon EC2", $tags="Amazon Web Services - EC2") {
+        Container(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Web Application", "Java and Spring Boot", "Allows employees to view and manage information regarding the veterinarians, the clients, and their pets.", $tags="Container,Application")
+      }
+
+    }
+
+    Deployment_Node(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Elastic Load Balancer", $descr="Automatically distributes incoming application traffic.", $tags="Amazon Web Services - Elastic Load Balancing")
+    Deployment_Node(Live.AmazonWebServices.USEast1.Route53, "Route 53", $descr="Highly available and scalable cloud DNS service.", $tags="Amazon Web Services - Route 53")
+  }
+
+}
+
+Rel_D(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Reads from and writes to", "MySQL Protocol/SSL", $tags="Relationship")
+Rel_D(Live.AmazonWebServices.USEast1.Route53, Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Forwards requests to", "HTTPS", $tags="Relationship")
+Rel_D(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Forwards requests to", "HTTPS", $tags="Relationship")
+
+SHOW_LEGEND()
+@enduml

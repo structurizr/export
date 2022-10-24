@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.0 (unreleased to Maven Central)
+
+- The C4-PlantUML export now mimics how the Structurizr renderer uses tags when a view set property named `c4plantuml.tags` is set to `true`.
+
 ## 1.7.0 (3rd October 2022)
 
 - Adds the ability to export a diagram legend when using the `StructurizrPlantUMLExporter`.

@@ -62,7 +62,23 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     }
 
     @Test
-    public void test_AmazonWebServicesExample() throws Exception {
+    public void test_AmazonWebServicesExampleWithoutTags() throws Exception {
+        Workspace workspace = WorkspaceUtils.loadWorkspaceFromJson(new File("./src/test/structurizr-54915-workspace.json"));
+        ThemeUtils.loadThemes(workspace);
+        workspace.getViews().getDeploymentViews().iterator().next().enableAutomaticLayout(AutomaticLayout.RankDirection.LeftRight, 300, 300);
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "false");
+
+        C4PlantUMLExporter exporter = new C4PlantUMLExporter();
+        Collection<Diagram> diagrams = exporter.export(workspace);
+        assertEquals(1, diagrams.size());
+
+        Diagram diagram = diagrams.stream().findFirst().get();
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/54915-AmazonWebServicesDeployment-WithoutTags.puml"));
+        assertEquals(expected, diagram.getDefinition());
+    }
+
+    @Test
+    public void test_AmazonWebServicesExampleWithTags() throws Exception {
         Workspace workspace = WorkspaceUtils.loadWorkspaceFromJson(new File("./src/test/structurizr-54915-workspace.json"));
         ThemeUtils.loadThemes(workspace);
         workspace.getViews().getDeploymentViews().iterator().next().enableAutomaticLayout(AutomaticLayout.RankDirection.LeftRight, 300, 300);
@@ -73,14 +89,13 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         assertEquals(1, diagrams.size());
 
         Diagram diagram = diagrams.stream().findFirst().get();
-        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/54915-AmazonWebServicesDeployment.puml"));
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/54915-AmazonWebServicesDeployment-WithTags.puml"));
         assertEquals(expected, diagram.getDefinition());
     }
 
     @Test
     public void test_GroupsExample() throws Exception {
         Workspace workspace = WorkspaceUtils.loadWorkspaceFromJson(new File("./src/test/groups.json"));
-        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
         ThemeUtils.loadThemes(workspace);
 
         C4PlantUMLExporter exporter = new C4PlantUMLExporter();
@@ -103,7 +118,6 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_renderContainerDiagramWithExternalContainers() {
         Workspace workspace = new Workspace("Name", "Description");
-        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
 
         SoftwareSystem softwareSystem1 = workspace.getModel().addSoftwareSystem("Software System 1");
         Container container1 = softwareSystem1.addContainer("Container 1");
@@ -128,14 +142,14 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml\n" +
                 "\n" +
                 "System_Boundary(\"SoftwareSystem1_boundary\", \"Software System 1\") {\n" +
-                "  Container(SoftwareSystem1.Container1, \"Container 1\", \"\", $tags=\"Element+Container\")\n" +
+                "  Container(SoftwareSystem1.Container1, \"Container 1\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
                 "System_Boundary(\"SoftwareSystem2_boundary\", \"Software System 2\") {\n" +
-                "  Container(SoftwareSystem2.Container2, \"Container 2\", \"\", $tags=\"Element+Container\")\n" +
+                "  Container(SoftwareSystem2.Container2, \"Container 2\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
-                "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $tags=\"Relationship\")\n" +
+                "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $tags=\"\")\n" +
                 "\n" +
                 "SHOW_LEGEND()\n" +
                 "@enduml", diagram.getDefinition());
@@ -153,12 +167,12 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml\n" +
                 "\n" +
                 "System_Boundary(\"SoftwareSystem1_boundary\", \"Software System 1\") {\n" +
-                "  Container(SoftwareSystem1.Container1, \"Container 1\", \"\", $tags=\"Element+Container\")\n" +
+                "  Container(SoftwareSystem1.Container1, \"Container 1\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
-                "Container(SoftwareSystem2.Container2, \"Container 2\", \"\", $tags=\"Element+Container\")\n" +
+                "Container(SoftwareSystem2.Container2, \"Container 2\", \"\", $tags=\"\")\n" +
                 "\n" +
-                "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $tags=\"Relationship\")\n" +
+                "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $tags=\"\")\n" +
                 "\n" +
                 "SHOW_LEGEND()\n" +
                 "@enduml", diagram.getDefinition());
@@ -167,7 +181,6 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_renderComponentDiagramWithExternalComponents() {
         Workspace workspace = new Workspace("Name", "Description");
-        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
 
         SoftwareSystem softwareSystem1 = workspace.getModel().addSoftwareSystem("Software System 1");
         Container container1 = softwareSystem1.addContainer("Container 1");
@@ -194,14 +207,14 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml\n" +
                 "\n" +
                 "Container_Boundary(\"SoftwareSystem1.Container1_boundary\", \"Container 1\") {\n" +
-                "  Component(SoftwareSystem1.Container1.Component1, \"Component 1\", \"\", $tags=\"Element+Component\")\n" +
+                "  Component(SoftwareSystem1.Container1.Component1, \"Component 1\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
                 "Container_Boundary(\"SoftwareSystem2.Container2_boundary\", \"Container 2\") {\n" +
-                "  Component(SoftwareSystem2.Container2.Component2, \"Component 2\", \"\", $tags=\"Element+Component\")\n" +
+                "  Component(SoftwareSystem2.Container2.Component2, \"Component 2\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
-                "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $tags=\"Relationship\")\n" +
+                "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $tags=\"\")\n" +
                 "\n" +
                 "SHOW_LEGEND()\n" +
                 "@enduml", diagram.getDefinition());
@@ -218,12 +231,12 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml\n" +
                 "\n" +
                 "Container_Boundary(\"SoftwareSystem1.Container1_boundary\", \"Container 1\") {\n" +
-                "  Component(SoftwareSystem1.Container1.Component1, \"Component 1\", \"\", $tags=\"Element+Component\")\n" +
+                "  Component(SoftwareSystem1.Container1.Component1, \"Component 1\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
-                "Component(SoftwareSystem2.Container2.Component2, \"Component 2\", \"\", $tags=\"Element+Component\")\n" +
+                "Component(SoftwareSystem2.Container2.Component2, \"Component 2\", \"\", $tags=\"\")\n" +
                 "\n" +
-                "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $tags=\"Relationship\")\n" +
+                "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $tags=\"\")\n" +
                 "\n" +
                 "SHOW_LEGEND()\n" +
                 "@enduml", diagram.getDefinition());
@@ -232,7 +245,6 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_renderDiagramWithElementUrls() {
         Workspace workspace = new Workspace("Name", "Description");
-        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
 
         SoftwareSystem softwareSystem = workspace.getModel().addSoftwareSystem("Software System");
         softwareSystem.setUrl("https://structurizr.com");
@@ -249,7 +261,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
                 "\n" +
-                "System(SoftwareSystem, \"Software System\", \"\", $tags=\"Element+Software System\")[[https://structurizr.com]]\n" +
+                "System(SoftwareSystem, \"Software System\", \"\", $tags=\"\")[[https://structurizr.com]]\n" +
                 "\n" +
                 "\n" +
                 "SHOW_LEGEND()\n" +
@@ -264,7 +276,6 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "Description");
         view.addDefaultElements();
 
-        view.getViewSet().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
         view.getViewSet().getConfiguration().addProperty(C4PlantUMLExporter.PLANTUML_INCLUDES_PROPERTY, "styles.puml");
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
@@ -277,7 +288,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
                 "!include styles.puml\n" +
                 "\n" +
-                "System(SoftwareSystem, \"Software System\", \"\", $tags=\"Element+Software System\")\n" +
+                "System(SoftwareSystem, \"Software System\", \"\", $tags=\"\")\n" +
                 "\n" +
                 "\n" +
                 "SHOW_LEGEND()\n" +
@@ -287,7 +298,6 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_renderDiagramWithNewLineCharacterInElementName() {
         Workspace workspace = new Workspace("Name", "Description");
-        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
 
         workspace.getModel().addSoftwareSystem("Software\nSystem");
 
@@ -303,7 +313,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
                 "\n" +
-                "System(SoftwareSystem, \"Software\\nSystem\", \"\", $tags=\"Element+Software System\")\n" +
+                "System(SoftwareSystem, \"Software\\nSystem\", \"\", $tags=\"\")\n" +
                 "\n" +
                 "\n" +
                 "SHOW_LEGEND()\n" +
@@ -313,7 +323,6 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     @Test
     public void test_renderInfrastructureNodeWithTechnology() {
         Workspace workspace = new Workspace("Name", "Description");
-        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
         DeploymentNode deploymentNode = workspace.getModel().addDeploymentNode("Deployment node");
         deploymentNode.addInfrastructureNode("Infrastructure node", "description", "technology");
 
@@ -330,8 +339,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml\n" +
                 "\n" +
-                "Deployment_Node(Default.Deploymentnode, \"Deployment node\", $tags=\"Element+Deployment Node\") {\n" +
-                "  Deployment_Node(Default.Deploymentnode.Infrastructurenode, \"Infrastructure node\", \"technology\", \"description\", $tags=\"Element+Infrastructure Node\")\n" +
+                "Deployment_Node(Default.Deploymentnode, \"Deployment node\", $tags=\"\") {\n" +
+                "  Deployment_Node(Default.Deploymentnode.Infrastructurenode, \"Infrastructure node\", \"technology\", \"description\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
                 "\n" +
@@ -363,4 +372,5 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/printProperties-containerView.puml"));
         assertEquals(expected, diagram.getDefinition());
     }
+
 }

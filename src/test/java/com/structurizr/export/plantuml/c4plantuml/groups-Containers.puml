@@ -7,18 +7,18 @@ top to bottom direction
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-System(C, "C", "", $tags="Element+Software System")
+System(C, "C", "", $tags="")
 
 System_Boundary("D_boundary", "D") {
   Boundary(group_2, "Group 3") {
-    Container(D.F, "F", "", $tags="Element+Container")
+    Container(D.F, "F", "", $tags="")
   }
 
-  Container(D.E, "E", "", $tags="Element+Container")
+  Container(D.E, "E", "", $tags="")
 }
 
-Rel_D(C, D.E, "", $tags="Relationship")
-Rel_D(C, D.F, "", $tags="Relationship")
+Rel_D(C, D.E, "", $tags="")
+Rel_D(C, D.F, "", $tags="")
 
 SHOW_LEGEND()
 @enduml

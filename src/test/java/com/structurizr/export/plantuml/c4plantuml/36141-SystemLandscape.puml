@@ -6,21 +6,28 @@ top to bottom direction
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
+AddElementTag("Software System", $bgColor="#1168bd", $borderColor="#0b4884", $fontColor="#ffffff", $sprite="")
+AddElementTag("Person,Bank Staff", $bgColor="#999999", $borderColor="#6b6b6b", $fontColor="#ffffff", $sprite="")
+AddElementTag("Software System,Existing System", $bgColor="#999999", $borderColor="#6b6b6b", $fontColor="#ffffff", $sprite="")
+AddElementTag("Person", $bgColor="#08427b", $borderColor="#052e56", $fontColor="#ffffff", $sprite="")
+
+AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070")
+
 Enterprise_Boundary(enterprise, "Big Bank plc") {
-  Person(CustomerServiceStaff, "Customer Service Staff", "Customer service staff within the bank.", $tags="Element+Person+Bank Staff")
-  Person(BackOfficeStaff, "Back Office Staff", "Administration and support staff within the bank.", $tags="Element+Person+Bank Staff")
-  System(InternetBankingSystem, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.", $tags="Element+Software System")
-  System(MainframeBankingSystem, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.", $tags="Element+Software System+Existing System")
-  System(EmailSystem, "E-mail System", "The internal Microsoft Exchange e-mail system.", $tags="Element+Software System+Existing System")
-  System(ATM, "ATM", "Allows customers to withdraw cash.", $tags="Element+Software System+Existing System")
+  Person(CustomerServiceStaff, "Customer Service Staff", "Customer service staff within the bank.", $tags="Person,Bank Staff")
+  Person(BackOfficeStaff, "Back Office Staff", "Administration and support staff within the bank.", $tags="Person,Bank Staff")
+  System(InternetBankingSystem, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.", $tags="Software System")
+  System(MainframeBankingSystem, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.", $tags="Software System,Existing System")
+  System(EmailSystem, "E-mail System", "The internal Microsoft Exchange e-mail system.", $tags="Software System,Existing System")
+  System(ATM, "ATM", "Allows customers to withdraw cash.", $tags="Software System,Existing System")
 }
 
-Person_Ext(PersonalBankingCustomer, "Personal Banking Customer", "A customer of the bank, with personal bank accounts.", $tags="Element+Person")
+Person_Ext(PersonalBankingCustomer, "Personal Banking Customer", "A customer of the bank, with personal bank accounts.", $tags="Person")
 
 Rel_D(ATM, MainframeBankingSystem, "Uses", $tags="Relationship")
 Rel_D(PersonalBankingCustomer, ATM, "Withdraws cash using", $tags="Relationship")
 Rel_D(CustomerServiceStaff, MainframeBankingSystem, "Uses", $tags="Relationship")
-Rel_D(PersonalBankingCustomer, CustomerServiceStaff, "Asks questions to", "Telephone", $tags="Relationship+Synchronous")
+Rel_D(PersonalBankingCustomer, CustomerServiceStaff, "Asks questions to", "Telephone", $tags="Relationship")
 Rel_D(BackOfficeStaff, MainframeBankingSystem, "Uses", $tags="Relationship")
 Rel_D(PersonalBankingCustomer, InternetBankingSystem, "Views account balances, and makes payments using", $tags="Relationship")
 Rel_D(InternetBankingSystem, MainframeBankingSystem, "Gets account information from, and makes payments using", $tags="Relationship")

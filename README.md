@@ -4,7 +4,7 @@ This library provides the ability to export the model and views defined in a Str
 
 - PlantUML
 - C4-PlantUML
-- DOT
+- [DOT](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/dot)
 - Mermaid
 - [WebSequenceDiagrams](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/websequencediagrams)
 - Ilograph

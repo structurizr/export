@@ -406,7 +406,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     protected boolean includeTags(View view) {
-        return "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_TAGS_PROPERTY, "false"));
+        return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_TAGS_PROPERTY, "false"));
     }
 
 }

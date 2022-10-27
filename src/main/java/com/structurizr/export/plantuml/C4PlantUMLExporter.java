@@ -13,6 +13,7 @@ import static java.lang.String.format;
 
 public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
+    public static final String C4PLANTUML_LEGEND_PROPERTY = "c4plantuml.legend";
     public static final String C4PLANTUML_TAGS_PROPERTY = "c4plantuml.tags";
 
     /**
@@ -401,7 +402,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     protected boolean includeLegend(View view) {
-        return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_LEGEND_PROPERTY, "true"));
+        return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_LEGEND_PROPERTY, "true"));
     }
 
     protected boolean includeTags(View view) {

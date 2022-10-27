@@ -5,6 +5,7 @@
 - The C4-PlantUML export now mimics how the Structurizr renderer uses tags when a view set or view property named `c4plantuml.tags` is set to `true`.
 - Fixes #24 (plantuml.sequenceDiagrams changes the export of static diagrams).
 - Adds the ability to configure the PlantUML exports via properties on the view set or view (#22).
+- Renamed `plantuml.legend` to `c4plantuml.legend`.
 
 ## 1.7.0 (3rd October 2022)
 

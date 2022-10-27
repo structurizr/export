@@ -17,7 +17,6 @@ import static java.lang.String.format;
 public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
 
     public static final String PLANTUML_TITLE_PROPERTY = "plantuml.title";
-    public static final String PLANTUML_LEGEND_PROPERTY = "plantuml.legend";
     public static final String PLANTUML_INCLUDES_PROPERTY = "plantuml.includes";
     public static final String PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY = "plantuml.sequenceDiagrams";
     public static final String PLANTUML_ANIMATION_PROPERTY = "plantuml.animation";

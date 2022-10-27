@@ -166,7 +166,7 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     }
 
     protected boolean useSequenceDiagrams(View view) {
-        return "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY, "false"));
+        return view instanceof DynamicView && "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY, "false"));
     }
 
     @Override

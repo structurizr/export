@@ -3,6 +3,7 @@
 ## 1.8.0 (unreleased to Maven Central)
 
 - The C4-PlantUML export now mimics how the Structurizr renderer uses tags when a view set property named `c4plantuml.tags` is set to `true`.
+- Fixes #24 (plantuml.sequenceDiagrams changes the export of static diagrams).
 
 ## 1.7.0 (3rd October 2022)
 

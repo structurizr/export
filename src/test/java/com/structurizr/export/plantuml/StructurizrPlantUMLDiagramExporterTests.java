@@ -922,4 +922,55 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "@enduml", diagram.getLegend().getDefinition());
     }
 
+    @Test
+    public void staticDiagramsAreUnchangedWhenSequenceDiagramsAreEnabled() {
+        Workspace workspace = new Workspace("Name", "Description");
+        Model model = workspace.getModel();
+
+        model.addSoftwareSystem("Software System").setGroup("Group");
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "Description");
+        view.addAllElements();
+
+        StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
+        Diagram diagram;
+        String expected = "@startuml\n" +
+                "title System Landscape\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "skinparam {\n" +
+                "  shadowing false\n" +
+                "  arrowFontSize 10\n" +
+                "  defaultTextAlignment center\n" +
+                "  wrapWidth 200\n" +
+                "  maxMessageSize 100\n" +
+                "}\n" +
+                "\n" +
+                "hide stereotype\n" +
+                "\n" +
+                "skinparam rectangle<<SoftwareSystem>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "}\n" +
+                "\n" +
+                "package \"Group\\n[Group]\" <<group>> {\n" +
+                "  skinparam PackageBorderColor<<group>> #cccccc\n" +
+                "  skinparam PackageFontColor<<group>> #cccccc\n" +
+                "\n" +
+                "  rectangle \"==Software System\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> as SoftwareSystem\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "@enduml";
+
+        diagram = exporter.export(view);
+        assertEquals(expected, diagram.getDefinition());
+
+        workspace.getViews().getConfiguration().addProperty(StructurizrPlantUMLExporter.PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY, "true");
+
+        diagram = exporter.export(view);
+        assertEquals(expected, diagram.getDefinition());
+    }
+
 }

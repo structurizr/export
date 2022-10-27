@@ -638,4 +638,13 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         return null;
     }
 
+    protected String getViewOrViewSetProperty(View view, String name, String defaultValue) {
+        ViewSet views = view.getViewSet();
+
+        return
+            view.getProperties().getOrDefault(name,
+                    views.getConfiguration().getProperties().getOrDefault(name, defaultValue)
+            );
+    }
+
 }

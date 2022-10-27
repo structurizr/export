@@ -66,7 +66,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         Workspace workspace = WorkspaceUtils.loadWorkspaceFromJson(new File("./src/test/structurizr-54915-workspace.json"));
         ThemeUtils.loadThemes(workspace);
         workspace.getViews().getDeploymentViews().iterator().next().enableAutomaticLayout(AutomaticLayout.RankDirection.LeftRight, 300, 300);
-        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "false");
+        workspace.getViews().getViews().forEach(v -> v.addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "false"));
 
         C4PlantUMLExporter exporter = new C4PlantUMLExporter();
         Collection<Diagram> diagrams = exporter.export(workspace);

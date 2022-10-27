@@ -162,16 +162,16 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     }
 
     protected boolean includeTitle(View view) {
-        return "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(PLANTUML_TITLE_PROPERTY, "true"));
+        return "true".equals(getViewOrViewSetProperty(view, PLANTUML_TITLE_PROPERTY, "true"));
     }
 
     protected boolean useSequenceDiagrams(View view) {
-        return view instanceof DynamicView && "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY, "false"));
+        return view instanceof DynamicView && "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY, "false"));
     }
 
     @Override
     protected boolean isAnimationSupported(View view) {
-        return "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(PLANTUML_ANIMATION_PROPERTY, "false"));
+        return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_ANIMATION_PROPERTY, "false"));
     }
 
     @Override

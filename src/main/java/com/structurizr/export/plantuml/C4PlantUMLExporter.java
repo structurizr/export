@@ -125,7 +125,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void writeFooter(View view, IndentingWriter writer) {
-        if ("true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(PLANTUML_LEGEND_PROPERTY, "true"))) {
+        if (includeLegend(view)) {
             writer.writeLine();
             writer.writeLine("SHOW_LEGEND()");
         }
@@ -400,8 +400,12 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         return !(view instanceof DynamicView) && super.isAnimationSupported(view);
     }
 
+    protected boolean includeLegend(View view) {
+        return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_LEGEND_PROPERTY, "true"));
+    }
+
     protected boolean includeTags(View view) {
         return "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_TAGS_PROPERTY, "false"));
     }
-    
+
 }

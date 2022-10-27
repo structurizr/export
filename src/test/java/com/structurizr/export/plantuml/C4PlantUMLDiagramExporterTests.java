@@ -54,7 +54,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
 
         try {
             // and the sequence diagram version ... which isn't supported
-            workspace.getViews().getConfiguration().addProperty(exporter.PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY, "true");
+            workspace.getViews().getConfiguration().addProperty(exporter.PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "true");
             exporter.export(workspace);
         } catch (UnsupportedOperationException uoe) {
             assertEquals("Sequence diagrams are not supported by C4-PlantUML", uoe.getMessage());

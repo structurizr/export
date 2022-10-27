@@ -236,7 +236,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     public Diagram export(DynamicView view) {
-        if (useSequenceDiagrams(view)) {
+        if (renderAsSequenceDiagram(view)) {
             throw new UnsupportedOperationException("Sequence diagrams are not supported by C4-PlantUML");
         } else {
             return super.export(view);

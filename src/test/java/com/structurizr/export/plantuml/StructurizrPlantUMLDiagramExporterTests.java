@@ -63,7 +63,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         assertEquals(6, diagram.getFrames().size());
 
         // and the sequence diagram version
-        workspace.getViews().getConfiguration().addProperty(exporter.PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY, "true");
+        workspace.getViews().getConfiguration().addProperty(exporter.PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "true");
         diagrams = exporter.export(workspace);
         diagram = diagrams.stream().filter(d -> d.getKey().equals("SignIn")).findFirst().get();
         expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/36141-SignIn-sequence.puml"));
@@ -967,7 +967,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         diagram = exporter.export(view);
         assertEquals(expected, diagram.getDefinition());
 
-        workspace.getViews().getConfiguration().addProperty(StructurizrPlantUMLExporter.PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY, "true");
+        workspace.getViews().getConfiguration().addProperty(StructurizrPlantUMLExporter.PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "true");
 
         diagram = exporter.export(view);
         assertEquals(expected, diagram.getDefinition());

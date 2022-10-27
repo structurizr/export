@@ -18,7 +18,7 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
 
     public static final String PLANTUML_TITLE_PROPERTY = "plantuml.title";
     public static final String PLANTUML_INCLUDES_PROPERTY = "plantuml.includes";
-    public static final String PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY = "plantuml.sequenceDiagrams";
+    public static final String PLANTUML_SEQUENCE_DIAGRAM_PROPERTY = "plantuml.sequenceDiagram";
     public static final String PLANTUML_ANIMATION_PROPERTY = "plantuml.animation";
 
     private final Map<String, String> skinParams = new LinkedHashMap<>();
@@ -164,8 +164,8 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
         return "true".equals(getViewOrViewSetProperty(view, PLANTUML_TITLE_PROPERTY, "true"));
     }
 
-    protected boolean useSequenceDiagrams(View view) {
-        return view instanceof DynamicView && "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_SEQUENCE_DIAGRAMS_PROPERTY, "false"));
+    protected boolean renderAsSequenceDiagram(View view) {
+        return view instanceof DynamicView && "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "false"));
     }
 
     @Override
@@ -187,7 +187,7 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
 
         writer.writeLine();
 
-        if (view instanceof DynamicView && useSequenceDiagrams(view)) {
+        if (view instanceof DynamicView && renderAsSequenceDiagram(view)) {
             // do nothing
         } else {
             if (view.getAutomaticLayout() != null) {

@@ -6,6 +6,7 @@
 - Fixes #24 (plantuml.sequenceDiagrams changes the export of static diagrams).
 - Adds the ability to configure the PlantUML exports via properties on the view set or view (#22).
 - Renamed `plantuml.legend` to `c4plantuml.legend`.
+- Renamed `plantuml.sequenceDiagrams` to `plantuml.sequenceDiagram`.
 
 ## 1.7.0 (3rd October 2022)
 

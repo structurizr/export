@@ -53,7 +53,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             String color = elementStyle.getColor();
             Shape shape = elementStyle.getShape();
 
-            if (view instanceof DynamicView && useSequenceDiagrams(view)) {
+            if (view instanceof DynamicView && renderAsSequenceDiagram(view)) {
                 type = "sequenceParticipant";
             }
 
@@ -79,7 +79,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startEnterpriseBoundary(View view, String enterpriseName, IndentingWriter writer) {
-        if (!useSequenceDiagrams(view)) {
+        if (!renderAsSequenceDiagram(view)) {
             writer.writeLine(String.format("package \"%s\" <<enterprise>> {", enterpriseName));
             writer.indent();
             writer.writeLine("skinparam PackageBorderColor<<enterprise>> #444444");
@@ -90,7 +90,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void endEnterpriseBoundary(View view, IndentingWriter writer) {
-        if (!useSequenceDiagrams(view)) {
+        if (!renderAsSequenceDiagram(view)) {
             writer.outdent();
             writer.writeLine("}");
             writer.writeLine();
@@ -99,7 +99,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startGroupBoundary(View view, String group, IndentingWriter writer) {
-        if (!useSequenceDiagrams(view)) {
+        if (!renderAsSequenceDiagram(view)) {
             String groupId;
             String color = "#cccccc";
 
@@ -127,7 +127,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void endGroupBoundary(View view, IndentingWriter writer) {
-        if (!useSequenceDiagrams(view)) {
+        if (!renderAsSequenceDiagram(view)) {
             writer.outdent();
             writer.writeLine("}");
             writer.writeLine();
@@ -136,7 +136,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startSoftwareSystemBoundary(View view, SoftwareSystem softwareSystem, IndentingWriter writer) {
-        if (!useSequenceDiagrams(view)) {
+        if (!renderAsSequenceDiagram(view)) {
             String color;
             if (softwareSystem.equals(view.getSoftwareSystem())) {
                 color = "#444444";
@@ -154,7 +154,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void endSoftwareSystemBoundary(View view, IndentingWriter writer) {
-        if (!useSequenceDiagrams(view)) {
+        if (!renderAsSequenceDiagram(view)) {
             writer.outdent();
             writer.writeLine("}");
             writer.writeLine();
@@ -163,7 +163,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startContainerBoundary(View view, Container container, IndentingWriter writer) {
-        if (!useSequenceDiagrams(view)) {
+        if (!renderAsSequenceDiagram(view)) {
             String color = "#444444";
             if (view instanceof ComponentView) {
                 if (container.equals(((ComponentView) view).getContainer())) {
@@ -189,7 +189,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void endContainerBoundary(View view, IndentingWriter writer) {
-        if (!useSequenceDiagrams(view)) {
+        if (!renderAsSequenceDiagram(view)) {
             writer.outdent();
             writer.writeLine("}");
             writer.writeLine();
@@ -239,7 +239,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     public Diagram export(DynamicView view) {
-        if (useSequenceDiagrams(view)) {
+        if (renderAsSequenceDiagram(view)) {
             IndentingWriter writer = new IndentingWriter();
             writeHeader(view, writer);
 
@@ -266,7 +266,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     protected void writeElement(View view, Element element, IndentingWriter writer) {
         ElementStyle elementStyle = findElementStyle(view, element);
 
-        if (view instanceof DynamicView && useSequenceDiagrams(view)) {
+        if (view instanceof DynamicView && renderAsSequenceDiagram(view)) {
             writer.writeLine(String.format("%s \"%s\\n<size:10>%s</size>\" as %s <<%s>> %s",
                     plantumlSequenceType(view, element),
                     element.getName(),
@@ -352,7 +352,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         String description = "";
         String technology = relationship.getTechnology();
 
-        if (view instanceof DynamicView && useSequenceDiagrams(view)) {
+        if (view instanceof DynamicView && renderAsSequenceDiagram(view)) {
             // do nothing - sequence diagrams don't need the order
         } else {
             if (!StringUtils.isNullOrEmpty(relationshipView.getOrder())) {
@@ -362,7 +362,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
         description += (hasValue(relationshipView.getDescription()) ? relationshipView.getDescription() : hasValue(relationshipView.getRelationship().getDescription()) ? relationshipView.getRelationship().getDescription() : "");
 
-        if (view instanceof DynamicView && useSequenceDiagrams(view)) {
+        if (view instanceof DynamicView && renderAsSequenceDiagram(view)) {
             String arrowStart = "-";
             String arrowEnd = ">";
 
@@ -474,7 +474,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             String stroke = elementStyle.getStroke();
             String color = elementStyle.getColor();
 
-            if (view instanceof DynamicView && useSequenceDiagrams(view)) {
+            if (view instanceof DynamicView && renderAsSequenceDiagram(view)) {
                 type = "sequenceParticipant";
             }
 

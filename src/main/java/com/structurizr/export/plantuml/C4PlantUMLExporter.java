@@ -162,7 +162,20 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startSoftwareSystemBoundary(View view, SoftwareSystem softwareSystem, IndentingWriter writer) {
-        writer.writeLine(String.format("System_Boundary(\"%s_boundary\", \"%s\") {", idOf(softwareSystem), softwareSystem.getName()));
+        if (includeTags(view)) {
+            ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(softwareSystem);
+            String tagList = elementStyle.getTag().replaceFirst("Element,", "");
+
+            writer.writeLine(String.format("AddBoundaryTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $shadowing=\"%s\")",
+                    tagList,
+                    "#ffffff",
+                    elementStyle.getStroke(),
+                    elementStyle.getStroke(),
+                    elementStyle.getProperties().getOrDefault(C4PLANTUML_SHADOW, "")
+            ));
+        }
+
+        writer.writeLine(String.format("System_Boundary(\"%s_boundary\", \"%s\", $tags=\"%s\") {", idOf(softwareSystem), softwareSystem.getName(), tagsOf(view, softwareSystem)));
         writer.indent();
     }
 
@@ -175,7 +188,20 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startContainerBoundary(View view, Container container, IndentingWriter writer) {
-        writer.writeLine(String.format("Container_Boundary(\"%s_boundary\", \"%s\") {", idOf(container), container.getName()));
+        if (includeTags(view)) {
+            ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(container);
+            String tagList = elementStyle.getTag().replaceFirst("Element,", "");
+
+            writer.writeLine(String.format("AddBoundaryTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $shadowing=\"%s\")",
+                    tagList,
+                    "#ffffff",
+                    elementStyle.getStroke(),
+                    elementStyle.getStroke(),
+                    elementStyle.getProperties().getOrDefault(C4PLANTUML_SHADOW, "")
+            ));
+        }
+
+        writer.writeLine(String.format("Container_Boundary(\"%s_boundary\", \"%s\", $tags=\"%s\") {", idOf(container), container.getName(), tagsOf(view,container)));
         writer.indent();
     }
 

@@ -141,11 +141,11 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml\n" +
                 "\n" +
-                "System_Boundary(\"SoftwareSystem1_boundary\", \"Software System 1\") {\n" +
+                "System_Boundary(\"SoftwareSystem1_boundary\", \"Software System 1\", $tags=\"\") {\n" +
                 "  Container(SoftwareSystem1.Container1, \"Container 1\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
-                "System_Boundary(\"SoftwareSystem2_boundary\", \"Software System 2\") {\n" +
+                "System_Boundary(\"SoftwareSystem2_boundary\", \"Software System 2\", $tags=\"\") {\n" +
                 "  Container(SoftwareSystem2.Container2, \"Container 2\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
@@ -166,7 +166,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml\n" +
                 "\n" +
-                "System_Boundary(\"SoftwareSystem1_boundary\", \"Software System 1\") {\n" +
+                "System_Boundary(\"SoftwareSystem1_boundary\", \"Software System 1\", $tags=\"\") {\n" +
                 "  Container(SoftwareSystem1.Container1, \"Container 1\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
@@ -206,11 +206,11 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml\n" +
                 "\n" +
-                "Container_Boundary(\"SoftwareSystem1.Container1_boundary\", \"Container 1\") {\n" +
+                "Container_Boundary(\"SoftwareSystem1.Container1_boundary\", \"Container 1\", $tags=\"\") {\n" +
                 "  Component(SoftwareSystem1.Container1.Component1, \"Component 1\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
-                "Container_Boundary(\"SoftwareSystem2.Container2_boundary\", \"Container 2\") {\n" +
+                "Container_Boundary(\"SoftwareSystem2.Container2_boundary\", \"Container 2\", $tags=\"\") {\n" +
                 "  Component(SoftwareSystem2.Container2.Component2, \"Component 2\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
@@ -230,7 +230,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml\n" +
                 "\n" +
-                "Container_Boundary(\"SoftwareSystem1.Container1_boundary\", \"Container 1\") {\n" +
+                "Container_Boundary(\"SoftwareSystem1.Container1_boundary\", \"Container 1\", $tags=\"\") {\n" +
                 "  Component(SoftwareSystem1.Container1.Component1, \"Component 1\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +

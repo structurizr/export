@@ -22,7 +22,8 @@ System(EmailSystem, "E-mail System", "The internal Microsoft Exchange e-mail sys
 Container(InternetBankingSystem.MobileApp, "Mobile App", "Xamarin", "Provides a limited subset of the Internet banking functionality to customers via their mobile device.", $tags="Container,Mobile App")
 ContainerDb(InternetBankingSystem.Database, "Database", "Oracle Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.", $tags="Container,Database")
 
-Container_Boundary("InternetBankingSystem.APIApplication_boundary", "API Application") {
+AddBoundaryTag("Container", $bgColor="#ffffff", $borderColor="#2e6295", $fontColor="#2e6295", $shadowing="")
+Container_Boundary("InternetBankingSystem.APIApplication_boundary", "API Application", $tags="Container") {
   Component(InternetBankingSystem.APIApplication.SignInController, "Sign In Controller", "Spring MVC Rest Controller", "Allows users to sign in to the Internet Banking System.", $tags="Component")
   Component(InternetBankingSystem.APIApplication.AccountsSummaryController, "Accounts Summary Controller", "Spring MVC Rest Controller", "Provides customers with a summary of their bank accounts.", $tags="Component")
   Component(InternetBankingSystem.APIApplication.ResetPasswordController, "Reset Password Controller", "Spring MVC Rest Controller", "Allows users to reset their passwords with a single use URL.", $tags="Component")

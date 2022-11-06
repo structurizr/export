@@ -14,7 +14,8 @@ AddElementTag("Container,Web Browser", $bgColor="#438dd5", $borderColor="#2e6295
 
 AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070")
 
-Container_Boundary("InternetBankingSystem.APIApplication_boundary", "API Application") {
+AddBoundaryTag("Container", $bgColor="#ffffff", $borderColor="#2e6295", $fontColor="#2e6295", $shadowing="")
+Container_Boundary("InternetBankingSystem.APIApplication_boundary", "API Application", $tags="Container") {
   Component(InternetBankingSystem.APIApplication.SignInController, "Sign In Controller", "Spring MVC Rest Controller", "Allows users to sign in to the Internet Banking System.", $tags="Component")
   Component(InternetBankingSystem.APIApplication.SecurityComponent, "Security Component", "Spring Bean", "Provides functionality related to signing in, changing passwords, etc.", $tags="Component")
 }

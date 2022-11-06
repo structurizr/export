@@ -9,7 +9,7 @@ top to bottom direction
 
 System(C, "C", "", $tags="")
 
-System_Boundary("D_boundary", "D") {
+System_Boundary("D_boundary", "D", $tags="") {
   Boundary(group_2, "Group 3") {
     Container(D.F, "F", "", $tags="")
   }

@@ -7,7 +7,7 @@ top to bottom direction
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-System_Boundary("SoftwareSystem_boundary", "SoftwareSystem") {
+System_Boundary("SoftwareSystem_boundary", "SoftwareSystem", $tags="") {
   WithoutPropertyHeader()
   AddProperty("IP","127.0.0.1")
   AddProperty("Region","East")

@@ -59,8 +59,8 @@ rectangle "==Mainframe Banking System\n<size:10>[Software System]</size>\n\nStor
 rectangle "==E-mail System\n<size:10>[Software System]</size>\n\nThe internal Microsoft Exchange e-mail system." <<EmailSystem>> as EmailSystem
 
 package "Internet Banking System\n[Software System]" <<InternetBankingSystem>> {
-  skinparam PackageBorderColor<<InternetBankingSystem>> #444444
-  skinparam PackageFontColor<<InternetBankingSystem>> #444444
+  skinparam PackageBorderColor<<InternetBankingSystem>> #0b4884
+  skinparam PackageFontColor<<InternetBankingSystem>> #0b4884
 
   rectangle "==Single-Page Application\n<size:10>[Container: JavaScript and Angular]</size>\n\nProvides all of the Internet banking functionality to customers via their web browser." <<InternetBankingSystem.SinglePageApplication>> as InternetBankingSystem.SinglePageApplication
   rectangle "==Mobile App\n<size:10>[Container: Xamarin]</size>\n\nProvides a limited subset of the Internet banking functionality to customers via their mobile device." <<InternetBankingSystem.MobileApp>> as InternetBankingSystem.MobileApp

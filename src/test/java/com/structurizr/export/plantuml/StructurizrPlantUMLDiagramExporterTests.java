@@ -282,15 +282,15 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "}\n" +
                 "\n" +
                 "package \"Software System 1\\n[Software System]\" <<SoftwareSystem1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1>> #444444\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1>> #444444\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> as SoftwareSystem1.Container1\n" +
                 "}\n" +
                 "\n" +
                 "package \"Software System 2\\n[Software System]\" <<SoftwareSystem2>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem2>> #cccccc\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem2>> #cccccc\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem2>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem2>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 2\\n<size:10>[Container]</size>\" <<SoftwareSystem2.Container2>> as SoftwareSystem2.Container2\n" +
                 "}\n" +
@@ -327,8 +327,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "}\n" +
                 "\n" +
                 "package \"Software System 1\\n[Software System]\" <<SoftwareSystem1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1>> #444444\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1>> #444444\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> as SoftwareSystem1.Container1\n" +
                 "}\n" +
@@ -384,15 +384,15 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "}\n" +
                 "\n" +
                 "package \"Container 1\\n[Container]\" <<SoftwareSystem1.Container1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #444444\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #444444\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 1\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container1.Component1>> as SoftwareSystem1.Container1.Component1\n" +
                 "}\n" +
                 "\n" +
                 "package \"Container 2\\n[Container]\" <<SoftwareSystem2.Container2>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem2.Container2>> #cccccc\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem2.Container2>> #cccccc\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem2.Container2>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem2.Container2>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 2\\n<size:10>[Component]</size>\" <<SoftwareSystem2.Container2.Component2>> as SoftwareSystem2.Container2.Component2\n" +
                 "}\n" +
@@ -429,8 +429,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "}\n" +
                 "\n" +
                 "package \"Container 1\\n[Container]\" <<SoftwareSystem1.Container1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #444444\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #444444\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 1\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container1.Component1>> as SoftwareSystem1.Container1.Component1\n" +
                 "}\n" +
@@ -483,15 +483,15 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "}\n" +
                 "\n" +
                 "package \"Software System 1\\n[Software System]\" <<SoftwareSystem1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1>> #444444\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1>> #444444\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> as SoftwareSystem1.Container1\n" +
                 "}\n" +
                 "\n" +
                 "package \"Software System 2\\n[Software System]\" <<SoftwareSystem2>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem2>> #cccccc\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem2>> #cccccc\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem2>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem2>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 2\\n<size:10>[Container]</size>\" <<SoftwareSystem2.Container2>> as SoftwareSystem2.Container2\n" +
                 "}\n" +
@@ -528,8 +528,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "}\n" +
                 "\n" +
                 "package \"Software System 1\\n[Software System]\" <<SoftwareSystem1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1>> #444444\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1>> #444444\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> as SoftwareSystem1.Container1\n" +
                 "}\n" +
@@ -584,15 +584,15 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "}\n" +
                 "\n" +
                 "package \"Container 1\\n[Container]\" <<SoftwareSystem1.Container1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #444444\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #444444\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 1\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container1.Component1>> as SoftwareSystem1.Container1.Component1\n" +
                 "}\n" +
                 "\n" +
                 "package \"Container 2\\n[Container]\" <<SoftwareSystem1.Container2>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1.Container2>> #cccccc\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1.Container2>> #cccccc\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem1.Container2>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem1.Container2>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 2\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container2.Component2>> as SoftwareSystem1.Container2.Component2\n" +
                 "}\n" +
@@ -629,8 +629,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "}\n" +
                 "\n" +
                 "package \"Container 1\\n[Container]\" <<SoftwareSystem1.Container1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #444444\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #444444\n" +
+                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 1\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container1.Component1>> as SoftwareSystem1.Container1.Component1\n" +
                 "}\n" +

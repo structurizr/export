@@ -76,8 +76,8 @@ rectangle "==Mobile App\n<size:10>[Container: Xamarin]</size>\n\nProvides a limi
 database "==Database\n<size:10>[Container: Oracle Database Schema]</size>\n\nStores user registration information, hashed authentication credentials, access logs, etc." <<InternetBankingSystem.Database>> as InternetBankingSystem.Database
 
 package "API Application\n[Container: Java and Spring MVC]" <<InternetBankingSystem.APIApplication>> {
-  skinparam PackageBorderColor<<InternetBankingSystem.APIApplication>> #444444
-  skinparam PackageFontColor<<InternetBankingSystem.APIApplication>> #444444
+  skinparam PackageBorderColor<<InternetBankingSystem.APIApplication>> #2e6295
+  skinparam PackageFontColor<<InternetBankingSystem.APIApplication>> #2e6295
 
   rectangle "==Sign In Controller\n<size:10>[Component: Spring MVC Rest Controller]</size>\n\nAllows users to sign in to the Internet Banking System." <<InternetBankingSystem.APIApplication.SignInController>> as InternetBankingSystem.APIApplication.SignInController
   rectangle "==Accounts Summary Controller\n<size:10>[Component: Spring MVC Rest Controller]</size>\n\nProvides customers with a summary of their bank accounts." <<InternetBankingSystem.APIApplication.AccountsSummaryController>> as InternetBankingSystem.APIApplication.AccountsSummaryController

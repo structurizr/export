@@ -35,8 +35,8 @@ skinparam rectangle<<InternetBankingSystem.SinglePageApplication>> {
 }
 
 package "API Application\n[Container: Java and Spring MVC]" <<InternetBankingSystem.APIApplication>> {
-  skinparam PackageBorderColor<<InternetBankingSystem.APIApplication>> #444444
-  skinparam PackageFontColor<<InternetBankingSystem.APIApplication>> #444444
+  skinparam PackageBorderColor<<InternetBankingSystem.APIApplication>> #2e6295
+  skinparam PackageFontColor<<InternetBankingSystem.APIApplication>> #2e6295
 
   rectangle "==Sign In Controller\n<size:10>[Component: Spring MVC Rest Controller]</size>\n\nAllows users to sign in to the Internet Banking System." <<InternetBankingSystem.APIApplication.SignInController>> as InternetBankingSystem.APIApplication.SignInController
   rectangle "==Security Component\n<size:10>[Component: Spring Bean]</size>\n\nProvides functionality related to signing in, changing passwords, etc." <<InternetBankingSystem.APIApplication.SecurityComponent>> as InternetBankingSystem.APIApplication.SecurityComponent

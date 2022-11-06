@@ -137,12 +137,8 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     @Override
     protected void startSoftwareSystemBoundary(View view, SoftwareSystem softwareSystem, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
-            String color;
-            if (softwareSystem.equals(view.getSoftwareSystem())) {
-                color = "#444444";
-            } else {
-                color = "#cccccc";
-            }
+            ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(softwareSystem);
+            String color = elementStyle.getStroke();
 
             writer.writeLine(String.format("package \"%s\\n%s\" <<%s>> {", softwareSystem.getName(), typeOf(view, softwareSystem, true), idOf(softwareSystem)));
             writer.indent();
@@ -164,20 +160,8 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     @Override
     protected void startContainerBoundary(View view, Container container, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
-            String color = "#444444";
-            if (view instanceof ComponentView) {
-                if (container.equals(((ComponentView) view).getContainer())) {
-                    color = "#444444";
-                } else {
-                    color = "#cccccc";
-                }
-            } else if (view instanceof DynamicView) {
-                if (container.equals(((DynamicView) view).getElement())) {
-                    color = "#444444";
-                } else {
-                    color = "#cccccc";
-                }
-            }
+            ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(container);
+            String color = elementStyle.getStroke();
 
             writer.writeLine(String.format("package \"%s\\n%s\" <<%s>> {", container.getName(), typeOf(view, container, true), idOf(container)));
             writer.indent();

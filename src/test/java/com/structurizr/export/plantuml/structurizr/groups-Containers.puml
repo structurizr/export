@@ -32,8 +32,8 @@ skinparam rectangle<<D.F>> {
 rectangle "==C\n<size:10>[Software System]</size>" <<C>> as C
 
 package "D\n[Software System]" <<D>> {
-  skinparam PackageBorderColor<<D>> #444444
-  skinparam PackageFontColor<<D>> #444444
+  skinparam PackageBorderColor<<D>> #9a9a9a
+  skinparam PackageFontColor<<D>> #9a9a9a
 
   package "Group 3\n[Group]" <<group>> {
     skinparam PackageBorderColor<<group>> #cccccc

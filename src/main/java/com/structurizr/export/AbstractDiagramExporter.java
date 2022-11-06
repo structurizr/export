@@ -238,12 +238,9 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
             writer.writeLine();
         }
 
-        List<SoftwareSystem> softwareSystems = new ArrayList<>(view.getElements().stream().map(ElementView::getElement).filter(e -> e instanceof Container).map(c -> ((Container)c).getSoftwareSystem()).collect(Collectors.toSet()));
-        softwareSystems.sort(Comparator.comparing(Element::getId));
-
+        List<SoftwareSystem> softwareSystems = getBoundarySoftwareSystems(view);
         for (SoftwareSystem softwareSystem : softwareSystems) {
             boolean showSoftwareSystemBoundary = softwareSystem.equals(view.getSoftwareSystem()) || view.getExternalSoftwareSystemBoundariesVisible();
-
             if (showSoftwareSystemBoundary) {
                 startSoftwareSystemBoundary(view, softwareSystem, writer);
             }
@@ -269,6 +266,13 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         writeFooter(view, writer);
 
         return createDiagram(view, writer.toString());
+    }
+
+    protected List<SoftwareSystem> getBoundarySoftwareSystems(View view) {
+        List<SoftwareSystem> softwareSystems = new ArrayList<>(view.getElements().stream().map(ElementView::getElement).filter(e -> e instanceof Container).map(c -> ((Container)c).getSoftwareSystem()).collect(Collectors.toSet()));
+        softwareSystems.sort(Comparator.comparing(Element::getId));
+
+        return softwareSystems;
     }
 
     public Diagram export(ComponentView view) {
@@ -302,12 +306,9 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
             writer.writeLine();
         }
 
-        List<Container> containers = new ArrayList<>(view.getElements().stream().map(ElementView::getElement).filter(e -> e instanceof Component).map(c -> ((Component)c).getContainer()).collect(Collectors.toSet()));
-        containers.sort(Comparator.comparing(Element::getId));
-
+        List<Container> containers = getBoundaryContainers(view);
         for (Container container : containers) {
             boolean showContainerBoundary = container.equals(view.getContainer()) || view.getExternalContainerBoundariesVisible();
-
             if (showContainerBoundary) {
                 startContainerBoundary(view, container, writer);
             }
@@ -332,6 +333,13 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         writeFooter(view, writer);
 
         return createDiagram(view, writer.toString());
+    }
+
+    protected List<Container> getBoundaryContainers(View view) {
+        List<Container> containers = new ArrayList<>(view.getElements().stream().map(ElementView::getElement).filter(e -> e instanceof Component).map(c -> ((Component)c).getContainer()).collect(Collectors.toSet()));
+        containers.sort(Comparator.comparing(Element::getId));
+
+        return containers;
     }
 
     public Diagram export(DynamicView view) {
@@ -369,8 +377,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
             }
         } else {
             if (element instanceof SoftwareSystem) {
-                List<SoftwareSystem> softwareSystems = new ArrayList<>(view.getElements().stream().map(ElementView::getElement).filter(e -> e instanceof Container).map(c -> ((Container)c).getSoftwareSystem()).collect(Collectors.toSet()));
-                softwareSystems.sort(Comparator.comparing(Element::getId));
+                List<SoftwareSystem> softwareSystems = getBoundarySoftwareSystems(view);
 
                 for (SoftwareSystem softwareSystem : softwareSystems) {
                     boolean showSoftwareSystemBoundary = softwareSystem.equals(view.getElement()) || view.getExternalBoundariesVisible();
@@ -399,8 +406,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
                     }
                 }
             } else if (element instanceof Container) {
-                List<Container> containers = new ArrayList<>(view.getElements().stream().map(ElementView::getElement).filter(e -> e instanceof Component).map(c -> ((Component)c).getContainer()).collect(Collectors.toSet()));
-                containers.sort(Comparator.comparing(Element::getId));
+                List<Container> containers = getBoundaryContainers(view);
 
                 for (Container container : containers) {
                     boolean showContainerBoundary = container.equals(view.getElement()) || view.getExternalBoundariesVisible();

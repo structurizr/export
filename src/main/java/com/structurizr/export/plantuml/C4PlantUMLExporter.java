@@ -6,8 +6,7 @@ import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static java.lang.String.format;
 
@@ -72,7 +71,9 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         if (includeTags(view)) {
             Map<String,ElementStyle> elementStyles = new HashMap<>();
             Map<String,RelationshipStyle> relationshipStyles = new HashMap<>();
+            Map<String,ElementStyle> boundaryStyles = new HashMap<>();
 
+            // elements
             for (ElementView elementView : view.getElements()) {
                 Element element = elementView.getElement();
                 ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(element);
@@ -80,11 +81,32 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
                 elementStyles.put(elementStyle.getTag(), elementStyle);
             }
 
+            // relationships
             for (RelationshipView relationshipView : view.getRelationships()) {
                 Relationship relationship = relationshipView.getRelationship();
                 RelationshipStyle relationshipStyle = view.getViewSet().getConfiguration().getStyles().findRelationshipStyle(relationship);
 
                 relationshipStyles.put(relationshipStyle.getTag(), relationshipStyle);
+            }
+
+            // boundaries
+            List<Element> boundaryElements = new ArrayList<>();
+            if (view instanceof ContainerView) {
+                boundaryElements.addAll(getBoundarySoftwareSystems(view));
+            } else if (view instanceof ComponentView) {
+                boundaryElements.addAll(getBoundaryContainers(view));
+            } else if (view instanceof DynamicView) {
+                DynamicView dynamicView = (DynamicView)view;
+                if (dynamicView.getElement() instanceof SoftwareSystem) {
+                    boundaryElements.addAll(getBoundarySoftwareSystems(view));
+                } else if (dynamicView.getElement() instanceof Container) {
+                    boundaryElements.addAll(getBoundaryContainers(view));
+                }
+            }
+
+            for (Element boundaryElement : boundaryElements) {
+                ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(boundaryElement);
+                boundaryStyles.put(elementStyle.getTag(), elementStyle);
             }
 
             if (!elementStyles.isEmpty()) {
@@ -116,6 +138,23 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
                             tagList,
                             relationshipStyle.getColor(),
                             relationshipStyle.getColor()
+                    ));
+                }
+            }
+
+            if (!boundaryStyles.isEmpty()) {
+                writer.writeLine();
+
+                for (String tagList : boundaryStyles.keySet()) {
+                    ElementStyle elementStyle = boundaryStyles.get(tagList);
+                    tagList = tagList.replaceFirst("Element,", "");
+
+                    writer.writeLine(String.format("AddBoundaryTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $shadowing=\"%s\")",
+                            tagList,
+                            "#ffffff",
+                            elementStyle.getStroke(),
+                            elementStyle.getStroke(),
+                            elementStyle.getProperties().getOrDefault(C4PLANTUML_SHADOW, "")
                     ));
                 }
             }
@@ -162,19 +201,6 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startSoftwareSystemBoundary(View view, SoftwareSystem softwareSystem, IndentingWriter writer) {
-        if (includeTags(view)) {
-            ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(softwareSystem);
-            String tagList = elementStyle.getTag().replaceFirst("Element,", "");
-
-            writer.writeLine(String.format("AddBoundaryTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $shadowing=\"%s\")",
-                    tagList,
-                    "#ffffff",
-                    elementStyle.getStroke(),
-                    elementStyle.getStroke(),
-                    elementStyle.getProperties().getOrDefault(C4PLANTUML_SHADOW, "")
-            ));
-        }
-
         writer.writeLine(String.format("System_Boundary(\"%s_boundary\", \"%s\", $tags=\"%s\") {", idOf(softwareSystem), softwareSystem.getName(), tagsOf(view, softwareSystem)));
         writer.indent();
     }
@@ -188,19 +214,6 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startContainerBoundary(View view, Container container, IndentingWriter writer) {
-        if (includeTags(view)) {
-            ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(container);
-            String tagList = elementStyle.getTag().replaceFirst("Element,", "");
-
-            writer.writeLine(String.format("AddBoundaryTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $shadowing=\"%s\")",
-                    tagList,
-                    "#ffffff",
-                    elementStyle.getStroke(),
-                    elementStyle.getStroke(),
-                    elementStyle.getProperties().getOrDefault(C4PLANTUML_SHADOW, "")
-            ));
-        }
-
         writer.writeLine(String.format("Container_Boundary(\"%s_boundary\", \"%s\", $tags=\"%s\") {", idOf(container), container.getName(), tagsOf(view,container)));
         writer.indent();
     }

@@ -34,5 +34,5 @@ Rel_D(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1
 Rel_D(Live.AmazonWebServices.USEast1.Route53, Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Forwards requests to", "HTTPS", $tags="")
 Rel_D(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Forwards requests to", "HTTPS", $tags="")
 
-SHOW_LEGEND()
+SHOW_LEGEND(true)
 @enduml

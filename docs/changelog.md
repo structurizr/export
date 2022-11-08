@@ -7,6 +7,7 @@
 - Adds the ability to configure the PlantUML exports via properties on the view set or view (#22).
 - Renamed `plantuml.legend` to `c4plantuml.legend`.
 - Renamed `plantuml.sequenceDiagrams` to `plantuml.sequenceDiagram`.
+- Adds a view/view set property named `c4plantuml.stereotypes` that can be used to enable/disable stereotypes (these are always on by default when the legend is not shown; #29).
 
 ## 1.7.0 (3rd October 2022)
 

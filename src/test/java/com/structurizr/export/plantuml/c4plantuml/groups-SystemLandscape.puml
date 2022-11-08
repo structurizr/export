@@ -24,5 +24,5 @@ Rel_D(B, C, "", $tags="")
 Rel_D(C, D, "", $tags="")
 Rel_D(A, B, "", $tags="")
 
-SHOW_LEGEND()
+SHOW_LEGEND(true)
 @enduml

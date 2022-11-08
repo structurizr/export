@@ -42,6 +42,7 @@ There are a number of properties that can be set to customise the exports, as fo
 - `plantuml.animation`: `true` to generate one PlantUML diagram definition per animation frame, `false` (default) to ignore animations.
 - `c4plantuml.tags`: `true` to generate diagram definitions based upon how the Structurizr diagram renderer creates diagrams using tags and styles, `false` (default) to generate diagram definitions that use the default C4-PlantUML styling (i.e. blue and grey boxes). Please note that with this property set to `true`, this exporter does not follow the approach that C4-PlantUML uses for tags and styling. If you would like this behaviour instead of what is provided here, you may want to take a look at [https://github.com/cloudflightio/structurizr-export-c4plantuml](https://github.com/cloudflightio/structurizr-export-c4plantuml) instead. 
 - `c4plantuml.legend`: `true` (default) to include the diagram legend, `false` to exclude the legend.
+- `c4plantuml.stereotypes`: `true` to include stereotypes, `false` (default) to exclude stereotypes.
 - `c4plantuml.elementProperties`: `true` to include element properties, `false` (default) to exclude element properties.
 - `c4plantuml.relationshipProperties`: `true` to include relationship properties, `false` (default) to exclude relationship properties.
 

@@ -23,5 +23,5 @@ AddProperty("Prop1","Value1")
 AddProperty("Prop2","Value2")
 Rel_D(SoftwareSystem.Container1, SoftwareSystem.Container2, "", $tags="")
 
-SHOW_LEGEND()
+SHOW_LEGEND(true)
 @enduml

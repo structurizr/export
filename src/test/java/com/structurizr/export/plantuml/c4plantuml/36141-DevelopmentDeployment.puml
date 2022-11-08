@@ -50,5 +50,5 @@ Rel_D(Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIAppli
 Rel_D(Development.DeveloperLaptop.WebBrowser.SinglePageApplication_1, Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1, "Makes API calls to", "JSON/HTTPS", $tags="Relationship")
 Rel_D(Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.WebApplication_1, Development.DeveloperLaptop.WebBrowser.SinglePageApplication_1, "Delivers to the customer's web browser", $tags="Relationship")
 
-SHOW_LEGEND()
+SHOW_LEGEND(true)
 @enduml

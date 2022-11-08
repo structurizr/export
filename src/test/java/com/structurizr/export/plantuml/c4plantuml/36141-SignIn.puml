@@ -31,5 +31,5 @@ Rel_D(InternetBankingSystem.Database, InternetBankingSystem.APIApplication.Secur
 Rel_D(InternetBankingSystem.APIApplication.SecurityComponent, InternetBankingSystem.APIApplication.SignInController, "5. Returns true if the hashed password matches", $tags="Relationship")
 Rel_D(InternetBankingSystem.APIApplication.SignInController, InternetBankingSystem.SinglePageApplication, "6. Sends back an authentication token to", "JSON/HTTPS", $tags="Relationship")
 
-SHOW_LEGEND()
+SHOW_LEGEND(true)
 @enduml

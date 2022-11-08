@@ -151,7 +151,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $tags=\"\")\n" +
                 "\n" +
-                "SHOW_LEGEND()\n" +
+                "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());
 
 
@@ -174,7 +174,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $tags=\"\")\n" +
                 "\n" +
-                "SHOW_LEGEND()\n" +
+                "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());
     }
 
@@ -216,7 +216,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $tags=\"\")\n" +
                 "\n" +
-                "SHOW_LEGEND()\n" +
+                "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());
 
         componentView.setExternalSoftwareSystemBoundariesVisible(false);
@@ -238,7 +238,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $tags=\"\")\n" +
                 "\n" +
-                "SHOW_LEGEND()\n" +
+                "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());
     }
 
@@ -264,7 +264,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "System(SoftwareSystem, \"Software System\", \"\", $tags=\"\")[[https://structurizr.com]]\n" +
                 "\n" +
                 "\n" +
-                "SHOW_LEGEND()\n" +
+                "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());
     }
 
@@ -291,7 +291,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "System(SoftwareSystem, \"Software System\", \"\", $tags=\"\")\n" +
                 "\n" +
                 "\n" +
-                "SHOW_LEGEND()\n" +
+                "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());
     }
 
@@ -316,7 +316,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "System(SoftwareSystem, \"Software\\nSystem\", \"\", $tags=\"\")\n" +
                 "\n" +
                 "\n" +
-                "SHOW_LEGEND()\n" +
+                "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());
     }
 
@@ -344,7 +344,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "}\n" +
                 "\n" +
                 "\n" +
-                "SHOW_LEGEND()\n" +
+                "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());
     }
 
@@ -371,6 +371,87 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
 
         String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/printProperties-containerView.puml"));
         assertEquals(expected, diagram.getDefinition());
+    }
+
+    @Test
+    public void test_legendAndStereotypes() {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addSoftwareSystem("Name");
+
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "Description");
+        view.addDefaultElements();
+
+        // legend (true) and stereotypes (false)
+        view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "true");
+        view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "false");
+        Diagram diagram = new C4PlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "title System Landscape\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "\n" +
+                "System(Name, \"Name\", \"\", $tags=\"\")\n" +
+                "\n" +
+                "\n" +
+                "SHOW_LEGEND(true)\n" +
+                "@enduml", diagram.getDefinition());
+
+        // legend (true) and stereotypes (true)
+        view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "true");
+        view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "true");
+        diagram = new C4PlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "title System Landscape\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "\n" +
+                "System(Name, \"Name\", \"\", $tags=\"\")\n" +
+                "\n" +
+                "\n" +
+                "SHOW_LEGEND(false)\n" +
+                "@enduml", diagram.getDefinition());
+
+        // legend (false) and stereotypes (false)
+        view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "false");
+        view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "false");
+        diagram = new C4PlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "title System Landscape\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "\n" +
+                "System(Name, \"Name\", \"\", $tags=\"\")\n" +
+                "\n" +
+                "\n" +
+                "hide stereotypes\n" +
+                "@enduml", diagram.getDefinition());
+
+        // legend (false) and stereotypes (true)
+        view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "false");
+        view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "true");
+        diagram = new C4PlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "title System Landscape\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "\n" +
+                "System(Name, \"Name\", \"\", $tags=\"\")\n" +
+                "\n" +
+                "\n" +
+                "show stereotypes\n" +
+                "@enduml", diagram.getDefinition());
     }
 
 }

@@ -13,6 +13,7 @@ import static java.lang.String.format;
 public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     public static final String C4PLANTUML_LEGEND_PROPERTY = "c4plantuml.legend";
+    public static final String C4PLANTUML_STEREOTYPES_PROPERTY = "c4plantuml.stereotypes";
     public static final String C4PLANTUML_TAGS_PROPERTY = "c4plantuml.tags";
 
     /**
@@ -167,7 +168,10 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     protected void writeFooter(View view, IndentingWriter writer) {
         if (includeLegend(view)) {
             writer.writeLine();
-            writer.writeLine("SHOW_LEGEND()");
+            writer.writeLine("SHOW_LEGEND(" + !(includeStereotypes(view)) + ")");
+        } else {
+            writer.writeLine();
+            writer.writeLine((includeStereotypes(view) ? "show" : "hide") + " stereotypes");
         }
 
         super.writeFooter(view, writer);
@@ -442,6 +446,10 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     protected boolean includeLegend(View view) {
         return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_LEGEND_PROPERTY, "true"));
+    }
+
+    protected boolean includeStereotypes(View view) {
+        return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_STEREOTYPES_PROPERTY, "false"));
     }
 
     protected boolean includeTags(View view) {

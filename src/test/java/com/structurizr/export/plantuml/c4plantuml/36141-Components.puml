@@ -47,5 +47,5 @@ Rel_D(InternetBankingSystem.APIApplication.SecurityComponent, InternetBankingSys
 Rel_D(InternetBankingSystem.APIApplication.MainframeBankingSystemFacade, MainframeBankingSystem, "Uses", "XML/HTTPS", $tags="Relationship")
 Rel_D(InternetBankingSystem.APIApplication.EmailComponent, EmailSystem, "Sends e-mail using", $tags="Relationship")
 
-SHOW_LEGEND()
+SHOW_LEGEND(true)
 @enduml

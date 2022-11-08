@@ -17,6 +17,8 @@ import static java.lang.String.format;
 
 public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
+    public static final String PLANTUML_SEQUENCE_DIAGRAM_PROPERTY = "plantuml.sequenceDiagram";
+
     private static final double MAX_ICON_SIZE = 50.0;
 
     public StructurizrPlantUMLExporter() {
@@ -31,6 +33,26 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     protected void writeHeader(View view, IndentingWriter writer) {
         super.writeHeader(view, writer);
 
+        if (view instanceof DynamicView && renderAsSequenceDiagram(view)) {
+            // do nothing
+        } else {
+            if (view.getAutomaticLayout() != null) {
+                switch (view.getAutomaticLayout().getRankDirection()) {
+                    case LeftRight:
+                        writer.writeLine("left to right direction");
+                        break;
+                    default:
+                        writer.writeLine("top to bottom direction");
+                        break;
+                }
+            } else {
+                writer.writeLine("top to bottom direction");
+            }
+
+            writer.writeLine();
+        }
+
+        writeSkinParams(writer);
         writeIncludes(view, writer);
 
         writer.writeLine();
@@ -569,6 +591,10 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         }
 
         return scale;
+    }
+
+    protected boolean renderAsSequenceDiagram(View view) {
+        return view instanceof DynamicView && "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "false"));
     }
 
 }

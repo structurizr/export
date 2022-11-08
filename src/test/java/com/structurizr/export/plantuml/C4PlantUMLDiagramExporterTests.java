@@ -51,14 +51,6 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         diagram = diagrams.stream().filter(md -> md.getKey().equals("LiveDeployment")).findFirst().get();
         expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/36141-LiveDeployment.puml"));
         assertEquals(expected, diagram.getDefinition());
-
-        try {
-            // and the sequence diagram version ... which isn't supported
-            workspace.getViews().getConfiguration().addProperty(exporter.PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "true");
-            exporter.export(workspace);
-        } catch (UnsupportedOperationException uoe) {
-            assertEquals("Sequence diagrams are not supported by C4-PlantUML", uoe.getMessage());
-        }
     }
 
     @Test

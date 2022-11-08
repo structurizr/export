@@ -52,6 +52,23 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     protected void writeHeader(View view, IndentingWriter writer) {
         super.writeHeader(view, writer);
 
+        writeSkinParams(writer);
+
+        if (view.getAutomaticLayout() != null) {
+            switch (view.getAutomaticLayout().getRankDirection()) {
+                case LeftRight:
+                    writer.writeLine("left to right direction");
+                    break;
+                default:
+                    writer.writeLine("top to bottom direction");
+                    break;
+            }
+        } else {
+            writer.writeLine("top to bottom direction");
+        }
+
+        writer.writeLine();
+
         writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml");
         writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml");
 
@@ -275,15 +292,6 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     @Override
     public Diagram export(CustomView view) {
         return null;
-    }
-
-    @Override
-    public Diagram export(DynamicView view) {
-        if (renderAsSequenceDiagram(view)) {
-            throw new UnsupportedOperationException("Sequence diagrams are not supported by C4-PlantUML");
-        } else {
-            return super.export(view);
-        }
     }
 
     @Override

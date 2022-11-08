@@ -18,7 +18,6 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
 
     public static final String PLANTUML_TITLE_PROPERTY = "plantuml.title";
     public static final String PLANTUML_INCLUDES_PROPERTY = "plantuml.includes";
-    public static final String PLANTUML_SEQUENCE_DIAGRAM_PROPERTY = "plantuml.sequenceDiagram";
     public static final String PLANTUML_ANIMATION_PROPERTY = "plantuml.animation";
 
     private final Map<String, String> skinParams = new LinkedHashMap<>();
@@ -164,10 +163,6 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
         return "true".equals(getViewOrViewSetProperty(view, PLANTUML_TITLE_PROPERTY, "true"));
     }
 
-    protected boolean renderAsSequenceDiagram(View view) {
-        return view instanceof DynamicView && "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "false"));
-    }
-
     @Override
     protected boolean isAnimationSupported(View view) {
         return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_ANIMATION_PROPERTY, "false"));
@@ -186,27 +181,6 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
         }
 
         writer.writeLine();
-
-        if (view instanceof DynamicView && renderAsSequenceDiagram(view)) {
-            // do nothing
-        } else {
-            if (view.getAutomaticLayout() != null) {
-                switch (view.getAutomaticLayout().getRankDirection()) {
-                    case LeftRight:
-                        writer.writeLine("left to right direction");
-                        break;
-                    default:
-                        writer.writeLine("top to bottom direction");
-                        break;
-                }
-            } else {
-                writer.writeLine("top to bottom direction");
-            }
-
-            writer.writeLine();
-        }
-
-        writeSkinParams(writer);
     }
 
     protected void writeSkinParams(IndentingWriter writer) {

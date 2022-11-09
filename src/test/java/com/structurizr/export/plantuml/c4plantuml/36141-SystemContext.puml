@@ -10,7 +10,7 @@ AddElementTag("Software System", $bgColor="#1168bd", $borderColor="#0b4884", $fo
 AddElementTag("Software System,Existing System", $bgColor="#999999", $borderColor="#6b6b6b", $fontColor="#ffffff", $sprite="", $shadowing="")
 AddElementTag("Person", $bgColor="#08427b", $borderColor="#052e56", $fontColor="#ffffff", $sprite="", $shadowing="")
 
-AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070")
+AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070", $lineStyle = SolidLine())
 
 Person_Ext(PersonalBankingCustomer, "Personal Banking Customer", "A customer of the bank, with personal bank accounts.", $tags="Person")
 System(InternetBankingSystem, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.", $tags="Software System")

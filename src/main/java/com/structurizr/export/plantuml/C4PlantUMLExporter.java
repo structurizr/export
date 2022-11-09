@@ -152,10 +152,11 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
                     RelationshipStyle relationshipStyle = relationshipStyles.get(tagList);
                     tagList = tagList.replaceFirst("Relationship,", "");
 
-                    writer.writeLine(String.format("AddRelTag(\"%s\", $textColor=\"%s\", $lineColor=\"%s\")",
+                    writer.writeLine(String.format("AddRelTag(\"%s\", $textColor=\"%s\", $lineColor=\"%s\", $lineStyle = %s)",
                             tagList,
                             relationshipStyle.getColor(),
-                            relationshipStyle.getColor()
+                            relationshipStyle.getColor(),
+                            relationshipStyle.getStyle() == LineStyle.Dashed ? "DashedLine()" : "SolidLine()"
                     ));
                 }
             }

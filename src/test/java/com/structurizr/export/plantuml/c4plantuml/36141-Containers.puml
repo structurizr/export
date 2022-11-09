@@ -14,7 +14,7 @@ AddElementTag("Person", $bgColor="#08427b", $borderColor="#052e56", $fontColor="
 AddElementTag("Container,Web Browser", $bgColor="#438dd5", $borderColor="#2e6295", $fontColor="#ffffff", $sprite="", $shadowing="")
 AddElementTag("Container", $bgColor="#438dd5", $borderColor="#2e6295", $fontColor="#ffffff", $sprite="", $shadowing="")
 
-AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070")
+AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070", $lineStyle = SolidLine())
 
 AddBoundaryTag("Software System", $bgColor="#ffffff", $borderColor="#0b4884", $fontColor="#0b4884", $shadowing="")
 

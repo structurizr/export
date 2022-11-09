@@ -11,7 +11,7 @@ AddElementTag("Person,Bank Staff", $bgColor="#999999", $borderColor="#6b6b6b", $
 AddElementTag("Software System,Existing System", $bgColor="#999999", $borderColor="#6b6b6b", $fontColor="#ffffff", $sprite="", $shadowing="")
 AddElementTag("Person", $bgColor="#08427b", $borderColor="#052e56", $fontColor="#ffffff", $sprite="", $shadowing="")
 
-AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070", $lineStyle = SolidLine())
+AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070", $lineStyle = "")
 
 Enterprise_Boundary(enterprise, "Big Bank plc") {
   Person(CustomerServiceStaff, "Customer Service Staff", "Customer service staff within the bank.", $tags="Person,Bank Staff")

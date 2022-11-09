@@ -19,7 +19,7 @@ AddElementTag("Amazon Web Services - RDS MySQL instance", $bgColor="#ffffff", $b
 AddElementTag("Container,Database", $bgColor="#ffffff", $borderColor="#b2b2b2", $fontColor="#000000", $sprite="", $shadowing="")
 AddElementTag("Amazon Web Services - Cloud", $bgColor="#ffffff", $borderColor="#232f3e", $fontColor="#232f3e", $sprite="", $shadowing="")
 
-AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070", $lineStyle = SolidLine())
+AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070", $lineStyle = "")
 
 Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $tags="Amazon Web Services - Cloud") {
   Deployment_Node(Live.AmazonWebServices.USEast1, "US-East-1", $tags="Amazon Web Services - Region") {

@@ -45,6 +45,7 @@ There are a number of properties that can be set to customise the exports, as fo
 - `c4plantuml.stereotypes`: `true` to include stereotypes, `false` (default) to exclude stereotypes.
 - `c4plantuml.elementProperties`: `true` to include element properties, `false` (default) to exclude element properties.
 - `c4plantuml.relationshipProperties`: `true` to include relationship properties, `false` (default) to exclude relationship properties.
+- `c4plantuml.stdlib`: `true` to use the built-in C4-PlantUML standard library, `false` (default) to use the latest version from GitHub.
 
 These properties can either be set on individual views, or on the view set to apply to all views.
 

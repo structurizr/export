@@ -15,6 +15,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     public static final String C4PLANTUML_LEGEND_PROPERTY = "c4plantuml.legend";
     public static final String C4PLANTUML_STEREOTYPES_PROPERTY = "c4plantuml.stereotypes";
     public static final String C4PLANTUML_TAGS_PROPERTY = "c4plantuml.tags";
+    public static final String C4PLANTUML_STANDARD_LIBRARY_PROPERTY = "c4plantuml.stdlib";
 
     /**
      * <p>Set this property to <code>true</code> by calling {@link Configuration#addProperty(String, String)} in your
@@ -69,19 +70,36 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
         writer.writeLine();
 
-        writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml");
-        writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml");
+        if (usePlantUMLStandardLibrary(view)) {
+            writer.writeLine("!include <C4/C4>");
+            writer.writeLine("!include <C4/C4_Context>");
+        } else {
+            writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml");
+            writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml");
+        }
 
         if (view.getElements().stream().map(ElementView::getElement).anyMatch(e -> e instanceof Container || e instanceof ContainerInstance)) {
-            writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml");
+            if (usePlantUMLStandardLibrary(view)) {
+                writer.writeLine("!include <C4/C4_Container>");
+            } else {
+                writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml");
+            }
         }
 
         if (view.getElements().stream().map(ElementView::getElement).anyMatch(e -> e instanceof Component)) {
-            writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml");
+            if (usePlantUMLStandardLibrary(view)) {
+                writer.writeLine("!include <C4/C4_Component>");
+            } else {
+                writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml");
+            }
         }
 
         if (view instanceof DeploymentView) {
-            writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml");
+            if (usePlantUMLStandardLibrary(view)) {
+                writer.writeLine("!include <C4/C4_Deployment>");
+            } else {
+                writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml");
+            }
         }
 
         writeIncludes(view, writer);
@@ -470,6 +488,10 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     protected boolean includeTags(View view) {
         return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_TAGS_PROPERTY, "false"));
+    }
+
+    protected boolean usePlantUMLStandardLibrary(View view) {
+        return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_STANDARD_LIBRARY_PROPERTY, "false"));
     }
 
 }

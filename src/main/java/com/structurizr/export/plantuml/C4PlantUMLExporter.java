@@ -437,7 +437,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             return;
         }
 
-        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
+        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_RELATIONSHIP_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
             addProperties(view, writer, relationship);
         }
 
@@ -462,14 +462,12 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     private void addProperties(View view, IndentingWriter writer, ModelItem element) {
-        if ("true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY, "false"))) {
-            Map<String, String> properties = element.getProperties();
-            if (!properties.isEmpty()) {
-                writer.writeLine("WithoutPropertyHeader()");
-                properties.keySet().stream().sorted().forEach(key ->
-                        writer.writeLine(String.format("AddProperty(\"%s\",\"%s\")", key, properties.get(key)))
-                );
-            }
+        Map<String, String> properties = element.getProperties();
+        if (!properties.isEmpty()) {
+            writer.writeLine("WithoutPropertyHeader()");
+            properties.keySet().stream().sorted().forEach(key ->
+                    writer.writeLine(String.format("AddProperty(\"%s\",\"%s\")", key, properties.get(key)))
+            );
         }
     }
 

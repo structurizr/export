@@ -15,7 +15,7 @@ public abstract class AbstractExporter {
         StringBuilder buf = new StringBuilder();
 
         double characterWidth = fontSize * 0.6;
-        int maxCharacters = (int)(maxWidth / characterWidth);
+        int maxCharacters = (int) (maxWidth / characterWidth);
 
         if (s.length() < maxCharacters) {
             return s;
@@ -81,26 +81,33 @@ public abstract class AbstractExporter {
         }
 
         if (includeMetadataSymbols) {
-            if (configuration.getMetadataSymbols() == null) {
-                configuration.setMetadataSymbols(MetadataSymbols.SquareBrackets);
-            }
+            type = wrapMetadata(configuration, type);
+        }
+        return type;
+    }
 
-            switch (configuration.getMetadataSymbols()) {
-                case RoundBrackets:
-                    return "(" + type + ")";
-                case CurlyBrackets:
-                    return "{" + type + "}";
-                case AngleBrackets:
-                    return "<" + type + ">";
-                case DoubleAngleBrackets:
-                    return "<<" + type + ">>";
-                case None:
-                    return type;
-                default:
-                    return "[" + type + "]";
-            }
-        } else {
-            return type;
+    protected String wrapMetadata(View view, String value) {
+        return wrapMetadata(view.getViewSet().getConfiguration(), value);
+    }
+
+    protected String wrapMetadata(Configuration configuration, String type) {
+        if (configuration.getMetadataSymbols() == null) {
+            configuration.setMetadataSymbols(MetadataSymbols.SquareBrackets);
+        }
+
+        switch (configuration.getMetadataSymbols()) {
+            case RoundBrackets:
+                return "(" + type + ")";
+            case CurlyBrackets:
+                return "{" + type + "}";
+            case AngleBrackets:
+                return "<" + type + ">";
+            case DoubleAngleBrackets:
+                return "<<" + type + ">>";
+            case None:
+                return type;
+            default:
+                return "[" + type + "]";
         }
     }
 

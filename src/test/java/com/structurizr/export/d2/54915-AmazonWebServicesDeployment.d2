@@ -1,0 +1,131 @@
+container_5: {
+  label: "Amazon Web Services\n[Deployment Node]"
+  shape: rectangle
+  style: {
+    fill: "#ffffff"
+    stroke: "#232f3e"
+    multiple: false
+    font-color: "#232f3e"
+    font-size: 24
+  }
+  container_6: {
+    label: "US-East-1\n[Deployment Node]"
+    shape: rectangle
+    style: {
+      fill: "#ffffff"
+      stroke: "#147eba"
+      multiple: false
+      font-color: "#147eba"
+      font-size: 24
+    }
+    container_12: {
+      label: "Amazon RDS\n[Deployment Node]"
+      shape: rectangle
+      style: {
+        fill: "#ffffff"
+        stroke: "#3b48cc"
+        multiple: false
+        font-color: "#3b48cc"
+        font-size: 24
+      }
+      container_13: {
+        label: "MySQL\n[Deployment Node]"
+        shape: rectangle
+        style: {
+          fill: "#ffffff"
+          stroke: "#3b48cc"
+          multiple: false
+          font-color: "#3b48cc"
+          font-size: 24
+        }
+        container_14: {
+          label: "Database"
+          shape: cylinder
+          style: {
+            fill: "#ffffff"
+            stroke: "#b2b2b2"
+            multiple: false
+            font-color: "#000000"
+            font-size: 24
+          }
+        }
+      }
+    }
+    container_9: {
+      label: "Autoscaling group\n[Deployment Node]"
+      shape: rectangle
+      style: {
+        fill: "#ffffff"
+        stroke: "#cc2264"
+        multiple: false
+        font-color: "#cc2264"
+        font-size: 24
+      }
+      container_10: {
+        label: "Amazon EC2\n[Deployment Node]"
+        shape: rectangle
+        style: {
+          fill: "#ffffff"
+          stroke: "#d86613"
+          multiple: false
+          font-color: "#d86613"
+          font-size: 24
+        }
+        container_11: {
+          label: "Web Application"
+          shape: rectangle
+          style: {
+            fill: "#ffffff"
+            stroke: "#b2b2b2"
+            multiple: false
+            font-color: "#000000"
+            font-size: 24
+          }
+        }
+      }
+    }
+    container_8: {
+      label: "Elastic Load Balancer\n[Infrastructure Node]"
+      shape: rectangle
+      style: {
+        fill: "#ffffff"
+        stroke: "#693cc5"
+        multiple: false
+        font-color: "#693cc5"
+        font-size: 24
+      }
+    }
+    container_7: {
+      label: "Route 53\n[Infrastructure Node]"
+      shape: rectangle
+      style: {
+        fill: "#ffffff"
+        stroke: "#693cc5"
+        multiple: false
+        font-color: "#693cc5"
+        font-size: 24
+      }
+    }
+  }
+}
+container_5.container_6.container_9.container_10.container_11 -> container_5.container_6.container_12.container_13.container_14 {
+  label: "Reads from and writes to\n[MySQL Protocol/SSL]"
+  style: {
+    stroke: "#707070"
+    stroke-width: 2
+  }
+}
+container_5.container_6.container_7 -> container_5.container_6.container_8 {
+  label: "Forwards requests to\n[HTTPS]"
+  style: {
+    stroke: "#707070"
+    stroke-width: 2
+  }
+}
+container_5.container_6.container_8 -> container_5.container_6.container_9.container_10.container_11 {
+  label: "Forwards requests to\n[HTTPS]"
+  style: {
+    stroke: "#707070"
+    stroke-width: 2
+  }
+}

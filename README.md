@@ -7,6 +7,7 @@ This library provides the ability to export the model and views defined in a Str
 - Mermaid
 - [WebSequenceDiagrams](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/websequencediagrams)
 - Ilograph
+- [D2](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/d2)
 
 This library is included in the [Structurizr CLI](https://github.com/structurizr/cli),
 and is available on Maven Central, for inclusion in your own Java applications:

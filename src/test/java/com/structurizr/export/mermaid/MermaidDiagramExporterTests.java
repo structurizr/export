@@ -52,7 +52,7 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
         assertEquals(expected, diagram.getDefinition());
 
         // and the sequence diagram version
-        workspace.getViews().getConfiguration().addProperty(exporter.MERMAID_SEQUENCE_DIAGRAMS_PROPERTY, "true");
+        workspace.getViews().getConfiguration().addProperty(exporter.MERMAID_SEQUENCE_DIAGRAM_PROPERTY, "true");
         diagrams = exporter.export(workspace);
         diagram = diagrams.stream().filter(d -> d.getKey().equals("SignIn")).findFirst().get();
         expected = readFile(new File("./src/test/java/com/structurizr/export/mermaid/36141-SignIn-sequence.mmd"));

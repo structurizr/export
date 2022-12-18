@@ -22,6 +22,7 @@ import static java.lang.String.format;
 public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
     public static final String MERMAID_SEQUENCE_DIAGRAMS_PROPERTY = "mermaid.sequenceDiagrams";
+    public static final String MERMAID_TITLE_PROPERTY = "mermaid.title";
 
     private int groupId = 0;
 
@@ -54,9 +55,12 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
         writer.writeLine("linkStyle default fill:#ffffff");
         writer.writeLine();
 
-        String viewTitle = view.getTitle();
-        if (StringUtils.isNullOrEmpty(viewTitle)) {
-            viewTitle = view.getName();
+        String viewTitle = " ";
+        if (includeTitle(view)) {
+            viewTitle = view.getTitle();
+            if (StringUtils.isNullOrEmpty(viewTitle)) {
+                viewTitle = view.getName();
+            }
         }
 
         writer.writeLine("subgraph diagram [" + viewTitle + "]");
@@ -396,6 +400,10 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     @Override
     protected Diagram createDiagram(View view, String definition) {
         return new MermaidDiagram(view, definition);
+    }
+
+    protected boolean includeTitle(View view) {
+        return "true".equals(getViewOrViewSetProperty(view, MERMAID_TITLE_PROPERTY, "true"));
     }
 
 }

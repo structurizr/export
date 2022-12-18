@@ -11,6 +11,7 @@
 - Adds a `c4plantuml.stdlib` view/view set property to allow users to choose which version of C4-PlantUML should be used (built-in standard library, or GitHub).
 - Fixes an issue with relationship properties not showing when `c4plantuml.relationshipProperties` is set to `true`.
 - Fixes #35 (Dark mode interfaces not well supported by Mermaid exporter).
+- Adds a `mermaid.title` property that can be used to enable/disable diagram titles.
 
 ## 1.7.0 (3rd October 2022)
 

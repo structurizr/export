@@ -21,8 +21,8 @@ import static java.lang.String.format;
  */
 public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
-    public static final String MERMAID_SEQUENCE_DIAGRAMS_PROPERTY = "mermaid.sequenceDiagrams";
     public static final String MERMAID_TITLE_PROPERTY = "mermaid.title";
+    public static final String MERMAID_SEQUENCE_DIAGRAM_PROPERTY = "mermaid.sequenceDiagram";
 
     private int groupId = 0;
 
@@ -193,7 +193,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
     @Override
     public Diagram export(DynamicView view) {
-        if (useSequenceDiagrams(view)) {
+        if (renderAsSequenceDiagram(view)) {
             IndentingWriter writer = new IndentingWriter();
             writer.writeLine("sequenceDiagram");
             writer.writeLine();
@@ -393,10 +393,6 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
         return buf.toString();
     }
 
-    protected boolean useSequenceDiagrams(View view) {
-        return "true".equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(MERMAID_SEQUENCE_DIAGRAMS_PROPERTY, "false"));
-    }
-
     @Override
     protected Diagram createDiagram(View view, String definition) {
         return new MermaidDiagram(view, definition);
@@ -404,6 +400,10 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
     protected boolean includeTitle(View view) {
         return "true".equals(getViewOrViewSetProperty(view, MERMAID_TITLE_PROPERTY, "true"));
+    }
+
+    protected boolean renderAsSequenceDiagram(View view) {
+        return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, MERMAID_SEQUENCE_DIAGRAM_PROPERTY, "false"));
     }
 
 }

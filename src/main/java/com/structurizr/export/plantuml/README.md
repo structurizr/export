@@ -20,7 +20,7 @@ There are a number of properties that can be set to customise the exports, as fo
 
 - `plantuml.title`: `true` (default) to include diagram titles, `false` to exclude diagram titles.
 - `plantuml.includes`: a comma separated list of file names that should be included (via `!include`) in the diagram definition.
-- `plantuml.sequenceDiagram`: `true` to generate a UML sequence diagram, `false` (default) to generate a collaboration diagram.
+- `plantuml.sequenceDiagram`: `true` to generate a UML sequence diagram, `false` (default) to generate a collaboration diagram (dynamic views only).
 - `plantuml.animation`: `true` to generate one PlantUML diagram definition per animation frame, `false` (default) to ignore animations.
 
 These properties can either be set on individual views, or on the view set to apply to all views.

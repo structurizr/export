@@ -12,6 +12,7 @@
 - Fixes an issue with relationship properties not showing when `c4plantuml.relationshipProperties` is set to `true`.
 - Fixes #35 (Dark mode interfaces not well supported by Mermaid exporter).
 - Adds a `mermaid.title` property that can be used to enable/disable diagram titles.
+- Renamed `mermaid.sequenceDiagrams` to `mermaid.sequenceDiagram`
 
 ## 1.7.0 (3rd October 2022)
 

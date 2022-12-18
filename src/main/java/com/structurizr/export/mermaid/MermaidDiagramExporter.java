@@ -53,10 +53,22 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
         writer.indent();
         writer.writeLine("linkStyle default fill:#ffffff");
         writer.writeLine();
+
+        String viewTitle = view.getTitle();
+        if (StringUtils.isNullOrEmpty(viewTitle)) {
+            viewTitle = view.getName();
+        }
+
+        writer.writeLine("subgraph diagram [" + viewTitle + "]");
+        writer.indent();
+        writer.writeLine("style diagram fill:#ffffff");
+        writer.writeLine();
     }
 
     @Override
     protected void writeFooter(View view, IndentingWriter writer) {
+        writer.outdent();
+        writer.writeLine("end");
         writer.outdent();
     }
 

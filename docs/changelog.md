@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.8.0 (unreleased to Maven Central)
+## 1.8.0 (21st December 2022)
 
 - The C4-PlantUML export now mimics how the Structurizr renderer uses tags when a view set or view property named `c4plantuml.tags` is set to `true`.
 - Fixes #24 (plantuml.sequenceDiagrams changes the export of static diagrams).
@@ -12,7 +12,7 @@
 - Fixes an issue with relationship properties not showing when `c4plantuml.relationshipProperties` is set to `true`.
 - Fixes #35 (Dark mode interfaces not well supported by Mermaid exporter).
 - Adds a `mermaid.title` property that can be used to enable/disable diagram titles.
-- Renamed `mermaid.sequenceDiagrams` to `mermaid.sequenceDiagram`
+- Renamed `mermaid.sequenceDiagrams` to `mermaid.sequenceDiagram`.
 
 ## 1.7.0 (3rd October 2022)
 

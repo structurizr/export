@@ -9,9 +9,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.structurizr:structurizr-core:1.16.1'
+    implementation 'com.structurizr:structurizr-core:1.16.2'
 
-    testImplementation 'com.structurizr:structurizr-client:1.16.1'
+    testImplementation 'com.structurizr:structurizr-client:1.16.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 }
 
@@ -23,7 +23,7 @@ targetCompatibility = 1.8
 
 description = 'Export Structurizr models and views to external formats'
 group = 'com.structurizr'
-version = '1.8.0'
+version = '1.8.1'
 
 test {
     useJUnitPlatform()

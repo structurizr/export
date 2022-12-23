@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.1 (23rd December 2022)
+
+- Updated dependencies.
+
 ## 1.8.0 (21st December 2022)
 
 - The C4-PlantUML export now mimics how the Structurizr renderer uses tags when a view set or view property named `c4plantuml.tags` is set to `true`.

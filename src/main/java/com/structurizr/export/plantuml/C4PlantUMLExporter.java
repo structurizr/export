@@ -285,7 +285,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             writer.writeLine(
                     format("Deployment_Node(%s, \"%s\", $tags=\"%s\")%s {",
                             idOf(deploymentNode),
-                            deploymentNode.getName() + (deploymentNode.getInstances() > 1 ? " (x" + deploymentNode.getInstances() + ")" : ""),
+                            deploymentNode.getName() + (!"1".equals(deploymentNode.getInstances()) ? " (x" + deploymentNode.getInstances() + ")" : ""),
                             tagsOf(view, deploymentNode),
                             url
                     )
@@ -294,7 +294,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             writer.writeLine(
                     format("Deployment_Node(%s, \"%s\", \"%s\", $tags=\"%s\")%s {",
                             idOf(deploymentNode),
-                            deploymentNode.getName() + (deploymentNode.getInstances() > 1 ? " (x" + deploymentNode.getInstances() + ")" : ""),
+                            deploymentNode.getName() + (!"1".equals(deploymentNode.getInstances()) ? " (x" + deploymentNode.getInstances() + ")" : ""),
                             deploymentNode.getTechnology(),
                             tagsOf(view, deploymentNode),
                             url

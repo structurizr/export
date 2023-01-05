@@ -9,9 +9,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.structurizr:structurizr-core:1.16.2'
+    implementation 'com.structurizr:structurizr-core:1.17.0'
 
-    testImplementation 'com.structurizr:structurizr-client:1.16.2'
+    testImplementation 'com.structurizr:structurizr-client:1.17.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 }
 

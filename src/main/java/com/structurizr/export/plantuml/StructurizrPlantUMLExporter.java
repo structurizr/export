@@ -221,7 +221,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
         writer.writeLine(
                 format("rectangle \"%s\\n<size:10>%s</size>%s\" <<%s>> as %s%s {",
-                        deploymentNode.getName() + (deploymentNode.getInstances() > 1 ? " (x" + deploymentNode.getInstances() + ")" : ""),
+                        deploymentNode.getName() + (!"1".equals(deploymentNode.getInstances()) ? " (x" + deploymentNode.getInstances() + ")" : ""),
                         typeOf(view, deploymentNode, true),
                         icon,
                         idOf(deploymentNode),

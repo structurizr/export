@@ -65,7 +65,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
         writer.writeLine("subgraph diagram [" + viewTitle + "]");
         writer.indent();
-        writer.writeLine("style diagram fill:#ffffff");
+        writer.writeLine("style diagram fill:#ffffff,stroke:#ffffff");
         writer.writeLine();
     }
 

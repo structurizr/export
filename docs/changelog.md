@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.2 (5th January 2023)
+
+- Fixes #37 (Mermaid diagrams have a yellow border).
+
 ## 1.8.1 (23rd December 2022)
 
 - Updated dependencies.

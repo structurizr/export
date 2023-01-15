@@ -6,7 +6,7 @@ This library provides the ability to export the model and views defined in a Str
 - [DOT](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/dot)
 - [Mermaid](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/mermaid)
 - [WebSequenceDiagrams](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/websequencediagrams)
-- Ilograph
+- [Ilograph](https://github.com/structurizr/export/tree/main/src/main/java/com/structurizr/export/ilograph)
 
 This library is included in the [Structurizr CLI](https://github.com/structurizr/cli)
 via the [export command](https://github.com/structurizr/cli/blob/master/docs/export.md).

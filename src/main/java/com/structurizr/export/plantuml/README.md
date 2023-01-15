@@ -16,14 +16,13 @@ creates diagrams using tags and styles. The following view types are supported:
 - Components
 - Dynamic (collaboration and sequence diagram)
 
-There are a number of properties that can be set to customise the exports, as follows:
+There are a number of properties that can be set to customise the exports.
+The following properties can either be set on individual views, or on the view set to apply to all views:
 
 - `plantuml.title`: `true` (default) to include diagram titles, `false` to exclude diagram titles.
 - `plantuml.includes`: a comma separated list of file names that should be included (via `!include`) in the diagram definition.
 - `plantuml.sequenceDiagram`: `true` to generate a UML sequence diagram, `false` (default) to generate a collaboration diagram (dynamic views only).
 - `plantuml.animation`: `true` to generate one PlantUML diagram definition per animation frame, `false` (default) to ignore animations.
-
-These properties can either be set on individual views, or on the view set to apply to all views.
 
 ## C4PlantUMLExporter
 
@@ -35,7 +34,8 @@ This exporter generates C4-PlantUML diagram definitions. The following view type
 - Components
 - Dynamic (collaboration diagram only)
 
-There are a number of properties that can be set to customise the exports, as follows:
+There are a number of properties that can be set to customise the exports.
+The following properties can either be set on individual views, or on the view set to apply to all views:
 
 - `plantuml.title`: `true` (default) to include diagram titles, `false` to exclude diagram titles.
 - `plantuml.includes`: a comma separated list of file names that should be included (via `!include`) in the diagram definition.
@@ -46,8 +46,6 @@ There are a number of properties that can be set to customise the exports, as fo
 - `c4plantuml.elementProperties`: `true` to include element properties, `false` (default) to exclude element properties.
 - `c4plantuml.relationshipProperties`: `true` to include relationship properties, `false` (default) to exclude relationship properties.
 - `c4plantuml.stdlib`: `true` to use the built-in C4-PlantUML standard library, `false` (default) to use the latest version from GitHub.
-
-These properties can either be set on individual views, or on the view set to apply to all views.
 
 There are also a number of properties that can be set on element styles, which can be used to customise the styling of diagrams when
 `c4plantuml.tags` is set to `true`. You will see these in the generated diagram definition inside `AddElementTag(...)` statements

@@ -48,4 +48,5 @@ There are two interfaces defined in this library, that be used as a starting poi
 
 - [Structurizr DSL demo page](https://structurizr.com/dsl) (demo of export formats)
 - [D2 exporter](https://github.com/goto1134/structurizr-d2-exporter) (this is included in the Structurizr CLI)
+- [structurizr2csv](https://gitlab.com/souliane/structurizr2csv/) (export Structurizr views to diagrams.net CSV format)
 - [Changelog](docs/changelog.md)

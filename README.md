@@ -17,4 +17,5 @@ and is available on Maven Central, for inclusion in your own Java applications:
 ## Links
 
 - [Structurizr DSL demo page](https://structurizr.com/dsl) (demo of export formats)
+- [D2 exporter](https://github.com/goto1134/structurizr-d2-exporter) (this is included in the Structurizr CLI)
 - [Changelog](docs/changelog.md)

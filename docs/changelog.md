@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.3 (16th January 2023)
+
+- Updated the structurizr-core dependency, which is now included as an "API dependency".
+
 ## 1.8.2 (5th January 2023)
 
 - Fixes #37 (Mermaid diagrams have a yellow border).

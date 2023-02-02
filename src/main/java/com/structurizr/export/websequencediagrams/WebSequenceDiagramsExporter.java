@@ -4,6 +4,7 @@ import com.structurizr.export.AbstractDiagramExporter;
 import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
+import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
 import java.util.LinkedHashSet;
@@ -145,6 +146,7 @@ public class WebSequenceDiagramsExporter extends AbstractDiagramExporter {
 
         Element source = r.getSource();
         Element destination = r.getDestination();
+        String description = relationshipView.getDescription();
         String arrow = r.getInteractionStyle() == InteractionStyle.Asynchronous ? ASYNCHRONOUS_INTERACTION : SYNCHRONOUS_INTERACTION;
 
         if (relationshipView.isResponse() != null && relationshipView.isResponse()) {
@@ -153,12 +155,16 @@ public class WebSequenceDiagramsExporter extends AbstractDiagramExporter {
             arrow = r.getInteractionStyle() == InteractionStyle.Asynchronous ? ASYNCHRONOUS_INTERACTION_RETURN : SYNCHRONOUS_INTERACTION_RETURN;
         }
 
+        if (StringUtils.isNullOrEmpty(description)) {
+            description = relationshipView.getRelationship().getDescription();
+        }
+
         // Thing A->Thing B: Description
         writer.writeLine(String.format("%s%s%s: %s",
                 source.getName(),
                 arrow,
                 destination.getName(),
-                relationshipView.getDescription()
+                description
         ));
     }
 

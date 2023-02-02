@@ -2,6 +2,7 @@
 
 ## 1.8.4 (unreleased)
 
+- Fixes #39 (WebSequenceDiagrams exporter only shows relationship descriptions defined in the dynamic view).
 - Fixes #40 (WebSequenceDiagrams exporter has a triple >>> ending the stereotype).
 
 ## 1.8.3 (16th January 2023)

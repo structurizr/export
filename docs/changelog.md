@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.4 (unreleased)
+
+- Fixes #40 (WebSequenceDiagrams exporter has a triple >>> ending the stereotype).
+
 ## 1.8.3 (16th January 2023)
 
 - Updated the structurizr-core dependency, which is now included as an "API dependency".

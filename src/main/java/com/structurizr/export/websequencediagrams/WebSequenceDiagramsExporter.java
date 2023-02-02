@@ -125,13 +125,13 @@ public class WebSequenceDiagramsExporter extends AbstractDiagramExporter {
     @Override
     protected void writeElement(View view, Element element, IndentingWriter writer) {
         if (element instanceof Person) {
-            writer.writeLine(String.format("actor <<%s>>>\\n%s as %s",
+            writer.writeLine(String.format("actor <<%s>>\\n%s as %s",
                     view.getViewSet().getConfiguration().getTerminology().findTerminology(element),
                     element.getName(),
                     element.getName())
             );
         } else {
-            writer.writeLine(String.format("participant <<%s>>>\\n%s as %s",
+            writer.writeLine(String.format("participant <<%s>>\\n%s as %s",
                     view.getViewSet().getConfiguration().getTerminology().findTerminology(element),
                     element.getName(),
                     element.getName())

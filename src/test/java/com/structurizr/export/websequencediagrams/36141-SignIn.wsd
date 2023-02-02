@@ -1,9 +1,9 @@
 title API Application - Dynamic - SignIn
 
-participant <<Container>>>\nSingle-Page Application as Single-Page Application
-participant <<Component>>>\nSign In Controller as Sign In Controller
-participant <<Component>>>\nSecurity Component as Security Component
-participant <<Container>>>\nDatabase as Database
+participant <<Container>>\nSingle-Page Application as Single-Page Application
+participant <<Component>>\nSign In Controller as Sign In Controller
+participant <<Component>>\nSecurity Component as Security Component
+participant <<Container>>\nDatabase as Database
 
 Single-Page Application->Sign In Controller: Submits credentials to
 Sign In Controller->Security Component: Validates credentials using

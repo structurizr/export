@@ -56,7 +56,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         if (font != null) {
             String fontName = font.getName();
             if (!StringUtils.isNullOrEmpty(fontName)) {
-                addSkinParam("defaultFontName", fontName);
+                addSkinParam("defaultFontName", "\"" + fontName + "\"");
             }
         }
 
@@ -449,7 +449,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         if (font != null) {
             String fontName = font.getName();
             if (!StringUtils.isNullOrEmpty(fontName)) {
-                writer.writeLine("defaultFontName " + fontName);
+                writer.writeLine("defaultFontName \"" + fontName + "\"");
             }
         }
         writer.outdent();

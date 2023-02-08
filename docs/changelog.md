@@ -3,6 +3,7 @@
 ## 1.8.5 (unreleased)
 
 - StructurizrPlantUMLExporter: Adds the ability to set a default font, based upon the branding font defined in the workspace (#41).
+- C4PlantUMLExporter: Adds the ability to set a default font, based upon the branding font defined in the workspace (#41).
 
 ## 1.8.4 (3rd February 2023)
 

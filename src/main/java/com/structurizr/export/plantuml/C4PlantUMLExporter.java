@@ -53,6 +53,14 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     protected void writeHeader(View view, IndentingWriter writer) {
         super.writeHeader(view, writer);
 
+        Font font = view.getViewSet().getConfiguration().getBranding().getFont();
+        if (font != null) {
+            String fontName = font.getName();
+            if (!StringUtils.isNullOrEmpty(fontName)) {
+                addSkinParam("defaultFontName", "\"" + fontName + "\"");
+            }
+        }
+
         writeSkinParams(writer);
 
         if (view.getAutomaticLayout() != null) {

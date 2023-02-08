@@ -993,7 +993,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  defaultTextAlignment center\n" +
                 "  wrapWidth 200\n" +
                 "  maxMessageSize 100\n" +
-                "  defaultFontName Courier\n" +
+                "  defaultFontName \"Courier\"\n" +
                 "}\n" +
                 "\n" +
                 "hide stereotype\n" +
@@ -1016,7 +1016,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  defaultTextAlignment center\n" +
                 "  wrapWidth 100\n" +
                 "  maxMessageSize 100\n" +
-                "  defaultFontName Courier\n" +
+                "  defaultFontName \"Courier\"\n" +
                 "}\n" +
                 "hide stereotype\n" +
                 "\n" +

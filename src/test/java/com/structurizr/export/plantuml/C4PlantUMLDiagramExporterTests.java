@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Collection;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
 
@@ -444,6 +444,34 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "show stereotypes\n" +
                 "@enduml", diagram.getDefinition());
+    }
+
+    @Test
+    public void testFont() {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addPerson("User");
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "Description");
+        view.addAllElements();
+        workspace.getViews().getConfiguration().getBranding().setFont(new Font("Courier"));
+
+        Diagram diagram = new C4PlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "title System Landscape\n" +
+                "\n" +
+                "skinparam {\n" +
+                "  defaultFontName \"Courier\"\n" +
+                "}\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
+                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "\n" +
+                "Person(User, \"User\", \"\", $tags=\"\")\n" +
+                "\n" +
+                "\n" +
+                "SHOW_LEGEND(true)\n" +
+                "@enduml", diagram.getDefinition().toString());
+
     }
 
 }

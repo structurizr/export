@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.5 (unreleased)
+
+- StructurizrPlantUMLExporter: Adds the ability to set a default font, based upon the branding font defined in the workspace (#41).
+
 ## 1.8.4 (3rd February 2023)
 
 - Fixes #39 (WebSequenceDiagrams exporter only shows relationship descriptions defined in the dynamic view).

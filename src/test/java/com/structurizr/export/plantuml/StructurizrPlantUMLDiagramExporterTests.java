@@ -973,4 +973,68 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         assertEquals(expected, diagram.getDefinition());
     }
 
+    @Test
+    public void testFont() {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addPerson("User");
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "Description");
+        view.addAllElements();
+        workspace.getViews().getConfiguration().getBranding().setFont(new Font("Courier"));
+
+        Diagram diagram = new StructurizrPlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "title System Landscape\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "skinparam {\n" +
+                "  shadowing false\n" +
+                "  arrowFontSize 10\n" +
+                "  defaultTextAlignment center\n" +
+                "  wrapWidth 200\n" +
+                "  maxMessageSize 100\n" +
+                "  defaultFontName Courier\n" +
+                "}\n" +
+                "\n" +
+                "hide stereotype\n" +
+                "\n" +
+                "skinparam rectangle<<User>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "}\n" +
+                "\n" +
+                "rectangle \"==User\\n<size:10>[Person]</size>\" <<User>> as User\n" +
+                "\n" +
+                "@enduml", diagram.getDefinition().toString());
+
+        assertEquals("@startuml\n" +
+                "\n" +
+                "skinparam {\n" +
+                "  shadowing false\n" +
+                "  arrowFontSize 15\n" +
+                "  defaultTextAlignment center\n" +
+                "  wrapWidth 100\n" +
+                "  maxMessageSize 100\n" +
+                "  defaultFontName Courier\n" +
+                "}\n" +
+                "hide stereotype\n" +
+                "\n" +
+                "skinparam rectangle<<_transparent>> {\n" +
+                "  BorderColor transparent\n" +
+                "  BackgroundColor transparent\n" +
+                "  FontColor transparent\n" +
+                "}\n" +
+                "\n" +
+                "skinparam rectangle<<1>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "}\n" +
+                "rectangle \"==Element\" <<1>>\n" +
+                "\n" +
+                "\n" +
+                "@enduml", diagram.getLegend().getDefinition());
+    }
+
 }

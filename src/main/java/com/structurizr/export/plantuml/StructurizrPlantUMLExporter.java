@@ -52,6 +52,14 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             writer.writeLine();
         }
 
+        Font font = view.getViewSet().getConfiguration().getBranding().getFont();
+        if (font != null) {
+            String fontName = font.getName();
+            if (!StringUtils.isNullOrEmpty(fontName)) {
+                addSkinParam("defaultFontName", fontName);
+            }
+        }
+
         writeSkinParams(writer);
         writeIncludes(view, writer);
 
@@ -437,6 +445,13 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         writer.writeLine("defaultTextAlignment center");
         writer.writeLine("wrapWidth 100");
         writer.writeLine("maxMessageSize 100");
+        Font font = view.getViewSet().getConfiguration().getBranding().getFont();
+        if (font != null) {
+            String fontName = font.getName();
+            if (!StringUtils.isNullOrEmpty(fontName)) {
+                writer.writeLine("defaultFontName " + fontName);
+            }
+        }
         writer.outdent();
         writer.writeLine("}");
 

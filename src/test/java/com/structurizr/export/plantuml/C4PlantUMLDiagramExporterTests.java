@@ -366,6 +366,26 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     }
 
     @Test
+    public void test_deploymentViewPrintProperties() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+
+        DeploymentNode deploymentNode = workspace.getModel().addDeploymentNode("Deployment node");
+        deploymentNode.addProperty("Prop1", "Value1");
+
+        InfrastructureNode infraNode = deploymentNode.addInfrastructureNode("Infrastructure node", "description", "technology");
+        infraNode.addProperty("Prop2", "Value2");
+
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY, Boolean.TRUE.toString());
+        DeploymentView deploymentView = workspace.getViews().createDeploymentView("deploymentView", "");
+        deploymentView.addDefaultElements();
+
+        Diagram diagram = new C4PlantUMLExporter().export(deploymentView);
+
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/printProperties-deploymentView.puml"));
+        assertEquals(expected, diagram.getDefinition());
+    }
+
+    @Test
     public void test_legendAndStereotypes() {
         Workspace workspace = new Workspace("Name", "Description");
         workspace.getModel().addSoftwareSystem("Name");

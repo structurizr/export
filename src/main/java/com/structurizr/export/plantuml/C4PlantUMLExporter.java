@@ -289,6 +289,10 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             url = "";
         }
 
+        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
+            addProperties(view, writer, deploymentNode);
+        }
+
         if (StringUtils.isNullOrEmpty(deploymentNode.getTechnology())) {
             writer.writeLine(
                     format("Deployment_Node(%s, \"%s\", $tags=\"%s\")%s {",

@@ -1,4 +1,5 @@
 @startuml
+set separator none
 title D - F - Components
 
 top to bottom direction

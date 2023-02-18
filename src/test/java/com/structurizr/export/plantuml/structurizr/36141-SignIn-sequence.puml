@@ -1,4 +1,5 @@
 @startuml
+set separator none
 title API Application - Dynamic
 
 skinparam {

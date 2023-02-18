@@ -1,4 +1,5 @@
 @startuml
+set separator none
 title Deployment - Default
 
 top to bottom direction

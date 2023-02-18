@@ -125,7 +125,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
         Diagram diagram = exporter.export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -183,7 +183,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         workspace.getViews().getConfiguration().getStyles().addElementStyle("Group").color("#aabbcc");
 
         diagram = exporter.export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -255,7 +255,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         containerView.setExternalSoftwareSystemBoundariesVisible(true);
         Diagram diagram = new StructurizrPlantUMLExporter().export(containerView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Containers\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -300,7 +300,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         containerView.setExternalSoftwareSystemBoundariesVisible(false);
         diagram = new StructurizrPlantUMLExporter().export(containerView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Containers\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -357,7 +357,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         componentView.setExternalSoftwareSystemBoundariesVisible(true);
         Diagram diagram = new StructurizrPlantUMLExporter().export(componentView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Container 1 - Components\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -402,7 +402,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         componentView.setExternalSoftwareSystemBoundariesVisible(false);
         diagram = new StructurizrPlantUMLExporter().export(componentView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Container 1 - Components\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -456,7 +456,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         dynamicView.setExternalBoundariesVisible(true);
         Diagram diagram = new StructurizrPlantUMLExporter().export(dynamicView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Dynamic\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -501,7 +501,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         dynamicView.setExternalBoundariesVisible(false);
         diagram = new StructurizrPlantUMLExporter().export(dynamicView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Dynamic\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -557,7 +557,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         dynamicView.setExternalBoundariesVisible(true);
         Diagram diagram = new StructurizrPlantUMLExporter().export(dynamicView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Container 1 - Dynamic\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -602,7 +602,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         dynamicView.setExternalBoundariesVisible(false);
         diagram = new StructurizrPlantUMLExporter().export(dynamicView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Container 1 - Dynamic\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -651,7 +651,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         view.addDefaultElements();
 
         Diagram diagram = new StructurizrPlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -688,7 +688,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         view.getViewSet().getConfiguration().addProperty(StructurizrPlantUMLExporter.PLANTUML_INCLUDES_PROPERTY, "styles.puml");
 
         Diagram diagram = new StructurizrPlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -724,7 +724,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         view.addDefaultElements();
 
         Diagram diagram = new StructurizrPlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -763,7 +763,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         view.addDefaultElements();
 
         Diagram diagram = new StructurizrPlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Title\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -802,7 +802,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         workspace.getModel().addPerson("Пользователь");
         workspace.getViews().createSystemLandscapeView("key", "Description").addDefaultElements();
 
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -844,7 +844,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         view.addDefaultElements();
 
         Diagram diagram = new StructurizrPlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "\n" +
                 "skinparam {\n" +
                 "  shadowing false\n" +
@@ -880,7 +880,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         workspace.getViews().getConfiguration().getStyles().addRelationshipStyle("Tag 4").color("#ff00ff").thickness(3).style(LineStyle.Solid);
 
         diagram = new StructurizrPlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "\n" +
                 "skinparam {\n" +
                 "  shadowing false\n" +
@@ -933,7 +933,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
         Diagram diagram;
-        String expected = "@startuml\n" +
+        String expected = "@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -982,7 +982,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         workspace.getViews().getConfiguration().getBranding().setFont(new Font("Courier"));
 
         Diagram diagram = new StructurizrPlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -1008,7 +1008,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "\n" +
                 "@enduml", diagram.getDefinition().toString());
 
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "\n" +
                 "skinparam {\n" +
                 "  shadowing false\n" +

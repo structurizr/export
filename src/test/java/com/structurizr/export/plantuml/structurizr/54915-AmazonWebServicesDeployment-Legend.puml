@@ -1,4 +1,5 @@
 @startuml
+set separator none
 
 skinparam {
   shadowing false

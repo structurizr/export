@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.10.0 (18th February 2023)
+
+- Adds `set separator none` to PlantUML exports for compatibility with [PlantUML namespace/package changes - 2 Feb 2023](https://plantuml.com/news).
+
 ## 1.9.0 (18th February 2023)
 
 - __Breaking change__: Renamed `com.structurizr.view.View` to `com.structurizr.view.ModelView`.

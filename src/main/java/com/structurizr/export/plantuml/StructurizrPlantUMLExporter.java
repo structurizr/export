@@ -436,6 +436,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         int id = 0;
 
         writer.writeLine("@startuml");
+        writer.writeLine("set separator none");
         writer.writeLine();
 
         writer.writeLine("skinparam {");

@@ -124,7 +124,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
 
         containerView.setExternalSoftwareSystemBoundariesVisible(true);
         Diagram diagram = new C4PlantUMLExporter().export(containerView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Containers\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -149,7 +149,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
 
         containerView.setExternalSoftwareSystemBoundariesVisible(false);
         diagram = new C4PlantUMLExporter().export(containerView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Containers\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -189,7 +189,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
 
         componentView.setExternalSoftwareSystemBoundariesVisible(true);
         Diagram diagram = new C4PlantUMLExporter().export(componentView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Container 1 - Components\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -213,7 +213,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
 
         componentView.setExternalSoftwareSystemBoundariesVisible(false);
         diagram = new C4PlantUMLExporter().export(componentView);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Container 1 - Components\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -245,7 +245,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addDefaultElements();
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -271,7 +271,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.getViewSet().getConfiguration().addProperty(C4PlantUMLExporter.PLANTUML_INCLUDES_PROPERTY, "styles.puml");
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -297,7 +297,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addDefaultElements();
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -322,7 +322,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addDefaultElements();
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title Deployment - Default\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -397,7 +397,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "true");
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "false");
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -415,7 +415,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "true");
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "true");
         diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -433,7 +433,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "false");
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "false");
         diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -451,7 +451,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "false");
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "true");
         diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -475,7 +475,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         workspace.getViews().getConfiguration().getBranding().setFont(new Font("Courier"));
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\n" +
+        assertEquals("@startuml\nset separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "skinparam {\n" +

@@ -1,4 +1,5 @@
 @startuml
+set separator none
 title System Landscape for Enterprise
 
 top to bottom direction

@@ -1,4 +1,5 @@
 @startuml
+set separator none
 title Spring PetClinic - Deployment - Live
 
 left to right direction

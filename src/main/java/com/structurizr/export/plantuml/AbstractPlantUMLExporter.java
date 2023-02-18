@@ -170,6 +170,7 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     @Override
     protected void writeHeader(ModelView view, IndentingWriter writer) {
         writer.writeLine("@startuml");
+        writer.writeLine("set separator none");
 
         if (includeTitle(view)) {
             String viewTitle = view.getTitle();

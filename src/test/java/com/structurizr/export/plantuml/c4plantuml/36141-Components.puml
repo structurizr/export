@@ -1,4 +1,5 @@
 @startuml
+set separator none
 title Internet Banking System - API Application - Components
 
 top to bottom direction

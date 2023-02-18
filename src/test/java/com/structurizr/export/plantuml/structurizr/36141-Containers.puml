@@ -1,4 +1,5 @@
 @startuml
+set separator none
 title Internet Banking System - Containers
 
 top to bottom direction

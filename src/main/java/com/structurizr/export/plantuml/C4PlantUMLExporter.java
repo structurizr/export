@@ -6,7 +6,10 @@ import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.lang.String.format;
 
@@ -50,7 +53,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void writeHeader(View view, IndentingWriter writer) {
+    protected void writeHeader(ModelView view, IndentingWriter writer) {
         super.writeHeader(view, writer);
 
         Font font = view.getViewSet().getConfiguration().getBranding().getFont();
@@ -216,7 +219,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void writeFooter(View view, IndentingWriter writer) {
+    protected void writeFooter(ModelView view, IndentingWriter writer) {
         if (includeLegend(view)) {
             writer.writeLine();
             writer.writeLine("SHOW_LEGEND(" + !(includeStereotypes(view)) + ")");
@@ -229,52 +232,52 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void startEnterpriseBoundary(View view, String enterpriseName, IndentingWriter writer) {
+    protected void startEnterpriseBoundary(ModelView view, String enterpriseName, IndentingWriter writer) {
         writer.writeLine(String.format("Enterprise_Boundary(enterprise, \"%s\") {", enterpriseName));
         writer.indent();
     }
 
     @Override
-    protected void endEnterpriseBoundary(View view, IndentingWriter writer) {
+    protected void endEnterpriseBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
         writer.writeLine();
     }
 
     @Override
-    protected void startGroupBoundary(View view, String group, IndentingWriter writer) {
+    protected void startGroupBoundary(ModelView view, String group, IndentingWriter writer) {
         writer.writeLine(String.format("Boundary(group_%s, \"%s\") {", groupId++, group));
         writer.indent();
     }
 
     @Override
-    protected void endGroupBoundary(View view, IndentingWriter writer) {
+    protected void endGroupBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
         writer.writeLine();
     }
 
     @Override
-    protected void startSoftwareSystemBoundary(View view, SoftwareSystem softwareSystem, IndentingWriter writer) {
+    protected void startSoftwareSystemBoundary(ModelView view, SoftwareSystem softwareSystem, IndentingWriter writer) {
         writer.writeLine(String.format("System_Boundary(\"%s_boundary\", \"%s\", $tags=\"%s\") {", idOf(softwareSystem), softwareSystem.getName(), tagsOf(view, softwareSystem)));
         writer.indent();
     }
 
     @Override
-    protected void endSoftwareSystemBoundary(View view, IndentingWriter writer) {
+    protected void endSoftwareSystemBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
         writer.writeLine();
     }
 
     @Override
-    protected void startContainerBoundary(View view, Container container, IndentingWriter writer) {
+    protected void startContainerBoundary(ModelView view, Container container, IndentingWriter writer) {
         writer.writeLine(String.format("Container_Boundary(\"%s_boundary\", \"%s\", $tags=\"%s\") {", idOf(container), container.getName(), tagsOf(view,container)));
         writer.indent();
     }
 
     @Override
-    protected void endContainerBoundary(View view, IndentingWriter writer) {
+    protected void endContainerBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
         writer.writeLine();
@@ -321,7 +324,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void endDeploymentNodeBoundary(View view, IndentingWriter writer) {
+    protected void endDeploymentNodeBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
         writer.writeLine();
@@ -333,7 +336,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void writeElement(View view, Element element, IndentingWriter writer) {
+    protected void writeElement(ModelView view, Element element, IndentingWriter writer) {
         if (element instanceof CustomElement) {
             return;
         }
@@ -423,7 +426,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         }
     }
 
-    private String tagsOf(View view, Element element) {
+    private String tagsOf(ModelView view, Element element) {
         if (includeTags(view)) {
             return view.getViewSet().getConfiguration().getStyles().findElementStyle(element).getTag().replaceFirst("Element,", "");
         } else {
@@ -431,7 +434,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         }
     }
 
-    private String tagsOf(View view, Relationship relationship) {
+    private String tagsOf(ModelView view, Relationship relationship) {
         if (includeTags(view)) {
             return view.getViewSet().getConfiguration().getStyles().findRelationshipStyle(relationship).getTag().replaceFirst("Relationship,", "");
         } else {
@@ -440,7 +443,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void writeRelationship(View view, RelationshipView relationshipView, IndentingWriter writer) {
+    protected void writeRelationship(ModelView view, RelationshipView relationshipView, IndentingWriter writer) {
         Relationship relationship = relationshipView.getRelationship();
         Element source = relationship.getSource();
         Element destination = relationship.getDestination();
@@ -473,7 +476,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         }
     }
 
-    private void addProperties(View view, IndentingWriter writer, ModelItem element) {
+    private void addProperties(ModelView view, IndentingWriter writer, ModelItem element) {
         Map<String, String> properties = element.getProperties();
         if (!properties.isEmpty()) {
             writer.writeLine("WithoutPropertyHeader()");
@@ -484,23 +487,23 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected boolean isAnimationSupported(View view) {
+    protected boolean isAnimationSupported(ModelView view) {
         return !(view instanceof DynamicView) && super.isAnimationSupported(view);
     }
 
-    protected boolean includeLegend(View view) {
+    protected boolean includeLegend(ModelView view) {
         return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_LEGEND_PROPERTY, "true"));
     }
 
-    protected boolean includeStereotypes(View view) {
+    protected boolean includeStereotypes(ModelView view) {
         return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_STEREOTYPES_PROPERTY, "false"));
     }
 
-    protected boolean includeTags(View view) {
+    protected boolean includeTags(ModelView view) {
         return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_TAGS_PROPERTY, "false"));
     }
 
-    protected boolean usePlantUMLStandardLibrary(View view) {
+    protected boolean usePlantUMLStandardLibrary(ModelView view) {
         return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_STANDARD_LIBRARY_PROPERTY, "false"));
     }
 

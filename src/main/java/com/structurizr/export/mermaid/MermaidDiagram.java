@@ -1,11 +1,11 @@
 package com.structurizr.export.mermaid;
 
 import com.structurizr.export.Diagram;
-import com.structurizr.view.View;
+import com.structurizr.view.ModelView;
 
 public class MermaidDiagram extends Diagram {
 
-    public MermaidDiagram(View view, String definition) {
+    public MermaidDiagram(ModelView view, String definition) {
         super(view, definition);
     }
 

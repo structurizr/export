@@ -49,7 +49,7 @@ public abstract class AbstractExporter {
         return typeOf(workspace.getViews().getConfiguration(), e, includeMetadataSymbols);
     }
 
-    protected String typeOf(View view, Element e, boolean includeMetadataSymbols) {
+    protected String typeOf(ModelView view, Element e, boolean includeMetadataSymbols) {
         return typeOf(view.getViewSet().getConfiguration(), e, includeMetadataSymbols);
     }
 
@@ -108,11 +108,11 @@ public abstract class AbstractExporter {
         return !StringUtils.isNullOrEmpty(s);
     }
 
-    protected ElementStyle findElementStyle(View view, Element element) {
+    protected ElementStyle findElementStyle(ModelView view, Element element) {
         return view.getViewSet().getConfiguration().getStyles().findElementStyle(element);
     }
 
-    protected RelationshipStyle findRelationshipStyle(View view, Relationship relationship) {
+    protected RelationshipStyle findRelationshipStyle(ModelView view, Relationship relationship) {
         return view.getViewSet().getConfiguration().getStyles().findRelationshipStyle(relationship);
     }
 

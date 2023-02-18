@@ -1,7 +1,8 @@
 # Changelog
 
-## 1.8.5 (unreleased)
+## 1.9.0 (18th February 2023)
 
+- __Breaking change__: Renamed `com.structurizr.view.View` to `com.structurizr.view.ModelView`.
 - StructurizrPlantUMLExporter: Adds the ability to set a default font, based upon the branding font defined in the workspace (#41).
 - C4PlantUMLExporter: Adds the ability to set a default font, based upon the branding font defined in the workspace (#41).
 - C4PlantUMLExporter: Adds support for showing properties on deployment nodes (#46).

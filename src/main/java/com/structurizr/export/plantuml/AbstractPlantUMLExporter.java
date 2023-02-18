@@ -5,9 +5,8 @@ import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
-import com.structurizr.view.DynamicView;
+import com.structurizr.view.ModelView;
 import com.structurizr.view.Shape;
-import com.structurizr.view.View;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -34,7 +33,7 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
         skinParams.clear();
     }
 
-    String plantUMLShapeOf(View view, Element element) {
+    String plantUMLShapeOf(ModelView view, Element element) {
         Shape shape = findElementStyle(view, element).getShape();
 
         return plantUMLShapeOf(shape);
@@ -63,7 +62,7 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
         }
     }
 
-    String plantumlSequenceType(View view, Element element) {
+    String plantumlSequenceType(ModelView view, Element element) {
         Shape shape = findElementStyle(view, element).getShape();
 
         switch(shape) {
@@ -159,17 +158,17 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
         return s.replaceAll("(?U)\\W", "");
     }
 
-    protected boolean includeTitle(View view) {
+    protected boolean includeTitle(ModelView view) {
         return "true".equals(getViewOrViewSetProperty(view, PLANTUML_TITLE_PROPERTY, "true"));
     }
 
     @Override
-    protected boolean isAnimationSupported(View view) {
+    protected boolean isAnimationSupported(ModelView view) {
         return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_ANIMATION_PROPERTY, "false"));
     }
 
     @Override
-    protected void writeHeader(View view, IndentingWriter writer) {
+    protected void writeHeader(ModelView view, IndentingWriter writer) {
         writer.writeLine("@startuml");
 
         if (includeTitle(view)) {
@@ -195,7 +194,7 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
         }
     }
 
-    protected void writeIncludes(View view, IndentingWriter writer) {
+    protected void writeIncludes(ModelView view, IndentingWriter writer) {
         String[] includes = view.getViewSet().getConfiguration().getProperties().getOrDefault(PLANTUML_INCLUDES_PROPERTY, "").split(",");
         for (String include : includes) {
             if (!StringUtils.isNullOrEmpty(include)) {
@@ -206,12 +205,12 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void writeFooter(View view, IndentingWriter writer) {
+    protected void writeFooter(ModelView view, IndentingWriter writer) {
         writer.writeLine("@enduml");
     }
 
     @Override
-    protected Diagram createDiagram(View view, String definition) {
+    protected Diagram createDiagram(ModelView view, String definition) {
         return new PlantUMLDiagram(view, definition);
     }
 

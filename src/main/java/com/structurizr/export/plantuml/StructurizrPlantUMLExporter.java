@@ -30,7 +30,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void writeHeader(View view, IndentingWriter writer) {
+    protected void writeHeader(ModelView view, IndentingWriter writer) {
         super.writeHeader(view, writer);
 
         if (view instanceof DynamicView && renderAsSequenceDiagram(view)) {
@@ -108,7 +108,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void startEnterpriseBoundary(View view, String enterpriseName, IndentingWriter writer) {
+    protected void startEnterpriseBoundary(ModelView view, String enterpriseName, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
             writer.writeLine(String.format("package \"%s\" <<enterprise>> {", enterpriseName));
             writer.indent();
@@ -119,7 +119,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void endEnterpriseBoundary(View view, IndentingWriter writer) {
+    protected void endEnterpriseBoundary(ModelView view, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
             writer.outdent();
             writer.writeLine("}");
@@ -128,7 +128,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void startGroupBoundary(View view, String group, IndentingWriter writer) {
+    protected void startGroupBoundary(ModelView view, String group, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
             String groupId;
             String color = "#cccccc";
@@ -156,7 +156,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void endGroupBoundary(View view, IndentingWriter writer) {
+    protected void endGroupBoundary(ModelView view, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
             writer.outdent();
             writer.writeLine("}");
@@ -165,7 +165,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void startSoftwareSystemBoundary(View view, SoftwareSystem softwareSystem, IndentingWriter writer) {
+    protected void startSoftwareSystemBoundary(ModelView view, SoftwareSystem softwareSystem, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
             ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(softwareSystem);
             String color = elementStyle.getStroke();
@@ -179,7 +179,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void endSoftwareSystemBoundary(View view, IndentingWriter writer) {
+    protected void endSoftwareSystemBoundary(ModelView view, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
             writer.outdent();
             writer.writeLine("}");
@@ -188,7 +188,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void startContainerBoundary(View view, Container container, IndentingWriter writer) {
+    protected void startContainerBoundary(ModelView view, Container container, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
             ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(container);
             String color = elementStyle.getStroke();
@@ -202,7 +202,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void endContainerBoundary(View view, IndentingWriter writer) {
+    protected void endContainerBoundary(ModelView view, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
             writer.outdent();
             writer.writeLine("}");
@@ -245,7 +245,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void endDeploymentNodeBoundary(View view, IndentingWriter writer) {
+    protected void endDeploymentNodeBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
         writer.writeLine();
@@ -277,7 +277,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void writeElement(View view, Element element, IndentingWriter writer) {
+    protected void writeElement(ModelView view, Element element, IndentingWriter writer) {
         ElementStyle elementStyle = findElementStyle(view, element);
 
         if (view instanceof DynamicView && renderAsSequenceDiagram(view)) {
@@ -359,7 +359,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected void writeRelationship(View view, RelationshipView relationshipView, IndentingWriter writer) {
+    protected void writeRelationship(ModelView view, RelationshipView relationshipView, IndentingWriter writer) {
         Relationship relationship = relationshipView.getRelationship();
         RelationshipStyle style = findRelationshipStyle(view, relationship);
 
@@ -431,7 +431,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
-    protected Legend createLegend(View view) {
+    protected Legend createLegend(ModelView view) {
         IndentingWriter writer = new IndentingWriter();
         int id = 0;
 
@@ -608,7 +608,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         return scale;
     }
 
-    protected boolean renderAsSequenceDiagram(View view) {
+    protected boolean renderAsSequenceDiagram(ModelView view) {
         return view instanceof DynamicView && "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "false"));
     }
 

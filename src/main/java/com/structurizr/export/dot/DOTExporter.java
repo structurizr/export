@@ -24,7 +24,7 @@ public class DOTExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void writeHeader(View view, IndentingWriter writer) {
+    protected void writeHeader(ModelView view, IndentingWriter writer) {
         String title = view.getTitle();
         if (StringUtils.isNullOrEmpty(title)) {
             title = view.getName();
@@ -73,13 +73,13 @@ public class DOTExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void writeFooter(View view, IndentingWriter writer) {
+    protected void writeFooter(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
     }
 
     @Override
-    protected void startEnterpriseBoundary(View view, String enterpriseName, IndentingWriter writer) {
+    protected void startEnterpriseBoundary(ModelView view, String enterpriseName, IndentingWriter writer) {
         writer.writeLine("subgraph cluster_enterprise {");
 
         writer.indent();
@@ -93,14 +93,14 @@ public class DOTExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void endEnterpriseBoundary(View view, IndentingWriter writer) {
+    protected void endEnterpriseBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
         writer.writeLine();
     }
 
     @Override
-    protected void startGroupBoundary(View view, String group, IndentingWriter writer) {
+    protected void startGroupBoundary(ModelView view, String group, IndentingWriter writer) {
         String color = "#cccccc";
 
         // is there a style for the group?
@@ -128,14 +128,14 @@ public class DOTExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void endGroupBoundary(View view, IndentingWriter writer) {
+    protected void endGroupBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
         writer.writeLine();
     }
 
     @Override
-    protected void startSoftwareSystemBoundary(View view, SoftwareSystem softwareSystem, IndentingWriter writer) {
+    protected void startSoftwareSystemBoundary(ModelView view, SoftwareSystem softwareSystem, IndentingWriter writer) {
         String color;
         if (softwareSystem.equals(view.getSoftwareSystem())) {
             color = "#444444";
@@ -155,14 +155,14 @@ public class DOTExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void endSoftwareSystemBoundary(View view, IndentingWriter writer) {
+    protected void endSoftwareSystemBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
         writer.writeLine();
     }
 
     @Override
-    protected void startContainerBoundary(View view, Container container, IndentingWriter writer) {
+    protected void startContainerBoundary(ModelView view, Container container, IndentingWriter writer) {
         String color = "#444444";
         if (view instanceof ComponentView) {
             if (container.equals(((ComponentView)view).getContainer())) {
@@ -190,7 +190,7 @@ public class DOTExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void endContainerBoundary(View view, IndentingWriter writer) {
+    protected void endContainerBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
         writer.writeLine();
@@ -212,14 +212,14 @@ public class DOTExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void endDeploymentNodeBoundary(View view, IndentingWriter writer) {
+    protected void endDeploymentNodeBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("}");
         writer.writeLine();
     }
 
     @Override
-    protected void writeElement(View view, Element element, IndentingWriter writer) {
+    protected void writeElement(ModelView view, Element element, IndentingWriter writer) {
         ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(element);
 
         int nameFontSize = elementStyle.getFontSize() + 10;
@@ -272,7 +272,7 @@ public class DOTExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void writeRelationship(View view, RelationshipView relationshipView, IndentingWriter writer) {
+    protected void writeRelationship(ModelView view, RelationshipView relationshipView, IndentingWriter writer) {
         Element source;
         Element destination;
 
@@ -360,7 +360,7 @@ public class DOTExporter extends AbstractDiagramExporter {
         }
     }
 
-    private String shapeOf(View view, Element element) {
+    private String shapeOf(ModelView view, Element element) {
         if (element instanceof DeploymentNode) {
             return "node";
         }
@@ -386,7 +386,7 @@ public class DOTExporter extends AbstractDiagramExporter {
         }
     }
 
-    private Element findElementInside(DeploymentNode deploymentNode, View view) {
+    private Element findElementInside(DeploymentNode deploymentNode, ModelView view) {
         for (SoftwareSystemInstance softwareSystemInstance : deploymentNode.getSoftwareSystemInstances()) {
             if (view.isElementInView(softwareSystemInstance)) {
                 return softwareSystemInstance;
@@ -419,7 +419,7 @@ public class DOTExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected Diagram createDiagram(View view, String definition) {
+    protected Diagram createDiagram(ModelView view, String definition) {
         return new DOTDiagram(view, definition);
     }
 

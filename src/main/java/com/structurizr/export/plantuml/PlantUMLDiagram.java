@@ -1,11 +1,11 @@
 package com.structurizr.export.plantuml;
 
 import com.structurizr.export.Diagram;
-import com.structurizr.view.View;
+import com.structurizr.view.ModelView;
 
 public class PlantUMLDiagram extends Diagram {
 
-    public PlantUMLDiagram(View view, String definition) {
+    public PlantUMLDiagram(ModelView view, String definition) {
         super(view, definition);
     }
 

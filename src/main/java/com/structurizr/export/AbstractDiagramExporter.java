@@ -149,7 +149,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         return export(view, view.isEnterpriseBoundaryVisible());
     }
 
-    private Diagram export(View view, boolean enterpriseBoundaryIsVisible) {
+    private Diagram export(ModelView view, boolean enterpriseBoundaryIsVisible) {
         IndentingWriter writer = new IndentingWriter();
         writeHeader(view, writer);
 
@@ -268,7 +268,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         return createDiagram(view, writer.toString());
     }
 
-    protected List<SoftwareSystem> getBoundarySoftwareSystems(View view) {
+    protected List<SoftwareSystem> getBoundarySoftwareSystems(ModelView view) {
         List<SoftwareSystem> softwareSystems = new ArrayList<>(view.getElements().stream().map(ElementView::getElement).filter(e -> e instanceof Container).map(c -> ((Container)c).getSoftwareSystem()).collect(Collectors.toSet()));
         softwareSystems.sort(Comparator.comparing(Element::getId));
 
@@ -335,7 +335,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         return createDiagram(view, writer.toString());
     }
 
-    protected List<Container> getBoundaryContainers(View view) {
+    protected List<Container> getBoundaryContainers(ModelView view) {
         List<Container> containers = new ArrayList<>(view.getElements().stream().map(ElementView::getElement).filter(e -> e instanceof Component).map(c -> ((Component)c).getContainer()).collect(Collectors.toSet()));
         containers.sort(Comparator.comparing(Element::getId));
 
@@ -517,7 +517,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         endDeploymentNodeBoundary(view, writer);
     }
 
-    protected void writeElements(View view, List<GroupableElement> elements, IndentingWriter writer) {
+    protected void writeElements(ModelView view, List<GroupableElement> elements, IndentingWriter writer) {
         elements.sort(Comparator.comparing(Element::getId));
 
         Set<String> groupsAsSet = new HashSet<>();
@@ -553,7 +553,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         }
     }
 
-    protected void writeRelationships(View view, IndentingWriter writer) {
+    protected void writeRelationships(ModelView view, IndentingWriter writer) {
         Collection<RelationshipView> relationshipList;
 
         if (view instanceof DynamicView) {
@@ -567,32 +567,32 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         }
     }
 
-    protected abstract void writeHeader(View view, IndentingWriter writer);
-    protected abstract void writeFooter(View view, IndentingWriter writer);
+    protected abstract void writeHeader(ModelView view, IndentingWriter writer);
+    protected abstract void writeFooter(ModelView view, IndentingWriter writer);
 
-    protected abstract void startEnterpriseBoundary(View view, String enterpriseName, IndentingWriter writer);
-    protected abstract void endEnterpriseBoundary(View view, IndentingWriter writer);
+    protected abstract void startEnterpriseBoundary(ModelView view, String enterpriseName, IndentingWriter writer);
+    protected abstract void endEnterpriseBoundary(ModelView view, IndentingWriter writer);
 
-    protected abstract void startGroupBoundary(View view, String group, IndentingWriter writer);
-    protected abstract void endGroupBoundary(View view, IndentingWriter writer);
+    protected abstract void startGroupBoundary(ModelView view, String group, IndentingWriter writer);
+    protected abstract void endGroupBoundary(ModelView view, IndentingWriter writer);
 
-    protected abstract void startSoftwareSystemBoundary(View view, SoftwareSystem softwareSystem, IndentingWriter writer);
-    protected abstract void endSoftwareSystemBoundary(View view, IndentingWriter writer);
+    protected abstract void startSoftwareSystemBoundary(ModelView view, SoftwareSystem softwareSystem, IndentingWriter writer);
+    protected abstract void endSoftwareSystemBoundary(ModelView view, IndentingWriter writer);
 
-    protected abstract void startContainerBoundary(View view, Container container, IndentingWriter writer);
-    protected abstract void endContainerBoundary(View view, IndentingWriter writer);
+    protected abstract void startContainerBoundary(ModelView view, Container container, IndentingWriter writer);
+    protected abstract void endContainerBoundary(ModelView view, IndentingWriter writer);
 
     protected abstract void startDeploymentNodeBoundary(DeploymentView view, DeploymentNode deploymentNode, IndentingWriter writer);
-    protected abstract void endDeploymentNodeBoundary(View view, IndentingWriter writer);
+    protected abstract void endDeploymentNodeBoundary(ModelView view, IndentingWriter writer);
 
-    protected abstract void writeElement(View view, Element element, IndentingWriter writer);
-    protected abstract void writeRelationship(View view, RelationshipView relationshipView, IndentingWriter writer);
+    protected abstract void writeElement(ModelView view, Element element, IndentingWriter writer);
+    protected abstract void writeRelationship(ModelView view, RelationshipView relationshipView, IndentingWriter writer);
 
-    protected boolean isAnimationSupported(View view) {
+    protected boolean isAnimationSupported(ModelView view) {
         return false;
     }
 
-    protected boolean isVisible(View view, Element element) {
+    protected boolean isVisible(ModelView view, Element element) {
         if (frame != null) {
             Set<String> elementIds = new HashSet<>();
 
@@ -630,7 +630,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         return true;
     }
 
-    protected boolean isVisible(View view, RelationshipView relationshipView) {
+    protected boolean isVisible(ModelView view, RelationshipView relationshipView) {
         if (view instanceof DynamicView && frame != null) {
             return frame.equals(relationshipView.getOrder());
         }
@@ -638,13 +638,13 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         return true;
     }
 
-    protected abstract Diagram createDiagram(View view, String definition);
+    protected abstract Diagram createDiagram(ModelView view, String definition);
 
-    protected Legend createLegend(View view) {
+    protected Legend createLegend(ModelView view) {
         return null;
     }
 
-    protected String getViewOrViewSetProperty(View view, String name, String defaultValue) {
+    protected String getViewOrViewSetProperty(ModelView view, String name, String defaultValue) {
         ViewSet views = view.getViewSet();
 
         return

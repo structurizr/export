@@ -74,45 +74,45 @@ public class WebSequenceDiagramsExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void writeHeader(View view, IndentingWriter writer) {
+    protected void writeHeader(ModelView view, IndentingWriter writer) {
         writer.writeLine("title " + view.getName() + " - " + view.getKey());
         writer.writeLine();
     }
 
     @Override
-    protected void writeFooter(View view, IndentingWriter writer) {
+    protected void writeFooter(ModelView view, IndentingWriter writer) {
     }
 
     @Override
-    protected void startEnterpriseBoundary(View view, String enterpriseName, IndentingWriter writer) {
+    protected void startEnterpriseBoundary(ModelView view, String enterpriseName, IndentingWriter writer) {
     }
 
     @Override
-    protected void endEnterpriseBoundary(View view, IndentingWriter writer) {
+    protected void endEnterpriseBoundary(ModelView view, IndentingWriter writer) {
     }
 
     @Override
-    protected void startGroupBoundary(View view, String group, IndentingWriter writer) {
+    protected void startGroupBoundary(ModelView view, String group, IndentingWriter writer) {
     }
 
     @Override
-    protected void endGroupBoundary(View view, IndentingWriter writer) {
+    protected void endGroupBoundary(ModelView view, IndentingWriter writer) {
     }
 
     @Override
-    protected void startSoftwareSystemBoundary(View view, SoftwareSystem softwareSystem, IndentingWriter writer) {
+    protected void startSoftwareSystemBoundary(ModelView view, SoftwareSystem softwareSystem, IndentingWriter writer) {
     }
 
     @Override
-    protected void endSoftwareSystemBoundary(View view, IndentingWriter writer) {
+    protected void endSoftwareSystemBoundary(ModelView view, IndentingWriter writer) {
     }
 
     @Override
-    protected void startContainerBoundary(View view, Container container, IndentingWriter writer) {
+    protected void startContainerBoundary(ModelView view, Container container, IndentingWriter writer) {
     }
 
     @Override
-    protected void endContainerBoundary(View view, IndentingWriter writer) {
+    protected void endContainerBoundary(ModelView view, IndentingWriter writer) {
     }
 
     @Override
@@ -120,11 +120,11 @@ public class WebSequenceDiagramsExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void endDeploymentNodeBoundary(View view, IndentingWriter writer) {
+    protected void endDeploymentNodeBoundary(ModelView view, IndentingWriter writer) {
     }
 
     @Override
-    protected void writeElement(View view, Element element, IndentingWriter writer) {
+    protected void writeElement(ModelView view, Element element, IndentingWriter writer) {
         if (element instanceof Person) {
             writer.writeLine(String.format("actor <<%s>>\\n%s as %s",
                     view.getViewSet().getConfiguration().getTerminology().findTerminology(element),
@@ -141,7 +141,7 @@ public class WebSequenceDiagramsExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void writeRelationship(View view, RelationshipView relationshipView, IndentingWriter writer) {
+    protected void writeRelationship(ModelView view, RelationshipView relationshipView, IndentingWriter writer) {
         Relationship r = relationshipView.getRelationship();
 
         Element source = r.getSource();
@@ -169,7 +169,7 @@ public class WebSequenceDiagramsExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected Diagram createDiagram(View view, String definition) {
+    protected Diagram createDiagram(ModelView view, String definition) {
         return new WebSequenceDiagramsDiagram(view, definition);
     }
 

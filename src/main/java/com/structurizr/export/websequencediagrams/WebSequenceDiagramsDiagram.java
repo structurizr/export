@@ -1,11 +1,11 @@
 package com.structurizr.export.websequencediagrams;
 
 import com.structurizr.export.Diagram;
-import com.structurizr.view.View;
+import com.structurizr.view.ModelView;
 
 public class WebSequenceDiagramsDiagram extends Diagram {
 
-    public WebSequenceDiagramsDiagram(View view, String definition) {
+    public WebSequenceDiagramsDiagram(ModelView view, String definition) {
         super(view, definition);
     }
 

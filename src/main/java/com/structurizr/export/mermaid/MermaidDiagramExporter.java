@@ -30,7 +30,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void writeHeader(View view, IndentingWriter writer) {
+    protected void writeHeader(ModelView view, IndentingWriter writer) {
         String direction = "TB";
 
         if (view.getAutomaticLayout() != null) {
@@ -70,14 +70,14 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void writeFooter(View view, IndentingWriter writer) {
+    protected void writeFooter(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("end");
         writer.outdent();
     }
 
     @Override
-    protected void startEnterpriseBoundary(View view, String enterpriseName, IndentingWriter writer) {
+    protected void startEnterpriseBoundary(ModelView view, String enterpriseName, IndentingWriter writer) {
         writer.writeLine("subgraph enterprise [" + enterpriseName + "]");
         writer.indent();
         writer.writeLine("style enterprise fill:#ffffff,stroke:#444444,color:#444444");
@@ -85,14 +85,14 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void endEnterpriseBoundary(View view, IndentingWriter writer) {
+    protected void endEnterpriseBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("end");
         writer.writeLine();
     }
 
     @Override
-    protected void startGroupBoundary(View view, String group, IndentingWriter writer) {
+    protected void startGroupBoundary(ModelView view, String group, IndentingWriter writer) {
         groupId++;
 
         String color = "#cccccc";
@@ -116,14 +116,14 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void endGroupBoundary(View view, IndentingWriter writer) {
+    protected void endGroupBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("end");
         writer.writeLine();
     }
 
     @Override
-    protected void startSoftwareSystemBoundary(View view, SoftwareSystem softwareSystem, IndentingWriter writer) {
+    protected void startSoftwareSystemBoundary(ModelView view, SoftwareSystem softwareSystem, IndentingWriter writer) {
         String color;
         if (softwareSystem.equals(view.getSoftwareSystem())) {
             color = "#444444";
@@ -138,14 +138,14 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void endSoftwareSystemBoundary(View view, IndentingWriter writer) {
+    protected void endSoftwareSystemBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("end");
         writer.writeLine();
     }
 
     @Override
-    protected void startContainerBoundary(View view, Container container, IndentingWriter writer) {
+    protected void startContainerBoundary(ModelView view, Container container, IndentingWriter writer) {
         String color = "#444444";
         if (view instanceof ComponentView) {
             if (container.equals(((ComponentView)view).getContainer())) {
@@ -168,7 +168,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void endContainerBoundary(View view, IndentingWriter writer) {
+    protected void endContainerBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("end");
         writer.writeLine();
@@ -185,7 +185,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void endDeploymentNodeBoundary(View view, IndentingWriter writer) {
+    protected void endDeploymentNodeBoundary(ModelView view, IndentingWriter writer) {
         writer.outdent();
         writer.writeLine("end");
         writer.writeLine();
@@ -267,7 +267,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void writeElement(View view, Element element, IndentingWriter writer) {
+    protected void writeElement(ModelView view, Element element, IndentingWriter writer) {
         ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(element);
 
         String name = element.getName();
@@ -326,7 +326,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected void writeRelationship(View view, RelationshipView relationshipView, IndentingWriter writer) {
+    protected void writeRelationship(ModelView view, RelationshipView relationshipView, IndentingWriter writer) {
         Relationship relationship = relationshipView.getRelationship();
         RelationshipStyle style = view.getViewSet().getConfiguration().getStyles().findRelationshipStyle(relationship);
 
@@ -394,15 +394,15 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     }
 
     @Override
-    protected Diagram createDiagram(View view, String definition) {
+    protected Diagram createDiagram(ModelView view, String definition) {
         return new MermaidDiagram(view, definition);
     }
 
-    protected boolean includeTitle(View view) {
+    protected boolean includeTitle(ModelView view) {
         return "true".equals(getViewOrViewSetProperty(view, MERMAID_TITLE_PROPERTY, "true"));
     }
 
-    protected boolean renderAsSequenceDiagram(View view) {
+    protected boolean renderAsSequenceDiagram(ModelView view) {
         return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, MERMAID_SEQUENCE_DIAGRAM_PROPERTY, "false"));
     }
 

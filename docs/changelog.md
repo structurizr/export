@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.10.1 (unreleased)
+
+- Fixes #47 (StructurizrPlantUMLExporter crashes when used in native binaries). 
+
 ## 1.10.0 (18th February 2023)
 
 - Adds `set separator none` to PlantUML exports for compatibility with [PlantUML namespace/package changes - 2 Feb 2023](https://plantuml.com/news).

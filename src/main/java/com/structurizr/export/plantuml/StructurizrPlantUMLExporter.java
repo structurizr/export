@@ -602,6 +602,9 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             int height = bi.getHeight();
 
             scale = MAX_ICON_SIZE / Math.max(width, height);
+        } catch (UnsatisfiedLinkError | IIOException e) {
+            // This is a known issue on native builds since AWT packages aren't available.
+            // So we just swallow the error and use the default scale            
         } catch (Exception e) {
             e.printStackTrace();
         }

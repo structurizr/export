@@ -345,9 +345,11 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         Workspace workspace = new Workspace("Name", "Description");
         SoftwareSystem softwareSystem = workspace.getModel().addSoftwareSystem("SoftwareSystem");
         Container container1 = softwareSystem.addContainer("Container 1");
+        container1.addProperty("structurizr.dsl.identifier", "container1");
         container1.addProperty("IP", "127.0.0.1");
         container1.addProperty("Region", "East");
         Container container2 = softwareSystem.addContainer("Container 2");
+        container1.addProperty("structurizr.dsl.identifier", "container2");
         container2.addProperty("Region", "West");
         container2.addProperty("IP", "127.0.0.2");
         Relationship relationship = container1.uses(container2, "");

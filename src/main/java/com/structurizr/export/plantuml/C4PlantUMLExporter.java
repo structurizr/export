@@ -15,6 +15,8 @@ import static java.lang.String.format;
 
 public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
+    private static final String STRUCTURIZR_PROPERTY_NAME = "structurizr.";
+
     public static final String C4PLANTUML_LEGEND_PROPERTY = "c4plantuml.legend";
     public static final String C4PLANTUML_STEREOTYPES_PROPERTY = "c4plantuml.stereotypes";
     public static final String C4PLANTUML_TAGS_PROPERTY = "c4plantuml.tags";
@@ -477,7 +479,14 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     private void addProperties(ModelView view, IndentingWriter writer, ModelItem element) {
-        Map<String, String> properties = element.getProperties();
+        Map<String, String> properties = new HashMap<>();
+        for (String key : element.getProperties().keySet()) {
+            // don't include any internal Structurizr properties (e.g. structurizr.dsl.identifier)
+            if (!key.startsWith(STRUCTURIZR_PROPERTY_NAME)) {
+                properties.put(key, element.getProperties().get(key));
+            }
+        }
+
         if (!properties.isEmpty()) {
             writer.writeLine("WithoutPropertyHeader()");
             properties.keySet().stream().sorted().forEach(key ->

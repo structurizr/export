@@ -1,6 +1,6 @@
 # Changelog
 
-# 1.10.1 (unreleased)
+# 1.10.1 (27th February 2023)
 
 - Fixes #47 (StructurizrPlantUMLExporter crashes when used in native binaries).
 - Fixes #49 (Internal property 'structurizr.dsl.identifier' on exported diagrams should be hidden).

@@ -346,8 +346,8 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
                     shape,
                     name,
                     type,
-                    icon,
                     description,
+                    icon,
                     id,
                     id,
                     url)

@@ -90,8 +90,8 @@ rectangle "Amazon Web Services\n<size:10>[Deployment Node]</size>\n\n<img:https:
 
     }
 
-    rectangle "==Elastic Load Balancer\n<size:10>[Infrastructure Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Elastic-Load-Balancing_light-bg@4x.png{scale=0.16666666666666666}>\n\nAutomatically distributes incoming application traffic." <<Live.AmazonWebServices.USEast1.ElasticLoadBalancer>> as Live.AmazonWebServices.USEast1.ElasticLoadBalancer
-    rectangle "==Route 53\n<size:10>[Infrastructure Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-Route-53_light-bg@4x.png{scale=0.16666666666666666}>\n\nHighly available and scalable cloud DNS service." <<Live.AmazonWebServices.USEast1.Route53>> as Live.AmazonWebServices.USEast1.Route53
+    rectangle "==Elastic Load Balancer\n<size:10>[Infrastructure Node]</size>\n\nAutomatically distributes incoming application traffic.\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Elastic-Load-Balancing_light-bg@4x.png{scale=0.16666666666666666}>" <<Live.AmazonWebServices.USEast1.ElasticLoadBalancer>> as Live.AmazonWebServices.USEast1.ElasticLoadBalancer
+    rectangle "==Route 53\n<size:10>[Infrastructure Node]</size>\n\nHighly available and scalable cloud DNS service.\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-Route-53_light-bg@4x.png{scale=0.16666666666666666}>" <<Live.AmazonWebServices.USEast1.Route53>> as Live.AmazonWebServices.USEast1.Route53
   }
 
 }

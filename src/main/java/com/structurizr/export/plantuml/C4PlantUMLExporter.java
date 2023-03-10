@@ -165,12 +165,19 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
                     ElementStyle elementStyle = elementStyles.get(tagList);
                     tagList = tagList.replaceFirst("Element,", "");
 
+                    String sprite = "";
+                    if (elementStyleHasSupportedIcon(elementStyle)) {
+                        double scale = calculateIconScale(elementStyle);
+                        sprite = "img:" + elementStyle.getIcon() + "{scale=" + scale + "}";
+                    }
+                    sprite = elementStyle.getProperties().getOrDefault(C4PLANTUML_SPRITE, sprite);
+
                     writer.writeLine(String.format("AddElementTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $sprite=\"%s\", $shadowing=\"%s\")",
                             tagList,
                             elementStyle.getBackground(),
                             elementStyle.getStroke(),
                             elementStyle.getColor(),
-                            elementStyle.getProperties().getOrDefault(C4PLANTUML_SPRITE, ""),
+                            sprite,
                             elementStyle.getProperties().getOrDefault(C4PLANTUML_SHADOW, "")
                     ));
                 }

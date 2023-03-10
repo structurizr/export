@@ -7,10 +7,6 @@ import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
-import javax.imageio.IIOException;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,8 +15,6 @@ import static java.lang.String.format;
 public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     public static final String PLANTUML_SEQUENCE_DIAGRAM_PROPERTY = "plantuml.sequenceDiagram";
-
-    private static final double MAX_ICON_SIZE = 50.0;
 
     public StructurizrPlantUMLExporter() {
         addSkinParam("shadowing", "false");
@@ -585,32 +579,6 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         writer.writeLine("@enduml");
 
         return new Legend(writer.toString());
-    }
-
-    private boolean elementStyleHasSupportedIcon(ElementStyle elementStyle) {
-        return !StringUtils.isNullOrEmpty(elementStyle.getIcon()) && elementStyle.getIcon().startsWith("http");
-    }
-
-    private double calculateIconScale(ElementStyle elementStyle) {
-        String icon = elementStyle.getIcon();
-        double scale = 0.5;
-
-        try {
-            URL url = new URL(icon);
-            BufferedImage bi = ImageIO.read(url);
-
-            int width = bi.getWidth();
-            int height = bi.getHeight();
-
-            scale = MAX_ICON_SIZE / Math.max(width, height);
-        } catch (UnsatisfiedLinkError | IIOException e) {
-            // This is a known issue on native builds since AWT packages aren't available.
-            // So we just swallow the error and use the default scale            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return scale;
     }
 
     protected boolean renderAsSequenceDiagram(ModelView view) {

@@ -44,7 +44,7 @@ The following table summarises the features that are available via the exporters
 | Element styles                            | All                                | Limited                              | Limited (with `c4plantuml.tags true`) | Limited         | Limited     |
 | Relationship styles                       | All                                | Limited                              | Limited (with `c4plantuml.tags true`) | Limited         | Limited     |
 | Shapes                                    | All                                | Limited                              | Limited                               | Limited         | Limited     |
-| Icons                                     | Yes                                | Yes                                  | No                                    | No              | No          |
+| Icons                                     | Yes                                | Yes                                  | Yes (with `c4plantuml.tags true`)     | No              | No          |
 | Automatic diagram key/legend              | Yes                                | Yes                                  | Yes                                   | No              | No          |
 | Click to zoom                             | Yes                                | No                                   | No                                    | No              | No          |
 | Interactive (tooltips, perspectives, etc) | Yes                                | No                                   | No                                    | No              | No          |

@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.11.0 (10th March 2023)
+
+- C4PlantUMLExporter: Adds support for image icons.
+
 # 1.10.1 (27th February 2023)
 
 - Fixes #47 (StructurizrPlantUMLExporter crashes when used in native binaries).

@@ -5,9 +5,14 @@ import com.structurizr.export.Diagram;
 import com.structurizr.export.IndentingWriter;
 import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
+import com.structurizr.view.ElementStyle;
 import com.structurizr.view.ModelView;
 import com.structurizr.view.Shape;
 
+import javax.imageio.IIOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,6 +23,8 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     public static final String PLANTUML_TITLE_PROPERTY = "plantuml.title";
     public static final String PLANTUML_INCLUDES_PROPERTY = "plantuml.includes";
     public static final String PLANTUML_ANIMATION_PROPERTY = "plantuml.animation";
+
+    private static final double MAX_ICON_SIZE = 30.0;
 
     private final Map<String, String> skinParams = new LinkedHashMap<>();
 
@@ -213,6 +220,32 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     @Override
     protected Diagram createDiagram(ModelView view, String definition) {
         return new PlantUMLDiagram(view, definition);
+    }
+
+    protected boolean elementStyleHasSupportedIcon(ElementStyle elementStyle) {
+        return !StringUtils.isNullOrEmpty(elementStyle.getIcon()) && elementStyle.getIcon().startsWith("http");
+    }
+
+    protected double calculateIconScale(ElementStyle elementStyle) {
+        String icon = elementStyle.getIcon();
+        double scale = 0.5;
+
+        try {
+            URL url = new URL(icon);
+            BufferedImage bi = ImageIO.read(url);
+
+            int width = bi.getWidth();
+            int height = bi.getHeight();
+
+            scale = MAX_ICON_SIZE / Math.max(width, height);
+        } catch (UnsatisfiedLinkError | IIOException e) {
+            // This is a known issue on native builds since AWT packages aren't available.
+            // So we just swallow the error and use the default scale
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return scale;
     }
 
 }

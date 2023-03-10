@@ -23,6 +23,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
     public static final String MERMAID_TITLE_PROPERTY = "mermaid.title";
     public static final String MERMAID_SEQUENCE_DIAGRAM_PROPERTY = "mermaid.sequenceDiagram";
+    public static final String MERMAID_ICONS_PROPERTY = "mermaid.icons";
 
     private int groupId = 0;
 
@@ -273,6 +274,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
         String name = element.getName();
         String description = element.getDescription();
         String type = typeOf(view, element, true);
+        String icon = "";
 
         if (element instanceof StaticStructureElementInstance) {
             StaticStructureElementInstance elementInstance = (StaticStructureElementInstance)element;
@@ -304,12 +306,17 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
             type = String.format("<div style='font-size: 70%%; margin-top: 0px'>%s</div>", type);
         }
 
-        writer.writeLine(format("%s%s\"<div style='font-weight: bold'>%s</div>%s%s\"%s",
+        if ("true".equals(getViewOrViewSetProperty(view, MERMAID_ICONS_PROPERTY, "false")) && elementStyleHasSupportedIcon(elementStyle)) {
+            icon = "<div><img src='" + elementStyle.getIcon() + "' style='max-height: 50px; margin: auto; margin-top:10px'/></div>";
+        }
+
+        writer.writeLine(format("%s%s\"<div style='font-weight: bold'>%s</div>%s%s%s\"%s",
                 element.getId(),
                 nodeOpeningSymbol,
                 name,
                 type,
                 description,
+                icon,
                 nodeClosingSymbol
         ));
 
@@ -404,6 +411,10 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
     protected boolean renderAsSequenceDiagram(ModelView view) {
         return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, MERMAID_SEQUENCE_DIAGRAM_PROPERTY, "false"));
+    }
+
+    private boolean elementStyleHasSupportedIcon(ElementStyle elementStyle) {
+        return !StringUtils.isNullOrEmpty(elementStyle.getIcon()) && elementStyle.getIcon().startsWith("http");
     }
 
 }

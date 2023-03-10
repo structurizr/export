@@ -39,19 +39,18 @@ complete and richest set of diagrams.
 
 The following table summarises the features that are available via the exporters implemented in this library.
 
-| Feature                                   | Structurizr Lite/cloud/on-premises | StructurizrPlantUMLExporter          | C4PlantUMLExporter                    | MermaidExporter | DOTExporter |
-|-------------------------------------------|------------------------------------|--------------------------------------|---------------------------------------|-----------------|-------------|
-| Element styles                            | All                                | Limited                              | Limited (with `c4plantuml.tags true`) | Limited         | Limited     |
-| Relationship styles                       | All                                | Limited                              | Limited (with `c4plantuml.tags true`) | Limited         | Limited     |
-| Shapes                                    | All                                | Limited                              | Limited                               | Limited         | Limited     |
-| Icons                                     | Yes                                | Limited                              | Limited (with `c4plantuml.tags true`) | No              | No          |
-| Automatic diagram key/legend              | Yes                                | Yes                                  | Yes                                   | No              | No          |
-| Click to zoom                             | Yes                                | No                                   | No                                    | No              | No          |
-| Interactive (tooltips, perspectives, etc) | Yes                                | No                                   | No                                    | No              | No          |
-| Animations                                | Yes                                | Yes (with `plantuml.animation true`) | Yes (with `plantuml.animation true`)  | No              | No          |
-| Automatic layout                          | Yes                                | Yes                                  | Yes                                   | Yes             | Yes         |
-| Manual layout                             | Yes                                | No                                   | No                                    | No              | No          |
-
+| Feature                                                                                         | Structurizr Lite/cloud/on-premises | StructurizrPlantUMLExporter          | C4PlantUMLExporter                    | MermaidExporter | DOTExporter |
+|-------------------------------------------------------------------------------------------------|------------------------------------|--------------------------------------|---------------------------------------|-----------------|-------------|
+| [Element styles](https://structurizr.com/help/notation#elements)                                | All                                | Limited                              | Limited (with `c4plantuml.tags true`) | Limited         | Limited     |
+| [Relationship styles](https://structurizr.com/help/notation#relationships)                      | All                                | Limited                              | Limited (with `c4plantuml.tags true`) | Limited         | Limited     |
+| [Shapes](https://structurizr.com/help/shapes)                                                   | All                                | Limited                              | Limited                               | Limited         | Limited     |
+| [Icons](https://structurizr.com/help/icons)                                                     | Yes                                | Limited                              | Limited (with `c4plantuml.tags true`) | No              | No          |
+| [Automatic diagram key/legend](https://structurizr.com/help/diagram-key)                        | Yes                                | Yes                                  | Yes                                   | No              | No          |
+| [Click to zoom](https://structurizr.com/help/diagram-navigation)                                | Yes                                | No                                   | No                                    | No              | No          |
+| Interactive features (tooltips, [perspectives](https://structurizr.com/help/perspectives), etc) | Yes                                | No                                   | No                                    | No              | No          |
+| [Animation](https://structurizr.com/help/animation)                                             | Yes                                | Yes (with `plantuml.animation true`) | Yes (with `plantuml.animation true`)  | No              | No          |
+| Automatic layout                                                                                | Yes                                | Yes                                  | Yes                                   | Yes             | Yes         |
+| Manual layout                                                                                   | Yes                                | No                                   | No                                    | No              | No          |
 
 ## Custom exporters
 

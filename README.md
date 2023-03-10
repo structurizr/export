@@ -37,6 +37,22 @@ In general though, the
 [Structurizr cloud service/on-premises installation/Lite](https://structurizr.com) will provide the most feature
 complete and richest set of diagrams.
 
+The following table summarises the features that are available via the exporters implemented in this library.
+
+| Feature                                   | Structurizr Lite/cloud/on-premises | StructurizrPlantUMLExporter          | C4PlantUMLExporter                    | MermaidExporter | DOTExporter |
+|-------------------------------------------|------------------------------------|--------------------------------------|---------------------------------------|-----------------|-------------|
+| Element styles                            | All                                | Limited                              | Limited (with `c4plantuml.tags true`) | Limited         | Limited     |
+| Relationship styles                       | All                                | Limited                              | Limited (with `c4plantuml.tags true`) | Limited         | Limited     |
+| Shapes                                    | All                                | Limited                              | Limited                               | Limited         | Limited     |
+| Icons                                     | Yes                                | Yes                                  | No                                    | No              | No          |
+| Automatic diagram key/legend              | Yes                                | Yes                                  | Yes                                   | No              | No          |
+| Click to zoom                             | Yes                                | No                                   | No                                    | No              | No          |
+| Interactive (tooltips, perspectives, etc) | Yes                                | No                                   | No                                    | No              | No          |
+| Animations                                | Yes                                | Yes (with `plantuml.animation true`) | Yes (with `plantuml.animation true`)  | No              | No          |
+| Automatic layout                          | Yes                                | Yes                                  | Yes                                   | Yes             | Yes         |
+| Manual layout                             | Yes                                | No                                   | No                                    | No              | No          |
+
+
 ## Custom exporters
 
 There are two interfaces defined in this library, that be used as a starting point for building your own custom exporters:

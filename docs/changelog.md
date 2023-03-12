@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.21.1 (12th March 2023)
+
+- Fixes an issue with styling nested groups.
+- MermaidExporter: Now correctly styles software system/container boundaries.
+
 ## 1.12.0 (12th March 2023)
 
 - Adds support for nested groups.

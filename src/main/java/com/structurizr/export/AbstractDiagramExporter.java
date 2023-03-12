@@ -405,18 +405,34 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
                     }
                 }
             } else if (element instanceof Container) {
+                boolean includeSoftwareSystemBoundaries = "true".equals(view.getProperties().getOrDefault("structurizr.softwareSystemBoundaries", "false"));
+
                 List<Container> containers = getBoundaryContainers(view);
+                Set<SoftwareSystem> softwareSystems = containers.stream().map(Container::getSoftwareSystem).collect(Collectors.toCollection(LinkedHashSet::new));
+                for (SoftwareSystem softwareSystem : softwareSystems) {
+                    if (includeSoftwareSystemBoundaries) {
+                        startSoftwareSystemBoundary(view, softwareSystem, writer);
+                        writer.indent();
+                    }
 
-                for (Container container : containers) {
-                    startContainerBoundary(view, container, writer);
+                    for (Container container : containers) {
+                        if (container.getSoftwareSystem() == softwareSystem) {
+                            startContainerBoundary(view, container, writer);
 
-                    for (ElementView elementView : view.getElements()) {
-                        if (elementView.getElement().getParent() == container) {
-                            writeElement(view, elementView.getElement(), writer);
+                            for (ElementView elementView : view.getElements()) {
+                                if (elementView.getElement().getParent() == container) {
+                                    writeElement(view, elementView.getElement(), writer);
+                                }
+                            }
+
+                            endContainerBoundary(view, writer);
                         }
                     }
 
-                    endContainerBoundary(view, writer);
+                    if (includeSoftwareSystemBoundaries) {
+                        endSoftwareSystemBoundary(view, writer);
+                        writer.outdent();
+                    }
                 }
 
                 for (ElementView elementView : view.getElements()) {

@@ -442,65 +442,55 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "@enduml", diagram.getDefinition());
     }
 
-
     @Test
-    public void test_renderDynamicDiagramWithExternalComponents() {
+    public void test_renderDynamicDiagramWithExternalComponents() throws Exception {
         Workspace workspace = new Workspace("Name", "Description");
+
         SoftwareSystem softwareSystem1 = workspace.getModel().addSoftwareSystem("Software System 1");
         Container container1 = softwareSystem1.addContainer("Container 1");
         Component component1 = container1.addComponent("Component 1");
-        Container container2 = softwareSystem1.addContainer("Container 2");
-        Component component2 = container2.addComponent("Component 2");
+        Component component2 = container1.addComponent("Component 2");
+
+        SoftwareSystem softwareSystem2 = workspace.getModel().addSoftwareSystem("Software System 2");
+        Container container2 = softwareSystem2.addContainer("Container 2");
+        Component component3 = container2.addComponent("Component 3");
 
         component1.uses(component2, "Uses");
+        component2.uses(component3, "Uses");
 
         DynamicView dynamicView = workspace.getViews().createDynamicView(container1, "Dynamic", "");
         dynamicView.add(component1, component2);
+        dynamicView.add(component2, component3);
 
         Diagram diagram = new StructurizrPlantUMLExporter().export(dynamicView);
-        assertEquals("@startuml\n" +
-                "set separator none\n" +
-                "title Container 1 - Dynamic\n" +
-                "\n" +
-                "top to bottom direction\n" +
-                "\n" +
-                "skinparam {\n" +
-                "  shadowing false\n" +
-                "  arrowFontSize 10\n" +
-                "  defaultTextAlignment center\n" +
-                "  wrapWidth 200\n" +
-                "  maxMessageSize 100\n" +
-                "}\n" +
-                "\n" +
-                "hide stereotype\n" +
-                "\n" +
-                "skinparam rectangle<<SoftwareSystem1.Container1.Component1>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "skinparam rectangle<<SoftwareSystem1.Container2.Component2>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> {\n" +
-                "  skinparam RectangleBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
-                "  skinparam RectangleFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
-                "\n" +
-                "  rectangle \"==Component 1\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container1.Component1>> as SoftwareSystem1.Container1.Component1\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"Container 2\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container2>> {\n" +
-                "  skinparam RectangleBorderColor<<SoftwareSystem1.Container2>> #9a9a9a\n" +
-                "  skinparam RectangleFontColor<<SoftwareSystem1.Container2>> #9a9a9a\n" +
-                "\n" +
-                "  rectangle \"==Component 2\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container2.Component2>> as SoftwareSystem1.Container2.Component2\n" +
-                "}\n" +
-                "\n" +
-                "SoftwareSystem1.Container1.Component1 .[#707070,thickness=2].> SoftwareSystem1.Container2.Component2 : \"<color:#707070>1. Uses\"\n" +
-                "@enduml", diagram.getDefinition());
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/dynamic-view-with-external-components-1.puml"));
+        assertEquals(expected, diagram.getDefinition());
+    }
+
+    @Test
+    public void test_renderDynamicDiagramWithExternalComponentsAndSoftwareSystemBoundariesIncluded() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+
+        SoftwareSystem softwareSystem1 = workspace.getModel().addSoftwareSystem("Software System 1");
+        Container container1 = softwareSystem1.addContainer("Container 1");
+        Component component1 = container1.addComponent("Component 1");
+        Component component2 = container1.addComponent("Component 2");
+
+        SoftwareSystem softwareSystem2 = workspace.getModel().addSoftwareSystem("Software System 2");
+        Container container2 = softwareSystem2.addContainer("Container 2");
+        Component component3 = container2.addComponent("Component 3");
+
+        component1.uses(component2, "Uses");
+        component2.uses(component3, "Uses");
+
+        DynamicView dynamicView = workspace.getViews().createDynamicView(container1, "Dynamic", "");
+        dynamicView.add(component1, component2);
+        dynamicView.add(component2, component3);
+        dynamicView.addProperty("structurizr.softwareSystemBoundaries", "true");
+
+        Diagram diagram = new StructurizrPlantUMLExporter().export(dynamicView);
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/dynamic-view-with-external-components-2.puml"));
+        assertEquals(expected, diagram.getDefinition());
     }
 
     @Test

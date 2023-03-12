@@ -39,9 +39,9 @@ rectangle "Enterprise" <<enterprise>> {
   skinparam RectangleBorderColor<<enterprise>> #444444
   skinparam RectangleFontColor<<enterprise>> #444444
 
-  rectangle "Group 2" <<group>> {
-    skinparam RectangleBorderColor<<group>> #cccccc
-    skinparam RectangleFontColor<<group>> #cccccc
+  rectangle "Group 2" <<group1>> {
+    skinparam RectangleBorderColor<<group1>> #cccccc
+    skinparam RectangleFontColor<<group1>> #cccccc
 
     rectangle "==D\n<size:10>[Software System]</size>" <<D>> as D
   }
@@ -49,9 +49,9 @@ rectangle "Enterprise" <<enterprise>> {
   rectangle "==C\n<size:10>[Software System]</size>" <<C>> as C
 }
 
-rectangle "Group 1" <<group>> {
-  skinparam RectangleBorderColor<<group>> #cccccc
-  skinparam RectangleFontColor<<group>> #cccccc
+rectangle "Group 1" <<group2>> {
+  skinparam RectangleBorderColor<<group2>> #cccccc
+  skinparam RectangleFontColor<<group2>> #cccccc
 
   rectangle "==B\n<size:10>[Software System]</size>" <<B>> as B
 }

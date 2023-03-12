@@ -16,6 +16,8 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     public static final String PLANTUML_SEQUENCE_DIAGRAM_PROPERTY = "plantuml.sequenceDiagram";
 
+    private int groupId = 0;
+
     public StructurizrPlantUMLExporter() {
         addSkinParam("shadowing", "false");
         addSkinParam("arrowFontSize", "10");
@@ -27,6 +29,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     @Override
     protected void writeHeader(ModelView view, IndentingWriter writer) {
         super.writeHeader(view, writer);
+        groupId = 0;
 
         if (view instanceof DynamicView && renderAsSequenceDiagram(view)) {
             // do nothing
@@ -124,28 +127,33 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startGroupBoundary(ModelView view, String group, IndentingWriter writer) {
+        groupId++;
+        String groupName = group;
+
+        String groupSeparator = view.getModel().getProperties().get(GROUP_SEPARATOR_PROPERTY_NAME);
+        if (!StringUtils.isNullOrEmpty(groupSeparator)) {
+            groupName = group.substring(group.lastIndexOf(groupSeparator) + groupSeparator.length());
+        }
+
         if (!renderAsSequenceDiagram(view)) {
-            String groupId;
             String color = "#cccccc";
 
             // is there a style for the group?
             ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle("Group:" + group);
-            groupId = "group:" + group;
 
             if (elementStyle == null || StringUtils.isNullOrEmpty(elementStyle.getColor())) {
                 // no, so is there a default group style?
                 elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle("Group");
-                groupId = "group";
             }
 
             if (elementStyle != null && !StringUtils.isNullOrEmpty(elementStyle.getColor())) {
                 color = elementStyle.getColor();
             }
 
-            writer.writeLine(String.format("rectangle \"%s\" <<%s>> {", group, groupId));
+            writer.writeLine(String.format("rectangle \"%s\" <<group%s>> {", groupName, groupId));
             writer.indent();
-            writer.writeLine(String.format("skinparam RectangleBorderColor<<%s>> %s", groupId, color));
-            writer.writeLine(String.format("skinparam RectangleFontColor<<%s>> %s", groupId, color));
+            writer.writeLine(String.format("skinparam RectangleBorderColor<<group%s>> %s", groupId, color));
+            writer.writeLine(String.format("skinparam RectangleFontColor<<group%s>> %s", groupId, color));
             writer.writeLine();
         }
     }

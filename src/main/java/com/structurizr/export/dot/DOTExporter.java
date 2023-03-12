@@ -103,6 +103,13 @@ public class DOTExporter extends AbstractDiagramExporter {
     protected void startGroupBoundary(ModelView view, String group, IndentingWriter writer) {
         String color = "#cccccc";
 
+        String groupName = group;
+
+        String groupSeparator = view.getModel().getProperties().get(GROUP_SEPARATOR_PROPERTY_NAME);
+        if (!StringUtils.isNullOrEmpty(groupSeparator)) {
+            groupName = group.substring(group.lastIndexOf(groupSeparator) + groupSeparator.length());
+        }
+
         // is there a style for the group?
         ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle("Group:" + group);
 
@@ -115,11 +122,11 @@ public class DOTExporter extends AbstractDiagramExporter {
             color = elementStyle.getColor();
         }
 
-        writer.writeLine("subgraph \"cluster_group_" + group + "\" {");
+        writer.writeLine("subgraph \"cluster_group_" + groupName + "\" {");
 
         writer.indent();
         writer.writeLine("margin=" + clusterInternalMargin);
-        writer.writeLine(String.format("label=<<font point-size=\"24\"><br />%s</font>>", group));
+        writer.writeLine(String.format("label=<<font point-size=\"24\"><br />%s</font>>", groupName));
         writer.writeLine("labelloc=b");
         writer.writeLine(String.format("color=\"%s\"", color));
         writer.writeLine(String.format("fontcolor=\"%s\"", color));

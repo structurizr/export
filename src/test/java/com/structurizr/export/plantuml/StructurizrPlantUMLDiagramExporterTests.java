@@ -133,6 +133,9 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("SystemLandscape", "Description");
         view.addAllElements();
 
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Group:Organisation 1/Department 1/Team 1").color("#ff0000");
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Group:Organisation 1/Department 1/Team 2").color("#0000ff");
+
         StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
         Collection<Diagram> diagrams = exporter.export(workspace);
 
@@ -702,9 +705,9 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "rectangle \"Group\" <<group>> {\n" +
-                "  skinparam RectangleBorderColor<<group>> #cccccc\n" +
-                "  skinparam RectangleFontColor<<group>> #cccccc\n" +
+                "rectangle \"Group\" <<group1>> {\n" +
+                "  skinparam RectangleBorderColor<<group1>> #cccccc\n" +
+                "  skinparam RectangleFontColor<<group1>> #cccccc\n" +
                 "\n" +
                 "  rectangle \"==Software System\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> as SoftwareSystem\n" +
                 "}\n" +

@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractDiagramExporter extends AbstractExporter implements DiagramExporter {
 
-    private static final String GROUP_SEPARATOR_PROPERTY_NAME = "structurizr.groupSeparator";
+    protected static final String GROUP_SEPARATOR_PROPERTY_NAME = "structurizr.groupSeparator";
 
     private Object frame = null;
 
@@ -557,7 +557,6 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
                 for (String group : groupsAsList) {
                     int groupCount = group.split(groupSeparator).length;
                     int contextCount = context.split(groupSeparator).length;
-                    String groupName = group.substring(group.lastIndexOf(groupSeparator) + groupSeparator.length());
 
                     if (groupCount > contextCount) {
                         // moved from a to a/b
@@ -580,7 +579,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
                         endGroupBoundary(view, writer);
                     }
 
-                    startGroupBoundary(view, groupName, writer);
+                    startGroupBoundary(view, group, writer);
 
                     for (GroupableElement element : elements) {
                         if (group.equals(element.getGroup())) {

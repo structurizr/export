@@ -30,23 +30,23 @@ skinparam rectangle<<User3>> {
   BorderColor #9a9a9a
 }
 
-rectangle "Group 1" <<group:Group 1>> {
-  skinparam RectangleBorderColor<<group:Group 1>> #111111
-  skinparam RectangleFontColor<<group:Group 1>> #111111
+rectangle "Group 1" <<group1>> {
+  skinparam RectangleBorderColor<<group1>> #111111
+  skinparam RectangleFontColor<<group1>> #111111
 
   rectangle "==User 1\n<size:10>[Person]</size>" <<User1>> as User1
 }
 
-rectangle "Group 2" <<group:Group 2>> {
-  skinparam RectangleBorderColor<<group:Group 2>> #222222
-  skinparam RectangleFontColor<<group:Group 2>> #222222
+rectangle "Group 2" <<group2>> {
+  skinparam RectangleBorderColor<<group2>> #222222
+  skinparam RectangleFontColor<<group2>> #222222
 
   rectangle "==User 2\n<size:10>[Person]</size>" <<User2>> as User2
 }
 
-rectangle "Group 3" <<group>> {
-  skinparam RectangleBorderColor<<group>> #cccccc
-  skinparam RectangleFontColor<<group>> #cccccc
+rectangle "Group 3" <<group3>> {
+  skinparam RectangleBorderColor<<group3>> #cccccc
+  skinparam RectangleFontColor<<group3>> #cccccc
 
   rectangle "==User 3\n<size:10>[Person]</size>" <<User3>> as User3
 }

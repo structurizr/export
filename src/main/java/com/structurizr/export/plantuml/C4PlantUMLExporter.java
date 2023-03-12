@@ -255,7 +255,14 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startGroupBoundary(ModelView view, String group, IndentingWriter writer) {
-        writer.writeLine(String.format("Boundary(group_%s, \"%s\") {", groupId++, group));
+        String groupName = group;
+
+        String groupSeparator = view.getModel().getProperties().get(GROUP_SEPARATOR_PROPERTY_NAME);
+        if (!StringUtils.isNullOrEmpty(groupSeparator)) {
+            groupName = group.substring(group.lastIndexOf(groupSeparator) + groupSeparator.length());
+        }
+
+        writer.writeLine(String.format("Boundary(group_%s, \"%s\") {", groupId++, groupName));
         writer.indent();
     }
 

@@ -40,26 +40,26 @@ skinparam rectangle<<Team2>> {
   BorderColor #9a9a9a
 }
 
-rectangle "Organisation 1" <<group>> {
-  skinparam RectangleBorderColor<<group>> #cccccc
-  skinparam RectangleFontColor<<group>> #cccccc
+rectangle "Organisation 1" <<group1>> {
+  skinparam RectangleBorderColor<<group1>> #cccccc
+  skinparam RectangleFontColor<<group1>> #cccccc
 
   rectangle "==Organisation 1\n<size:10>[Software System]</size>" <<Organisation1>> as Organisation1
-    rectangle "Department 1" <<group>> {
-      skinparam RectangleBorderColor<<group>> #cccccc
-      skinparam RectangleFontColor<<group>> #cccccc
+    rectangle "Department 1" <<group2>> {
+      skinparam RectangleBorderColor<<group2>> #cccccc
+      skinparam RectangleFontColor<<group2>> #cccccc
 
       rectangle "==Department 1\n<size:10>[Software System]</size>" <<Department1>> as Department1
-        rectangle "Team 1" <<group>> {
-          skinparam RectangleBorderColor<<group>> #cccccc
-          skinparam RectangleFontColor<<group>> #cccccc
+        rectangle "Team 1" <<group3>> {
+          skinparam RectangleBorderColor<<group3>> #ff0000
+          skinparam RectangleFontColor<<group3>> #ff0000
 
           rectangle "==Team 1\n<size:10>[Software System]</size>" <<Team1>> as Team1
         }
 
-        rectangle "Team 2" <<group>> {
-          skinparam RectangleBorderColor<<group>> #cccccc
-          skinparam RectangleFontColor<<group>> #cccccc
+        rectangle "Team 2" <<group4>> {
+          skinparam RectangleBorderColor<<group4>> #0000ff
+          skinparam RectangleFontColor<<group4>> #0000ff
 
           rectangle "==Team 2\n<size:10>[Software System]</size>" <<Team2>> as Team2
         }
@@ -68,9 +68,9 @@ rectangle "Organisation 1" <<group>> {
 
 }
 
-rectangle "Organisation 2" <<group>> {
-  skinparam RectangleBorderColor<<group>> #cccccc
-  skinparam RectangleFontColor<<group>> #cccccc
+rectangle "Organisation 2" <<group5>> {
+  skinparam RectangleBorderColor<<group5>> #cccccc
+  skinparam RectangleFontColor<<group5>> #cccccc
 
   rectangle "==Organisation 2\n<size:10>[Software System]</size>" <<Organisation2>> as Organisation2
 }

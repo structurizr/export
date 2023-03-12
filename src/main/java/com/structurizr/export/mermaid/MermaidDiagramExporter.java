@@ -96,6 +96,13 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
     protected void startGroupBoundary(ModelView view, String group, IndentingWriter writer) {
         groupId++;
 
+        String groupName = group;
+
+        String groupSeparator = view.getModel().getProperties().get(GROUP_SEPARATOR_PROPERTY_NAME);
+        if (!StringUtils.isNullOrEmpty(groupSeparator)) {
+            groupName = group.substring(group.lastIndexOf(groupSeparator) + groupSeparator.length());
+        }
+
         String color = "#cccccc";
 
         // is there a style for the group?
@@ -110,7 +117,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
             color = elementStyle.getColor();
         }
 
-        writer.writeLine(String.format("subgraph group%s [" + group + "]", groupId));
+        writer.writeLine(String.format("subgraph group%s [" + groupName + "]", groupId));
         writer.indent();
         writer.writeLine(String.format("style group%s fill:#ffffff,stroke:%s,color:%s", groupId, color, color));
         writer.writeLine();

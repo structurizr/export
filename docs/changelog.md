@@ -4,6 +4,7 @@
 
 - Adds support for nested groups.
 - StructurizrPlantUMLExporter: Switch from packages to rectangles when rendering groups.
+- Updates all exporters to mirror how the Structurizr renderer draws "external" boundaries.
 
 ## 1.11.0 (10th March 2023)
 

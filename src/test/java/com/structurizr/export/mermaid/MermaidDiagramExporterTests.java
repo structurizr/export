@@ -149,14 +149,14 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
                 "    style diagram fill:#ffffff,stroke:#ffffff\n" +
                 "\n" +
                 "    subgraph 1 [Software System 1]\n" +
-                "      style 1 fill:#ffffff,stroke:#444444,color:#444444\n" +
+                "      style 1 fill:#ffffff,stroke:#9a9a9a,color:#9a9a9a\n" +
                 "\n" +
                 "      2[\"<div style='font-weight: bold'>Container 1</div><div style='font-size: 70%; margin-top: 0px'>[Container]</div>\"]\n" +
                 "      style 2 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
                 "    end\n" +
                 "\n" +
                 "    subgraph 3 [Software System 2]\n" +
-                "      style 3 fill:#ffffff,stroke:#cccccc,color:#cccccc\n" +
+                "      style 3 fill:#ffffff,stroke:#9a9a9a,color:#9a9a9a\n" +
                 "\n" +
                 "      4[\"<div style='font-weight: bold'>Container 2</div><div style='font-size: 70%; margin-top: 0px'>[Container]</div>\"]\n" +
                 "      style 4 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
@@ -190,14 +190,14 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
                 "    style diagram fill:#ffffff,stroke:#ffffff\n" +
                 "\n" +
                 "    subgraph 2 [Container 1]\n" +
-                "      style 2 fill:#ffffff,stroke:#444444,color:#444444\n" +
+                "      style 2 fill:#ffffff,stroke:#9a9a9a,color:#9a9a9a\n" +
                 "\n" +
                 "      3[\"<div style='font-weight: bold'>Component 1</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>\"]\n" +
                 "      style 3 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
                 "    end\n" +
                 "\n" +
                 "    subgraph 5 [Container 2]\n" +
-                "      style 5 fill:#ffffff,stroke:#cccccc,color:#cccccc\n" +
+                "      style 5 fill:#ffffff,stroke:#9a9a9a,color:#9a9a9a\n" +
                 "\n" +
                 "      6[\"<div style='font-weight: bold'>Component 2</div><div style='font-size: 70%; margin-top: 0px'>[Component]</div>\"]\n" +
                 "      style 6 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +

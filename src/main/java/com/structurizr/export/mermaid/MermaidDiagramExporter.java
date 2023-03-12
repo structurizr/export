@@ -133,12 +133,8 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
     @Override
     protected void startSoftwareSystemBoundary(ModelView view, SoftwareSystem softwareSystem, IndentingWriter writer) {
-        String color;
-        if (softwareSystem.equals(view.getSoftwareSystem())) {
-            color = "#444444";
-        } else {
-            color = "#cccccc";
-        }
+        ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(softwareSystem);
+        String color = elementStyle.getStroke();
 
         writer.writeLine(String.format("subgraph %s [%s]", softwareSystem.getId(), softwareSystem.getName()));
         writer.indent();
@@ -155,20 +151,8 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
     @Override
     protected void startContainerBoundary(ModelView view, Container container, IndentingWriter writer) {
-        String color = "#444444";
-        if (view instanceof ComponentView) {
-            if (container.equals(((ComponentView)view).getContainer())) {
-                color = "#444444";
-            } else {
-                color = "#cccccc";
-            }
-        } else if (view instanceof DynamicView) {
-            if (container.equals(((DynamicView)view).getElement())) {
-                color = "#444444";
-            } else {
-                color = "#cccccc";
-            }
-        }
+        ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(container);
+        String color = elementStyle.getStroke();
 
         writer.writeLine(String.format("subgraph %s [%s]", container.getId(), container.getName()));
         writer.indent();

@@ -261,22 +261,22 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
                 "  subgraph diagram [System Landscape]\n" +
                 "    style diagram fill:#ffffff,stroke:#ffffff\n" +
                 "\n" +
-                "    subgraph group4 [Group 1]\n" +
-                "      style group4 fill:#ffffff,stroke:#111111,color:#111111\n" +
+                "    subgraph group1 [Group 1]\n" +
+                "      style group1 fill:#ffffff,stroke:#111111,color:#111111\n" +
                 "\n" +
                 "      1[\"<div style='font-weight: bold'>User 1</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div>\"]\n" +
                 "      style 1 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
                 "    end\n" +
                 "\n" +
-                "    subgraph group5 [Group 2]\n" +
-                "      style group5 fill:#ffffff,stroke:#222222,color:#222222\n" +
+                "    subgraph group2 [Group 2]\n" +
+                "      style group2 fill:#ffffff,stroke:#222222,color:#222222\n" +
                 "\n" +
                 "      2[\"<div style='font-weight: bold'>User 2</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div>\"]\n" +
                 "      style 2 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
                 "    end\n" +
                 "\n" +
-                "    subgraph group6 [Group 3]\n" +
-                "      style group6 fill:#ffffff,stroke:#aabbcc,color:#aabbcc\n" +
+                "    subgraph group3 [Group 3]\n" +
+                "      style group3 fill:#ffffff,stroke:#aabbcc,color:#aabbcc\n" +
                 "\n" +
                 "      3[\"<div style='font-weight: bold'>User 3</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div>\"]\n" +
                 "      style 3 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +

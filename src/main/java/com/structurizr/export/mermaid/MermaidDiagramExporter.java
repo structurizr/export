@@ -32,6 +32,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
     @Override
     protected void writeHeader(ModelView view, IndentingWriter writer) {
+        groupId = 0;
         String direction = "TB";
 
         if (view.getAutomaticLayout() != null) {

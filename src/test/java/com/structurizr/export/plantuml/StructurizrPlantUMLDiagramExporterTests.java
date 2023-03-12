@@ -142,7 +142,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
     }
 
     @Test
-    public void test_renderGroupStyles() {
+    public void test_renderGroupStyles() throws Exception {
         Workspace workspace = new Workspace("Name", "Description");
         workspace.getModel().addPerson("User 1").setGroup("Group 1");
         workspace.getModel().addPerson("User 2").setGroup("Group 2");
@@ -156,118 +156,14 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
         Diagram diagram = exporter.export(view);
-        assertEquals("@startuml\nset separator none\n" +
-                "title System Landscape\n" +
-                "\n" +
-                "top to bottom direction\n" +
-                "\n" +
-                "skinparam {\n" +
-                "  shadowing false\n" +
-                "  arrowFontSize 10\n" +
-                "  defaultTextAlignment center\n" +
-                "  wrapWidth 200\n" +
-                "  maxMessageSize 100\n" +
-                "}\n" +
-                "\n" +
-                "hide stereotype\n" +
-                "\n" +
-                "skinparam rectangle<<User1>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "skinparam rectangle<<User2>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "skinparam rectangle<<User3>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"Group 1\" <<group:Group 1>> {\n" +
-                "  skinparam RectangleBorderColor<<group:Group 1>> #111111\n" +
-                "  skinparam RectangleFontColor<<group:Group 1>> #111111\n" +
-                "\n" +
-                "  rectangle \"==User 1\\n<size:10>[Person]</size>\" <<User1>> as User1\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"Group 2\" <<group:Group 2>> {\n" +
-                "  skinparam RectangleBorderColor<<group:Group 2>> #222222\n" +
-                "  skinparam RectangleFontColor<<group:Group 2>> #222222\n" +
-                "\n" +
-                "  rectangle \"==User 2\\n<size:10>[Person]</size>\" <<User2>> as User2\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"Group 3\" <<group>> {\n" +
-                "  skinparam RectangleBorderColor<<group>> #cccccc\n" +
-                "  skinparam RectangleFontColor<<group>> #cccccc\n" +
-                "\n" +
-                "  rectangle \"==User 3\\n<size:10>[Person]</size>\" <<User3>> as User3\n" +
-                "}\n" +
-                "\n" +
-                "\n" +
-                "@enduml", diagram.getDefinition());
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/group-styles-1.puml"));
+        assertEquals(expected, diagram.getDefinition());
 
         workspace.getViews().getConfiguration().getStyles().addElementStyle("Group").color("#aabbcc");
 
         diagram = exporter.export(view);
-        assertEquals("@startuml\nset separator none\n" +
-                "title System Landscape\n" +
-                "\n" +
-                "top to bottom direction\n" +
-                "\n" +
-                "skinparam {\n" +
-                "  shadowing false\n" +
-                "  arrowFontSize 10\n" +
-                "  defaultTextAlignment center\n" +
-                "  wrapWidth 200\n" +
-                "  maxMessageSize 100\n" +
-                "}\n" +
-                "\n" +
-                "hide stereotype\n" +
-                "\n" +
-                "skinparam rectangle<<User1>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "skinparam rectangle<<User2>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "skinparam rectangle<<User3>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"Group 1\" <<group:Group 1>> {\n" +
-                "  skinparam RectangleBorderColor<<group:Group 1>> #111111\n" +
-                "  skinparam RectangleFontColor<<group:Group 1>> #111111\n" +
-                "\n" +
-                "  rectangle \"==User 1\\n<size:10>[Person]</size>\" <<User1>> as User1\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"Group 2\" <<group:Group 2>> {\n" +
-                "  skinparam RectangleBorderColor<<group:Group 2>> #222222\n" +
-                "  skinparam RectangleFontColor<<group:Group 2>> #222222\n" +
-                "\n" +
-                "  rectangle \"==User 2\\n<size:10>[Person]</size>\" <<User2>> as User2\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"Group 3\" <<group>> {\n" +
-                "  skinparam RectangleBorderColor<<group>> #aabbcc\n" +
-                "  skinparam RectangleFontColor<<group>> #aabbcc\n" +
-                "\n" +
-                "  rectangle \"==User 3\\n<size:10>[Person]</size>\" <<User3>> as User3\n" +
-                "}\n" +
-                "\n" +
-                "\n" +
-                "@enduml", diagram.getDefinition());
+        expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/group-styles-2.puml"));
+        assertEquals(expected, diagram.getDefinition());
     }
 
     @Test

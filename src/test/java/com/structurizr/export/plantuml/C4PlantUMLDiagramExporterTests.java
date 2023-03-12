@@ -108,6 +108,37 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     }
 
     @Test
+    public void test_NestedGroupsExample() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addProperty("structurizr.groupSeparator", "/");
+
+        SoftwareSystem a = workspace.getModel().addSoftwareSystem("Team 1");
+        a.setGroup("Organisation 1/Department 1/Team 1");
+
+        SoftwareSystem b = workspace.getModel().addSoftwareSystem("Team 2");
+        b.setGroup("Organisation 1/Department 1/Team 2");
+
+        SoftwareSystem c = workspace.getModel().addSoftwareSystem("Organisation 1");
+        c.setGroup("Organisation 1");
+
+        SoftwareSystem d = workspace.getModel().addSoftwareSystem("Organisation 2");
+        d.setGroup("Organisation 2");
+
+        SoftwareSystem e = workspace.getModel().addSoftwareSystem("Department 1");
+        e.setGroup("Organisation 1/Department 1");
+
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("SystemLandscape", "Description");
+        view.addAllElements();
+
+        C4PlantUMLExporter exporter = new C4PlantUMLExporter();
+        Collection<Diagram> diagrams = exporter.export(workspace);
+
+        Diagram diagram = diagrams.stream().filter(md -> md.getKey().equals("SystemLandscape")).findFirst().get();
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/nested-groups.puml"));
+        assertEquals(expected, diagram.getDefinition());
+    }
+
+    @Test
     public void test_renderContainerDiagramWithExternalContainers() {
         Workspace workspace = new Workspace("Name", "Description");
 

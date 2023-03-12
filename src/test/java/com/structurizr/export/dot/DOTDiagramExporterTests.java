@@ -90,6 +90,37 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
     }
 
     @Test
+    public void test_NestedGroupsExample() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addProperty("structurizr.groupSeparator", "/");
+
+        SoftwareSystem a = workspace.getModel().addSoftwareSystem("Team 1");
+        a.setGroup("Organisation 1/Department 1/Team 1");
+
+        SoftwareSystem b = workspace.getModel().addSoftwareSystem("Team 2");
+        b.setGroup("Organisation 1/Department 1/Team 2");
+
+        SoftwareSystem c = workspace.getModel().addSoftwareSystem("Organisation 1");
+        c.setGroup("Organisation 1");
+
+        SoftwareSystem d = workspace.getModel().addSoftwareSystem("Organisation 2");
+        d.setGroup("Organisation 2");
+
+        SoftwareSystem e = workspace.getModel().addSoftwareSystem("Department 1");
+        e.setGroup("Organisation 1/Department 1");
+
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("SystemLandscape", "Description");
+        view.addAllElements();
+
+        DOTExporter exporter = new DOTExporter();
+        Collection<Diagram> diagrams = exporter.export(workspace);
+
+        Diagram diagram = diagrams.stream().filter(md -> md.getKey().equals("SystemLandscape")).findFirst().get();
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/dot/nested-groups.dot"));
+        assertEquals(expected, diagram.getDefinition());
+    }
+
+    @Test
     public void test_renderContainerDiagramWithExternalContainers() {
         Workspace workspace = new Workspace("Name", "Description");
         SoftwareSystem softwareSystem1 = workspace.getModel().addSoftwareSystem("Software System 1");
@@ -263,7 +294,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "  subgraph \"cluster_group_Group 1\" {\n" +
                 "    margin=25\n" +
-                "    label=<<font point-size=\"24\"><br />Group 1</font><br /><font point-size=\"19\">[Group]</font>>\n" +
+                "    label=<<font point-size=\"24\"><br />Group 1</font>>\n" +
                 "    labelloc=b\n" +
                 "    color=\"#111111\"\n" +
                 "    fontcolor=\"#111111\"\n" +
@@ -274,7 +305,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "  subgraph \"cluster_group_Group 2\" {\n" +
                 "    margin=25\n" +
-                "    label=<<font point-size=\"24\"><br />Group 2</font><br /><font point-size=\"19\">[Group]</font>>\n" +
+                "    label=<<font point-size=\"24\"><br />Group 2</font>>\n" +
                 "    labelloc=b\n" +
                 "    color=\"#222222\"\n" +
                 "    fontcolor=\"#222222\"\n" +
@@ -285,7 +316,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "  subgraph \"cluster_group_Group 3\" {\n" +
                 "    margin=25\n" +
-                "    label=<<font point-size=\"24\"><br />Group 3</font><br /><font point-size=\"19\">[Group]</font>>\n" +
+                "    label=<<font point-size=\"24\"><br />Group 3</font>>\n" +
                 "    labelloc=b\n" +
                 "    color=\"#cccccc\"\n" +
                 "    fontcolor=\"#cccccc\"\n" +
@@ -309,7 +340,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "  subgraph \"cluster_group_Group 1\" {\n" +
                 "    margin=25\n" +
-                "    label=<<font point-size=\"24\"><br />Group 1</font><br /><font point-size=\"19\">[Group]</font>>\n" +
+                "    label=<<font point-size=\"24\"><br />Group 1</font>>\n" +
                 "    labelloc=b\n" +
                 "    color=\"#111111\"\n" +
                 "    fontcolor=\"#111111\"\n" +
@@ -320,7 +351,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "  subgraph \"cluster_group_Group 2\" {\n" +
                 "    margin=25\n" +
-                "    label=<<font point-size=\"24\"><br />Group 2</font><br /><font point-size=\"19\">[Group]</font>>\n" +
+                "    label=<<font point-size=\"24\"><br />Group 2</font>>\n" +
                 "    labelloc=b\n" +
                 "    color=\"#222222\"\n" +
                 "    fontcolor=\"#222222\"\n" +
@@ -331,7 +362,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "  subgraph \"cluster_group_Group 3\" {\n" +
                 "    margin=25\n" +
-                "    label=<<font point-size=\"24\"><br />Group 3</font><br /><font point-size=\"19\">[Group]</font>>\n" +
+                "    label=<<font point-size=\"24\"><br />Group 3</font>>\n" +
                 "    labelloc=b\n" +
                 "    color=\"#aabbcc\"\n" +
                 "    fontcolor=\"#aabbcc\"\n" +

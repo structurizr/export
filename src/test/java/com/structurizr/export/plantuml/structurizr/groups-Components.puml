@@ -32,13 +32,13 @@ skinparam rectangle<<D.F.H>> {
 
 rectangle "==C\n<size:10>[Software System]</size>" <<C>> as C
 
-package "F\n[Container]" <<D.F>> {
-  skinparam PackageBorderColor<<D.F>> #9a9a9a
-  skinparam PackageFontColor<<D.F>> #9a9a9a
+rectangle "F\n<size:10>[Container]</size>" <<D.F>> {
+  skinparam RectangleBorderColor<<D.F>> #9a9a9a
+  skinparam RectangleFontColor<<D.F>> #9a9a9a
 
-  package "Group 4\n[Group]" <<group>> {
-    skinparam PackageBorderColor<<group>> #cccccc
-    skinparam PackageFontColor<<group>> #cccccc
+  rectangle "Group 4" <<group>> {
+    skinparam RectangleBorderColor<<group>> #cccccc
+    skinparam RectangleFontColor<<group>> #cccccc
 
     rectangle "==H\n<size:10>[Component]</size>" <<D.F.H>> as D.F.H
   }

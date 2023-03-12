@@ -119,7 +119,7 @@ public class DOTExporter extends AbstractDiagramExporter {
 
         writer.indent();
         writer.writeLine("margin=" + clusterInternalMargin);
-        writer.writeLine(String.format("label=<<font point-size=\"24\"><br />%s</font><br /><font point-size=\"19\">[Group]</font>>", group));
+        writer.writeLine(String.format("label=<<font point-size=\"24\"><br />%s</font>>", group));
         writer.writeLine("labelloc=b");
         writer.writeLine(String.format("color=\"%s\"", color));
         writer.writeLine(String.format("fontcolor=\"%s\"", color));

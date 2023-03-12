@@ -105,10 +105,10 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     @Override
     protected void startEnterpriseBoundary(ModelView view, String enterpriseName, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
-            writer.writeLine(String.format("package \"%s\" <<enterprise>> {", enterpriseName));
+            writer.writeLine(String.format("rectangle \"%s\" <<enterprise>> {", enterpriseName));
             writer.indent();
-            writer.writeLine("skinparam PackageBorderColor<<enterprise>> #444444");
-            writer.writeLine("skinparam PackageFontColor<<enterprise>> #444444");
+            writer.writeLine("skinparam RectangleBorderColor<<enterprise>> #444444");
+            writer.writeLine("skinparam RectangleFontColor<<enterprise>> #444444");
             writer.writeLine();
         }
     }
@@ -142,10 +142,10 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
                 color = elementStyle.getColor();
             }
 
-            writer.writeLine(String.format("package \"%s\\n[Group]\" <<%s>> {", group, groupId));
+            writer.writeLine(String.format("rectangle \"%s\" <<%s>> {", group, groupId));
             writer.indent();
-            writer.writeLine(String.format("skinparam PackageBorderColor<<%s>> %s", groupId, color));
-            writer.writeLine(String.format("skinparam PackageFontColor<<%s>> %s", groupId, color));
+            writer.writeLine(String.format("skinparam RectangleBorderColor<<%s>> %s", groupId, color));
+            writer.writeLine(String.format("skinparam RectangleFontColor<<%s>> %s", groupId, color));
             writer.writeLine();
         }
     }
@@ -165,10 +165,10 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(softwareSystem);
             String color = elementStyle.getStroke();
 
-            writer.writeLine(String.format("package \"%s\\n%s\" <<%s>> {", softwareSystem.getName(), typeOf(view, softwareSystem, true), idOf(softwareSystem)));
+            writer.writeLine(String.format("rectangle \"%s\\n<size:10>%s</size>\" <<%s>> {", softwareSystem.getName(), typeOf(view, softwareSystem, true), idOf(softwareSystem)));
             writer.indent();
-            writer.writeLine(String.format("skinparam PackageBorderColor<<%s>> %s", idOf(softwareSystem), color));
-            writer.writeLine(String.format("skinparam PackageFontColor<<%s>> %s", idOf(softwareSystem), color));
+            writer.writeLine(String.format("skinparam RectangleBorderColor<<%s>> %s", idOf(softwareSystem), color));
+            writer.writeLine(String.format("skinparam RectangleFontColor<<%s>> %s", idOf(softwareSystem), color));
             writer.writeLine();
         }
     }
@@ -188,10 +188,10 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(container);
             String color = elementStyle.getStroke();
 
-            writer.writeLine(String.format("package \"%s\\n%s\" <<%s>> {", container.getName(), typeOf(view, container, true), idOf(container)));
+            writer.writeLine(String.format("rectangle \"%s\\n<size:10>%s</size>\" <<%s>> {", container.getName(), typeOf(view, container, true), idOf(container)));
             writer.indent();
-            writer.writeLine(String.format("skinparam PackageBorderColor<<%s>> %s", idOf(container), color));
-            writer.writeLine(String.format("skinparam PackageFontColor<<%s>> %s", idOf(container), color));
+            writer.writeLine(String.format("skinparam RectangleBorderColor<<%s>> %s", idOf(container), color));
+            writer.writeLine(String.format("skinparam RectangleFontColor<<%s>> %s", idOf(container), color));
             writer.writeLine();
         }
     }

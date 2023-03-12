@@ -1,6 +1,6 @@
 @startuml
 set separator none
-title System Landscape for Enterprise
+title System Landscape
 
 top to bottom direction
 
@@ -35,13 +35,13 @@ skinparam rectangle<<D>> {
   BorderColor #9a9a9a
 }
 
-package "Enterprise" <<enterprise>> {
-  skinparam PackageBorderColor<<enterprise>> #444444
-  skinparam PackageFontColor<<enterprise>> #444444
+rectangle "Enterprise" <<enterprise>> {
+  skinparam RectangleBorderColor<<enterprise>> #444444
+  skinparam RectangleFontColor<<enterprise>> #444444
 
-  package "Group 2\n[Group]" <<group>> {
-    skinparam PackageBorderColor<<group>> #cccccc
-    skinparam PackageFontColor<<group>> #cccccc
+  rectangle "Group 2" <<group>> {
+    skinparam RectangleBorderColor<<group>> #cccccc
+    skinparam RectangleFontColor<<group>> #cccccc
 
     rectangle "==D\n<size:10>[Software System]</size>" <<D>> as D
   }
@@ -49,9 +49,9 @@ package "Enterprise" <<enterprise>> {
   rectangle "==C\n<size:10>[Software System]</size>" <<C>> as C
 }
 
-package "Group 1\n[Group]" <<group>> {
-  skinparam PackageBorderColor<<group>> #cccccc
-  skinparam PackageFontColor<<group>> #cccccc
+rectangle "Group 1" <<group>> {
+  skinparam RectangleBorderColor<<group>> #cccccc
+  skinparam RectangleFontColor<<group>> #cccccc
 
   rectangle "==B\n<size:10>[Software System]</size>" <<B>> as B
 }

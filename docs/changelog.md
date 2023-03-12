@@ -1,10 +1,15 @@
 # Changelog
 
-# 1.11.0 (10th March 2023)
+## 1.12.0 (12th March 2023)
+
+- Adds support for nested groups.
+- StructurizrPlantUMLExporter: Switch from packages to rectangles when rendering groups.
+
+## 1.11.0 (10th March 2023)
 
 - C4PlantUMLExporter: Adds support for image icons.
 
-# 1.10.1 (27th February 2023)
+## 1.10.1 (27th February 2023)
 
 - Fixes #47 (StructurizrPlantUMLExporter crashes when used in native binaries).
 - Fixes #49 (Internal property 'structurizr.dsl.identifier' on exported diagrams should be hidden).

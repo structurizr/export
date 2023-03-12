@@ -1,6 +1,6 @@
 @startuml
 set separator none
-title System Landscape for Big Bank plc
+title System Landscape
 
 top to bottom direction
 
@@ -50,9 +50,9 @@ skinparam person<<PersonalBankingCustomer>> {
   BorderColor #052e56
 }
 
-package "Big Bank plc" <<enterprise>> {
-  skinparam PackageBorderColor<<enterprise>> #444444
-  skinparam PackageFontColor<<enterprise>> #444444
+rectangle "Big Bank plc" <<enterprise>> {
+  skinparam RectangleBorderColor<<enterprise>> #444444
+  skinparam RectangleFontColor<<enterprise>> #444444
 
   person "==Customer Service Staff\n<size:10>[Person]</size>\n\nCustomer service staff within the bank." <<CustomerServiceStaff>> as CustomerServiceStaff
   person "==Back Office Staff\n<size:10>[Person]</size>\n\nAdministration and support staff within the bank." <<BackOfficeStaff>> as BackOfficeStaff

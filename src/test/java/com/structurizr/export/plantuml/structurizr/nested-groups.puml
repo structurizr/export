@@ -1,0 +1,79 @@
+@startuml
+set separator none
+title System Landscape
+
+top to bottom direction
+
+skinparam {
+  shadowing false
+  arrowFontSize 10
+  defaultTextAlignment center
+  wrapWidth 200
+  maxMessageSize 100
+}
+
+hide stereotype
+
+skinparam rectangle<<Department1>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+}
+skinparam rectangle<<Organisation1>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+}
+skinparam rectangle<<Organisation2>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+}
+skinparam rectangle<<Team1>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+}
+skinparam rectangle<<Team2>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+}
+
+rectangle "Organisation 1" <<group>> {
+  skinparam RectangleBorderColor<<group>> #cccccc
+  skinparam RectangleFontColor<<group>> #cccccc
+
+  rectangle "==Organisation 1\n<size:10>[Software System]</size>" <<Organisation1>> as Organisation1
+    rectangle "Department 1" <<group>> {
+      skinparam RectangleBorderColor<<group>> #cccccc
+      skinparam RectangleFontColor<<group>> #cccccc
+
+      rectangle "==Department 1\n<size:10>[Software System]</size>" <<Department1>> as Department1
+        rectangle "Team 1" <<group>> {
+          skinparam RectangleBorderColor<<group>> #cccccc
+          skinparam RectangleFontColor<<group>> #cccccc
+
+          rectangle "==Team 1\n<size:10>[Software System]</size>" <<Team1>> as Team1
+        }
+
+        rectangle "Team 2" <<group>> {
+          skinparam RectangleBorderColor<<group>> #cccccc
+          skinparam RectangleFontColor<<group>> #cccccc
+
+          rectangle "==Team 2\n<size:10>[Software System]</size>" <<Team2>> as Team2
+        }
+
+    }
+
+}
+
+rectangle "Organisation 2" <<group>> {
+  skinparam RectangleBorderColor<<group>> #cccccc
+  skinparam RectangleFontColor<<group>> #cccccc
+
+  rectangle "==Organisation 2\n<size:10>[Software System]</size>" <<Organisation2>> as Organisation2
+}
+
+
+@enduml

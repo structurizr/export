@@ -3,7 +3,7 @@ digraph {
   graph [fontname="Arial", rankdir=TB, ranksep=1.0, nodesep=1.0]
   node [fontname="Arial", shape=box, margin="0.4,0.3"]
   edge [fontname="Arial"]
-  label=<<br /><font point-size="34">System Landscape for Enterprise</font>>
+  label=<<br /><font point-size="34">System Landscape</font>>
 
   subgraph cluster_enterprise {
     margin=25
@@ -15,7 +15,7 @@ digraph {
 
     subgraph "cluster_group_Group 2" {
       margin=25
-      label=<<font point-size="24"><br />Group 2</font><br /><font point-size="19">[Group]</font>>
+      label=<<font point-size="24"><br />Group 2</font>>
       labelloc=b
       color="#cccccc"
       fontcolor="#cccccc"
@@ -29,7 +29,7 @@ digraph {
 
   subgraph "cluster_group_Group 1" {
     margin=25
-    label=<<font point-size="24"><br />Group 1</font><br /><font point-size="19">[Group]</font>>
+    label=<<font point-size="24"><br />Group 1</font>>
     labelloc=b
     color="#cccccc"
     fontcolor="#cccccc"

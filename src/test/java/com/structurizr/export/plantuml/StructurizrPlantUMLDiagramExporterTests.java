@@ -111,6 +111,37 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
     }
 
     @Test
+    public void test_NestedGroupsExample() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addProperty("structurizr.groupSeparator", "/");
+
+        SoftwareSystem a = workspace.getModel().addSoftwareSystem("Team 1");
+        a.setGroup("Organisation 1/Department 1/Team 1");
+
+        SoftwareSystem b = workspace.getModel().addSoftwareSystem("Team 2");
+        b.setGroup("Organisation 1/Department 1/Team 2");
+
+        SoftwareSystem c = workspace.getModel().addSoftwareSystem("Organisation 1");
+        c.setGroup("Organisation 1");
+
+        SoftwareSystem d = workspace.getModel().addSoftwareSystem("Organisation 2");
+        d.setGroup("Organisation 2");
+
+        SoftwareSystem e = workspace.getModel().addSoftwareSystem("Department 1");
+        e.setGroup("Organisation 1/Department 1");
+
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("SystemLandscape", "Description");
+        view.addAllElements();
+
+        StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
+        Collection<Diagram> diagrams = exporter.export(workspace);
+
+        Diagram diagram = diagrams.stream().filter(md -> md.getKey().equals("SystemLandscape")).findFirst().get();
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/nested-groups.puml"));
+        assertEquals(expected, diagram.getDefinition());
+    }
+
+    @Test
     public void test_renderGroupStyles() {
         Workspace workspace = new Workspace("Name", "Description");
         workspace.getModel().addPerson("User 1").setGroup("Group 1");
@@ -156,23 +187,23 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "package \"Group 1\\n[Group]\" <<group:Group 1>> {\n" +
-                "  skinparam PackageBorderColor<<group:Group 1>> #111111\n" +
-                "  skinparam PackageFontColor<<group:Group 1>> #111111\n" +
+                "rectangle \"Group 1\" <<group:Group 1>> {\n" +
+                "  skinparam RectangleBorderColor<<group:Group 1>> #111111\n" +
+                "  skinparam RectangleFontColor<<group:Group 1>> #111111\n" +
                 "\n" +
                 "  rectangle \"==User 1\\n<size:10>[Person]</size>\" <<User1>> as User1\n" +
                 "}\n" +
                 "\n" +
-                "package \"Group 2\\n[Group]\" <<group:Group 2>> {\n" +
-                "  skinparam PackageBorderColor<<group:Group 2>> #222222\n" +
-                "  skinparam PackageFontColor<<group:Group 2>> #222222\n" +
+                "rectangle \"Group 2\" <<group:Group 2>> {\n" +
+                "  skinparam RectangleBorderColor<<group:Group 2>> #222222\n" +
+                "  skinparam RectangleFontColor<<group:Group 2>> #222222\n" +
                 "\n" +
                 "  rectangle \"==User 2\\n<size:10>[Person]</size>\" <<User2>> as User2\n" +
                 "}\n" +
                 "\n" +
-                "package \"Group 3\\n[Group]\" <<group>> {\n" +
-                "  skinparam PackageBorderColor<<group>> #cccccc\n" +
-                "  skinparam PackageFontColor<<group>> #cccccc\n" +
+                "rectangle \"Group 3\" <<group>> {\n" +
+                "  skinparam RectangleBorderColor<<group>> #cccccc\n" +
+                "  skinparam RectangleFontColor<<group>> #cccccc\n" +
                 "\n" +
                 "  rectangle \"==User 3\\n<size:10>[Person]</size>\" <<User3>> as User3\n" +
                 "}\n" +
@@ -214,23 +245,23 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "package \"Group 1\\n[Group]\" <<group:Group 1>> {\n" +
-                "  skinparam PackageBorderColor<<group:Group 1>> #111111\n" +
-                "  skinparam PackageFontColor<<group:Group 1>> #111111\n" +
+                "rectangle \"Group 1\" <<group:Group 1>> {\n" +
+                "  skinparam RectangleBorderColor<<group:Group 1>> #111111\n" +
+                "  skinparam RectangleFontColor<<group:Group 1>> #111111\n" +
                 "\n" +
                 "  rectangle \"==User 1\\n<size:10>[Person]</size>\" <<User1>> as User1\n" +
                 "}\n" +
                 "\n" +
-                "package \"Group 2\\n[Group]\" <<group:Group 2>> {\n" +
-                "  skinparam PackageBorderColor<<group:Group 2>> #222222\n" +
-                "  skinparam PackageFontColor<<group:Group 2>> #222222\n" +
+                "rectangle \"Group 2\" <<group:Group 2>> {\n" +
+                "  skinparam RectangleBorderColor<<group:Group 2>> #222222\n" +
+                "  skinparam RectangleFontColor<<group:Group 2>> #222222\n" +
                 "\n" +
                 "  rectangle \"==User 2\\n<size:10>[Person]</size>\" <<User2>> as User2\n" +
                 "}\n" +
                 "\n" +
-                "package \"Group 3\\n[Group]\" <<group>> {\n" +
-                "  skinparam PackageBorderColor<<group>> #aabbcc\n" +
-                "  skinparam PackageFontColor<<group>> #aabbcc\n" +
+                "rectangle \"Group 3\" <<group>> {\n" +
+                "  skinparam RectangleBorderColor<<group>> #aabbcc\n" +
+                "  skinparam RectangleFontColor<<group>> #aabbcc\n" +
                 "\n" +
                 "  rectangle \"==User 3\\n<size:10>[Person]</size>\" <<User3>> as User3\n" +
                 "}\n" +
@@ -255,7 +286,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         containerView.setExternalSoftwareSystemBoundariesVisible(true);
         Diagram diagram = new StructurizrPlantUMLExporter().export(containerView);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title Software System 1 - Containers\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -281,16 +313,16 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "package \"Software System 1\\n[Software System]\" <<SoftwareSystem1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "rectangle \"Software System 1\\n<size:10>[Software System]</size>\" <<SoftwareSystem1>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> as SoftwareSystem1.Container1\n" +
                 "}\n" +
                 "\n" +
-                "package \"Software System 2\\n[Software System]\" <<SoftwareSystem2>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem2>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem2>> #9a9a9a\n" +
+                "rectangle \"Software System 2\\n<size:10>[Software System]</size>\" <<SoftwareSystem2>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem2>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem2>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 2\\n<size:10>[Container]</size>\" <<SoftwareSystem2.Container2>> as SoftwareSystem2.Container2\n" +
                 "}\n" +
@@ -300,7 +332,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         containerView.setExternalSoftwareSystemBoundariesVisible(false);
         diagram = new StructurizrPlantUMLExporter().export(containerView);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title Software System 1 - Containers\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -326,9 +359,9 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "package \"Software System 1\\n[Software System]\" <<SoftwareSystem1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "rectangle \"Software System 1\\n<size:10>[Software System]</size>\" <<SoftwareSystem1>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> as SoftwareSystem1.Container1\n" +
                 "}\n" +
@@ -357,7 +390,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         componentView.setExternalSoftwareSystemBoundariesVisible(true);
         Diagram diagram = new StructurizrPlantUMLExporter().export(componentView);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title Software System 1 - Container 1 - Components\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -383,16 +417,16 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "package \"Container 1\\n[Container]\" <<SoftwareSystem1.Container1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "rectangle \"Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 1\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container1.Component1>> as SoftwareSystem1.Container1.Component1\n" +
                 "}\n" +
                 "\n" +
-                "package \"Container 2\\n[Container]\" <<SoftwareSystem2.Container2>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem2.Container2>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem2.Container2>> #9a9a9a\n" +
+                "rectangle \"Container 2\\n<size:10>[Container]</size>\" <<SoftwareSystem2.Container2>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem2.Container2>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem2.Container2>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 2\\n<size:10>[Component]</size>\" <<SoftwareSystem2.Container2.Component2>> as SoftwareSystem2.Container2.Component2\n" +
                 "}\n" +
@@ -402,7 +436,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         componentView.setExternalSoftwareSystemBoundariesVisible(false);
         diagram = new StructurizrPlantUMLExporter().export(componentView);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title Software System 1 - Container 1 - Components\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -428,9 +463,9 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "package \"Container 1\\n[Container]\" <<SoftwareSystem1.Container1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "rectangle \"Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 1\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container1.Component1>> as SoftwareSystem1.Container1.Component1\n" +
                 "}\n" +
@@ -456,7 +491,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         dynamicView.setExternalBoundariesVisible(true);
         Diagram diagram = new StructurizrPlantUMLExporter().export(dynamicView);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title Software System 1 - Dynamic\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -482,16 +518,16 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "package \"Software System 1\\n[Software System]\" <<SoftwareSystem1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "rectangle \"Software System 1\\n<size:10>[Software System]</size>\" <<SoftwareSystem1>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> as SoftwareSystem1.Container1\n" +
                 "}\n" +
                 "\n" +
-                "package \"Software System 2\\n[Software System]\" <<SoftwareSystem2>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem2>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem2>> #9a9a9a\n" +
+                "rectangle \"Software System 2\\n<size:10>[Software System]</size>\" <<SoftwareSystem2>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem2>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem2>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 2\\n<size:10>[Container]</size>\" <<SoftwareSystem2.Container2>> as SoftwareSystem2.Container2\n" +
                 "}\n" +
@@ -501,7 +537,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         dynamicView.setExternalBoundariesVisible(false);
         diagram = new StructurizrPlantUMLExporter().export(dynamicView);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title Software System 1 - Dynamic\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -527,9 +564,9 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "package \"Software System 1\\n[Software System]\" <<SoftwareSystem1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "rectangle \"Software System 1\\n<size:10>[Software System]</size>\" <<SoftwareSystem1>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> as SoftwareSystem1.Container1\n" +
                 "}\n" +
@@ -557,7 +594,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         dynamicView.setExternalBoundariesVisible(true);
         Diagram diagram = new StructurizrPlantUMLExporter().export(dynamicView);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title Container 1 - Dynamic\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -583,16 +621,16 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "package \"Container 1\\n[Container]\" <<SoftwareSystem1.Container1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "rectangle \"Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 1\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container1.Component1>> as SoftwareSystem1.Container1.Component1\n" +
                 "}\n" +
                 "\n" +
-                "package \"Container 2\\n[Container]\" <<SoftwareSystem1.Container2>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1.Container2>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1.Container2>> #9a9a9a\n" +
+                "rectangle \"Container 2\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container2>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem1.Container2>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem1.Container2>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 2\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container2.Component2>> as SoftwareSystem1.Container2.Component2\n" +
                 "}\n" +
@@ -602,7 +640,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         dynamicView.setExternalBoundariesVisible(false);
         diagram = new StructurizrPlantUMLExporter().export(dynamicView);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title Container 1 - Dynamic\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -628,9 +667,9 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "package \"Container 1\\n[Container]\" <<SoftwareSystem1.Container1>> {\n" +
-                "  skinparam PackageBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
-                "  skinparam PackageFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "rectangle \"Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem1.Container1>> #9a9a9a\n" +
                 "\n" +
                 "  rectangle \"==Component 1\\n<size:10>[Component]</size>\" <<SoftwareSystem1.Container1.Component1>> as SoftwareSystem1.Container1.Component1\n" +
                 "}\n" +
@@ -954,9 +993,9 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BorderColor #9a9a9a\n" +
                 "}\n" +
                 "\n" +
-                "package \"Group\\n[Group]\" <<group>> {\n" +
-                "  skinparam PackageBorderColor<<group>> #cccccc\n" +
-                "  skinparam PackageFontColor<<group>> #cccccc\n" +
+                "rectangle \"Group\" <<group>> {\n" +
+                "  skinparam RectangleBorderColor<<group>> #cccccc\n" +
+                "  skinparam RectangleFontColor<<group>> #cccccc\n" +
                 "\n" +
                 "  rectangle \"==Software System\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> as SoftwareSystem\n" +
                 "}\n" +

@@ -1,0 +1,33 @@
+@startuml
+set separator none
+title System Landscape
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Boundary(group_0, "Organisation 1") {
+  System(Organisation1, "Organisation 1", "", $tags="")
+    Boundary(group_1, "Department 1") {
+      System(Department1, "Department 1", "", $tags="")
+        Boundary(group_2, "Team 1") {
+          System(Team1, "Team 1", "", $tags="")
+        }
+
+        Boundary(group_3, "Team 2") {
+          System(Team2, "Team 2", "", $tags="")
+        }
+
+    }
+
+}
+
+Boundary(group_4, "Organisation 2") {
+  System(Organisation2, "Organisation 2", "", $tags="")
+}
+
+
+
+SHOW_LEGEND(true)
+@enduml

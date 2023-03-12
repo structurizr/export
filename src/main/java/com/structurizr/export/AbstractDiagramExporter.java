@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractDiagramExporter extends AbstractExporter implements DiagramExporter {
 
+    private static final String GROUP_SEPARATOR_PROPERTY_NAME = "structurizr.groupSeparator";
+
     private Object frame = null;
 
     /**
@@ -518,6 +520,9 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
     }
 
     protected void writeElements(ModelView view, List<GroupableElement> elements, IndentingWriter writer) {
+        String groupSeparator = view.getModel().getProperties().get(GROUP_SEPARATOR_PROPERTY_NAME);
+        boolean nested = !StringUtils.isNullOrEmpty(groupSeparator);
+
         elements.sort(Comparator.comparing(Element::getId));
 
         Set<String> groupsAsSet = new HashSet<>();
@@ -526,6 +531,13 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
 
             if (!StringUtils.isNullOrEmpty(group)) {
                 groupsAsSet.add(group);
+
+                if (nested) {
+                    while (group.contains(groupSeparator)) {
+                        group = group.substring(0, group.lastIndexOf(groupSeparator));
+                        groupsAsSet.add(group);
+                    }
+                }
             }
         }
 
@@ -533,16 +545,65 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         Collections.sort(groupsAsList);
 
         // first render grouped elements
-        for (String group : groupsAsList) {
-            startGroupBoundary(view, group, writer);
+        if (groupsAsList.size() > 0) {
+            if (nested) {
+                String context = "";
 
-            for (GroupableElement element : elements) {
-                if (group.equals(element.getGroup())) {
-                    writeElement(view, element, writer);
+                for (String group : groupsAsList) {
+                    int groupCount = group.split(groupSeparator).length;
+                    int contextCount = context.split(groupSeparator).length;
+                    String groupName = group.substring(group.lastIndexOf(groupSeparator) + groupSeparator.length());
+
+                    if (groupCount > contextCount) {
+                        // moved from a to a/b
+                        // - increase padding
+                        writer.indent();
+                    } else if (groupCount == contextCount) {
+                        // moved from a/b to a/c
+                        // - close off previous subgraph
+                        if (groupCount > 1) {
+                            endGroupBoundary(view, writer);
+                        }
+                    } else {
+                        // moved from a/b/c to a/b or a
+                        // - close off previous subgraphs
+                        // - close off current subgraph
+                        for (int i = 0; i < (contextCount - groupCount); i++) {
+                            endGroupBoundary(view, writer);
+                            writer.outdent();
+                        }
+                        endGroupBoundary(view, writer);
+                    }
+
+                    startGroupBoundary(view, groupName, writer);
+
+                    for (GroupableElement element : elements) {
+                        if (group.equals(element.getGroup())) {
+                            writeElement(view, element, writer);
+                        }
+                    }
+
+                    context = group;
+                }
+
+                int contextCount = context.split(groupSeparator).length;
+                for (int i = 0; i < contextCount; i++) {
+                    endGroupBoundary(view, writer);
+                    writer.outdent();
+                }
+            } else {
+                for (String group : groupsAsList) {
+                    startGroupBoundary(view, group, writer);
+
+                    for (GroupableElement element : elements) {
+                        if (group.equals(element.getGroup())) {
+                            writeElement(view, element, writer);
+                        }
+                    }
+
+                    endGroupBoundary(view, writer);
                 }
             }
-
-            endGroupBoundary(view, writer);
         }
 
         // then render ungrouped elements

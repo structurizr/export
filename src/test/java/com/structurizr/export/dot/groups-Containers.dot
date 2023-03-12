@@ -17,7 +17,7 @@ digraph {
 
     subgraph "cluster_group_Group 3" {
       margin=25
-      label=<<font point-size="24"><br />Group 3</font><br /><font point-size="19">[Group]</font>>
+      label=<<font point-size="24"><br />Group 3</font>>
       labelloc=b
       color="#cccccc"
       fontcolor="#cccccc"

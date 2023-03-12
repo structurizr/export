@@ -153,7 +153,6 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         containerView.add(container1);
         containerView.add(container2);
 
-        containerView.setExternalSoftwareSystemBoundariesVisible(true);
         Diagram diagram = new C4PlantUMLExporter().export(containerView);
         assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Containers\n" +
@@ -171,29 +170,6 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "System_Boundary(\"SoftwareSystem2_boundary\", \"Software System 2\", $tags=\"\") {\n" +
                 "  Container(SoftwareSystem2.Container2, \"Container 2\", \"\", $tags=\"\")\n" +
                 "}\n" +
-                "\n" +
-                "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $tags=\"\")\n" +
-                "\n" +
-                "SHOW_LEGEND(true)\n" +
-                "@enduml", diagram.getDefinition());
-
-
-        containerView.setExternalSoftwareSystemBoundariesVisible(false);
-        diagram = new C4PlantUMLExporter().export(containerView);
-        assertEquals("@startuml\nset separator none\n" +
-                "title Software System 1 - Containers\n" +
-                "\n" +
-                "top to bottom direction\n" +
-                "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml\n" +
-                "\n" +
-                "System_Boundary(\"SoftwareSystem1_boundary\", \"Software System 1\", $tags=\"\") {\n" +
-                "  Container(SoftwareSystem1.Container1, \"Container 1\", \"\", $tags=\"\")\n" +
-                "}\n" +
-                "\n" +
-                "Container(SoftwareSystem2.Container2, \"Container 2\", \"\", $tags=\"\")\n" +
                 "\n" +
                 "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $tags=\"\")\n" +
                 "\n" +
@@ -218,7 +194,6 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         componentView.add(component1);
         componentView.add(component2);
 
-        componentView.setExternalSoftwareSystemBoundariesVisible(true);
         Diagram diagram = new C4PlantUMLExporter().export(componentView);
         assertEquals("@startuml\nset separator none\n" +
                 "title Software System 1 - Container 1 - Components\n" +
@@ -236,28 +211,6 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "Container_Boundary(\"SoftwareSystem2.Container2_boundary\", \"Container 2\", $tags=\"\") {\n" +
                 "  Component(SoftwareSystem2.Container2.Component2, \"Component 2\", \"\", $tags=\"\")\n" +
                 "}\n" +
-                "\n" +
-                "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $tags=\"\")\n" +
-                "\n" +
-                "SHOW_LEGEND(true)\n" +
-                "@enduml", diagram.getDefinition());
-
-        componentView.setExternalSoftwareSystemBoundariesVisible(false);
-        diagram = new C4PlantUMLExporter().export(componentView);
-        assertEquals("@startuml\nset separator none\n" +
-                "title Software System 1 - Container 1 - Components\n" +
-                "\n" +
-                "top to bottom direction\n" +
-                "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml\n" +
-                "\n" +
-                "Container_Boundary(\"SoftwareSystem1.Container1_boundary\", \"Container 1\", $tags=\"\") {\n" +
-                "  Component(SoftwareSystem1.Container1.Component1, \"Component 1\", \"\", $tags=\"\")\n" +
-                "}\n" +
-                "\n" +
-                "Component(SoftwareSystem2.Container2.Component2, \"Component 2\", \"\", $tags=\"\")\n" +
                 "\n" +
                 "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $tags=\"\")\n" +
                 "\n" +

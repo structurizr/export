@@ -57,6 +57,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     @Override
     protected void writeHeader(ModelView view, IndentingWriter writer) {
         super.writeHeader(view, writer);
+        groupId = 0;
 
         Font font = view.getViewSet().getConfiguration().getBranding().getFont();
         if (font != null) {
@@ -255,6 +256,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     @Override
     protected void startGroupBoundary(ModelView view, String group, IndentingWriter writer) {
+        groupId++;
         String groupName = group;
 
         String groupSeparator = view.getModel().getProperties().get(GROUP_SEPARATOR_PROPERTY_NAME);
@@ -262,7 +264,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             groupName = group.substring(group.lastIndexOf(groupSeparator) + groupSeparator.length());
         }
 
-        writer.writeLine(String.format("Boundary(group_%s, \"%s\") {", groupId++, groupName));
+        writer.writeLine(String.format("Boundary(group_%s, \"%s\") {", groupId, groupName));
         writer.indent();
     }
 

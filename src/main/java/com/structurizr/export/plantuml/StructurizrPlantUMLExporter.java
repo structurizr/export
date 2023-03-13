@@ -137,20 +137,29 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
         if (!renderAsSequenceDiagram(view)) {
             String color = "#cccccc";
+            String icon = "";
 
-            // is there a style for the group?
-            ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle("Group:" + group);
+            ElementStyle elementStyleForGroup = view.getViewSet().getConfiguration().getStyles().findElementStyle("Group:" + group);
+            ElementStyle elementStyleForAllGroups = view.getViewSet().getConfiguration().getStyles().findElementStyle("Group");
 
-            if (elementStyle == null || StringUtils.isNullOrEmpty(elementStyle.getColor())) {
-                // no, so is there a default group style?
-                elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle("Group");
+            if (elementStyleForGroup != null && !StringUtils.isNullOrEmpty(elementStyleForGroup.getColor())) {
+                color = elementStyleForGroup.getColor();
+            } else if (elementStyleForAllGroups != null && !StringUtils.isNullOrEmpty(elementStyleForAllGroups.getColor())) {
+                color = elementStyleForAllGroups.getColor();
             }
 
-            if (elementStyle != null && !StringUtils.isNullOrEmpty(elementStyle.getColor())) {
-                color = elementStyle.getColor();
+            if (elementStyleForGroup != null && elementStyleHasSupportedIcon(elementStyleForGroup)) {
+                icon = elementStyleForGroup.getIcon();
+            } else if (elementStyleForAllGroups != null && elementStyleHasSupportedIcon(elementStyleForAllGroups)) {
+                icon = elementStyleForAllGroups.getColor();
             }
 
-            writer.writeLine(String.format("rectangle \"%s\" <<group%s>> {", groupName, groupId));
+            if (!StringUtils.isNullOrEmpty(icon)) {
+                double scale = calculateIconScale(icon);
+                icon = "\\n\\n<img:" + icon + "{scale=" + scale + "}>";
+            }
+
+            writer.writeLine(String.format("rectangle \"%s%s\" <<group%s>> {", groupName, icon, groupId));
             writer.indent();
             writer.writeLine(String.format("skinparam RectangleBorderColor<<group%s>> %s", groupId, color));
             writer.writeLine(String.format("skinparam RectangleFontColor<<group%s>> %s", groupId, color));
@@ -219,7 +228,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
         String icon = "";
         if (elementStyleHasSupportedIcon(elementStyle)) {
-            double scale = calculateIconScale(elementStyle);
+            double scale = calculateIconScale(elementStyle.getIcon());
             icon = "\\n\\n<img:" + elementStyle.getIcon() + "{scale=" + scale + "}>";
         }
 
@@ -338,7 +347,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             }
 
             if (elementStyleHasSupportedIcon(elementStyle)) {
-                double scale = calculateIconScale(elementStyle);
+                double scale = calculateIconScale(elementStyle.getIcon());
                 icon = "\\n\\n<img:" + elementStyle.getIcon() + "{scale=" + scale + "}>";
             }
 
@@ -523,7 +532,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
             String icon = "";
             if (elementStyleHasSupportedIcon(elementStyle)) {
-                double scale = calculateIconScale(elementStyle);
+                double scale = calculateIconScale(elementStyle.getIcon());
                 icon = "\\n\\n<img:" + elementStyle.getIcon() + "{scale=" + scale + "}>";
             }
 

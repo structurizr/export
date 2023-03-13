@@ -226,12 +226,11 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
         return !StringUtils.isNullOrEmpty(elementStyle.getIcon()) && elementStyle.getIcon().startsWith("http");
     }
 
-    protected double calculateIconScale(ElementStyle elementStyle) {
-        String icon = elementStyle.getIcon();
+    protected double calculateIconScale(String iconUrl) {
         double scale = 0.5;
 
         try {
-            URL url = new URL(icon);
+            URL url = new URL(iconUrl);
             BufferedImage bi = ImageIO.read(url);
 
             int width = bi.getWidth();

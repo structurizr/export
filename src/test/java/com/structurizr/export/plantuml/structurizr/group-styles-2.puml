@@ -30,14 +30,14 @@ skinparam rectangle<<User3>> {
   BorderColor #9a9a9a
 }
 
-rectangle "Group 1" <<group1>> {
+rectangle "Group 1\n\n<img:https://example.com/icon1.png{scale=1.0}>" <<group1>> {
   skinparam RectangleBorderColor<<group1>> #111111
   skinparam RectangleFontColor<<group1>> #111111
 
   rectangle "==User 1\n<size:10>[Person]</size>" <<User1>> as User1
 }
 
-rectangle "Group 2" <<group2>> {
+rectangle "Group 2\n\n<img:https://example.com/icon2.png{scale=1.0}>" <<group2>> {
   skinparam RectangleBorderColor<<group2>> #222222
   skinparam RectangleFontColor<<group2>> #222222
 

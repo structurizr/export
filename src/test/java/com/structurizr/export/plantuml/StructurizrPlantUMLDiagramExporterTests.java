@@ -154,10 +154,16 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "");
         view.addDefaultElements();
 
-        workspace.getViews().getConfiguration().getStyles().addElementStyle("Group:Group 1").color("#111111");
-        workspace.getViews().getConfiguration().getStyles().addElementStyle("Group:Group 2").color("#222222");
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Group:Group 1").color("#111111").icon("https://example.com/icon1.png");
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Group:Group 2").color("#222222").icon("https://example.com/icon2.png");
 
-        StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
+        StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter() {
+            @Override
+            protected double calculateIconScale(String iconUrl) {
+                return 1.0;
+            }
+        };
+
         Diagram diagram = exporter.export(view);
         String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/group-styles-1.puml"));
         assertEquals(expected, diagram.getDefinition());

@@ -573,7 +573,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
                     } else if (groupCount == contextCount) {
                         // moved from a/b to a/c
                         // - close off previous subgraph
-                        if (groupCount > 1) {
+                        if (context.length() > 1) {
                             endGroupBoundary(view, writer);
                         }
                     } else {

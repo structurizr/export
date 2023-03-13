@@ -1,0 +1,55 @@
+@startuml
+set separator none
+title A - Dynamic
+
+top to bottom direction
+
+skinparam {
+  shadowing false
+  arrowFontSize 10
+  defaultTextAlignment center
+  wrapWidth 200
+  maxMessageSize 100
+}
+
+hide stereotype
+
+skinparam rectangle<<A.A>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+}
+skinparam rectangle<<B.B>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+}
+
+rectangle "A\n<size:10>[Software System]</size>" <<A>> {
+  skinparam RectangleBorderColor<<A>> #9a9a9a
+  skinparam RectangleFontColor<<A>> #9a9a9a
+
+  rectangle "Group 1" <<group1>> {
+    skinparam RectangleBorderColor<<group1>> #cccccc
+    skinparam RectangleFontColor<<group1>> #cccccc
+
+    rectangle "==A\n<size:10>[Container]</size>" <<A.A>> as A.A
+  }
+
+}
+
+rectangle "B\n<size:10>[Software System]</size>" <<B>> {
+  skinparam RectangleBorderColor<<B>> #9a9a9a
+  skinparam RectangleFontColor<<B>> #9a9a9a
+
+  rectangle "Group 2" <<group2>> {
+    skinparam RectangleBorderColor<<group2>> #cccccc
+    skinparam RectangleFontColor<<group2>> #cccccc
+
+    rectangle "==B\n<size:10>[Container]</size>" <<B.B>> as B.B
+  }
+
+}
+
+A.A .[#707070,thickness=2].> B.B : "<color:#707070>1. Uses"
+@enduml

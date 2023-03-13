@@ -788,4 +788,64 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "@enduml", diagram.getLegend().getDefinition());
     }
 
+    @Test
+    public void dynamicView_UnscopedWithGroups() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+        SoftwareSystem softwareSystemA = workspace.getModel().addSoftwareSystem("A");
+        softwareSystemA.setGroup("Group 1");
+        SoftwareSystem softwareSystemB = workspace.getModel().addSoftwareSystem("B");
+        softwareSystemB.setGroup("Group 2");
+        softwareSystemA.uses(softwareSystemB, "Uses");
+
+        DynamicView view = workspace.getViews().createDynamicView("key", "Description");
+        view.add(softwareSystemA, softwareSystemB);
+
+        StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
+        Diagram diagram = exporter.export(view);
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/dynamic-view-unscoped-with-groups.puml"));
+        assertEquals(expected, diagram.getDefinition());
+    }
+
+    @Test
+    public void dynamicView_SoftwareSystemScopedWithGroups() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+        SoftwareSystem softwareSystemA = workspace.getModel().addSoftwareSystem("A");
+        Container containerA = softwareSystemA.addContainer("A");
+        containerA.setGroup("Group 1");
+        SoftwareSystem softwareSystemB = workspace.getModel().addSoftwareSystem("B");
+        Container containerB = softwareSystemB.addContainer("B");
+        containerB.setGroup("Group 2");
+        containerA.uses(containerB, "Uses");
+
+        DynamicView view = workspace.getViews().createDynamicView(softwareSystemA, "key", "Description");
+        view.add(containerA, containerB);
+
+        StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
+        Diagram diagram = exporter.export(view);
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/dynamic-view-software-system-scoped-with-groups.puml"));
+        assertEquals(expected, diagram.getDefinition());
+    }
+
+    @Test
+    public void dynamicView_ContainerScopedWithGroups() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+        SoftwareSystem softwareSystemA = workspace.getModel().addSoftwareSystem("A");
+        Container containerA = softwareSystemA.addContainer("A");
+        Component componentA = containerA.addComponent("A");
+        componentA.setGroup("Group 1");
+        SoftwareSystem softwareSystemB = workspace.getModel().addSoftwareSystem("B");
+        Container containerB = softwareSystemB.addContainer("B");
+        Component componentB = containerB.addComponent("B");
+        componentB.setGroup("Group 2");
+        componentA.uses(componentB, "Uses");
+
+        DynamicView view = workspace.getViews().createDynamicView(containerA, "key", "Description");
+        view.add(componentA, componentB);
+
+        StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
+        Diagram diagram = exporter.export(view);
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/structurizr/dynamic-view-container-scoped-with-groups.puml"));
+        assertEquals(expected, diagram.getDefinition());
+    }
+
 }

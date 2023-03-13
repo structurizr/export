@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.21.1 (12th March 2023)
+## 1.13.0 (unreleased)
+
+- Adds support for groups on dynamic views (Show group also in dynamic view #1).
+
+## 1.12.1 (12th March 2023)
 
 - Fixes an issue with styling nested groups.
 - MermaidExporter: Now correctly styles software system/container boundaries.

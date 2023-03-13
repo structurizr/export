@@ -377,23 +377,27 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         Element element = view.getElement();
 
         if (element == null) {
+            // dynamic view with no scope
+            List<GroupableElement> elements = new ArrayList<>();
             for (ElementView elementView : view.getElements()) {
-                writeElement(view, elementView.getElement(), writer);
-                elementsWritten = true;
+                elements.add((StaticStructureElement) elementView.getElement());
             }
+            writeElements(view, elements, writer);
         } else {
             if (element instanceof SoftwareSystem) {
+                // dynamic view with software system scope
                 List<SoftwareSystem> softwareSystems = getBoundarySoftwareSystems(view);
-
                 for (SoftwareSystem softwareSystem : softwareSystems) {
-
                     startSoftwareSystemBoundary(view, softwareSystem, writer);
 
+                    List<GroupableElement> scopedElements = new ArrayList<>();
                     for (ElementView elementView : view.getElements()) {
                         if (elementView.getElement().getParent() == softwareSystem) {
-                            writeElement(view, elementView.getElement(), writer);
+                            scopedElements.add((StaticStructureElement) elementView.getElement());
                         }
                     }
+
+                    writeElements(view, scopedElements, writer);
 
                     endSoftwareSystemBoundary(view, writer);
                 }
@@ -405,11 +409,13 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
                     }
                 }
             } else if (element instanceof Container) {
+                // dynamic view with container scope
                 boolean includeSoftwareSystemBoundaries = "true".equals(view.getProperties().getOrDefault("structurizr.softwareSystemBoundaries", "false"));
 
                 List<Container> containers = getBoundaryContainers(view);
                 Set<SoftwareSystem> softwareSystems = containers.stream().map(Container::getSoftwareSystem).collect(Collectors.toCollection(LinkedHashSet::new));
                 for (SoftwareSystem softwareSystem : softwareSystems) {
+
                     if (includeSoftwareSystemBoundaries) {
                         startSoftwareSystemBoundary(view, softwareSystem, writer);
                         writer.indent();
@@ -419,11 +425,13 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
                         if (container.getSoftwareSystem() == softwareSystem) {
                             startContainerBoundary(view, container, writer);
 
+                            List<GroupableElement> scopedElements = new ArrayList<>();
                             for (ElementView elementView : view.getElements()) {
                                 if (elementView.getElement().getParent() == container) {
-                                    writeElement(view, elementView.getElement(), writer);
+                                    scopedElements.add((StaticStructureElement) elementView.getElement());
                                 }
                             }
+                            writeElements(view, scopedElements, writer);
 
                             endContainerBoundary(view, writer);
                         }

@@ -848,4 +848,76 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         assertEquals(expected, diagram.getDefinition());
     }
 
+    @Test
+    public void test_writeContainerViewWithGroupedElements_WithAndWithoutAGroupSeparator() {
+        Workspace workspace = new Workspace("Name", "");
+        SoftwareSystem softwareSystem = workspace.getModel().addSoftwareSystem("Software System", "");
+        Container container1 = softwareSystem.addContainer("Container 1");
+        container1.setGroup("Group 1");
+        Container container2 = softwareSystem.addContainer("Container 2");
+        container2.setGroup("Group 2");
+
+        ContainerView view = workspace.getViews().createContainerView(softwareSystem, "Containers", "");
+        view.addAllElements();
+
+        String expectedResult = "@startuml\n" +
+                "set separator none\n" +
+                "title Software System - Containers\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "skinparam {\n" +
+                "  shadowing false\n" +
+                "  arrowFontSize 10\n" +
+                "  defaultTextAlignment center\n" +
+                "  wrapWidth 200\n" +
+                "  maxMessageSize 100\n" +
+                "}\n" +
+                "\n" +
+                "hide stereotype\n" +
+                "\n" +
+                "skinparam rectangle<<SoftwareSystem.Container1>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "}\n" +
+                "skinparam rectangle<<SoftwareSystem.Container2>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "}\n" +
+                "\n" +
+                "rectangle \"Software System\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> {\n" +
+                "  skinparam RectangleBorderColor<<SoftwareSystem>> #9a9a9a\n" +
+                "  skinparam RectangleFontColor<<SoftwareSystem>> #9a9a9a\n" +
+                "\n" +
+                "  rectangle \"Group 1\" <<group1>> {\n" +
+                "    skinparam RectangleBorderColor<<group1>> #cccccc\n" +
+                "    skinparam RectangleFontColor<<group1>> #cccccc\n" +
+                "\n" +
+                "    rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem.Container1>> as SoftwareSystem.Container1\n" +
+                "  }\n" +
+                "\n" +
+                "  rectangle \"Group 2\" <<group2>> {\n" +
+                "    skinparam RectangleBorderColor<<group2>> #cccccc\n" +
+                "    skinparam RectangleFontColor<<group2>> #cccccc\n" +
+                "\n" +
+                "    rectangle \"==Container 2\\n<size:10>[Container]</size>\" <<SoftwareSystem.Container2>> as SoftwareSystem.Container2\n" +
+                "  }\n" +
+                "\n" +
+                "}\n" +
+                "\n" +
+                "@enduml";
+
+        StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
+        Diagram diagram = exporter.export(view);
+        assertEquals(expectedResult, diagram.getDefinition());
+
+        // this should be the same
+        workspace.getModel().addProperty("structurizr.groupSeparator", "/");
+        exporter = new StructurizrPlantUMLExporter();
+        diagram = exporter.export(view);
+        assertEquals(expectedResult, diagram.getDefinition());
+    }
+
 }

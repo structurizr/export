@@ -8,14 +8,16 @@ top to bottom direction
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
 Enterprise_Boundary(enterprise, "Enterprise") {
-  Boundary(group_1, "Group 2") {
+  AddBoundaryTag("Group 2", $borderColor="#cccccc", $fontColor="#cccccc")
+  Boundary(group_1, "Group 2", $tags="Group 2") {
     System(D, "D", "", $tags="")
   }
 
   System(C, "C", "", $tags="")
 }
 
-Boundary(group_2, "Group 1") {
+AddBoundaryTag("Group 1", $borderColor="#cccccc", $fontColor="#cccccc")
+Boundary(group_2, "Group 1", $tags="Group 1") {
   System_Ext(B, "B", "", $tags="")
 }
 

@@ -139,6 +139,37 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     }
 
     @Test
+    public void test_renderGroupStyles() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addPerson("User 1").setGroup("Group 1");
+        workspace.getModel().addPerson("User 2").setGroup("Group 2");
+        workspace.getModel().addPerson("User 3").setGroup("Group 3");
+
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "");
+        view.addDefaultElements();
+
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Group:Group 1").color("#111111").icon("https://example.com/icon1.png");
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Group:Group 2").color("#222222").icon("https://example.com/icon2.png");
+
+        C4PlantUMLExporter exporter = new C4PlantUMLExporter() {
+            @Override
+            protected double calculateIconScale(String iconUrl) {
+                return 1.0;
+            }
+        };
+
+        Diagram diagram = exporter.export(view);
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/group-styles-1.puml"));
+        assertEquals(expected, diagram.getDefinition());
+
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Group").color("#aabbcc");
+
+        diagram = exporter.export(view);
+        expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/group-styles-2.puml"));
+        assertEquals(expected, diagram.getDefinition());
+    }
+
+    @Test
     public void test_renderContainerDiagramWithExternalContainers() {
         Workspace workspace = new Workspace("Name", "Description");
 

@@ -264,7 +264,37 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             groupName = group.substring(group.lastIndexOf(groupSeparator) + groupSeparator.length());
         }
 
-        writer.writeLine(String.format("Boundary(group_%s, \"%s\") {", groupId, groupName));
+        String color = "#cccccc";
+//        String icon = "";
+
+        ElementStyle elementStyleForGroup = view.getViewSet().getConfiguration().getStyles().findElementStyle("Group:" + group);
+        ElementStyle elementStyleForAllGroups = view.getViewSet().getConfiguration().getStyles().findElementStyle("Group");
+
+        if (elementStyleForGroup != null && !StringUtils.isNullOrEmpty(elementStyleForGroup.getColor())) {
+            color = elementStyleForGroup.getColor();
+        } else if (elementStyleForAllGroups != null && !StringUtils.isNullOrEmpty(elementStyleForAllGroups.getColor())) {
+            color = elementStyleForAllGroups.getColor();
+        }
+
+// todo: $sprite doesn't seem to be supported for boundary styles
+//        if (elementStyleForGroup != null && elementStyleHasSupportedIcon(elementStyleForGroup)) {
+//            icon = elementStyleForGroup.getIcon();
+//        } else if (elementStyleForAllGroups != null && elementStyleHasSupportedIcon(elementStyleForAllGroups)) {
+//            icon = elementStyleForAllGroups.getColor();
+//        }
+//
+//        if (!StringUtils.isNullOrEmpty(icon)) {
+//            double scale = calculateIconScale(icon);
+//            icon = "\\n\\n<img:" + icon + "{scale=" + scale + "}>";
+//        }
+
+        writer.writeLine(String.format("AddBoundaryTag(\"%s\", $borderColor=\"%s\", $fontColor=\"%s\")",
+                group,
+                color,
+                color)
+        );
+
+        writer.writeLine(String.format("Boundary(group_%s, \"%s\", $tags=\"%s\") {", groupId, groupName, group));
         writer.indent();
     }
 

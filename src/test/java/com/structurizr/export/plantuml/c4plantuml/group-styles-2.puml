@@ -1,0 +1,28 @@
+@startuml
+set separator none
+title System Landscape
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+AddBoundaryTag("Group 1", $borderColor="#111111", $fontColor="#111111")
+Boundary(group_1, "Group 1", $tags="Group 1") {
+  Person(User1, "User 1", "", $tags="")
+}
+
+AddBoundaryTag("Group 2", $borderColor="#222222", $fontColor="#222222")
+Boundary(group_2, "Group 2", $tags="Group 2") {
+  Person(User2, "User 2", "", $tags="")
+}
+
+AddBoundaryTag("Group 3", $borderColor="#aabbcc", $fontColor="#aabbcc")
+Boundary(group_3, "Group 3", $tags="Group 3") {
+  Person(User3, "User 3", "", $tags="")
+}
+
+
+
+SHOW_LEGEND(true)
+@enduml

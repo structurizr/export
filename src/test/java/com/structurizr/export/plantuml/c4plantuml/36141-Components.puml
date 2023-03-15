@@ -26,12 +26,12 @@ Container(InternetBankingSystem.MobileApp, "Mobile App", "Xamarin", "Provides a 
 ContainerDb(InternetBankingSystem.Database, "Database", "Oracle Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.", $tags="Container,Database")
 
 Container_Boundary("InternetBankingSystem.APIApplication_boundary", "API Application", $tags="Container") {
-  Component(InternetBankingSystem.APIApplication.SignInController, "Sign In Controller", "Spring MVC Rest Controller", "Allows users to sign in to the Internet Banking System.", $tags="Component")
-  Component(InternetBankingSystem.APIApplication.AccountsSummaryController, "Accounts Summary Controller", "Spring MVC Rest Controller", "Provides customers with a summary of their bank accounts.", $tags="Component")
-  Component(InternetBankingSystem.APIApplication.ResetPasswordController, "Reset Password Controller", "Spring MVC Rest Controller", "Allows users to reset their passwords with a single use URL.", $tags="Component")
-  Component(InternetBankingSystem.APIApplication.SecurityComponent, "Security Component", "Spring Bean", "Provides functionality related to signing in, changing passwords, etc.", $tags="Component")
-  Component(InternetBankingSystem.APIApplication.MainframeBankingSystemFacade, "Mainframe Banking System Facade", "Spring Bean", "A facade onto the mainframe banking system.", $tags="Component")
-  Component(InternetBankingSystem.APIApplication.EmailComponent, "E-mail Component", "Spring Bean", "Sends e-mails to users.", $tags="Component")
+  Component(InternetBankingSystem.APIApplication.SignInController, "Sign In Controller", "Allows users to sign in to the Internet Banking System.", "Spring MVC Rest Controller", $tags="Component")
+  Component(InternetBankingSystem.APIApplication.AccountsSummaryController, "Accounts Summary Controller", "Provides customers with a summary of their bank accounts.", "Spring MVC Rest Controller", $tags="Component")
+  Component(InternetBankingSystem.APIApplication.ResetPasswordController, "Reset Password Controller", "Allows users to reset their passwords with a single use URL.", "Spring MVC Rest Controller", $tags="Component")
+  Component(InternetBankingSystem.APIApplication.SecurityComponent, "Security Component", "Provides functionality related to signing in, changing passwords, etc.", "Spring Bean", $tags="Component")
+  Component(InternetBankingSystem.APIApplication.MainframeBankingSystemFacade, "Mainframe Banking System Facade", "A facade onto the mainframe banking system.", "Spring Bean", $tags="Component")
+  Component(InternetBankingSystem.APIApplication.EmailComponent, "E-mail Component", "Sends e-mails to users.", "Spring Bean", $tags="Component")
 }
 
 Rel_D(InternetBankingSystem.SinglePageApplication, InternetBankingSystem.APIApplication.SignInController, "Makes API calls to", "JSON/HTTPS", $tags="Relationship")

@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.13.0 (unreleased)
+## 1.13.0 (17th March 2023)
 
 - Adds support for groups on dynamic views (Show group also in dynamic view #1).
 - Fixes an issue when nested groups are configured, but groups are not nested.

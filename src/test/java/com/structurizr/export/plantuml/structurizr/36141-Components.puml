@@ -5,7 +5,6 @@ title Internet Banking System - API Application - Components
 top to bottom direction
 
 skinparam {
-  shadowing false
   arrowFontSize 10
   defaultTextAlignment center
   wrapWidth 200
@@ -18,56 +17,72 @@ skinparam rectangle<<InternetBankingSystem.APIApplication.AccountsSummaryControl
   BackgroundColor #85bbf0
   FontColor #000000
   BorderColor #5d82a8
+  shadowing false
 }
 skinparam database<<InternetBankingSystem.Database>> {
   BackgroundColor #438dd5
   FontColor #ffffff
   BorderColor #2e6295
+  shadowing false
 }
 skinparam rectangle<<InternetBankingSystem.APIApplication.EmailComponent>> {
   BackgroundColor #85bbf0
   FontColor #000000
   BorderColor #5d82a8
+  shadowing false
 }
 skinparam rectangle<<EmailSystem>> {
   BackgroundColor #999999
   FontColor #ffffff
   BorderColor #6b6b6b
+  shadowing false
 }
 skinparam rectangle<<MainframeBankingSystem>> {
   BackgroundColor #999999
   FontColor #ffffff
   BorderColor #6b6b6b
+  shadowing false
 }
 skinparam rectangle<<InternetBankingSystem.APIApplication.MainframeBankingSystemFacade>> {
   BackgroundColor #85bbf0
   FontColor #000000
   BorderColor #5d82a8
+  shadowing false
 }
 skinparam rectangle<<InternetBankingSystem.MobileApp>> {
   BackgroundColor #438dd5
   FontColor #ffffff
   BorderColor #2e6295
+  shadowing false
 }
 skinparam rectangle<<InternetBankingSystem.APIApplication.ResetPasswordController>> {
   BackgroundColor #85bbf0
   FontColor #000000
   BorderColor #5d82a8
+  shadowing false
 }
 skinparam rectangle<<InternetBankingSystem.APIApplication.SecurityComponent>> {
   BackgroundColor #85bbf0
   FontColor #000000
   BorderColor #5d82a8
+  shadowing false
 }
 skinparam rectangle<<InternetBankingSystem.APIApplication.SignInController>> {
   BackgroundColor #85bbf0
   FontColor #000000
   BorderColor #5d82a8
+  shadowing false
 }
 skinparam rectangle<<InternetBankingSystem.SinglePageApplication>> {
   BackgroundColor #438dd5
   FontColor #ffffff
   BorderColor #2e6295
+  shadowing false
+}
+skinparam rectangle<<InternetBankingSystem.APIApplication>> {
+  BorderColor #2e6295
+  FontColor #2e6295
+  shadowing false
 }
 
 rectangle "==Mainframe Banking System\n<size:10>[Software System]</size>\n\nStores all of the core banking information about customers, accounts, transactions, etc." <<MainframeBankingSystem>> as MainframeBankingSystem
@@ -77,9 +92,6 @@ rectangle "==Mobile App\n<size:10>[Container: Xamarin]</size>\n\nProvides a limi
 database "==Database\n<size:10>[Container: Oracle Database Schema]</size>\n\nStores user registration information, hashed authentication credentials, access logs, etc." <<InternetBankingSystem.Database>> as InternetBankingSystem.Database
 
 rectangle "API Application\n<size:10>[Container: Java and Spring MVC]</size>" <<InternetBankingSystem.APIApplication>> {
-  skinparam RectangleBorderColor<<InternetBankingSystem.APIApplication>> #2e6295
-  skinparam RectangleFontColor<<InternetBankingSystem.APIApplication>> #2e6295
-
   rectangle "==Sign In Controller\n<size:10>[Component: Spring MVC Rest Controller]</size>\n\nAllows users to sign in to the Internet Banking System." <<InternetBankingSystem.APIApplication.SignInController>> as InternetBankingSystem.APIApplication.SignInController
   rectangle "==Accounts Summary Controller\n<size:10>[Component: Spring MVC Rest Controller]</size>\n\nProvides customers with a summary of their bank accounts." <<InternetBankingSystem.APIApplication.AccountsSummaryController>> as InternetBankingSystem.APIApplication.AccountsSummaryController
   rectangle "==Reset Password Controller\n<size:10>[Component: Spring MVC Rest Controller]</size>\n\nAllows users to reset their passwords with a single use URL." <<InternetBankingSystem.APIApplication.ResetPasswordController>> as InternetBankingSystem.APIApplication.ResetPasswordController

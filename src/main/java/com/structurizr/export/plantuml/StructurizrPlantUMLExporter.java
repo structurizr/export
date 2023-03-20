@@ -15,11 +15,11 @@ import static java.lang.String.format;
 public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
     public static final String PLANTUML_SEQUENCE_DIAGRAM_PROPERTY = "plantuml.sequenceDiagram";
+    public static final String PLANTUML_SHADOW = "plantuml.shadow";
 
     private int groupId = 0;
 
     public StructurizrPlantUMLExporter() {
-        addSkinParam("shadowing", "false");
         addSkinParam("arrowFontSize", "10");
         addSkinParam("defaultTextAlignment", "center");
         addSkinParam("wrapWidth", "200");
@@ -98,8 +98,44 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             if (shape == Shape.RoundedBox) {
                 writer.writeLine("roundCorner 20");
             }
+
+            boolean shadow = "true".equalsIgnoreCase(elementStyle.getProperties().getOrDefault(PLANTUML_SHADOW, "false"));
+            writer.writeLine(String.format("shadowing %s", shadow));
+
             writer.outdent();
             writer.writeLine("}");
+        }
+
+        if (!renderAsSequenceDiagram(view)) {
+            // boundaries
+            List<Element> boundaryElements = new ArrayList<>();
+            if (view instanceof ContainerView) {
+                boundaryElements.addAll(getBoundarySoftwareSystems(view));
+            } else if (view instanceof ComponentView) {
+                boundaryElements.addAll(getBoundaryContainers(view));
+            } else if (view instanceof DynamicView) {
+                DynamicView dynamicView = (DynamicView) view;
+                if (dynamicView.getElement() instanceof SoftwareSystem) {
+                    boundaryElements.addAll(getBoundarySoftwareSystems(view));
+                } else if (dynamicView.getElement() instanceof Container) {
+                    boundaryElements.addAll(getBoundaryContainers(view));
+                }
+            }
+
+            for (Element boundaryElement : boundaryElements) {
+                ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(boundaryElement);
+                String id = idOf(boundaryElement);
+                String color = elementStyle.getStroke();
+                boolean shadow = "true".equalsIgnoreCase(elementStyle.getProperties().getOrDefault(PLANTUML_SHADOW, "false"));
+
+                writer.writeLine(format("skinparam rectangle<<%s>> {", id));
+                writer.indent();
+                writer.writeLine(String.format("BorderColor %s", color));
+                writer.writeLine(String.format("FontColor %s", color));
+                writer.writeLine(String.format("shadowing %s", shadow));
+                writer.outdent();
+                writer.writeLine("}");
+            }
         }
 
         writer.writeLine();
@@ -179,14 +215,8 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     @Override
     protected void startSoftwareSystemBoundary(ModelView view, SoftwareSystem softwareSystem, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
-            ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(softwareSystem);
-            String color = elementStyle.getStroke();
-
             writer.writeLine(String.format("rectangle \"%s\\n<size:10>%s</size>\" <<%s>> {", softwareSystem.getName(), typeOf(view, softwareSystem, true), idOf(softwareSystem)));
             writer.indent();
-            writer.writeLine(String.format("skinparam RectangleBorderColor<<%s>> %s", idOf(softwareSystem), color));
-            writer.writeLine(String.format("skinparam RectangleFontColor<<%s>> %s", idOf(softwareSystem), color));
-            writer.writeLine();
         }
     }
 
@@ -202,14 +232,8 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
     @Override
     protected void startContainerBoundary(ModelView view, Container container, IndentingWriter writer) {
         if (!renderAsSequenceDiagram(view)) {
-            ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(container);
-            String color = elementStyle.getStroke();
-
             writer.writeLine(String.format("rectangle \"%s\\n<size:10>%s</size>\" <<%s>> {", container.getName(), typeOf(view, container, true), idOf(container)));
             writer.indent();
-            writer.writeLine(String.format("skinparam RectangleBorderColor<<%s>> %s", idOf(container), color));
-            writer.writeLine(String.format("skinparam RectangleFontColor<<%s>> %s", idOf(container), color));
-            writer.writeLine();
         }
     }
 

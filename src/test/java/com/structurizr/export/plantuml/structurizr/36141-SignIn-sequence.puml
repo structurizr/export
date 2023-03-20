@@ -3,7 +3,6 @@ set separator none
 title API Application - Dynamic
 
 skinparam {
-  shadowing false
   arrowFontSize 10
   defaultTextAlignment center
   wrapWidth 200
@@ -16,21 +15,25 @@ skinparam sequenceParticipant<<InternetBankingSystem.Database>> {
   BackgroundColor #438dd5
   FontColor #ffffff
   BorderColor #2e6295
+  shadowing false
 }
 skinparam sequenceParticipant<<InternetBankingSystem.APIApplication.SecurityComponent>> {
   BackgroundColor #85bbf0
   FontColor #000000
   BorderColor #5d82a8
+  shadowing false
 }
 skinparam sequenceParticipant<<InternetBankingSystem.APIApplication.SignInController>> {
   BackgroundColor #85bbf0
   FontColor #000000
   BorderColor #5d82a8
+  shadowing false
 }
 skinparam sequenceParticipant<<InternetBankingSystem.SinglePageApplication>> {
   BackgroundColor #438dd5
   FontColor #ffffff
   BorderColor #2e6295
+  shadowing false
 }
 
 participant "Single-Page Application\n<size:10>[Container: JavaScript and Angular]</size>" as InternetBankingSystem.SinglePageApplication <<InternetBankingSystem.SinglePageApplication>> #438dd5

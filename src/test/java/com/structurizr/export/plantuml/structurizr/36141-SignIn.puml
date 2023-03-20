@@ -5,7 +5,6 @@ title API Application - Dynamic
 top to bottom direction
 
 skinparam {
-  shadowing false
   arrowFontSize 10
   defaultTextAlignment center
   wrapWidth 200
@@ -18,27 +17,33 @@ skinparam database<<InternetBankingSystem.Database>> {
   BackgroundColor #438dd5
   FontColor #ffffff
   BorderColor #2e6295
+  shadowing false
 }
 skinparam rectangle<<InternetBankingSystem.APIApplication.SecurityComponent>> {
   BackgroundColor #85bbf0
   FontColor #000000
   BorderColor #5d82a8
+  shadowing false
 }
 skinparam rectangle<<InternetBankingSystem.APIApplication.SignInController>> {
   BackgroundColor #85bbf0
   FontColor #000000
   BorderColor #5d82a8
+  shadowing false
 }
 skinparam rectangle<<InternetBankingSystem.SinglePageApplication>> {
   BackgroundColor #438dd5
   FontColor #ffffff
   BorderColor #2e6295
+  shadowing false
+}
+skinparam rectangle<<InternetBankingSystem.APIApplication>> {
+  BorderColor #2e6295
+  FontColor #2e6295
+  shadowing false
 }
 
 rectangle "API Application\n<size:10>[Container: Java and Spring MVC]</size>" <<InternetBankingSystem.APIApplication>> {
-  skinparam RectangleBorderColor<<InternetBankingSystem.APIApplication>> #2e6295
-  skinparam RectangleFontColor<<InternetBankingSystem.APIApplication>> #2e6295
-
   rectangle "==Sign In Controller\n<size:10>[Component: Spring MVC Rest Controller]</size>\n\nAllows users to sign in to the Internet Banking System." <<InternetBankingSystem.APIApplication.SignInController>> as InternetBankingSystem.APIApplication.SignInController
   rectangle "==Security Component\n<size:10>[Component: Spring Bean]</size>\n\nProvides functionality related to signing in, changing passwords, etc." <<InternetBankingSystem.APIApplication.SecurityComponent>> as InternetBankingSystem.APIApplication.SecurityComponent
 }

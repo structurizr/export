@@ -5,7 +5,6 @@ title System Landscape
 top to bottom direction
 
 skinparam {
-  shadowing false
   arrowFontSize 10
   defaultTextAlignment center
   wrapWidth 200
@@ -18,21 +17,25 @@ skinparam rectangle<<A>> {
   BackgroundColor #dddddd
   FontColor #000000
   BorderColor #9a9a9a
+  shadowing false
 }
 skinparam rectangle<<B>> {
   BackgroundColor #dddddd
   FontColor #000000
   BorderColor #9a9a9a
+  shadowing false
 }
 skinparam rectangle<<C>> {
   BackgroundColor #dddddd
   FontColor #000000
   BorderColor #9a9a9a
+  shadowing false
 }
 skinparam rectangle<<D>> {
   BackgroundColor #dddddd
   FontColor #000000
   BorderColor #9a9a9a
+  shadowing false
 }
 
 rectangle "Enterprise" <<enterprise>> {

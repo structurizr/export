@@ -5,7 +5,6 @@ title System Landscape
 top to bottom direction
 
 skinparam {
-  shadowing false
   arrowFontSize 10
   defaultTextAlignment center
   wrapWidth 200
@@ -18,36 +17,43 @@ skinparam rectangle<<ATM>> {
   BackgroundColor #999999
   FontColor #ffffff
   BorderColor #6b6b6b
+  shadowing false
 }
 skinparam person<<BackOfficeStaff>> {
   BackgroundColor #999999
   FontColor #ffffff
   BorderColor #6b6b6b
+  shadowing false
 }
 skinparam person<<CustomerServiceStaff>> {
   BackgroundColor #999999
   FontColor #ffffff
   BorderColor #6b6b6b
+  shadowing false
 }
 skinparam rectangle<<EmailSystem>> {
   BackgroundColor #999999
   FontColor #ffffff
   BorderColor #6b6b6b
+  shadowing false
 }
 skinparam rectangle<<InternetBankingSystem>> {
   BackgroundColor #1168bd
   FontColor #ffffff
   BorderColor #0b4884
+  shadowing false
 }
 skinparam rectangle<<MainframeBankingSystem>> {
   BackgroundColor #999999
   FontColor #ffffff
   BorderColor #6b6b6b
+  shadowing false
 }
 skinparam person<<PersonalBankingCustomer>> {
   BackgroundColor #08427b
   FontColor #ffffff
   BorderColor #052e56
+  shadowing false
 }
 
 rectangle "Big Bank plc" <<enterprise>> {

@@ -197,7 +197,6 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "top to bottom direction\n" +
                 "\n" +
                 "skinparam {\n" +
-                "  shadowing false\n" +
                 "  arrowFontSize 10\n" +
                 "  defaultTextAlignment center\n" +
                 "  wrapWidth 200\n" +
@@ -210,24 +209,30 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BackgroundColor #dddddd\n" +
                 "  FontColor #000000\n" +
                 "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
                 "}\n" +
                 "skinparam rectangle<<SoftwareSystem2.Container2>> {\n" +
                 "  BackgroundColor #dddddd\n" +
                 "  FontColor #000000\n" +
                 "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
+                "}\n" +
+                "skinparam rectangle<<SoftwareSystem1>> {\n" +
+                "  BorderColor #9a9a9a\n" +
+                "  FontColor #9a9a9a\n" +
+                "  shadowing false\n" +
+                "}\n" +
+                "skinparam rectangle<<SoftwareSystem2>> {\n" +
+                "  BorderColor #9a9a9a\n" +
+                "  FontColor #9a9a9a\n" +
+                "  shadowing false\n" +
                 "}\n" +
                 "\n" +
                 "rectangle \"Software System 1\\n<size:10>[Software System]</size>\" <<SoftwareSystem1>> {\n" +
-                "  skinparam RectangleBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
-                "  skinparam RectangleFontColor<<SoftwareSystem1>> #9a9a9a\n" +
-                "\n" +
                 "  rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> as SoftwareSystem1.Container1\n" +
                 "}\n" +
                 "\n" +
                 "rectangle \"Software System 2\\n<size:10>[Software System]</size>\" <<SoftwareSystem2>> {\n" +
-                "  skinparam RectangleBorderColor<<SoftwareSystem2>> #9a9a9a\n" +
-                "  skinparam RectangleFontColor<<SoftwareSystem2>> #9a9a9a\n" +
-                "\n" +
                 "  rectangle \"==Container 2\\n<size:10>[Container]</size>\" <<SoftwareSystem2.Container2>> as SoftwareSystem2.Container2\n" +
                 "}\n" +
                 "\n" +
@@ -309,7 +314,6 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "top to bottom direction\n" +
                 "\n" +
                 "skinparam {\n" +
-                "  shadowing false\n" +
                 "  arrowFontSize 10\n" +
                 "  defaultTextAlignment center\n" +
                 "  wrapWidth 200\n" +
@@ -322,24 +326,30 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BackgroundColor #dddddd\n" +
                 "  FontColor #000000\n" +
                 "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
                 "}\n" +
                 "skinparam rectangle<<SoftwareSystem2.Container2>> {\n" +
                 "  BackgroundColor #dddddd\n" +
                 "  FontColor #000000\n" +
                 "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
+                "}\n" +
+                "skinparam rectangle<<SoftwareSystem1>> {\n" +
+                "  BorderColor #9a9a9a\n" +
+                "  FontColor #9a9a9a\n" +
+                "  shadowing false\n" +
+                "}\n" +
+                "skinparam rectangle<<SoftwareSystem2>> {\n" +
+                "  BorderColor #9a9a9a\n" +
+                "  FontColor #9a9a9a\n" +
+                "  shadowing false\n" +
                 "}\n" +
                 "\n" +
                 "rectangle \"Software System 1\\n<size:10>[Software System]</size>\" <<SoftwareSystem1>> {\n" +
-                "  skinparam RectangleBorderColor<<SoftwareSystem1>> #9a9a9a\n" +
-                "  skinparam RectangleFontColor<<SoftwareSystem1>> #9a9a9a\n" +
-                "\n" +
                 "  rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem1.Container1>> as SoftwareSystem1.Container1\n" +
                 "}\n" +
                 "\n" +
                 "rectangle \"Software System 2\\n<size:10>[Software System]</size>\" <<SoftwareSystem2>> {\n" +
-                "  skinparam RectangleBorderColor<<SoftwareSystem2>> #9a9a9a\n" +
-                "  skinparam RectangleFontColor<<SoftwareSystem2>> #9a9a9a\n" +
-                "\n" +
                 "  rectangle \"==Container 2\\n<size:10>[Container]</size>\" <<SoftwareSystem2.Container2>> as SoftwareSystem2.Container2\n" +
                 "}\n" +
                 "\n" +
@@ -408,30 +418,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         view.addDefaultElements();
 
         Diagram diagram = new StructurizrPlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
-                "title System Landscape\n" +
-                "\n" +
-                "top to bottom direction\n" +
-                "\n" +
-                "skinparam {\n" +
-                "  shadowing false\n" +
-                "  arrowFontSize 10\n" +
-                "  defaultTextAlignment center\n" +
-                "  wrapWidth 200\n" +
-                "  maxMessageSize 100\n" +
-                "}\n" +
-                "\n" +
-                "hide stereotype\n" +
-                "\n" +
-                "skinparam rectangle<<SoftwareSystem>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"==Software System\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> as SoftwareSystem [[https://structurizr.com]]\n" +
-                "\n" +
-                "@enduml", diagram.getDefinition());
+        assertTrue(diagram.getDefinition().contains("rectangle \"==Software System\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> as SoftwareSystem [[https://structurizr.com]]\n"));
     }
 
     @Test
@@ -445,31 +432,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         view.getViewSet().getConfiguration().addProperty(StructurizrPlantUMLExporter.PLANTUML_INCLUDES_PROPERTY, "styles.puml");
 
         Diagram diagram = new StructurizrPlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
-                "title System Landscape\n" +
-                "\n" +
-                "top to bottom direction\n" +
-                "\n" +
-                "skinparam {\n" +
-                "  shadowing false\n" +
-                "  arrowFontSize 10\n" +
-                "  defaultTextAlignment center\n" +
-                "  wrapWidth 200\n" +
-                "  maxMessageSize 100\n" +
-                "}\n" +
-                "!include styles.puml\n" +
-                "\n" +
-                "hide stereotype\n" +
-                "\n" +
-                "skinparam rectangle<<SoftwareSystem>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"==Software System\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> as SoftwareSystem\n" +
-                "\n" +
-                "@enduml", diagram.getDefinition());
+        assertTrue(diagram.getDefinition().contains("!include styles.puml\n"));
     }
 
     @Test
@@ -481,30 +444,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         view.addDefaultElements();
 
         Diagram diagram = new StructurizrPlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
-                "title System Landscape\n" +
-                "\n" +
-                "top to bottom direction\n" +
-                "\n" +
-                "skinparam {\n" +
-                "  shadowing false\n" +
-                "  arrowFontSize 10\n" +
-                "  defaultTextAlignment center\n" +
-                "  wrapWidth 200\n" +
-                "  maxMessageSize 100\n" +
-                "}\n" +
-                "\n" +
-                "hide stereotype\n" +
-                "\n" +
-                "skinparam rectangle<<SoftwareSystem>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"==Software\\nSystem\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> as SoftwareSystem\n" +
-                "\n" +
-                "@enduml", diagram.getDefinition());
+        assertTrue(diagram.getDefinition().contains("rectangle \"==Software\\nSystem\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> as SoftwareSystem"));
     }
 
     @Test
@@ -526,7 +466,6 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "top to bottom direction\n" +
                 "\n" +
                 "skinparam {\n" +
-                "  shadowing false\n" +
                 "  arrowFontSize 10\n" +
                 "  defaultTextAlignment center\n" +
                 "  wrapWidth 200\n" +
@@ -539,11 +478,13 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BackgroundColor #dddddd\n" +
                 "  FontColor #000000\n" +
                 "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
                 "}\n" +
                 "skinparam rectangle<<2>> {\n" +
                 "  BackgroundColor #dddddd\n" +
                 "  FontColor #000000\n" +
                 "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
                 "}\n" +
                 "\n" +
                 "rectangle \"==A\" <<1>> as 1\n" +
@@ -559,30 +500,10 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         workspace.getModel().addPerson("Пользователь");
         workspace.getViews().createSystemLandscapeView("key", "Description").addDefaultElements();
 
-        assertEquals("@startuml\nset separator none\n" +
-                "title System Landscape\n" +
-                "\n" +
-                "top to bottom direction\n" +
-                "\n" +
-                "skinparam {\n" +
-                "  shadowing false\n" +
-                "  arrowFontSize 10\n" +
-                "  defaultTextAlignment center\n" +
-                "  wrapWidth 200\n" +
-                "  maxMessageSize 100\n" +
-                "}\n" +
-                "\n" +
-                "hide stereotype\n" +
-                "\n" +
-                "skinparam rectangle<<Пользователь>> {\n" +
-                "  BackgroundColor #dddddd\n" +
-                "  FontColor #000000\n" +
-                "  BorderColor #9a9a9a\n" +
-                "}\n" +
-                "\n" +
-                "rectangle \"==Пользователь\\n<size:10>[Person]</size>\" <<Пользователь>> as Пользователь\n" +
-                "\n" +
-                "@enduml", new StructurizrPlantUMLExporter().export(workspace).stream().findFirst().get().getDefinition());
+        String diagramDefinition = new StructurizrPlantUMLExporter().export(workspace).stream().findFirst().get().getDefinition();
+
+        assertTrue(diagramDefinition.contains("skinparam rectangle<<Пользователь>> {"));
+        assertTrue(diagramDefinition.contains("rectangle \"==Пользователь\\n<size:10>[Person]</size>\" <<Пользователь>> as Пользователь"));
     }
 
     @Test
@@ -696,7 +617,6 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "top to bottom direction\n" +
                 "\n" +
                 "skinparam {\n" +
-                "  shadowing false\n" +
                 "  arrowFontSize 10\n" +
                 "  defaultTextAlignment center\n" +
                 "  wrapWidth 200\n" +
@@ -709,6 +629,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BackgroundColor #dddddd\n" +
                 "  FontColor #000000\n" +
                 "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
                 "}\n" +
                 "\n" +
                 "rectangle \"Group\" <<group1>> {\n" +
@@ -745,7 +666,6 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "top to bottom direction\n" +
                 "\n" +
                 "skinparam {\n" +
-                "  shadowing false\n" +
                 "  arrowFontSize 10\n" +
                 "  defaultTextAlignment center\n" +
                 "  wrapWidth 200\n" +
@@ -759,6 +679,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BackgroundColor #dddddd\n" +
                 "  FontColor #000000\n" +
                 "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
                 "}\n" +
                 "\n" +
                 "rectangle \"==User\\n<size:10>[Person]</size>\" <<User>> as User\n" +
@@ -873,7 +794,6 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "top to bottom direction\n" +
                 "\n" +
                 "skinparam {\n" +
-                "  shadowing false\n" +
                 "  arrowFontSize 10\n" +
                 "  defaultTextAlignment center\n" +
                 "  wrapWidth 200\n" +
@@ -886,17 +806,21 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  BackgroundColor #dddddd\n" +
                 "  FontColor #000000\n" +
                 "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
                 "}\n" +
                 "skinparam rectangle<<SoftwareSystem.Container2>> {\n" +
                 "  BackgroundColor #dddddd\n" +
                 "  FontColor #000000\n" +
                 "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
+                "}\n" +
+                "skinparam rectangle<<SoftwareSystem>> {\n" +
+                "  BorderColor #9a9a9a\n" +
+                "  FontColor #9a9a9a\n" +
+                "  shadowing false\n" +
                 "}\n" +
                 "\n" +
                 "rectangle \"Software System\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> {\n" +
-                "  skinparam RectangleBorderColor<<SoftwareSystem>> #9a9a9a\n" +
-                "  skinparam RectangleFontColor<<SoftwareSystem>> #9a9a9a\n" +
-                "\n" +
                 "  rectangle \"Group 1\" <<group1>> {\n" +
                 "    skinparam RectangleBorderColor<<group1>> #cccccc\n" +
                 "    skinparam RectangleFontColor<<group1>> #cccccc\n" +

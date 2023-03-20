@@ -5,7 +5,6 @@ title A - Dynamic
 top to bottom direction
 
 skinparam {
-  shadowing false
   arrowFontSize 10
   defaultTextAlignment center
   wrapWidth 200
@@ -18,17 +17,26 @@ skinparam rectangle<<A.A>> {
   BackgroundColor #dddddd
   FontColor #000000
   BorderColor #9a9a9a
+  shadowing false
 }
 skinparam rectangle<<B.B>> {
   BackgroundColor #dddddd
   FontColor #000000
   BorderColor #9a9a9a
+  shadowing false
+}
+skinparam rectangle<<A>> {
+  BorderColor #9a9a9a
+  FontColor #9a9a9a
+  shadowing false
+}
+skinparam rectangle<<B>> {
+  BorderColor #9a9a9a
+  FontColor #9a9a9a
+  shadowing false
 }
 
 rectangle "A\n<size:10>[Software System]</size>" <<A>> {
-  skinparam RectangleBorderColor<<A>> #9a9a9a
-  skinparam RectangleFontColor<<A>> #9a9a9a
-
   rectangle "Group 1" <<group1>> {
     skinparam RectangleBorderColor<<group1>> #cccccc
     skinparam RectangleFontColor<<group1>> #cccccc
@@ -39,9 +47,6 @@ rectangle "A\n<size:10>[Software System]</size>" <<A>> {
 }
 
 rectangle "B\n<size:10>[Software System]</size>" <<B>> {
-  skinparam RectangleBorderColor<<B>> #9a9a9a
-  skinparam RectangleFontColor<<B>> #9a9a9a
-
   rectangle "Group 2" <<group2>> {
     skinparam RectangleBorderColor<<group2>> #cccccc
     skinparam RectangleFontColor<<group2>> #cccccc

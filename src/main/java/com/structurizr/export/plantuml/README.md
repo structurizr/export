@@ -24,6 +24,10 @@ The following properties can either be set on individual views, or on the view s
 - `plantuml.sequenceDiagram`: `true` to generate a UML sequence diagram, `false` (default) to generate a collaboration diagram (dynamic views only).
 - `plantuml.animation`: `true` to generate one PlantUML diagram definition per animation frame, `false` (default) to ignore animations.
 
+The following properties can be set on element styles, which can be used to further customise the styling of diagrams too.
+
+- `plantuml.shadow`: whether a shadow should be added to the element (default `false`).
+
 ## C4PlantUMLExporter
 
 This exporter generates C4-PlantUML diagram definitions. The following view types are supported:

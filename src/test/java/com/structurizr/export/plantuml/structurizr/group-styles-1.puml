@@ -5,7 +5,6 @@ title System Landscape
 top to bottom direction
 
 skinparam {
-  shadowing false
   arrowFontSize 10
   defaultTextAlignment center
   wrapWidth 200
@@ -18,16 +17,19 @@ skinparam rectangle<<User1>> {
   BackgroundColor #dddddd
   FontColor #000000
   BorderColor #9a9a9a
+  shadowing false
 }
 skinparam rectangle<<User2>> {
   BackgroundColor #dddddd
   FontColor #000000
   BorderColor #9a9a9a
+  shadowing false
 }
 skinparam rectangle<<User3>> {
   BackgroundColor #dddddd
   FontColor #000000
   BorderColor #9a9a9a
+  shadowing false
 }
 
 rectangle "Group 1\n\n<img:https://example.com/icon1.png{scale=1.0}>" <<group1>> {

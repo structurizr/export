@@ -4,10 +4,10 @@ title Spring PetClinic - Deployment - Live
 
 left to right direction
 
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include <C4/C4_Deployment>
 
 AddElementTag("Container,Application", $bgColor="#ffffff", $borderColor="#b2b2b2", $fontColor="#000000", $sprite="", $shadowing="")
 AddElementTag("Amazon Web Services - RDS", $bgColor="#ffffff", $borderColor="#3b48cc", $fontColor="#3b48cc", $sprite="img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-RDS_light-bg@4x.png{scale=0.1}", $shadowing="")

@@ -559,7 +559,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     protected boolean usePlantUMLStandardLibrary(ModelView view) {
-        return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_STANDARD_LIBRARY_PROPERTY, "false"));
+        return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_STANDARD_LIBRARY_PROPERTY, "true"));
     }
 
 }

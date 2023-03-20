@@ -4,9 +4,9 @@ title Internet Banking System - Containers
 
 top to bottom direction
 
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
 
 AddElementTag("Software System,Existing System", $bgColor="#999999", $borderColor="#6b6b6b", $fontColor="#ffffff", $sprite="", $shadowing="")
 AddElementTag("Container,Mobile App", $bgColor="#438dd5", $borderColor="#2e6295", $fontColor="#ffffff", $sprite="", $shadowing="")

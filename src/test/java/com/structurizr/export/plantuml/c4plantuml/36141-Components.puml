@@ -4,10 +4,10 @@ title Internet Banking System - API Application - Components
 
 top to bottom direction
 
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include <C4/C4_Component>
 
 AddElementTag("Software System,Existing System", $bgColor="#999999", $borderColor="#6b6b6b", $fontColor="#ffffff", $sprite="", $shadowing="")
 AddElementTag("Component", $bgColor="#85bbf0", $borderColor="#5d82a8", $fontColor="#000000", $sprite="", $shadowing="")

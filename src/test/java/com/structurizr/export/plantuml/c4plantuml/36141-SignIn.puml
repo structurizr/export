@@ -4,10 +4,10 @@ title API Application - Dynamic
 
 top to bottom direction
 
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include <C4/C4_Component>
 
 AddElementTag("Component", $bgColor="#85bbf0", $borderColor="#5d82a8", $fontColor="#000000", $sprite="", $shadowing="")
 AddElementTag("Container,Database", $bgColor="#438dd5", $borderColor="#2e6295", $fontColor="#ffffff", $sprite="", $shadowing="")

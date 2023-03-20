@@ -190,9 +190,9 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "top to bottom direction\n" +
                 "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
+                "!include <C4/C4_Container>\n" +
                 "\n" +
                 "System_Boundary(\"SoftwareSystem1_boundary\", \"Software System 1\", $tags=\"\") {\n" +
                 "  Container(SoftwareSystem1.Container1, \"Container 1\", \"\", $tags=\"\")\n" +
@@ -231,9 +231,9 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "top to bottom direction\n" +
                 "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
+                "!include <C4/C4_Component>\n" +
                 "\n" +
                 "Container_Boundary(\"SoftwareSystem1.Container1_boundary\", \"Container 1\", $tags=\"\") {\n" +
                 "  Component(SoftwareSystem1.Container1.Component1, \"Component 1\", \"\", $tags=\"\")\n" +
@@ -265,8 +265,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "top to bottom direction\n" +
                 "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
                 "\n" +
                 "System(SoftwareSystem, \"Software System\", \"\", $tags=\"\")[[https://structurizr.com]]\n" +
                 "\n" +
@@ -291,8 +291,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "top to bottom direction\n" +
                 "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
                 "!include styles.puml\n" +
                 "\n" +
                 "System(SoftwareSystem, \"Software System\", \"\", $tags=\"\")\n" +
@@ -317,8 +317,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "top to bottom direction\n" +
                 "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
                 "\n" +
                 "System(SoftwareSystem, \"Software\\nSystem\", \"\", $tags=\"\")\n" +
                 "\n" +
@@ -342,9 +342,9 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "top to bottom direction\n" +
                 "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
+                "!include <C4/C4_Deployment>\n" +
                 "\n" +
                 "Deployment_Node(Default.Deploymentnode, \"Deployment node\", $tags=\"\") {\n" +
                 "  Deployment_Node(Default.Deploymentnode.Infrastructurenode, \"Infrastructure node\", \"technology\", \"description\", $tags=\"\")\n" +
@@ -419,8 +419,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "top to bottom direction\n" +
                 "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
                 "\n" +
                 "System(Name, \"Name\", \"\", $tags=\"\")\n" +
                 "\n" +
@@ -437,8 +437,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "top to bottom direction\n" +
                 "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
                 "\n" +
                 "System(Name, \"Name\", \"\", $tags=\"\")\n" +
                 "\n" +
@@ -455,8 +455,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "top to bottom direction\n" +
                 "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
                 "\n" +
                 "System(Name, \"Name\", \"\", $tags=\"\")\n" +
                 "\n" +
@@ -473,8 +473,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "\n" +
                 "top to bottom direction\n" +
                 "\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
-                "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
                 "\n" +
                 "System(Name, \"Name\", \"\", $tags=\"\")\n" +
                 "\n" +
@@ -498,6 +498,32 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "skinparam {\n" +
                 "  defaultFontName \"Courier\"\n" +
                 "}\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
+                "\n" +
+                "Person(User, \"User\", \"\", $tags=\"\")\n" +
+                "\n" +
+                "\n" +
+                "SHOW_LEGEND(true)\n" +
+                "@enduml", diagram.getDefinition().toString());
+
+    }
+
+    @Test
+    public void stdlib_false() {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addPerson("User");
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "Description");
+        view.addAllElements();
+        view.addProperty(C4PlantUMLExporter.C4PLANTUML_STANDARD_LIBRARY_PROPERTY, "false");
+
+        Diagram diagram = new C4PlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
+                "title System Landscape\n" +
+                "\n" +
                 "top to bottom direction\n" +
                 "\n" +
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +

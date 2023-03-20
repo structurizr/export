@@ -45,7 +45,7 @@ The following properties can either be set on individual views, or on the view s
 - `c4plantuml.stereotypes`: `true` to include stereotypes, `false` (default) to exclude stereotypes.
 - `c4plantuml.elementProperties`: `true` to include element properties, `false` (default) to exclude element properties.
 - `c4plantuml.relationshipProperties`: `true` to include relationship properties, `false` (default) to exclude relationship properties.
-- `c4plantuml.stdlib`: `true` to use the built-in C4-PlantUML standard library, `false` (default) to use the latest version from GitHub.
+- `c4plantuml.stdlib`: `true` (default) to use the built-in C4-PlantUML standard library, `false` to use the latest version from GitHub.
 
 There are also a number of properties that can be set on element styles, which can be used to customise the styling of diagrams when
 `c4plantuml.tags` is set to `true`. You will see these in the generated diagram definition inside `AddElementTag(...)` statements

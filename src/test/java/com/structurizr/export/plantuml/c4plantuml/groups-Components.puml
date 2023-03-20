@@ -4,9 +4,9 @@ title D - F - Components
 
 top to bottom direction
 
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Component>
 
 System(C, "C", "", $tags="")
 

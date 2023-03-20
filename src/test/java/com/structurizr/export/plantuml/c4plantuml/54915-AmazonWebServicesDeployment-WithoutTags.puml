@@ -4,10 +4,10 @@ title Spring PetClinic - Deployment - Live
 
 left to right direction
 
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include <C4/C4_Deployment>
 
 Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $tags="") {
   Deployment_Node(Live.AmazonWebServices.USEast1, "US-East-1", $tags="") {

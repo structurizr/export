@@ -4,8 +4,8 @@ title System Landscape
 
 top to bottom direction
 
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include <C4/C4>
+!include <C4/C4_Context>
 
 AddBoundaryTag("Group 1", $borderColor="#111111", $fontColor="#111111")
 Boundary(group_1, "Group 1", $tags="Group 1") {

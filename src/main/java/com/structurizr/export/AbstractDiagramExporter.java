@@ -601,7 +601,10 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
                 int contextCount = context.split(groupSeparator).length;
                 for (int i = 0; i < contextCount; i++) {
                     endGroupBoundary(view, writer);
-                    writer.outdent();
+
+                    if (i < contextCount-1) {
+                        writer.outdent();
+                    }
                 }
             } else {
                 for (String group : groupsAsList) {

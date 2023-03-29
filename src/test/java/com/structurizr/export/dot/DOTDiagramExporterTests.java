@@ -350,4 +350,68 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "}", diagram.getDefinition());
     }
 
+    @Test
+    public void test_writeContainerViewWithGroupedElements_WithAndWithoutAGroupSeparator() {
+        Workspace workspace = new Workspace("Name", "");
+        SoftwareSystem softwareSystem = workspace.getModel().addSoftwareSystem("Software System", "");
+        Container container1 = softwareSystem.addContainer("Container 1");
+        container1.setGroup("Group 1");
+        Container container2 = softwareSystem.addContainer("Container 2");
+        container2.setGroup("Group 2");
+
+        ContainerView view = workspace.getViews().createContainerView(softwareSystem, "Containers", "");
+        view.addAllElements();
+
+        String expectedResult = "digraph {\n" +
+                "  compound=true\n" +
+                "  graph [fontname=\"Arial\", rankdir=TB, ranksep=1.0, nodesep=1.0]\n" +
+                "  node [fontname=\"Arial\", shape=box, margin=\"0.4,0.3\"]\n" +
+                "  edge [fontname=\"Arial\"]\n" +
+                "  label=<<br /><font point-size=\"34\">Software System - Containers</font>>\n" +
+                "\n" +
+                "  subgraph cluster_1 {\n" +
+                "    margin=25\n" +
+                "    label=<<font point-size=\"24\"><br />Software System</font><br /><font point-size=\"19\">[Software System]</font>>\n" +
+                "    labelloc=b\n" +
+                "    color=\"#444444\"\n" +
+                "    fontcolor=\"#444444\"\n" +
+                "    fillcolor=\"#444444\"\n" +
+                "\n" +
+                "    subgraph \"cluster_group_Group 1\" {\n" +
+                "      margin=25\n" +
+                "      label=<<font point-size=\"24\"><br />Group 1</font>>\n" +
+                "      labelloc=b\n" +
+                "      color=\"#cccccc\"\n" +
+                "      fontcolor=\"#cccccc\"\n" +
+                "      fillcolor=\"#ffffff\"\n" +
+                "\n" +
+                "      2 [id=2,shape=rect, label=<<font point-size=\"34\">Container 1</font><br /><font point-size=\"19\">[Container]</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
+                "    }\n" +
+                "\n" +
+                "    subgraph \"cluster_group_Group 2\" {\n" +
+                "      margin=25\n" +
+                "      label=<<font point-size=\"24\"><br />Group 2</font>>\n" +
+                "      labelloc=b\n" +
+                "      color=\"#cccccc\"\n" +
+                "      fontcolor=\"#cccccc\"\n" +
+                "      fillcolor=\"#ffffff\"\n" +
+                "\n" +
+                "      3 [id=3,shape=rect, label=<<font point-size=\"34\">Container 2</font><br /><font point-size=\"19\">[Container]</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
+                "    }\n" +
+                "\n" +
+                "  }\n" +
+                "\n" +
+                "}";
+
+        DOTExporter exporter = new DOTExporter();
+        Diagram diagram = exporter.export(view);
+        assertEquals(expectedResult, diagram.getDefinition());
+
+        // this should be the same
+        workspace.getModel().addProperty("structurizr.groupSeparator", "/");
+        exporter = new DOTExporter();
+        diagram = exporter.export(view);
+        assertEquals(expectedResult, diagram.getDefinition());
+    }
+
 }

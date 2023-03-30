@@ -6,6 +6,7 @@
 - StructurizrPlantUMLExporter: Adds a `plantuml.shadow` element style property.
 - StructurizrPlantUMLExporter: Groups now have a dashed border.
 - MermaidDiagramExporter: Groups now have a dashed border.
+- DOTExporter: Groups now have a dashed border.
 - Fixes some minor indentation issues with the diagram exporters.
 - Adds support for grouping deployment nodes, infrastructure nodes, software system instances, and container instances.
 

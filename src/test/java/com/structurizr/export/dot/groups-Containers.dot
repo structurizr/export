@@ -22,6 +22,7 @@ digraph {
       color="#cccccc"
       fontcolor="#cccccc"
       fillcolor="#ffffff"
+      style="dashed"
 
       6 [id=6,shape=rect, label=<<font point-size="34">F</font><br /><font point-size="19">[Container]</font>>, style=filled, color="#9a9a9a", fillcolor="#dddddd", fontcolor="#000000"]
     }

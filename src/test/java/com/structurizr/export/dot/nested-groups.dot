@@ -12,6 +12,7 @@ digraph {
     color="#cccccc"
     fontcolor="#cccccc"
     fillcolor="#ffffff"
+    style="dashed"
 
     3 [id=3,shape=rect, label=<<font point-size="34">Organisation 1</font><br /><font point-size="19">[Software System]</font>>, style=filled, color="#9a9a9a", fillcolor="#dddddd", fontcolor="#000000"]
       subgraph "cluster_group_Department 1" {
@@ -21,6 +22,7 @@ digraph {
         color="#cccccc"
         fontcolor="#cccccc"
         fillcolor="#ffffff"
+        style="dashed"
 
         5 [id=5,shape=rect, label=<<font point-size="34">Department 1</font><br /><font point-size="19">[Software System]</font>>, style=filled, color="#9a9a9a", fillcolor="#dddddd", fontcolor="#000000"]
           subgraph "cluster_group_Team 1" {
@@ -30,6 +32,7 @@ digraph {
             color="#cccccc"
             fontcolor="#cccccc"
             fillcolor="#ffffff"
+            style="dashed"
 
             1 [id=1,shape=rect, label=<<font point-size="34">Team 1</font><br /><font point-size="19">[Software System]</font>>, style=filled, color="#9a9a9a", fillcolor="#dddddd", fontcolor="#000000"]
           }
@@ -41,6 +44,7 @@ digraph {
             color="#cccccc"
             fontcolor="#cccccc"
             fillcolor="#ffffff"
+            style="dashed"
 
             2 [id=2,shape=rect, label=<<font point-size="34">Team 2</font><br /><font point-size="19">[Software System]</font>>, style=filled, color="#9a9a9a", fillcolor="#dddddd", fontcolor="#000000"]
           }
@@ -56,6 +60,7 @@ digraph {
     color="#cccccc"
     fontcolor="#cccccc"
     fillcolor="#ffffff"
+    style="dashed"
 
     4 [id=4,shape=rect, label=<<font point-size="34">Organisation 2</font><br /><font point-size="19">[Software System]</font>>, style=filled, color="#9a9a9a", fillcolor="#dddddd", fontcolor="#000000"]
   }

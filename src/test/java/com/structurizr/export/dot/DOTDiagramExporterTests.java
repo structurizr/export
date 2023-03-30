@@ -247,6 +247,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "    color=\"#111111\"\n" +
                 "    fontcolor=\"#111111\"\n" +
                 "    fillcolor=\"#ffffff\"\n" +
+                "    style=\"dashed\"\n" +
                 "\n" +
                 "    1 [id=1,shape=rect, label=<<font point-size=\"34\">User 1</font><br /><font point-size=\"19\">[Person]</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
                 "  }\n" +
@@ -258,6 +259,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "    color=\"#222222\"\n" +
                 "    fontcolor=\"#222222\"\n" +
                 "    fillcolor=\"#ffffff\"\n" +
+                "    style=\"dashed\"\n" +
                 "\n" +
                 "    2 [id=2,shape=rect, label=<<font point-size=\"34\">User 2</font><br /><font point-size=\"19\">[Person]</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
                 "  }\n" +
@@ -269,6 +271,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "    color=\"#cccccc\"\n" +
                 "    fontcolor=\"#cccccc\"\n" +
                 "    fillcolor=\"#ffffff\"\n" +
+                "    style=\"dashed\"\n" +
                 "\n" +
                 "    3 [id=3,shape=rect, label=<<font point-size=\"34\">User 3</font><br /><font point-size=\"19\">[Person]</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
                 "  }\n" +
@@ -293,6 +296,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "    color=\"#111111\"\n" +
                 "    fontcolor=\"#111111\"\n" +
                 "    fillcolor=\"#ffffff\"\n" +
+                "    style=\"dashed\"\n" +
                 "\n" +
                 "    1 [id=1,shape=rect, label=<<font point-size=\"34\">User 1</font><br /><font point-size=\"19\">[Person]</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
                 "  }\n" +
@@ -304,6 +308,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "    color=\"#222222\"\n" +
                 "    fontcolor=\"#222222\"\n" +
                 "    fillcolor=\"#ffffff\"\n" +
+                "    style=\"dashed\"\n" +
                 "\n" +
                 "    2 [id=2,shape=rect, label=<<font point-size=\"34\">User 2</font><br /><font point-size=\"19\">[Person]</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
                 "  }\n" +
@@ -315,6 +320,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "    color=\"#aabbcc\"\n" +
                 "    fontcolor=\"#aabbcc\"\n" +
                 "    fillcolor=\"#ffffff\"\n" +
+                "    style=\"dashed\"\n" +
                 "\n" +
                 "    3 [id=3,shape=rect, label=<<font point-size=\"34\">User 3</font><br /><font point-size=\"19\">[Person]</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
                 "  }\n" +
@@ -384,6 +390,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "      color=\"#cccccc\"\n" +
                 "      fontcolor=\"#cccccc\"\n" +
                 "      fillcolor=\"#ffffff\"\n" +
+                "      style=\"dashed\"\n" +
                 "\n" +
                 "      2 [id=2,shape=rect, label=<<font point-size=\"34\">Container 1</font><br /><font point-size=\"19\">[Container]</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
                 "    }\n" +
@@ -395,6 +402,7 @@ public class DOTDiagramExporterTests extends AbstractExporterTests {
                 "      color=\"#cccccc\"\n" +
                 "      fontcolor=\"#cccccc\"\n" +
                 "      fillcolor=\"#ffffff\"\n" +
+                "      style=\"dashed\"\n" +
                 "\n" +
                 "      3 [id=3,shape=rect, label=<<font point-size=\"34\">Container 2</font><br /><font point-size=\"19\">[Container]</font>>, style=filled, color=\"#9a9a9a\", fillcolor=\"#dddddd\", fontcolor=\"#000000\"]\n" +
                 "    }\n" +

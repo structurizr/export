@@ -131,6 +131,7 @@ public class DOTExporter extends AbstractDiagramExporter {
         writer.writeLine(String.format("color=\"%s\"", color));
         writer.writeLine(String.format("fontcolor=\"%s\"", color));
         writer.writeLine("fillcolor=\"#ffffff\"");
+        writer.writeLine("style=\"dashed\"");
         writer.writeLine();
     }
 

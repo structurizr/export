@@ -21,6 +21,8 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     public static final String C4PLANTUML_STEREOTYPES_PROPERTY = "c4plantuml.stereotypes";
     public static final String C4PLANTUML_TAGS_PROPERTY = "c4plantuml.tags";
     public static final String C4PLANTUML_STANDARD_LIBRARY_PROPERTY = "c4plantuml.stdlib";
+    public static final String C4PLANTUML_SPRITE = "c4plantuml.sprite";
+    public static final String C4PLANTUML_SHADOW = "c4plantuml.shadow";
 
     /**
      * <p>Set this property to <code>true</code> by calling {@link Configuration#addProperty(String, String)} in your
@@ -45,9 +47,6 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
      * @see Configuration#getProperties()
      */
     public static final String C4PLANTUML_RELATIONSHIP_PROPERTIES_PROPERTY = "c4plantuml.relationshipProperties";
-
-    public static final String C4PLANTUML_SPRITE = "c4plantuml.sprite";
-    public static final String C4PLANTUML_SHADOW = "c4plantuml.shadow";
 
     private int groupId = 0;
 

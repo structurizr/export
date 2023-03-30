@@ -33,6 +33,17 @@ Deployment_Node(Live.Customerscomputer, "Customer's computer", "Microsoft Window
 }
 
 Deployment_Node(Live.BigBankplc, "Big Bank plc", "Big Bank plc data center", $tags="Element") {
+  Deployment_Node(Live.BigBankplc.bigbankprod001, "bigbank-prod001", $tags="Element") {
+    System(Live.BigBankplc.bigbankprod001.MainframeBankingSystem_1, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.", $tags="Software System,Existing System")
+  }
+
+  Deployment_Node(Live.BigBankplc.bigbankweb, "bigbank-web*** (x4)", "Ubuntu 16.04 LTS", $tags="Element") {
+    Deployment_Node(Live.BigBankplc.bigbankweb.ApacheTomcat, "Apache Tomcat", "Apache Tomcat 8.x", $tags="Element") {
+      Container(Live.BigBankplc.bigbankweb.ApacheTomcat.WebApplication_1, "Web Application", "Java and Spring MVC", "Delivers the static content and the Internet banking single page application.", $tags="Container")
+    }
+
+  }
+
   Deployment_Node(Live.BigBankplc.bigbankapi, "bigbank-api*** (x8)", "Ubuntu 16.04 LTS", $tags="Element") {
     Deployment_Node(Live.BigBankplc.bigbankapi.ApacheTomcat, "Apache Tomcat", "Apache Tomcat 8.x", $tags="Element") {
       Container(Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1, "API Application", "Java and Spring MVC", "Provides Internet banking functionality via a JSON/HTTPS API.", $tags="Container")
@@ -50,17 +61,6 @@ Deployment_Node(Live.BigBankplc, "Big Bank plc", "Big Bank plc data center", $ta
   Deployment_Node(Live.BigBankplc.bigbankdb02, "bigbank-db02", "Ubuntu 16.04 LTS", $tags="Failover") {
     Deployment_Node(Live.BigBankplc.bigbankdb02.OracleSecondary, "Oracle - Secondary", "Oracle 12c", $tags="Failover") {
       ContainerDb(Live.BigBankplc.bigbankdb02.OracleSecondary.Database_2, "Database", "Oracle Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.", $tags="Container,Database,Failover")
-    }
-
-  }
-
-  Deployment_Node(Live.BigBankplc.bigbankprod001, "bigbank-prod001", $tags="Element") {
-    System(Live.BigBankplc.bigbankprod001.MainframeBankingSystem_1, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.", $tags="Software System,Existing System")
-  }
-
-  Deployment_Node(Live.BigBankplc.bigbankweb, "bigbank-web*** (x4)", "Ubuntu 16.04 LTS", $tags="Element") {
-    Deployment_Node(Live.BigBankplc.bigbankweb.ApacheTomcat, "Apache Tomcat", "Apache Tomcat 8.x", $tags="Element") {
-      Container(Live.BigBankplc.bigbankweb.ApacheTomcat.WebApplication_1, "Web Application", "Java and Spring MVC", "Delivers the static content and the Internet banking single page application.", $tags="Container")
     }
 
   }

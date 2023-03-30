@@ -92,14 +92,15 @@ skinparam rectangle<<Development.BigBankplc.bigbankdev001>> {
   shadowing false
 }
 
-rectangle "Big Bank plc\n<size:10>[Deployment Node: Big Bank plc data center]</size>" <<Development.BigBankplc>> as Development.BigBankplc {
-  rectangle "bigbank-dev001\n<size:10>[Deployment Node]</size>" <<Development.BigBankplc.bigbankdev001>> as Development.BigBankplc.bigbankdev001 {
-    rectangle "==Mainframe Banking System\n<size:10>[Software System]</size>\n\nStores all of the core banking information about customers, accounts, transactions, etc." <<Development.BigBankplc.bigbankdev001.MainframeBankingSystem_1>> as Development.BigBankplc.bigbankdev001.MainframeBankingSystem_1
+rectangle "Developer Laptop\n<size:10>[Deployment Node: Microsoft Windows 10 or Apple macOS]</size>" <<Development.DeveloperLaptop>> as Development.DeveloperLaptop {
+  rectangle "Docker Container - Web Server\n<size:10>[Deployment Node: Docker]</size>" <<Development.DeveloperLaptop.DockerContainerWebServer>> as Development.DeveloperLaptop.DockerContainerWebServer {
+    rectangle "Apache Tomcat\n<size:10>[Deployment Node: Apache Tomcat 8.x]</size>" <<Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat>> as Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat {
+      rectangle "==Web Application\n<size:10>[Container: Java and Spring MVC]</size>\n\nDelivers the static content and the Internet banking single page application." <<Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.WebApplication_1>> as Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.WebApplication_1
+      rectangle "==API Application\n<size:10>[Container: Java and Spring MVC]</size>\n\nProvides Internet banking functionality via a JSON/HTTPS API." <<Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1>> as Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1
+    }
+
   }
 
-}
-
-rectangle "Developer Laptop\n<size:10>[Deployment Node: Microsoft Windows 10 or Apple macOS]</size>" <<Development.DeveloperLaptop>> as Development.DeveloperLaptop {
   rectangle "Docker Container - Database Server\n<size:10>[Deployment Node: Docker]</size>" <<Development.DeveloperLaptop.DockerContainerDatabaseServer>> as Development.DeveloperLaptop.DockerContainerDatabaseServer {
     rectangle "Database Server\n<size:10>[Deployment Node: Oracle 12c]</size>" <<Development.DeveloperLaptop.DockerContainerDatabaseServer.DatabaseServer>> as Development.DeveloperLaptop.DockerContainerDatabaseServer.DatabaseServer {
       database "==Database\n<size:10>[Container: Oracle Database Schema]</size>\n\nStores user registration information, hashed authentication credentials, access logs, etc." <<Development.DeveloperLaptop.DockerContainerDatabaseServer.DatabaseServer.Database_1>> as Development.DeveloperLaptop.DockerContainerDatabaseServer.DatabaseServer.Database_1
@@ -107,16 +108,15 @@ rectangle "Developer Laptop\n<size:10>[Deployment Node: Microsoft Windows 10 or 
 
   }
 
-  rectangle "Docker Container - Web Server\n<size:10>[Deployment Node: Docker]</size>" <<Development.DeveloperLaptop.DockerContainerWebServer>> as Development.DeveloperLaptop.DockerContainerWebServer {
-    rectangle "Apache Tomcat\n<size:10>[Deployment Node: Apache Tomcat 8.x]</size>" <<Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat>> as Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat {
-      rectangle "==API Application\n<size:10>[Container: Java and Spring MVC]</size>\n\nProvides Internet banking functionality via a JSON/HTTPS API." <<Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1>> as Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.APIApplication_1
-      rectangle "==Web Application\n<size:10>[Container: Java and Spring MVC]</size>\n\nDelivers the static content and the Internet banking single page application." <<Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.WebApplication_1>> as Development.DeveloperLaptop.DockerContainerWebServer.ApacheTomcat.WebApplication_1
-    }
-
-  }
-
   rectangle "Web Browser\n<size:10>[Deployment Node: Chrome, Firefox, Safari, or Edge]</size>" <<Development.DeveloperLaptop.WebBrowser>> as Development.DeveloperLaptop.WebBrowser {
     rectangle "==Single-Page Application\n<size:10>[Container: JavaScript and Angular]</size>\n\nProvides all of the Internet banking functionality to customers via their web browser." <<Development.DeveloperLaptop.WebBrowser.SinglePageApplication_1>> as Development.DeveloperLaptop.WebBrowser.SinglePageApplication_1
+  }
+
+}
+
+rectangle "Big Bank plc\n<size:10>[Deployment Node: Big Bank plc data center]</size>" <<Development.BigBankplc>> as Development.BigBankplc {
+  rectangle "bigbank-dev001\n<size:10>[Deployment Node]</size>" <<Development.BigBankplc.bigbankdev001>> as Development.BigBankplc.bigbankdev001 {
+    rectangle "==Mainframe Banking System\n<size:10>[Software System]</size>\n\nStores all of the core banking information about customers, accounts, transactions, etc." <<Development.BigBankplc.bigbankdev001.MainframeBankingSystem_1>> as Development.BigBankplc.bigbankdev001.MainframeBankingSystem_1
   }
 
 }

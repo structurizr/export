@@ -92,6 +92,8 @@ rectangle "Amazon Web Services\n<size:10>[Deployment Node]</size>\n\n<img:https:
 
     }
 
+    rectangle "==Route 53\n<size:10>[Infrastructure Node]</size>\n\nHighly available and scalable cloud DNS service.\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-Route-53_light-bg@4x.png{scale=0.1}>" <<Live.AmazonWebServices.USEast1.Route53>> as Live.AmazonWebServices.USEast1.Route53
+    rectangle "==Elastic Load Balancer\n<size:10>[Infrastructure Node]</size>\n\nAutomatically distributes incoming application traffic.\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Elastic-Load-Balancing_light-bg@4x.png{scale=0.1}>" <<Live.AmazonWebServices.USEast1.ElasticLoadBalancer>> as Live.AmazonWebServices.USEast1.ElasticLoadBalancer
     rectangle "Autoscaling group\n<size:10>[Deployment Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/AWS-Auto-Scaling_light-bg@4x.png{scale=0.1}>" <<Live.AmazonWebServices.USEast1.Autoscalinggroup>> as Live.AmazonWebServices.USEast1.Autoscalinggroup {
       rectangle "Amazon EC2\n<size:10>[Deployment Node]</size>\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-EC2_light-bg@4x.png{scale=0.1}>" <<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2>> as Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2 {
         rectangle "==Web Application\n<size:10>[Container: Java and Spring Boot]</size>\n\nAllows employees to view and manage information regarding the veterinarians, the clients, and their pets." <<Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1>> as Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1
@@ -99,8 +101,6 @@ rectangle "Amazon Web Services\n<size:10>[Deployment Node]</size>\n\n<img:https:
 
     }
 
-    rectangle "==Elastic Load Balancer\n<size:10>[Infrastructure Node]</size>\n\nAutomatically distributes incoming application traffic.\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Elastic-Load-Balancing_light-bg@4x.png{scale=0.1}>" <<Live.AmazonWebServices.USEast1.ElasticLoadBalancer>> as Live.AmazonWebServices.USEast1.ElasticLoadBalancer
-    rectangle "==Route 53\n<size:10>[Infrastructure Node]</size>\n\nHighly available and scalable cloud DNS service.\n\n<img:https://static.structurizr.com/themes/amazon-web-services-2020.04.30/Amazon-Route-53_light-bg@4x.png{scale=0.1}>" <<Live.AmazonWebServices.USEast1.Route53>> as Live.AmazonWebServices.USEast1.Route53
   }
 
 }

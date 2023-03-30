@@ -850,4 +850,95 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         assertEquals(expectedResult, diagram.getDefinition());
     }
 
+    @Test
+    public void deploymentView_WithGroups() {
+        Workspace workspace = new Workspace("Name", "");
+        SoftwareSystem softwareSystem = workspace.getModel().addSoftwareSystem("Software System");
+
+        DeploymentNode server1 = workspace.getModel().addDeploymentNode("Server 1");
+        server1.setGroup("Group 1");
+
+        InfrastructureNode infrastructureNode1 = server1.addInfrastructureNode("Infrastructure Node 1");
+        InfrastructureNode infrastructureNode2 = server1.addInfrastructureNode("Infrastructure Node 2");
+
+        SoftwareSystemInstance softwareSystemInstance = server1.add(softwareSystem);
+        softwareSystemInstance.setGroup("Group 2");
+        infrastructureNode2.setGroup("Group 2");
+
+        DeploymentView view = workspace.getViews().createDeploymentView("key", "Description");
+        view.add(infrastructureNode1);
+        view.add(infrastructureNode2);
+        view.add(softwareSystemInstance);
+
+        String expectedResult = "@startuml\n" +
+                "set separator none\n" +
+                "title Deployment - Default\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "skinparam {\n" +
+                "  arrowFontSize 10\n" +
+                "  defaultTextAlignment center\n" +
+                "  wrapWidth 200\n" +
+                "  maxMessageSize 100\n" +
+                "}\n" +
+                "\n" +
+                "hide stereotype\n" +
+                "\n" +
+                "skinparam rectangle<<Default.Server1.InfrastructureNode1>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
+                "}\n" +
+                "skinparam rectangle<<Default.Server1.InfrastructureNode2>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
+                "}\n" +
+                "skinparam rectangle<<Default.Server1>> {\n" +
+                "  BackgroundColor #ffffff\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #888888\n" +
+                "  shadowing false\n" +
+                "}\n" +
+                "skinparam rectangle<<Default.Server1.SoftwareSystem_1>> {\n" +
+                "  BackgroundColor #dddddd\n" +
+                "  FontColor #000000\n" +
+                "  BorderColor #9a9a9a\n" +
+                "  shadowing false\n" +
+                "}\n" +
+                "\n" +
+                "rectangle \"Group 1\" <<group1>> {\n" +
+                "  skinparam RectangleBorderColor<<group1>> #cccccc\n" +
+                "  skinparam RectangleFontColor<<group1>> #cccccc\n" +
+                "\n" +
+                "  rectangle \"Server 1\\n<size:10>[Deployment Node]</size>\" <<Default.Server1>> as Default.Server1 {\n" +
+                "    rectangle \"Group 2\" <<group2>> {\n" +
+                "      skinparam RectangleBorderColor<<group2>> #cccccc\n" +
+                "      skinparam RectangleFontColor<<group2>> #cccccc\n" +
+                "\n" +
+                "      rectangle \"==Infrastructure Node 2\\n<size:10>[Infrastructure Node]</size>\" <<Default.Server1.InfrastructureNode2>> as Default.Server1.InfrastructureNode2\n" +
+                "      rectangle \"==Software System\\n<size:10>[Software System]</size>\" <<Default.Server1.SoftwareSystem_1>> as Default.Server1.SoftwareSystem_1\n" +
+                "    }\n" +
+                "\n" +
+                "    rectangle \"==Infrastructure Node 1\\n<size:10>[Infrastructure Node]</size>\" <<Default.Server1.InfrastructureNode1>> as Default.Server1.InfrastructureNode1\n" +
+                "  }\n" +
+                "\n" +
+                "}\n" +
+                "\n" +
+                "@enduml";
+
+        StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
+        Diagram diagram = exporter.export(view);
+        assertEquals(expectedResult, diagram.getDefinition());
+
+        // this should be the same
+        workspace.getModel().addProperty("structurizr.groupSeparator", "/");
+        exporter = new StructurizrPlantUMLExporter();
+        diagram = exporter.export(view);
+        assertEquals(expectedResult, diagram.getDefinition());
+    }
+
 }

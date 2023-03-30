@@ -42,6 +42,8 @@ digraph {
 
       }
 
+      7 [id=7,shape=rect, label=<<font point-size="34">Route 53</font><br /><font point-size="19">[Infrastructure Node]</font><br /><br /><font point-size="24">Highly available and scalable<br />cloud DNS service.</font>>, style=filled, color="#693cc5", fillcolor="#ffffff", fontcolor="#693cc5"]
+      8 [id=8,shape=rect, label=<<font point-size="34">Elastic Load Balancer</font><br /><font point-size="19">[Infrastructure Node]</font><br /><br /><font point-size="24">Automatically distributes<br />incoming application traffic.</font>>, style=filled, color="#693cc5", fillcolor="#ffffff", fontcolor="#693cc5"]
       subgraph cluster_9 {
         margin=25
         label=<<font point-size="24">Autoscaling group</font><br /><font point-size="19">[Deployment Node]</font>>
@@ -63,8 +65,6 @@ digraph {
 
       }
 
-      8 [id=8,shape=rect, label=<<font point-size="34">Elastic Load Balancer</font><br /><font point-size="19">[Infrastructure Node]</font><br /><br /><font point-size="24">Automatically distributes<br />incoming application traffic.</font>>, style=filled, color="#693cc5", fillcolor="#ffffff", fontcolor="#693cc5"]
-      7 [id=7,shape=rect, label=<<font point-size="34">Route 53</font><br /><font point-size="19">[Infrastructure Node]</font><br /><br /><font point-size="24">Highly available and scalable<br />cloud DNS service.</font>>, style=filled, color="#693cc5", fillcolor="#ffffff", fontcolor="#693cc5"]
     }
 
   }

@@ -5,27 +5,6 @@ digraph {
   edge [fontname="Arial"]
   label=<<br /><font point-size="34">Internet Banking System - Deployment - Development</font><br /><font point-size="24">An example development deployment scenario for the Internet Banking System.</font>>
 
-  subgraph cluster_55 {
-    margin=25
-    label=<<font point-size="24">Big Bank plc</font><br /><font point-size="19">[Deployment Node: Big Bank plc data center]</font>>
-    labelloc=b
-    color="#888888"
-    fontcolor="#000000"
-    fillcolor="#ffffff"
-
-    subgraph cluster_56 {
-      margin=25
-      label=<<font point-size="24">bigbank-dev001</font><br /><font point-size="19">[Deployment Node]</font>>
-      labelloc=b
-      color="#888888"
-      fontcolor="#000000"
-      fillcolor="#ffffff"
-
-      57 [id=57,shape=rect, label=<<font point-size="34">Mainframe Banking<br />System</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Stores all of the core banking<br />information about customers,<br />accounts, transactions, etc.</font>>, style=filled, color="#6b6b6b", fillcolor="#999999", fontcolor="#ffffff"]
-    }
-
-  }
-
   subgraph cluster_50 {
     margin=25
     label=<<font point-size="24">Developer Laptop</font><br /><font point-size="19">[Deployment Node: Microsoft Windows 10 or Apple macOS]</font>>
@@ -33,6 +12,28 @@ digraph {
     color="#888888"
     fontcolor="#000000"
     fillcolor="#ffffff"
+
+    subgraph cluster_51 {
+      margin=25
+      label=<<font point-size="24">Docker Container - Web Server</font><br /><font point-size="19">[Deployment Node: Docker]</font>>
+      labelloc=b
+      color="#888888"
+      fontcolor="#000000"
+      fillcolor="#ffffff"
+
+      subgraph cluster_52 {
+        margin=25
+        label=<<font point-size="24">Apache Tomcat</font><br /><font point-size="19">[Deployment Node: Apache Tomcat 8.x]</font>>
+        labelloc=b
+        color="#888888"
+        fontcolor="#000000"
+        fillcolor="#ffffff"
+
+        53 [id=53,shape=rect, label=<<font point-size="34">Web Application</font><br /><font point-size="19">[Container: Java and Spring MVC]</font><br /><br /><font point-size="24">Delivers the static content<br />and the Internet banking<br />single page application.</font>>, style=filled, color="#2e6295", fillcolor="#438dd5", fontcolor="#ffffff"]
+        54 [id=54,shape=rect, label=<<font point-size="34">API Application</font><br /><font point-size="19">[Container: Java and Spring MVC]</font><br /><br /><font point-size="24">Provides Internet banking<br />functionality via a JSON/HTTPS<br />API.</font>>, style=filled, color="#2e6295", fillcolor="#438dd5", fontcolor="#ffffff"]
+      }
+
+    }
 
     subgraph cluster_59 {
       margin=25
@@ -55,28 +56,6 @@ digraph {
 
     }
 
-    subgraph cluster_51 {
-      margin=25
-      label=<<font point-size="24">Docker Container - Web Server</font><br /><font point-size="19">[Deployment Node: Docker]</font>>
-      labelloc=b
-      color="#888888"
-      fontcolor="#000000"
-      fillcolor="#ffffff"
-
-      subgraph cluster_52 {
-        margin=25
-        label=<<font point-size="24">Apache Tomcat</font><br /><font point-size="19">[Deployment Node: Apache Tomcat 8.x]</font>>
-        labelloc=b
-        color="#888888"
-        fontcolor="#000000"
-        fillcolor="#ffffff"
-
-        54 [id=54,shape=rect, label=<<font point-size="34">API Application</font><br /><font point-size="19">[Container: Java and Spring MVC]</font><br /><br /><font point-size="24">Provides Internet banking<br />functionality via a JSON/HTTPS<br />API.</font>>, style=filled, color="#2e6295", fillcolor="#438dd5", fontcolor="#ffffff"]
-        53 [id=53,shape=rect, label=<<font point-size="34">Web Application</font><br /><font point-size="19">[Container: Java and Spring MVC]</font><br /><br /><font point-size="24">Delivers the static content<br />and the Internet banking<br />single page application.</font>>, style=filled, color="#2e6295", fillcolor="#438dd5", fontcolor="#ffffff"]
-      }
-
-    }
-
     subgraph cluster_63 {
       margin=25
       label=<<font point-size="24">Web Browser</font><br /><font point-size="19">[Deployment Node: Chrome, Firefox, Safari, or Edge]</font>>
@@ -86,6 +65,27 @@ digraph {
       fillcolor="#ffffff"
 
       64 [id=64,shape=rect, label=<<font point-size="34">Single-Page<br />Application</font><br /><font point-size="19">[Container: JavaScript and Angular]</font><br /><br /><font point-size="24">Provides all of the Internet<br />banking functionality to<br />customers via their web<br />browser.</font>>, style=filled, color="#2e6295", fillcolor="#438dd5", fontcolor="#ffffff"]
+    }
+
+  }
+
+  subgraph cluster_55 {
+    margin=25
+    label=<<font point-size="24">Big Bank plc</font><br /><font point-size="19">[Deployment Node: Big Bank plc data center]</font>>
+    labelloc=b
+    color="#888888"
+    fontcolor="#000000"
+    fillcolor="#ffffff"
+
+    subgraph cluster_56 {
+      margin=25
+      label=<<font point-size="24">bigbank-dev001</font><br /><font point-size="19">[Deployment Node]</font>>
+      labelloc=b
+      color="#888888"
+      fontcolor="#000000"
+      fillcolor="#ffffff"
+
+      57 [id=57,shape=rect, label=<<font point-size="34">Mainframe Banking<br />System</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Stores all of the core banking<br />information about customers,<br />accounts, transactions, etc.</font>>, style=filled, color="#6b6b6b", fillcolor="#999999", fontcolor="#ffffff"]
     }
 
   }

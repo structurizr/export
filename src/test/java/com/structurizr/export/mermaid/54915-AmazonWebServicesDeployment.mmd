@@ -22,6 +22,10 @@ graph LR
 
         end
 
+        7("<div style='font-weight: bold'>Route 53</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node]</div><div style='font-size: 80%; margin-top:10px'>Highly available and scalable<br />cloud DNS service.</div>")
+        style 7 fill:#ffffff,stroke:#693cc5,color:#693cc5
+        8("<div style='font-weight: bold'>Elastic Load Balancer</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node]</div><div style='font-size: 80%; margin-top:10px'>Automatically distributes<br />incoming application traffic.</div>")
+        style 8 fill:#ffffff,stroke:#693cc5,color:#693cc5
         subgraph 9 [Autoscaling group]
           style 9 fill:#ffffff,stroke:#cc2264,color:#cc2264
 
@@ -34,10 +38,6 @@ graph LR
 
         end
 
-        8("<div style='font-weight: bold'>Elastic Load Balancer</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node]</div><div style='font-size: 80%; margin-top:10px'>Automatically distributes<br />incoming application traffic.</div>")
-        style 8 fill:#ffffff,stroke:#693cc5,color:#693cc5
-        7("<div style='font-weight: bold'>Route 53</div><div style='font-size: 70%; margin-top: 0px'>[Infrastructure Node]</div><div style='font-size: 80%; margin-top:10px'>Highly available and scalable<br />cloud DNS service.</div>")
-        style 7 fill:#ffffff,stroke:#693cc5,color:#693cc5
       end
 
     end

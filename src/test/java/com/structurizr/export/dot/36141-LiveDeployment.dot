@@ -45,6 +45,38 @@ digraph {
     fontcolor="#000000"
     fillcolor="#ffffff"
 
+    subgraph cluster_73 {
+      margin=25
+      label=<<font point-size="24">bigbank-prod001</font><br /><font point-size="19">[Deployment Node]</font>>
+      labelloc=b
+      color="#888888"
+      fontcolor="#000000"
+      fillcolor="#ffffff"
+
+      74 [id=74,shape=rect, label=<<font point-size="34">Mainframe Banking<br />System</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Stores all of the core banking<br />information about customers,<br />accounts, transactions, etc.</font>>, style=filled, color="#6b6b6b", fillcolor="#999999", fontcolor="#ffffff"]
+    }
+
+    subgraph cluster_75 {
+      margin=25
+      label=<<font point-size="24">bigbank-web***</font><br /><font point-size="19">[Deployment Node: Ubuntu 16.04 LTS]</font>>
+      labelloc=b
+      color="#888888"
+      fontcolor="#000000"
+      fillcolor="#ffffff"
+
+      subgraph cluster_76 {
+        margin=25
+        label=<<font point-size="24">Apache Tomcat</font><br /><font point-size="19">[Deployment Node: Apache Tomcat 8.x]</font>>
+        labelloc=b
+        color="#888888"
+        fontcolor="#000000"
+        fillcolor="#ffffff"
+
+        77 [id=77,shape=rect, label=<<font point-size="34">Web Application</font><br /><font point-size="19">[Container: Java and Spring MVC]</font><br /><br /><font point-size="24">Delivers the static content<br />and the Internet banking<br />single page application.</font>>, style=filled, color="#2e6295", fillcolor="#438dd5", fontcolor="#ffffff"]
+      }
+
+    }
+
     subgraph cluster_79 {
       margin=25
       label=<<font point-size="24">bigbank-api***</font><br /><font point-size="19">[Deployment Node: Ubuntu 16.04 LTS]</font>>
@@ -104,38 +136,6 @@ digraph {
         fillcolor="#ffffff"
 
         91 [id=91,shape=cylinder, label=<<font point-size="34">Database</font><br /><font point-size="19">[Container: Oracle Database Schema]</font><br /><br /><font point-size="24">Stores user registration<br />information, hashed<br />authentication credentials,<br />access logs, etc.</font>>, style=filled, color="#2e6295", fillcolor="#438dd5", fontcolor="#ffffff"]
-      }
-
-    }
-
-    subgraph cluster_73 {
-      margin=25
-      label=<<font point-size="24">bigbank-prod001</font><br /><font point-size="19">[Deployment Node]</font>>
-      labelloc=b
-      color="#888888"
-      fontcolor="#000000"
-      fillcolor="#ffffff"
-
-      74 [id=74,shape=rect, label=<<font point-size="34">Mainframe Banking<br />System</font><br /><font point-size="19">[Software System]</font><br /><br /><font point-size="24">Stores all of the core banking<br />information about customers,<br />accounts, transactions, etc.</font>>, style=filled, color="#6b6b6b", fillcolor="#999999", fontcolor="#ffffff"]
-    }
-
-    subgraph cluster_75 {
-      margin=25
-      label=<<font point-size="24">bigbank-web***</font><br /><font point-size="19">[Deployment Node: Ubuntu 16.04 LTS]</font>>
-      labelloc=b
-      color="#888888"
-      fontcolor="#000000"
-      fillcolor="#ffffff"
-
-      subgraph cluster_76 {
-        margin=25
-        label=<<font point-size="24">Apache Tomcat</font><br /><font point-size="19">[Deployment Node: Apache Tomcat 8.x]</font>>
-        labelloc=b
-        color="#888888"
-        fontcolor="#000000"
-        fillcolor="#ffffff"
-
-        77 [id=77,shape=rect, label=<<font point-size="34">Web Application</font><br /><font point-size="19">[Container: Java and Spring MVC]</font><br /><br /><font point-size="24">Delivers the static content<br />and the Internet banking<br />single page application.</font>>, style=filled, color="#2e6295", fillcolor="#438dd5", fontcolor="#ffffff"]
       }
 
     }

@@ -481,55 +481,20 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         IndentingWriter writer = new IndentingWriter();
         writeHeader(view, writer);
 
+        List<GroupableElement> elements = new ArrayList<>();
+
         for (ElementView elementView : view.getElements()) {
             if (elementView.getElement() instanceof DeploymentNode && elementView.getElement().getParent() == null) {
-                write(view, (DeploymentNode)elementView.getElement(), writer);
+                elements.add((DeploymentNode)elementView.getElement());
             }
         }
+
+        writeElements(view, elements, writer);
 
         writeRelationships(view, writer);
         writeFooter(view, writer);
 
         return createDiagram(view, writer.toString());
-    }
-
-    private void write(DeploymentView view, DeploymentNode deploymentNode, IndentingWriter writer) {
-        startDeploymentNodeBoundary(view, deploymentNode, writer);
-
-        List<DeploymentNode> children = new ArrayList<>(deploymentNode.getChildren());
-        children.sort(Comparator.comparing(DeploymentNode::getName));
-        for (DeploymentNode child : children) {
-            if (view.isElementInView(child)) {
-                write(view, child, writer);
-
-            }
-        }
-
-        List<InfrastructureNode> infrastructureNodes = new ArrayList<>(deploymentNode.getInfrastructureNodes());
-        infrastructureNodes.sort(Comparator.comparing(InfrastructureNode::getName));
-        for (InfrastructureNode infrastructureNode : infrastructureNodes) {
-            if (view.isElementInView(infrastructureNode)) {
-                writeElement(view, infrastructureNode, writer);
-            }
-        }
-
-        List<SoftwareSystemInstance> softwareSystemInstances = new ArrayList<>(deploymentNode.getSoftwareSystemInstances());
-        softwareSystemInstances.sort(Comparator.comparing(SoftwareSystemInstance::getName));
-        for (SoftwareSystemInstance softwareSystemInstance : softwareSystemInstances) {
-            if (view.isElementInView(softwareSystemInstance)) {
-                writeElement(view, softwareSystemInstance, writer);
-            }
-        }
-
-        List<ContainerInstance> containerInstances = new ArrayList<>(deploymentNode.getContainerInstances());
-        containerInstances.sort(Comparator.comparing(ContainerInstance::getName));
-        for (ContainerInstance containerInstance : containerInstances) {
-            if (view.isElementInView(containerInstance)) {
-                writeElement(view, containerInstance, writer);
-            }
-        }
-
-        endDeploymentNodeBoundary(view, writer);
     }
 
     protected void writeElements(ModelView view, List<GroupableElement> elements, IndentingWriter writer) {
@@ -591,7 +556,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
 
                     for (GroupableElement element : elements) {
                         if (group.equals(element.getGroup())) {
-                            writeElement(view, element, writer);
+                            write(view, element, writer);
                         }
                     }
 
@@ -612,7 +577,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
 
                     for (GroupableElement element : elements) {
                         if (group.equals(element.getGroup())) {
-                            writeElement(view, element, writer);
+                            write(view, element, writer);
                         }
                     }
 
@@ -624,7 +589,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
         // then render ungrouped elements
         for (GroupableElement element : elements) {
             if (StringUtils.isNullOrEmpty(element.getGroup())) {
-                writeElement(view, element, writer);
+                write(view, element, writer);
             }
         }
     }
@@ -660,6 +625,56 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
 
     protected abstract void startDeploymentNodeBoundary(DeploymentView view, DeploymentNode deploymentNode, IndentingWriter writer);
     protected abstract void endDeploymentNodeBoundary(ModelView view, IndentingWriter writer);
+
+    private void write(ModelView view, Element element, IndentingWriter writer) {
+        if (view instanceof DeploymentView && element instanceof DeploymentNode) {
+            writeDeploymentNode((DeploymentView)view, (DeploymentNode)element, writer);
+        } else {
+            writeElement(view, element, writer);
+        }
+    }
+
+    private void writeDeploymentNode(DeploymentView view, DeploymentNode deploymentNode, IndentingWriter writer) {
+        startDeploymentNodeBoundary(view, deploymentNode, writer);
+
+        List<GroupableElement> elements = new ArrayList<>();
+
+        List<DeploymentNode> children = new ArrayList<>(deploymentNode.getChildren());
+        children.sort(Comparator.comparing(DeploymentNode::getName));
+        for (DeploymentNode child : children) {
+            if (view.isElementInView(child)) {
+                elements.add(child);
+            }
+        }
+
+        List<InfrastructureNode> infrastructureNodes = new ArrayList<>(deploymentNode.getInfrastructureNodes());
+        infrastructureNodes.sort(Comparator.comparing(InfrastructureNode::getName));
+        for (InfrastructureNode infrastructureNode : infrastructureNodes) {
+            if (view.isElementInView(infrastructureNode)) {
+                elements.add(infrastructureNode);
+            }
+        }
+
+        List<SoftwareSystemInstance> softwareSystemInstances = new ArrayList<>(deploymentNode.getSoftwareSystemInstances());
+        softwareSystemInstances.sort(Comparator.comparing(SoftwareSystemInstance::getName));
+        for (SoftwareSystemInstance softwareSystemInstance : softwareSystemInstances) {
+            if (view.isElementInView(softwareSystemInstance)) {
+                elements.add(softwareSystemInstance);
+            }
+        }
+
+        List<ContainerInstance> containerInstances = new ArrayList<>(deploymentNode.getContainerInstances());
+        containerInstances.sort(Comparator.comparing(ContainerInstance::getName));
+        for (ContainerInstance containerInstance : containerInstances) {
+            if (view.isElementInView(containerInstance)) {
+                elements.add(containerInstance);
+            }
+        }
+
+        writeElements(view, elements, writer);
+
+        endDeploymentNodeBoundary(view, writer);
+    }
 
     protected abstract void writeElement(ModelView view, Element element, IndentingWriter writer);
     protected abstract void writeRelationship(ModelView view, RelationshipView relationshipView, IndentingWriter writer);

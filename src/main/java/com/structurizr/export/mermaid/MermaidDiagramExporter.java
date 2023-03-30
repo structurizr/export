@@ -120,7 +120,7 @@ public class MermaidDiagramExporter extends AbstractDiagramExporter {
 
         writer.writeLine(String.format("subgraph group%s [" + groupName + "]", groupId));
         writer.indent();
-        writer.writeLine(String.format("style group%s fill:#ffffff,stroke:%s,color:%s", groupId, color, color));
+        writer.writeLine(String.format("style group%s fill:#ffffff,stroke:%s,color:%s,stroke-dasharray:5", groupId, color, color));
         writer.writeLine();
     }
 

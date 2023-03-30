@@ -5,6 +5,7 @@
 - C4PlantUMLExporter: `c4plantuml.stdlib` is now `true` by default.
 - StructurizrPlantUMLExporter: Adds a `plantuml.shadow` element style property.
 - StructurizrPlantUMLExporter: Groups now have a dashed border.
+- MermaidDiagramExporter: Groups now have a dashed border.
 - Fixes some minor indentation issues with the diagram exporters.
 - Adds support for grouping deployment nodes, infrastructure nodes, software system instances, and container instances.
 

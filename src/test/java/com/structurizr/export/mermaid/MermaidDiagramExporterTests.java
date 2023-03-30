@@ -229,21 +229,21 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
                 "    style diagram fill:#ffffff,stroke:#ffffff\n" +
                 "\n" +
                 "    subgraph group1 [Group 1]\n" +
-                "      style group1 fill:#ffffff,stroke:#111111,color:#111111\n" +
+                "      style group1 fill:#ffffff,stroke:#111111,color:#111111,stroke-dasharray:5\n" +
                 "\n" +
                 "      1[\"<div style='font-weight: bold'>User 1</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div>\"]\n" +
                 "      style 1 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
                 "    end\n" +
                 "\n" +
                 "    subgraph group2 [Group 2]\n" +
-                "      style group2 fill:#ffffff,stroke:#222222,color:#222222\n" +
+                "      style group2 fill:#ffffff,stroke:#222222,color:#222222,stroke-dasharray:5\n" +
                 "\n" +
                 "      2[\"<div style='font-weight: bold'>User 2</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div>\"]\n" +
                 "      style 2 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
                 "    end\n" +
                 "\n" +
                 "    subgraph group3 [Group 3]\n" +
-                "      style group3 fill:#ffffff,stroke:#cccccc,color:#cccccc\n" +
+                "      style group3 fill:#ffffff,stroke:#cccccc,color:#cccccc,stroke-dasharray:5\n" +
                 "\n" +
                 "      3[\"<div style='font-weight: bold'>User 3</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div>\"]\n" +
                 "      style 3 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
@@ -262,21 +262,21 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
                 "    style diagram fill:#ffffff,stroke:#ffffff\n" +
                 "\n" +
                 "    subgraph group1 [Group 1]\n" +
-                "      style group1 fill:#ffffff,stroke:#111111,color:#111111\n" +
+                "      style group1 fill:#ffffff,stroke:#111111,color:#111111,stroke-dasharray:5\n" +
                 "\n" +
                 "      1[\"<div style='font-weight: bold'>User 1</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div>\"]\n" +
                 "      style 1 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
                 "    end\n" +
                 "\n" +
                 "    subgraph group2 [Group 2]\n" +
-                "      style group2 fill:#ffffff,stroke:#222222,color:#222222\n" +
+                "      style group2 fill:#ffffff,stroke:#222222,color:#222222,stroke-dasharray:5\n" +
                 "\n" +
                 "      2[\"<div style='font-weight: bold'>User 2</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div>\"]\n" +
                 "      style 2 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +
                 "    end\n" +
                 "\n" +
                 "    subgraph group3 [Group 3]\n" +
-                "      style group3 fill:#ffffff,stroke:#aabbcc,color:#aabbcc\n" +
+                "      style group3 fill:#ffffff,stroke:#aabbcc,color:#aabbcc,stroke-dasharray:5\n" +
                 "\n" +
                 "      3[\"<div style='font-weight: bold'>User 3</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div>\"]\n" +
                 "      style 3 fill:#dddddd,stroke:#9a9a9a,color:#000000\n" +

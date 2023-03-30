@@ -45,6 +45,7 @@ rectangle "Enterprise" <<enterprise>> {
   rectangle "Group 2" <<group1>> {
     skinparam RectangleBorderColor<<group1>> #cccccc
     skinparam RectangleFontColor<<group1>> #cccccc
+    skinparam RectangleBorderStyle<<group1>> dashed
 
     rectangle "==D\n<size:10>[Software System]</size>" <<D>> as D
   }
@@ -55,6 +56,7 @@ rectangle "Enterprise" <<enterprise>> {
 rectangle "Group 1" <<group2>> {
   skinparam RectangleBorderColor<<group2>> #cccccc
   skinparam RectangleFontColor<<group2>> #cccccc
+  skinparam RectangleBorderStyle<<group2>> dashed
 
   rectangle "==B\n<size:10>[Software System]</size>" <<B>> as B
 }

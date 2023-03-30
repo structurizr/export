@@ -199,6 +199,8 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             writer.indent();
             writer.writeLine(String.format("skinparam RectangleBorderColor<<group%s>> %s", groupId, color));
             writer.writeLine(String.format("skinparam RectangleFontColor<<group%s>> %s", groupId, color));
+            writer.writeLine(String.format("skinparam RectangleBorderStyle<<group%s>> dashed", groupId));
+
             writer.writeLine();
         }
     }

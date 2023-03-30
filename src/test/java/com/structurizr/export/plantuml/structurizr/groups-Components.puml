@@ -43,6 +43,7 @@ rectangle "F\n<size:10>[Container]</size>" <<D.F>> {
   rectangle "Group 4" <<group1>> {
     skinparam RectangleBorderColor<<group1>> #cccccc
     skinparam RectangleFontColor<<group1>> #cccccc
+    skinparam RectangleBorderStyle<<group1>> dashed
 
     rectangle "==H\n<size:10>[Component]</size>" <<D.F.H>> as D.F.H
   }

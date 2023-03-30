@@ -611,7 +611,8 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
 
         StructurizrPlantUMLExporter exporter = new StructurizrPlantUMLExporter();
         Diagram diagram;
-        String expected = "@startuml\nset separator none\n" +
+        String expected = "@startuml\n" +
+                "set separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -635,6 +636,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "rectangle \"Group\" <<group1>> {\n" +
                 "  skinparam RectangleBorderColor<<group1>> #cccccc\n" +
                 "  skinparam RectangleFontColor<<group1>> #cccccc\n" +
+                "  skinparam RectangleBorderStyle<<group1>> dashed\n" +
                 "\n" +
                 "  rectangle \"==Software System\\n<size:10>[Software System]</size>\" <<SoftwareSystem>> as SoftwareSystem\n" +
                 "}\n" +
@@ -824,6 +826,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  rectangle \"Group 1\" <<group1>> {\n" +
                 "    skinparam RectangleBorderColor<<group1>> #cccccc\n" +
                 "    skinparam RectangleFontColor<<group1>> #cccccc\n" +
+                "    skinparam RectangleBorderStyle<<group1>> dashed\n" +
                 "\n" +
                 "    rectangle \"==Container 1\\n<size:10>[Container]</size>\" <<SoftwareSystem.Container1>> as SoftwareSystem.Container1\n" +
                 "  }\n" +
@@ -831,6 +834,7 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "  rectangle \"Group 2\" <<group2>> {\n" +
                 "    skinparam RectangleBorderColor<<group2>> #cccccc\n" +
                 "    skinparam RectangleFontColor<<group2>> #cccccc\n" +
+                "    skinparam RectangleBorderStyle<<group2>> dashed\n" +
                 "\n" +
                 "    rectangle \"==Container 2\\n<size:10>[Container]</size>\" <<SoftwareSystem.Container2>> as SoftwareSystem.Container2\n" +
                 "  }\n" +
@@ -913,11 +917,13 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
                 "rectangle \"Group 1\" <<group1>> {\n" +
                 "  skinparam RectangleBorderColor<<group1>> #cccccc\n" +
                 "  skinparam RectangleFontColor<<group1>> #cccccc\n" +
+                "  skinparam RectangleBorderStyle<<group1>> dashed\n" +
                 "\n" +
                 "  rectangle \"Server 1\\n<size:10>[Deployment Node]</size>\" <<Default.Server1>> as Default.Server1 {\n" +
                 "    rectangle \"Group 2\" <<group2>> {\n" +
                 "      skinparam RectangleBorderColor<<group2>> #cccccc\n" +
                 "      skinparam RectangleFontColor<<group2>> #cccccc\n" +
+                "      skinparam RectangleBorderStyle<<group2>> dashed\n" +
                 "\n" +
                 "      rectangle \"==Infrastructure Node 2\\n<size:10>[Infrastructure Node]</size>\" <<Default.Server1.InfrastructureNode2>> as Default.Server1.InfrastructureNode2\n" +
                 "      rectangle \"==Software System\\n<size:10>[Software System]</size>\" <<Default.Server1.SoftwareSystem_1>> as Default.Server1.SoftwareSystem_1\n" +

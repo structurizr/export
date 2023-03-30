@@ -1,6 +1,6 @@
 # Changelog
 
-## unreleased
+## 1.14.0 (30th March 2023)
 
 - C4PlantUMLExporter: `c4plantuml.stdlib` is now `true` by default.
 - StructurizrPlantUMLExporter: Adds a `plantuml.shadow` element style property.

@@ -339,7 +339,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             url = "";
         }
 
-        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
+        if (Boolean.TRUE.toString().equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
             addProperties(view, writer, deploymentNode);
         }
 
@@ -399,7 +399,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             url = "";
         }
 
-        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
+        if (Boolean.TRUE.toString().equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_ELEMENT_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
             addProperties(view, writer, element);
         }
 
@@ -499,7 +499,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             return;
         }
 
-        if (Boolean.TRUE.toString().equalsIgnoreCase(view.getViewSet().getConfiguration().getProperties().getOrDefault(C4PLANTUML_RELATIONSHIP_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
+        if (Boolean.TRUE.toString().equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_RELATIONSHIP_PROPERTIES_PROPERTY, Boolean.FALSE.toString()))) {
             addProperties(view, writer, relationship);
         }
 

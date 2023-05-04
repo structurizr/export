@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.14.1 (unreleased)
+
+- C4PlantUMLExporter: Enables `c4plantuml.elementProperties` and `c4plantuml.relationshipProperties` to be defined on the view set or individual views.
+
 ## 1.14.0 (30th March 2023)
 
 - C4PlantUMLExporter: `c4plantuml.stdlib` is now `true` by default.

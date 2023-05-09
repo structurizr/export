@@ -315,7 +315,8 @@
                                 "sourceId": "18",
                                 "destinationId": "29",
                                 "description": "Makes API calls to",
-                                "technology": "JSON/HTTPS"
+                                "technology": "JSON/HTTPS",
+                                "url" : "https://github.com/structurizr/export"
                             },
                             {
                                 "id": "41",

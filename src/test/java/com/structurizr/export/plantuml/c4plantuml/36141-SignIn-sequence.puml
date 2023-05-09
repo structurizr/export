@@ -17,12 +17,12 @@ Container_Boundary("InternetBankingSystem.APIApplication_boundary", "API Applica
 Container(InternetBankingSystem.SinglePageApplication, "Single-Page Application", "JavaScript and Angular", "Provides all of the Internet banking functionality to customers via their web browser.", $tags="Element,Container,Web Browser")
 ContainerDb(InternetBankingSystem.Database, "Database", "Oracle Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.", $tags="Element,Container,Database")
 
-Rel_D(InternetBankingSystem.SinglePageApplication, InternetBankingSystem.APIApplication.SignInController, "1. Submits credentials to", "JSON/HTTPS", $tags="Relationship")
-Rel_D(InternetBankingSystem.APIApplication.SignInController, InternetBankingSystem.APIApplication.SecurityComponent, "2. Validates credentials using", $tags="Relationship")
-Rel_D(InternetBankingSystem.APIApplication.SecurityComponent, InternetBankingSystem.Database, "3. select * from users where username = ?", "JDBC", $tags="Relationship")
-Rel_D(InternetBankingSystem.Database, InternetBankingSystem.APIApplication.SecurityComponent, "4. Returns user data to", "JDBC", $tags="Relationship")
-Rel_D(InternetBankingSystem.APIApplication.SecurityComponent, InternetBankingSystem.APIApplication.SignInController, "5. Returns true if the hashed password matches", $tags="Relationship")
-Rel_D(InternetBankingSystem.APIApplication.SignInController, InternetBankingSystem.SinglePageApplication, "6. Sends back an authentication token to", "JSON/HTTPS", $tags="Relationship")
+Rel_D(InternetBankingSystem.SinglePageApplication, InternetBankingSystem.APIApplication.SignInController, "1. Submits credentials to", "JSON/HTTPS", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem.APIApplication.SignInController, InternetBankingSystem.APIApplication.SecurityComponent, "2. Validates credentials using", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem.APIApplication.SecurityComponent, InternetBankingSystem.Database, "3. select * from users where username = ?", "JDBC", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem.Database, InternetBankingSystem.APIApplication.SecurityComponent, "4. Returns user data to", "JDBC", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem.APIApplication.SecurityComponent, InternetBankingSystem.APIApplication.SignInController, "5. Returns true if the hashed password matches", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem.APIApplication.SignInController, InternetBankingSystem.SinglePageApplication, "6. Sends back an authentication token to", "JSON/HTTPS", $tags="Relationship", $link="")
 
 SHOW_LEGEND(true)
 @enduml

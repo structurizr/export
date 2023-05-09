@@ -19,8 +19,8 @@ Container_Boundary("D.F_boundary", "F", $tags="") {
   Component(D.F.G, "G", "", $tags="")
 }
 
-Rel_D(C, D.F.G, "", $tags="")
-Rel_D(C, D.F.H, "", $tags="")
+Rel_D(C, D.F.G, "", $tags="", $link="")
+Rel_D(C, D.F.H, "", $tags="", $link="")
 
 SHOW_LEGEND(true)
 @enduml

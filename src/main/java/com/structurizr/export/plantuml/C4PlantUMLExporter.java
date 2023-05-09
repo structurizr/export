@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static java.lang.String.format;
 
@@ -517,9 +518,9 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         description += (hasValue(relationshipView.getDescription()) ? relationshipView.getDescription() : hasValue(relationshipView.getRelationship().getDescription()) ? relationshipView.getRelationship().getDescription() : "");
 
         if (StringUtils.isNullOrEmpty(relationship.getTechnology())) {
-            writer.writeLine(format("Rel_D(%s, %s, \"%s\", $tags=\"%s\")", idOf(source), idOf(destination), description, tagsOf(view, relationship)));
+            writer.writeLine(format("Rel_D(%s, %s, \"%s\", $tags=\"%s\", $link=\"%s\")", idOf(source), idOf(destination), description, tagsOf(view, relationship), Objects.toString(relationship.getUrl(), "")));
         } else {
-            writer.writeLine(format("Rel_D(%s, %s, \"%s\", \"%s\", $tags=\"%s\")", idOf(source), idOf(destination), description, relationship.getTechnology(), tagsOf(view, relationship)));
+            writer.writeLine(format("Rel_D(%s, %s, \"%s\", \"%s\", $tags=\"%s\", $link=\"%s\")", idOf(source), idOf(destination), description, relationship.getTechnology(), tagsOf(view, relationship), Objects.toString(relationship.getUrl(), "")));
         }
     }
 

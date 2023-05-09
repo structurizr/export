@@ -31,16 +31,16 @@ System_Boundary("InternetBankingSystem_boundary", "Internet Banking System", $ta
   ContainerDb(InternetBankingSystem.Database, "Database", "Oracle Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.", $tags="Container,Database")
 }
 
-Rel_D(PersonalBankingCustomer, InternetBankingSystem.WebApplication, "Visits bigbank.com/ib using", "HTTPS", $tags="Relationship")
-Rel_D(PersonalBankingCustomer, InternetBankingSystem.SinglePageApplication, "Views account balances, and makes payments using", $tags="Relationship")
-Rel_D(PersonalBankingCustomer, InternetBankingSystem.MobileApp, "Views account balances, and makes payments using", $tags="Relationship")
-Rel_D(InternetBankingSystem.WebApplication, InternetBankingSystem.SinglePageApplication, "Delivers to the customer's web browser", $tags="Relationship")
-Rel_D(InternetBankingSystem.APIApplication, InternetBankingSystem.Database, "Reads from and writes to", "JDBC", $tags="Relationship")
-Rel_D(InternetBankingSystem.APIApplication, MainframeBankingSystem, "Makes API calls to", "XML/HTTPS", $tags="Relationship")
-Rel_D(InternetBankingSystem.APIApplication, EmailSystem, "Sends e-mail using", "SMTP", $tags="Relationship")
-Rel_D(InternetBankingSystem.SinglePageApplication, InternetBankingSystem.APIApplication, "Makes API calls to", "JSON/HTTPS", $tags="Relationship")
-Rel_D(InternetBankingSystem.MobileApp, InternetBankingSystem.APIApplication, "Makes API calls to", "JSON/HTTPS", $tags="Relationship")
-Rel_D(EmailSystem, PersonalBankingCustomer, "Sends e-mails to", $tags="Relationship")
+Rel_D(PersonalBankingCustomer, InternetBankingSystem.WebApplication, "Visits bigbank.com/ib using", "HTTPS", $tags="Relationship", $link="")
+Rel_D(PersonalBankingCustomer, InternetBankingSystem.SinglePageApplication, "Views account balances, and makes payments using", $tags="Relationship", $link="")
+Rel_D(PersonalBankingCustomer, InternetBankingSystem.MobileApp, "Views account balances, and makes payments using", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem.WebApplication, InternetBankingSystem.SinglePageApplication, "Delivers to the customer's web browser", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem.APIApplication, InternetBankingSystem.Database, "Reads from and writes to", "JDBC", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem.APIApplication, MainframeBankingSystem, "Makes API calls to", "XML/HTTPS", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem.APIApplication, EmailSystem, "Sends e-mail using", "SMTP", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem.SinglePageApplication, InternetBankingSystem.APIApplication, "Makes API calls to", "JSON/HTTPS", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem.MobileApp, InternetBankingSystem.APIApplication, "Makes API calls to", "JSON/HTTPS", $tags="Relationship", $link="")
+Rel_D(EmailSystem, PersonalBankingCustomer, "Sends e-mails to", $tags="Relationship", $link="")
 
 SHOW_LEGEND(true)
 @enduml

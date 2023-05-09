@@ -19,8 +19,8 @@ System_Boundary("D_boundary", "D", $tags="") {
   Container(D.E, "E", "", $tags="")
 }
 
-Rel_D(C, D.E, "", $tags="")
-Rel_D(C, D.F, "", $tags="")
+Rel_D(C, D.E, "", $tags="", $link="")
+Rel_D(C, D.F, "", $tags="", $link="")
 
 SHOW_LEGEND(true)
 @enduml

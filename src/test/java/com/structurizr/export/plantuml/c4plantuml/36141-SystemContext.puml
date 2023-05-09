@@ -18,10 +18,10 @@ System(InternetBankingSystem, "Internet Banking System", "Allows customers to vi
 System(MainframeBankingSystem, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.", $tags="Software System,Existing System")
 System(EmailSystem, "E-mail System", "The internal Microsoft Exchange e-mail system.", $tags="Software System,Existing System")
 
-Rel_D(PersonalBankingCustomer, InternetBankingSystem, "Views account balances, and makes payments using", $tags="Relationship")
-Rel_D(InternetBankingSystem, MainframeBankingSystem, "Gets account information from, and makes payments using", $tags="Relationship")
-Rel_D(InternetBankingSystem, EmailSystem, "Sends e-mail using", $tags="Relationship")
-Rel_D(EmailSystem, PersonalBankingCustomer, "Sends e-mails to", $tags="Relationship")
+Rel_D(PersonalBankingCustomer, InternetBankingSystem, "Views account balances, and makes payments using", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem, MainframeBankingSystem, "Gets account information from, and makes payments using", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem, EmailSystem, "Sends e-mail using", $tags="Relationship", $link="")
+Rel_D(EmailSystem, PersonalBankingCustomer, "Sends e-mails to", $tags="Relationship", $link="")
 
 SHOW_LEGEND(true)
 @enduml

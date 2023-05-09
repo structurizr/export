@@ -202,7 +202,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "  Container(SoftwareSystem2.Container2, \"Container 2\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
-                "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $tags=\"\")\n" +
+                "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());
@@ -243,7 +243,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "  Component(SoftwareSystem2.Container2.Component2, \"Component 2\", \"\", $tags=\"\")\n" +
                 "}\n" +
                 "\n" +
-                "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $tags=\"\")\n" +
+                "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());

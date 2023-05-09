@@ -23,9 +23,9 @@ Boundary(group_2, "Group 1", $tags="Group 1") {
 
 System_Ext(A, "A", "", $tags="")
 
-Rel_D(B, C, "", $tags="")
-Rel_D(C, D, "", $tags="")
-Rel_D(A, B, "", $tags="")
+Rel_D(B, C, "", $tags="", $link="")
+Rel_D(C, D, "", $tags="", $link="")
+Rel_D(A, B, "", $tags="", $link="")
 
 SHOW_LEGEND(true)
 @enduml

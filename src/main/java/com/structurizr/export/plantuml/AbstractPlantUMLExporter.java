@@ -237,7 +237,7 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
             int height = bi.getHeight();
 
             scale = MAX_ICON_SIZE / Math.max(width, height);
-        } catch (UnsatisfiedLinkError | IIOException e) {
+        } catch (UnsupportedOperationException | UnsatisfiedLinkError | IIOException e) {
             // This is a known issue on native builds since AWT packages aren't available.
             // So we just swallow the error and use the default scale
         } catch (Exception e) {

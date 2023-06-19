@@ -10,22 +10,22 @@ top to bottom direction
 Enterprise_Boundary(enterprise, "Enterprise") {
   AddBoundaryTag("Group 2", $borderColor="#cccccc", $fontColor="#cccccc")
   Boundary(group_1, "Group 2", $tags="Group 2") {
-    System(D, "D", "", $tags="")
+    System(D, "D", $descr="", $tags="", $link="")
   }
 
-  System(C, "C", "", $tags="")
+  System(C, "C", $descr="", $tags="", $link="")
 }
 
 AddBoundaryTag("Group 1", $borderColor="#cccccc", $fontColor="#cccccc")
 Boundary(group_2, "Group 1", $tags="Group 1") {
-  System_Ext(B, "B", "", $tags="")
+  System_Ext(B, "B", $descr="", $tags="", $link="")
 }
 
-System_Ext(A, "A", "", $tags="")
+System_Ext(A, "A", $descr="", $tags="", $link="")
 
-Rel_D(B, C, "", $tags="")
-Rel_D(C, D, "", $tags="")
-Rel_D(A, B, "", $tags="")
+Rel_D(B, C, "", $techn="", $tags="", $link="")
+Rel_D(C, D, "", $techn="", $tags="", $link="")
+Rel_D(A, B, "", $techn="", $tags="", $link="")
 
 SHOW_LEGEND(true)
 @enduml

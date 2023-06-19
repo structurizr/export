@@ -13,15 +13,15 @@ AddElementTag("Person", $bgColor="#08427b", $borderColor="#052e56", $fontColor="
 
 AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070", $lineStyle = "")
 
-Person_Ext(PersonalBankingCustomer, "Personal Banking Customer", "A customer of the bank, with personal bank accounts.", $tags="Person")
-System(InternetBankingSystem, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.", $tags="Software System")
-System(MainframeBankingSystem, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.", $tags="Software System,Existing System")
-System(EmailSystem, "E-mail System", "The internal Microsoft Exchange e-mail system.", $tags="Software System,Existing System")
+Person_Ext(PersonalBankingCustomer, "Personal Banking Customer", $descr="A customer of the bank, with personal bank accounts.", $tags="Person", $link="")
+System(InternetBankingSystem, "Internet Banking System", $descr="Allows customers to view information about their bank accounts, and make payments.", $tags="Software System", $link="")
+System(MainframeBankingSystem, "Mainframe Banking System", $descr="Stores all of the core banking information about customers, accounts, transactions, etc.", $tags="Software System,Existing System", $link="")
+System(EmailSystem, "E-mail System", $descr="The internal Microsoft Exchange e-mail system.", $tags="Software System,Existing System", $link="")
 
-Rel_D(PersonalBankingCustomer, InternetBankingSystem, "Views account balances, and makes payments using", $tags="Relationship")
-Rel_D(InternetBankingSystem, MainframeBankingSystem, "Gets account information from, and makes payments using", $tags="Relationship")
-Rel_D(InternetBankingSystem, EmailSystem, "Sends e-mail using", $tags="Relationship")
-Rel_D(EmailSystem, PersonalBankingCustomer, "Sends e-mails to", $tags="Relationship")
+Rel_D(PersonalBankingCustomer, InternetBankingSystem, "Views account balances, and makes payments using", $techn="", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem, MainframeBankingSystem, "Gets account information from, and makes payments using", $techn="", $tags="Relationship", $link="")
+Rel_D(InternetBankingSystem, EmailSystem, "Sends e-mail using", $techn="", $tags="Relationship", $link="")
+Rel_D(EmailSystem, PersonalBankingCustomer, "Sends e-mails to", $techn="", $tags="Relationship", $link="")
 
 SHOW_LEGEND(true)
 @enduml

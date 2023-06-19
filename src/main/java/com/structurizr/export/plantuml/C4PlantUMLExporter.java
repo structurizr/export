@@ -333,9 +333,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     @Override
     protected void startDeploymentNodeBoundary(DeploymentView view, DeploymentNode deploymentNode, IndentingWriter writer) {
         String url = deploymentNode.getUrl();
-        if (!StringUtils.isNullOrEmpty(url)) {
-            url = "[[" + url + "]]";
-        } else {
+        if (StringUtils.isNullOrEmpty(url)) {
             url = "";
         }
 
@@ -343,26 +341,21 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
             addProperties(view, writer, deploymentNode);
         }
 
-        if (StringUtils.isNullOrEmpty(deploymentNode.getTechnology())) {
-            writer.writeLine(
-                    format("Deployment_Node(%s, \"%s\", $tags=\"%s\")%s {",
-                            idOf(deploymentNode),
-                            deploymentNode.getName() + (!"1".equals(deploymentNode.getInstances()) ? " (x" + deploymentNode.getInstances() + ")" : ""),
-                            tagsOf(view, deploymentNode),
-                            url
-                    )
-            );
-        } else {
-            writer.writeLine(
-                    format("Deployment_Node(%s, \"%s\", \"%s\", $tags=\"%s\")%s {",
-                            idOf(deploymentNode),
-                            deploymentNode.getName() + (!"1".equals(deploymentNode.getInstances()) ? " (x" + deploymentNode.getInstances() + ")" : ""),
-                            deploymentNode.getTechnology(),
-                            tagsOf(view, deploymentNode),
-                            url
-                    )
-            );
+        String technology = deploymentNode.getTechnology();
+        if (StringUtils.isNullOrEmpty(technology)) {
+            technology = "";
         }
+
+        // Deployment_Node(alias, label, ?type, ?descr, ?sprite, ?tags, ?link)
+        writer.writeLine(
+                format("Deployment_Node(%s, \"%s\", $type=\"%s\", $tags=\"%s\", $link=\"%s\") {",
+                        idOf(deploymentNode),
+                        deploymentNode.getName() + (!"1".equals(deploymentNode.getInstances()) ? " (x" + deploymentNode.getInstances() + ")" : ""),
+                        technology,
+                        tagsOf(view, deploymentNode),
+                        url
+                )
+        );
         writer.indent();
 
         if (!isVisible(view, deploymentNode)) {
@@ -393,9 +386,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         String id = idOf(element);
 
         String url = element.getUrl();
-        if (!StringUtils.isNullOrEmpty(url)) {
-            url = "[[" + url + "]]";
-        } else {
+        if (StringUtils.isNullOrEmpty(url)) {
             url = "";
         }
 
@@ -426,18 +417,28 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
         if (element instanceof Person) {
             Person person = (Person)element;
+            String location = "";
             if (person.getLocation() == Location.External) {
-                writer.writeLine(String.format("Person_Ext(%s, \"%s\", \"%s\", $tags=\"%s\")%s", id, name, description, tagsOf(view, elementToWrite), url));
-            } else {
-                writer.writeLine(String.format("Person(%s, \"%s\", \"%s\", $tags=\"%s\")%s", id, name, description, tagsOf(view, elementToWrite), url));
+                location = "_Ext";
             }
+
+            // Person(alias, label, ?descr, ?sprite, ?tags, ?link, ?type)
+            writer.writeLine(
+                    String.format("Person%s(%s, \"%s\", $descr=\"%s\", $tags=\"%s\", $link=\"%s\")",
+                        location, id, name, description, tagsOf(view, elementToWrite), url)
+            );
         } else if (element instanceof SoftwareSystem) {
             SoftwareSystem softwareSystem = (SoftwareSystem)element;
+            String location = "";
             if (softwareSystem.getLocation() == Location.External) {
-                writer.writeLine(String.format("System_Ext(%s, \"%s\", \"%s\", $tags=\"%s\")%s", id, name, description, tagsOf(view, elementToWrite), url));
-            } else {
-                writer.writeLine(String.format("System(%s, \"%s\", \"%s\", $tags=\"%s\")%s", id, name, description, tagsOf(view, elementToWrite), url));
+                location = "_Ext";
             }
+
+            // System(alias, label, ?descr, ?sprite, ?tags, ?link, ?type)
+            writer.writeLine(
+                    String.format("System%s(%s, \"%s\", $descr=\"%s\", $tags=\"%s\", $link=\"%s\")",
+                        location, id, name, description, tagsOf(view, elementToWrite), url)
+            );
         } else if (element instanceof Container) {
             Container container = (Container)element;
             String shape = "";
@@ -447,32 +448,48 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
                 shape = "Queue";
             }
 
-            if (StringUtils.isNullOrEmpty(container.getTechnology())) {
-                writer.writeLine(String.format("Container%s(%s, \"%s\", \"%s\", $tags=\"%s\")%s", shape, id, name, description, tagsOf(view, elementToWrite), url));
-            } else {
-                writer.writeLine(String.format("Container%s(%s, \"%s\", \"%s\", \"%s\", $tags=\"%s\")%s", shape, id, name, container.getTechnology(), description, tagsOf(view, elementToWrite), url));
+            String technology = container.getTechnology();
+            if (StringUtils.isNullOrEmpty(technology)) {
+                technology = "";
             }
+
+            // Container(alias, label, ?techn, ?descr, ?sprite, ?tags, ?link)
+            writer.writeLine(
+                    String.format("Container%s(%s, \"%s\", $techn=\"%s\", $descr=\"%s\", $tags=\"%s\", $link=\"%s\")",
+                            shape, id, name, technology, description, tagsOf(view, elementToWrite), url)
+            );
         } else if (element instanceof Component) {
             Component component = (Component)element;
             String shape = "";
+
             if (elementStyle.getShape() == Shape.Cylinder) {
                 shape = "Db";
             } else if (elementStyle.getShape() == Shape.Pipe) {
                 shape = "Queue";
             }
 
-            if (StringUtils.isNullOrEmpty(component.getTechnology())) {
-                writer.writeLine(String.format("Component%s(%s, \"%s\", \"%s\", $tags=\"%s\")%s", shape, id, name, description, tagsOf(view, elementToWrite), url));
-            } else {
-                writer.writeLine(String.format("Component%s(%s, \"%s\", \"%s\", \"%s\", $tags=\"%s\")%s", shape, id, name, component.getTechnology(), description, tagsOf(view, elementToWrite), url));
+            String technology = component.getTechnology();
+            if (StringUtils.isNullOrEmpty(technology)) {
+                technology = "";
             }
+
+            // Component(alias, label, ?techn, ?descr, ?sprite, ?tags, ?link)
+            writer.writeLine(
+                    String.format("Component%s(%s, \"%s\", $techn=\"%s\", $descr=\"%s\", $tags=\"%s\", $link=\"%s\")",
+                        shape, id, name, technology, description, tagsOf(view, elementToWrite), url)
+            );
         } else if (element instanceof InfrastructureNode) {
             InfrastructureNode infrastructureNode = (InfrastructureNode)element;
-            if (StringUtils.isNullOrEmpty(infrastructureNode.getTechnology())) {
-                writer.writeLine(format("Deployment_Node(%s, \"%s\", $descr=\"%s\", $tags=\"%s\")%s", idOf(infrastructureNode), name, description, tagsOf(view, elementToWrite), url));
-            } else {
-                writer.writeLine(format("Deployment_Node(%s, \"%s\", \"%s\", \"%s\", $tags=\"%s\")%s", idOf(infrastructureNode), name, infrastructureNode.getTechnology(), description, tagsOf(view, elementToWrite), url));
+            String technology = infrastructureNode.getTechnology();
+            if (StringUtils.isNullOrEmpty(technology)) {
+                technology = "";
             }
+
+            // Deployment_Node(alias, label, ?type, ?descr, ?sprite, ?tags, ?link)
+            writer.writeLine(
+                    String.format("Deployment_Node(%s, \"%s\", $type=\"%s\", $descr=\"%s\", $tags=\"%s\", $link=\"%s\")",
+                        idOf(infrastructureNode), name, technology, description, tagsOf(view, elementToWrite), url)
+            );
         }
 
         if (!isVisible(view, elementToWrite)) {
@@ -523,11 +540,21 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
         description += (hasValue(relationshipView.getDescription()) ? relationshipView.getDescription() : hasValue(relationshipView.getRelationship().getDescription()) ? relationshipView.getRelationship().getDescription() : "");
 
-        if (StringUtils.isNullOrEmpty(relationship.getTechnology())) {
-            writer.writeLine(format("Rel_D(%s, %s, \"%s\", $tags=\"%s\")", idOf(source), idOf(destination), description, tagsOf(view, relationship)));
-        } else {
-            writer.writeLine(format("Rel_D(%s, %s, \"%s\", \"%s\", $tags=\"%s\")", idOf(source), idOf(destination), description, relationship.getTechnology(), tagsOf(view, relationship)));
+        String technology = relationship.getTechnology();
+        if (StringUtils.isNullOrEmpty(technology)) {
+            technology = "";
         }
+
+        String url = relationship.getUrl();
+        if (StringUtils.isNullOrEmpty(url)) {
+            url = "";
+        }
+
+        // Rel(from, to, label, ?techn, ?descr, ?sprite, ?tags, ?link)
+        writer.writeLine(
+                format("Rel_D(%s, %s, \"%s\", $techn=\"%s\", $tags=\"%s\", $link=\"%s\")",
+                        idOf(source), idOf(destination), description, technology, tagsOf(view, relationship), url)
+        );
     }
 
     private void addProperties(ModelView view, IndentingWriter writer, ModelItem element) {

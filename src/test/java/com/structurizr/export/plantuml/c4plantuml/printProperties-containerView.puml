@@ -12,17 +12,17 @@ System_Boundary("SoftwareSystem_boundary", "SoftwareSystem", $tags="") {
   WithoutPropertyHeader()
   AddProperty("IP","127.0.0.1")
   AddProperty("Region","East")
-  Container(SoftwareSystem.Container1, "Container 1", "", $tags="")
+  Container(SoftwareSystem.Container1, "Container 1", $techn="", $descr="", $tags="", $link="")
   WithoutPropertyHeader()
   AddProperty("IP","127.0.0.2")
   AddProperty("Region","West")
-  Container(SoftwareSystem.Container2, "Container 2", "", $tags="")
+  Container(SoftwareSystem.Container2, "Container 2", $techn="", $descr="", $tags="", $link="")
 }
 
 WithoutPropertyHeader()
 AddProperty("Prop1","Value1")
 AddProperty("Prop2","Value2")
-Rel_D(SoftwareSystem.Container1, SoftwareSystem.Container2, "", $tags="")
+Rel_D(SoftwareSystem.Container1, SoftwareSystem.Container2, "", $techn="", $tags="", $link="")
 
 SHOW_LEGEND(true)
 @enduml

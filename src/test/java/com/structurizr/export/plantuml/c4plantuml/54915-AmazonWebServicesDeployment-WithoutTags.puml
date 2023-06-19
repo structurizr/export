@@ -9,20 +9,20 @@ left to right direction
 !include <C4/C4_Container>
 !include <C4/C4_Deployment>
 
-Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $tags="") {
-  Deployment_Node(Live.AmazonWebServices.USEast1, "US-East-1", $tags="") {
-    Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS, "Amazon RDS", $tags="") {
-      Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL, "MySQL", $tags="") {
-        ContainerDb(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Database", "Relational database schema", "Stores information regarding the veterinarians, the clients, and their pets.", $tags="")
+Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $type="", $tags="", $link="") {
+  Deployment_Node(Live.AmazonWebServices.USEast1, "US-East-1", $type="", $tags="", $link="") {
+    Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS, "Amazon RDS", $type="", $tags="", $link="") {
+      Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL, "MySQL", $type="", $tags="", $link="") {
+        ContainerDb(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Database", $techn="Relational database schema", $descr="Stores information regarding the veterinarians, the clients, and their pets.", $tags="", $link="")
       }
 
     }
 
-    Deployment_Node(Live.AmazonWebServices.USEast1.Route53, "Route 53", $descr="Highly available and scalable cloud DNS service.", $tags="")
-    Deployment_Node(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Elastic Load Balancer", $descr="Automatically distributes incoming application traffic.", $tags="")
-    Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup, "Autoscaling group", $tags="") {
-      Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2, "Amazon EC2", $tags="") {
-        Container(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Web Application", "Java and Spring Boot", "Allows employees to view and manage information regarding the veterinarians, the clients, and their pets.", $tags="")
+    Deployment_Node(Live.AmazonWebServices.USEast1.Route53, "Route 53", $type="", $descr="Highly available and scalable cloud DNS service.", $tags="", $link="")
+    Deployment_Node(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Elastic Load Balancer", $type="", $descr="Automatically distributes incoming application traffic.", $tags="", $link="")
+    Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup, "Autoscaling group", $type="", $tags="", $link="") {
+      Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2, "Amazon EC2", $type="", $tags="", $link="") {
+        Container(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Web Application", $techn="Java and Spring Boot", $descr="Allows employees to view and manage information regarding the veterinarians, the clients, and their pets.", $tags="", $link="")
       }
 
     }
@@ -31,9 +31,9 @@ Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $tags="") {
 
 }
 
-Rel_D(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Reads from and writes to", "MySQL Protocol/SSL", $tags="")
-Rel_D(Live.AmazonWebServices.USEast1.Route53, Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Forwards requests to", "HTTPS", $tags="")
-Rel_D(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Forwards requests to", "HTTPS", $tags="")
+Rel_D(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Reads from and writes to", $techn="MySQL Protocol/SSL", $tags="", $link="")
+Rel_D(Live.AmazonWebServices.USEast1.Route53, Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Forwards requests to", $techn="HTTPS", $tags="", $link="")
+Rel_D(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Forwards requests to", $techn="HTTPS", $tags="", $link="")
 
 SHOW_LEGEND(true)
 @enduml

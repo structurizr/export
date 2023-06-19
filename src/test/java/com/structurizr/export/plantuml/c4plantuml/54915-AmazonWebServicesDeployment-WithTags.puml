@@ -22,20 +22,20 @@ AddElementTag("Amazon Web Services - Cloud", $bgColor="#ffffff", $borderColor="#
 
 AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070", $lineStyle = "")
 
-Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $tags="Amazon Web Services - Cloud") {
-  Deployment_Node(Live.AmazonWebServices.USEast1, "US-East-1", $tags="Amazon Web Services - Region") {
-    Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS, "Amazon RDS", $tags="Amazon Web Services - RDS") {
-      Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL, "MySQL", $tags="Amazon Web Services - RDS MySQL instance") {
-        ContainerDb(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Database", "Relational database schema", "Stores information regarding the veterinarians, the clients, and their pets.", $tags="Container,Database")
+Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $type="", $tags="Amazon Web Services - Cloud", $link="") {
+  Deployment_Node(Live.AmazonWebServices.USEast1, "US-East-1", $type="", $tags="Amazon Web Services - Region", $link="") {
+    Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS, "Amazon RDS", $type="", $tags="Amazon Web Services - RDS", $link="") {
+      Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL, "MySQL", $type="", $tags="Amazon Web Services - RDS MySQL instance", $link="") {
+        ContainerDb(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Database", $techn="Relational database schema", $descr="Stores information regarding the veterinarians, the clients, and their pets.", $tags="Container,Database", $link="")
       }
 
     }
 
-    Deployment_Node(Live.AmazonWebServices.USEast1.Route53, "Route 53", $descr="Highly available and scalable cloud DNS service.", $tags="Amazon Web Services - Route 53")
-    Deployment_Node(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Elastic Load Balancer", $descr="Automatically distributes incoming application traffic.", $tags="Amazon Web Services - Elastic Load Balancing")
-    Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup, "Autoscaling group", $tags="Amazon Web Services - Auto Scaling") {
-      Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2, "Amazon EC2", $tags="Amazon Web Services - EC2") {
-        Container(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Web Application", "Java and Spring Boot", "Allows employees to view and manage information regarding the veterinarians, the clients, and their pets.", $tags="Container,Application")
+    Deployment_Node(Live.AmazonWebServices.USEast1.Route53, "Route 53", $type="", $descr="Highly available and scalable cloud DNS service.", $tags="Amazon Web Services - Route 53", $link="")
+    Deployment_Node(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Elastic Load Balancer", $type="", $descr="Automatically distributes incoming application traffic.", $tags="Amazon Web Services - Elastic Load Balancing", $link="")
+    Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup, "Autoscaling group", $type="", $tags="Amazon Web Services - Auto Scaling", $link="") {
+      Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2, "Amazon EC2", $type="", $tags="Amazon Web Services - EC2", $link="") {
+        Container(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Web Application", $techn="Java and Spring Boot", $descr="Allows employees to view and manage information regarding the veterinarians, the clients, and their pets.", $tags="Container,Application", $link="")
       }
 
     }
@@ -44,9 +44,9 @@ Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $tags="Amazon Web
 
 }
 
-Rel_D(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Reads from and writes to", "MySQL Protocol/SSL", $tags="Relationship")
-Rel_D(Live.AmazonWebServices.USEast1.Route53, Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Forwards requests to", "HTTPS", $tags="Relationship")
-Rel_D(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Forwards requests to", "HTTPS", $tags="Relationship")
+Rel_D(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Reads from and writes to", $techn="MySQL Protocol/SSL", $tags="Relationship", $link="")
+Rel_D(Live.AmazonWebServices.USEast1.Route53, Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Forwards requests to", $techn="HTTPS", $tags="Relationship", $link="")
+Rel_D(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Forwards requests to", $techn="HTTPS", $tags="Relationship", $link="")
 
 SHOW_LEGEND(true)
 @enduml

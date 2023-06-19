@@ -185,7 +185,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         containerView.add(container2);
 
         Diagram diagram = new C4PlantUMLExporter().export(containerView);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title Software System 1 - Containers\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -195,14 +196,14 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4_Container>\n" +
                 "\n" +
                 "System_Boundary(\"SoftwareSystem1_boundary\", \"Software System 1\", $tags=\"\") {\n" +
-                "  Container(SoftwareSystem1.Container1, \"Container 1\", \"\", $tags=\"\")\n" +
+                "  Container(SoftwareSystem1.Container1, \"Container 1\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "}\n" +
                 "\n" +
                 "System_Boundary(\"SoftwareSystem2_boundary\", \"Software System 2\", $tags=\"\") {\n" +
-                "  Container(SoftwareSystem2.Container2, \"Container 2\", \"\", $tags=\"\")\n" +
+                "  Container(SoftwareSystem2.Container2, \"Container 2\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "}\n" +
                 "\n" +
-                "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $tags=\"\")\n" +
+                "Rel_D(SoftwareSystem1.Container1, SoftwareSystem2.Container2, \"Uses\", $techn=\"\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());
@@ -226,7 +227,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         componentView.add(component2);
 
         Diagram diagram = new C4PlantUMLExporter().export(componentView);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title Software System 1 - Container 1 - Components\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -236,14 +238,14 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4_Component>\n" +
                 "\n" +
                 "Container_Boundary(\"SoftwareSystem1.Container1_boundary\", \"Container 1\", $tags=\"\") {\n" +
-                "  Component(SoftwareSystem1.Container1.Component1, \"Component 1\", \"\", $tags=\"\")\n" +
+                "  Component(SoftwareSystem1.Container1.Component1, \"Component 1\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "}\n" +
                 "\n" +
                 "Container_Boundary(\"SoftwareSystem2.Container2_boundary\", \"Container 2\", $tags=\"\") {\n" +
-                "  Component(SoftwareSystem2.Container2.Component2, \"Component 2\", \"\", $tags=\"\")\n" +
+                "  Component(SoftwareSystem2.Container2.Component2, \"Component 2\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "}\n" +
                 "\n" +
-                "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $tags=\"\")\n" +
+                "Rel_D(SoftwareSystem1.Container1.Component1, SoftwareSystem2.Container2.Component2, \"Uses\", $techn=\"\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition());
@@ -260,7 +262,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addDefaultElements();
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -268,7 +271,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4>\n" +
                 "!include <C4/C4_Context>\n" +
                 "\n" +
-                "System(SoftwareSystem, \"Software System\", \"\", $tags=\"\")[[https://structurizr.com]]\n" +
+                "System(SoftwareSystem, \"Software System\", $descr=\"\", $tags=\"\", $link=\"https://structurizr.com\")\n" +
                 "\n" +
                 "\n" +
                 "SHOW_LEGEND(true)\n" +
@@ -286,7 +289,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.getViewSet().getConfiguration().addProperty(C4PlantUMLExporter.PLANTUML_INCLUDES_PROPERTY, "styles.puml");
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -295,7 +299,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4_Context>\n" +
                 "!include styles.puml\n" +
                 "\n" +
-                "System(SoftwareSystem, \"Software System\", \"\", $tags=\"\")\n" +
+                "System(SoftwareSystem, \"Software System\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "\n" +
                 "SHOW_LEGEND(true)\n" +
@@ -312,7 +316,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addDefaultElements();
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -320,7 +325,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4>\n" +
                 "!include <C4/C4_Context>\n" +
                 "\n" +
-                "System(SoftwareSystem, \"Software\\nSystem\", \"\", $tags=\"\")\n" +
+                "System(SoftwareSystem, \"Software\\nSystem\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "\n" +
                 "SHOW_LEGEND(true)\n" +
@@ -337,7 +342,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addDefaultElements();
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title Deployment - Default\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -346,8 +352,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4_Context>\n" +
                 "!include <C4/C4_Deployment>\n" +
                 "\n" +
-                "Deployment_Node(Default.Deploymentnode, \"Deployment node\", $tags=\"\") {\n" +
-                "  Deployment_Node(Default.Deploymentnode.Infrastructurenode, \"Infrastructure node\", \"technology\", \"description\", $tags=\"\")\n" +
+                "Deployment_Node(Default.Deploymentnode, \"Deployment node\", $type=\"\", $tags=\"\", $link=\"\") {\n" +
+                "  Deployment_Node(Default.Deploymentnode.Infrastructurenode, \"Infrastructure node\", $type=\"technology\", $descr=\"description\", $tags=\"\", $link=\"\")\n" +
                 "}\n" +
                 "\n" +
                 "\n" +
@@ -414,7 +420,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "true");
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "false");
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -422,7 +429,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4>\n" +
                 "!include <C4/C4_Context>\n" +
                 "\n" +
-                "System(Name, \"Name\", \"\", $tags=\"\")\n" +
+                "System(Name, \"Name\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "\n" +
                 "SHOW_LEGEND(true)\n" +
@@ -432,7 +439,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "true");
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "true");
         diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -440,7 +448,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4>\n" +
                 "!include <C4/C4_Context>\n" +
                 "\n" +
-                "System(Name, \"Name\", \"\", $tags=\"\")\n" +
+                "System(Name, \"Name\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "\n" +
                 "SHOW_LEGEND(false)\n" +
@@ -450,7 +458,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "false");
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "false");
         diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -458,7 +467,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4>\n" +
                 "!include <C4/C4_Context>\n" +
                 "\n" +
-                "System(Name, \"Name\", \"\", $tags=\"\")\n" +
+                "System(Name, \"Name\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "\n" +
                 "hide stereotypes\n" +
@@ -468,7 +477,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_LEGEND_PROPERTY, "false");
         view.addProperty(C4PlantUMLExporter.C4PLANTUML_STEREOTYPES_PROPERTY, "true");
         diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "top to bottom direction\n" +
@@ -476,7 +486,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4>\n" +
                 "!include <C4/C4_Context>\n" +
                 "\n" +
-                "System(Name, \"Name\", \"\", $tags=\"\")\n" +
+                "System(Name, \"Name\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "\n" +
                 "show stereotypes\n" +
@@ -518,10 +528,10 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4_Container>\n" +
                 "\n" +
                 "System_Boundary(\"SoftwareSystem_boundary\", \"Software System\", $tags=\"\") {\n" +
-                "  Container(SoftwareSystem.DefaultContainer, \"Default Container\", \"\", $tags=\"\")\n" +
-                "  ContainerDb(SoftwareSystem.CylinderContainer, \"Cylinder Container\", \"\", $tags=\"\")\n" +
-                "  ContainerQueue(SoftwareSystem.PipeContainer, \"Pipe Container\", \"\", $tags=\"\")\n" +
-                "  Container(SoftwareSystem.RobotContainer, \"Robot Container\", \"\", $tags=\"\")\n" +
+                "  Container(SoftwareSystem.DefaultContainer, \"Default Container\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
+                "  ContainerDb(SoftwareSystem.CylinderContainer, \"Cylinder Container\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
+                "  ContainerQueue(SoftwareSystem.PipeContainer, \"Pipe Container\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
+                "  Container(SoftwareSystem.RobotContainer, \"Robot Container\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "}\n" +
                 "\n" +
                 "\n" +
@@ -567,10 +577,10 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4_Component>\n" +
                 "\n" +
                 "Container_Boundary(\"SoftwareSystem.Container_boundary\", \"Container\", $tags=\"\") {\n" +
-                "  Component(SoftwareSystem.Container.DefaultComponent, \"Default Component\", \"\", $tags=\"\")\n" +
-                "  ComponentDb(SoftwareSystem.Container.CylinderComponent, \"Cylinder Component\", \"\", $tags=\"\")\n" +
-                "  ComponentQueue(SoftwareSystem.Container.PipeComponent, \"Pipe Component\", \"\", $tags=\"\")\n" +
-                "  Component(SoftwareSystem.Container.RobotComponent, \"Robot Component\", \"\", $tags=\"\")\n" +
+                "  Component(SoftwareSystem.Container.DefaultComponent, \"Default Component\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
+                "  ComponentDb(SoftwareSystem.Container.CylinderComponent, \"Cylinder Component\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
+                "  ComponentQueue(SoftwareSystem.Container.PipeComponent, \"Pipe Component\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
+                "  Component(SoftwareSystem.Container.RobotComponent, \"Robot Component\", $techn=\"\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "}\n" +
                 "\n" +
                 "\n" +
@@ -587,7 +597,8 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         workspace.getViews().getConfiguration().getBranding().setFont(new Font("Courier"));
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
-        assertEquals("@startuml\nset separator none\n" +
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
                 "title System Landscape\n" +
                 "\n" +
                 "skinparam {\n" +
@@ -598,7 +609,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4>\n" +
                 "!include <C4/C4_Context>\n" +
                 "\n" +
-                "Person(User, \"User\", \"\", $tags=\"\")\n" +
+                "Person(User, \"User\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "\n" +
                 "SHOW_LEGEND(true)\n" +
@@ -624,12 +635,41 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml\n" +
                 "!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml\n" +
                 "\n" +
-                "Person(User, \"User\", \"\", $tags=\"\")\n" +
+                "Person(User, \"User\", $descr=\"\", $tags=\"\", $link=\"\")\n" +
                 "\n" +
                 "\n" +
                 "SHOW_LEGEND(true)\n" +
                 "@enduml", diagram.getDefinition().toString());
 
+    }
+
+    @Test
+    public void componentWithoutTechnology() {
+        Workspace workspace = new Workspace("Name", "Description");
+        Container container = workspace.getModel().addSoftwareSystem("Name").addContainer("Name");
+        container.addComponent("Name").setDescription("Description");
+
+        ComponentView view = workspace.getViews().createComponentView(container, "key", "Description");
+        view.addAllElements();
+
+        Diagram diagram = new C4PlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
+                "title Name - Name - Components\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
+                "!include <C4/C4_Component>\n" +
+                "\n" +
+                "Container_Boundary(\"Name.Name_boundary\", \"Name\", $tags=\"\") {\n" +
+                "  Component(Name.Name.Name, \"Name\", $techn=\"\", $descr=\"Description\", $tags=\"\", $link=\"\")\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "SHOW_LEGEND(true)\n" +
+                "@enduml", diagram.getDefinition());
     }
 
 }

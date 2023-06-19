@@ -8,19 +8,19 @@ top to bottom direction
 !include <C4/C4_Context>
 !include <C4/C4_Container>
 
-System(C, "C", "", $tags="")
+System(C, "C", $descr="", $tags="", $link="")
 
 System_Boundary("D_boundary", "D", $tags="") {
   AddBoundaryTag("Group 3", $borderColor="#cccccc", $fontColor="#cccccc")
   Boundary(group_1, "Group 3", $tags="Group 3") {
-    Container(D.F, "F", "", $tags="")
+    Container(D.F, "F", $techn="", $descr="", $tags="", $link="")
   }
 
-  Container(D.E, "E", "", $tags="")
+  Container(D.E, "E", $techn="", $descr="", $tags="", $link="")
 }
 
-Rel_D(C, D.E, "", $tags="")
-Rel_D(C, D.F, "", $tags="")
+Rel_D(C, D.E, "", $techn="", $tags="", $link="")
+Rel_D(C, D.F, "", $techn="", $tags="", $link="")
 
 SHOW_LEGEND(true)
 @enduml

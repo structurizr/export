@@ -1,8 +1,9 @@
 # Changelog
 
-## 1.14.1 (unreleased)
+## 1.15.0 (unreleased)
 
 - C4PlantUMLExporter: Enables `c4plantuml.elementProperties` and `c4plantuml.relationshipProperties` to be defined on the view set or individual views.
+- C4PlantUMLExporter: Adds support for ComponentDb and ComponentQueue shapes (#59).
 
 ## 1.14.0 (30th March 2023)
 

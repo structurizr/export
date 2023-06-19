@@ -484,6 +484,101 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     }
 
     @Test
+    public void test_renderContainerShapes() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+        SoftwareSystem softwareSystem = workspace.getModel().addSoftwareSystem("Software System");
+
+        Container container1 = softwareSystem.addContainer("Default Container");
+        Container container2 = softwareSystem.addContainer("Cylinder Container");
+        Container container3 = softwareSystem.addContainer("Pipe Container");
+        Container container4 = softwareSystem.addContainer("Robot Container");
+        container2.addTags("Cylinder");
+        container3.addTags("Pipe");
+        container4.addTags("Robot"); // Just an example of a shape that has no C4-PlantUML mapping.
+
+        ContainerView containerView = workspace.getViews().createContainerView(softwareSystem, "Containers", "");
+        containerView.add(container1);
+        containerView.add(container2);
+        containerView.add(container3);
+        containerView.add(container4);
+
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Cylinder").shape(Shape.Cylinder);
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Pipe").shape(Shape.Pipe);
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Robot").shape(Shape.Robot);
+
+        Diagram diagram = new C4PlantUMLExporter().export(containerView);
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
+                "title Software System - Containers\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
+                "!include <C4/C4_Container>\n" +
+                "\n" +
+                "System_Boundary(\"SoftwareSystem_boundary\", \"Software System\", $tags=\"\") {\n" +
+                "  Container(SoftwareSystem.DefaultContainer, \"Default Container\", \"\", $tags=\"\")\n" +
+                "  ContainerDb(SoftwareSystem.CylinderContainer, \"Cylinder Container\", \"\", $tags=\"\")\n" +
+                "  ContainerQueue(SoftwareSystem.PipeContainer, \"Pipe Container\", \"\", $tags=\"\")\n" +
+                "  Container(SoftwareSystem.RobotContainer, \"Robot Container\", \"\", $tags=\"\")\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "SHOW_LEGEND(true)\n" +
+                "@enduml", diagram.getDefinition());
+    }
+
+    @Test
+    public void test_renderComponentShapes() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+        SoftwareSystem softwareSystem = workspace.getModel().addSoftwareSystem("Software System");
+        Container container = softwareSystem.addContainer("Container");
+
+        Component component1 = container.addComponent("Default Component");
+        Component component2 = container.addComponent("Cylinder Component");
+        Component component3 = container.addComponent("Pipe Component");
+        Component component4 = container.addComponent("Robot Component");
+
+        component2.addTags("Cylinder");
+        component3.addTags("Pipe");
+        component4.addTags("Robot"); // Just an example of a shape that has no C4-PlantUML mapping.
+
+        ContainerView containerView = workspace.getViews().createContainerView(softwareSystem, "Containers", "");
+        ComponentView componentView = workspace.getViews().createComponentView(container, "Components", "");
+        componentView.add(component1);
+        componentView.add(component2);
+        componentView.add(component3);
+        componentView.add(component4);
+
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Cylinder").shape(Shape.Cylinder);
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Pipe").shape(Shape.Pipe);
+        workspace.getViews().getConfiguration().getStyles().addElementStyle("Robot").shape(Shape.Robot);
+
+        Diagram diagram = new C4PlantUMLExporter().export(componentView);
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
+                "title Software System - Container - Components\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
+                "!include <C4/C4_Component>\n" +
+                "\n" +
+                "Container_Boundary(\"SoftwareSystem.Container_boundary\", \"Container\", $tags=\"\") {\n" +
+                "  Component(SoftwareSystem.Container.DefaultComponent, \"Default Component\", \"\", $tags=\"\")\n" +
+                "  ComponentDb(SoftwareSystem.Container.CylinderComponent, \"Cylinder Component\", \"\", $tags=\"\")\n" +
+                "  ComponentQueue(SoftwareSystem.Container.PipeComponent, \"Pipe Component\", \"\", $tags=\"\")\n" +
+                "  Component(SoftwareSystem.Container.RobotComponent, \"Robot Component\", \"\", $tags=\"\")\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "SHOW_LEGEND(true)\n" +
+                "@enduml", diagram.getDefinition());
+    }
+
+    @Test
     public void testFont() {
         Workspace workspace = new Workspace("Name", "Description");
         workspace.getModel().addPerson("User");

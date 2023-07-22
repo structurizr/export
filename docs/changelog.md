@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.16.0 (25th July 2023)
+
+- Updated dependencies and minimum Java version (11).
+
 ## 1.15.0 (21st June 2023)
 
 - C4PlantUMLExporter: Enables `c4plantuml.elementProperties` and `c4plantuml.relationshipProperties` to be defined on the view set or individual views.

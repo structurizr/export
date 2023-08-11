@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.16.1 (unreleased to Maven Central)
+## 1.16.1 (11th August 2023)
 
 - Fixes an issue with nested groups when using `.` as a group separator.
 

@@ -6,6 +6,7 @@ import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public abstract class AbstractDiagramExporter extends AbstractExporter implements DiagramExporter {
@@ -528,8 +529,8 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
                 String context = "";
 
                 for (String group : groupsAsList) {
-                    int groupCount = group.split(groupSeparator).length;
-                    int contextCount = context.split(groupSeparator).length;
+                    int groupCount = group.split(Pattern.quote(groupSeparator)).length;
+                    int contextCount = context.split(Pattern.quote(groupSeparator)).length;
 
                     if (groupCount > contextCount) {
                         // moved from a to a/b
@@ -563,7 +564,7 @@ public abstract class AbstractDiagramExporter extends AbstractExporter implement
                     context = group;
                 }
 
-                int contextCount = context.split(groupSeparator).length;
+                int contextCount = context.split(Pattern.quote(groupSeparator)).length;
                 for (int i = 0; i < contextCount; i++) {
                     endGroupBoundary(view, writer);
 

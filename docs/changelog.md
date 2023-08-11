@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.16.1 (unreleased to Maven Central)
+
+- Fixes an issue with nested groups when using `.` as a group separator.
+
 ## 1.16.0 (25th July 2023)
 
 - Updated dependencies and minimum Java version (11).

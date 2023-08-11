@@ -139,6 +139,25 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
     }
 
     @Test
+    public void test_NestedGroupsExample_WithDotAsGroupSeparator() throws Exception {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addProperty("structurizr.groupSeparator", ".");
+
+        SoftwareSystem a = workspace.getModel().addSoftwareSystem("Team 1");
+        a.setGroup("Organisation 1.Department 1.Team 1");
+
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("SystemLandscape", "Description");
+        view.addAllElements();
+
+        C4PlantUMLExporter exporter = new C4PlantUMLExporter();
+        Collection<Diagram> diagrams = exporter.export(workspace);
+
+        Diagram diagram = diagrams.stream().filter(md -> md.getKey().equals("SystemLandscape")).findFirst().get();
+        String expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/nested-groups-with-dot-separator.puml"));
+        assertEquals(expected, diagram.getDefinition());
+    }
+
+    @Test
     public void test_renderGroupStyles() throws Exception {
         Workspace workspace = new Workspace("Name", "Description");
         workspace.getModel().addPerson("User 1").setGroup("Group 1");

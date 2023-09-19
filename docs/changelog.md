@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.17.0 (unreleased)
+
+- C4PlantUMLExporter: Adds support for border style and stroke width (see https://github.com/structurizr/export/issues/73).
+
 ## 1.16.1 (11th August 2023)
 
 - Fixes an issue with nested groups when using `.` as a group separator.

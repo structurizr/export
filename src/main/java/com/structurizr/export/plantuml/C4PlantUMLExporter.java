@@ -172,13 +172,20 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
                     }
                     sprite = elementStyle.getProperties().getOrDefault(C4PLANTUML_SPRITE, sprite);
 
-                    writer.writeLine(String.format("AddElementTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $sprite=\"%s\", $shadowing=\"%s\")",
+                    int borderThickness = 1;
+                    if (elementStyle.getStrokeWidth() != null) {
+                        borderThickness = elementStyle.getStrokeWidth();
+                    }
+
+                    writer.writeLine(String.format("AddElementTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $sprite=\"%s\", $shadowing=\"%s\", $borderStyle=\"%s\", $borderThickness=\"%s\")",
                             tagList,
                             elementStyle.getBackground(),
                             elementStyle.getStroke(),
                             elementStyle.getColor(),
                             sprite,
-                            elementStyle.getProperties().getOrDefault(C4PLANTUML_SHADOW, "")
+                            elementStyle.getProperties().getOrDefault(C4PLANTUML_SHADOW, ""),
+                            elementStyle.getBorder(),
+                            borderThickness
                     ));
                 }
             }
@@ -213,12 +220,19 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
                     ElementStyle elementStyle = boundaryStyles.get(tagList);
                     tagList = tagList.replaceFirst("Element,", "");
 
-                    writer.writeLine(String.format("AddBoundaryTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $shadowing=\"%s\")",
+                    int borderThickness = 1;
+                    if (elementStyle.getStrokeWidth() != null) {
+                        borderThickness = elementStyle.getStrokeWidth();
+                    }
+
+                    writer.writeLine(String.format("AddBoundaryTag(\"%s\", $bgColor=\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $shadowing=\"%s\", $borderStyle=\"%s\", $borderThickness=\"%s\")",
                             tagList,
                             "#ffffff",
                             elementStyle.getStroke(),
                             elementStyle.getStroke(),
-                            elementStyle.getProperties().getOrDefault(C4PLANTUML_SHADOW, "")
+                            elementStyle.getProperties().getOrDefault(C4PLANTUML_SHADOW, ""),
+                            elementStyle.getBorder(),
+                            borderThickness
                     ));
                 }
             }
@@ -264,6 +278,8 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         }
 
         String color = "#cccccc";
+        String borderStyle = "Dashed";
+        int borderThickness = 1;
 //        String icon = "";
 
         ElementStyle elementStyleForGroup = view.getViewSet().getConfiguration().getStyles().findElementStyle("Group:" + group);
@@ -274,6 +290,19 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         } else if (elementStyleForAllGroups != null && !StringUtils.isNullOrEmpty(elementStyleForAllGroups.getColor())) {
             color = elementStyleForAllGroups.getColor();
         }
+
+        if (elementStyleForGroup != null && !StringUtils.isNullOrEmpty(elementStyleForGroup.getStroke())) {
+            borderStyle = elementStyleForGroup.getStroke();
+        } else if (elementStyleForAllGroups != null && !StringUtils.isNullOrEmpty(elementStyleForAllGroups.getStroke())) {
+            borderStyle = elementStyleForAllGroups.getStroke();
+        }
+
+        if (elementStyleForGroup != null && elementStyleForGroup.getStrokeWidth() != null) {
+            borderThickness = elementStyleForGroup.getStrokeWidth();
+        } else if (elementStyleForAllGroups != null && elementStyleForAllGroups.getStrokeWidth() != null) {
+            borderThickness = elementStyleForAllGroups.getStrokeWidth();
+        }
+
 
 // todo: $sprite doesn't seem to be supported for boundary styles
 //        if (elementStyleForGroup != null && elementStyleHasSupportedIcon(elementStyleForGroup)) {
@@ -287,10 +316,12 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 //            icon = "\\n\\n<img:" + icon + "{scale=" + scale + "}>";
 //        }
 
-        writer.writeLine(String.format("AddBoundaryTag(\"%s\", $borderColor=\"%s\", $fontColor=\"%s\")",
+        writer.writeLine(String.format("AddBoundaryTag(\"%s\", $borderColor=\"%s\", $fontColor=\"%s\", $borderStyle=\"%s\", $borderThickness=\"%s\")",
                 group,
                 color,
-                color)
+                color,
+                borderStyle,
+                borderThickness)
         );
 
         writer.writeLine(String.format("Boundary(group_%s, \"%s\", $tags=\"%s\") {", groupId, groupName, group));

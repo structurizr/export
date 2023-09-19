@@ -691,4 +691,32 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "@enduml", diagram.getDefinition());
     }
 
+    @Test
+    public void borderStyling() {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addSoftwareSystem("Name");
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "Description");
+        view.addAllElements();
+        workspace.getViews().getConfiguration().addProperty(C4PlantUMLExporter.C4PLANTUML_TAGS_PROPERTY, "true");
+        workspace.getViews().getConfiguration().getStyles().addElementStyle(Tags.ELEMENT).stroke("green").border(Border.Dashed).strokeWidth(2);
+
+        Diagram diagram = new C4PlantUMLExporter().export(view);
+        assertEquals("@startuml\n" +
+                "set separator none\n" +
+                "title System Landscape\n" +
+                "\n" +
+                "top to bottom direction\n" +
+                "\n" +
+                "!include <C4/C4>\n" +
+                "!include <C4/C4_Context>\n" +
+                "\n" +
+                "AddElementTag(\"Element\", $bgColor=\"#dddddd\", $borderColor=\"#008000\", $fontColor=\"#000000\", $sprite=\"\", $shadowing=\"\", $borderStyle=\"Dashed\", $borderThickness=\"2\")\n" +
+                "\n" +
+                "System(Name, \"Name\", $descr=\"\", $tags=\"Element\", $link=\"\")\n" +
+                "\n" +
+                "\n" +
+                "SHOW_LEGEND(true)\n" +
+                "@enduml", diagram.getDefinition());
+    }
+
 }

@@ -3,6 +3,7 @@
 ## 1.17.0 (unreleased)
 
 - C4PlantUMLExporter: Adds support for border style and stroke width (see https://github.com/structurizr/export/issues/73).
+- MermaidDiagramExporter: Fixes https://github.com/structurizr/export/issues/80
 
 ## 1.16.1 (11th August 2023)
 

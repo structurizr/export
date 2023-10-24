@@ -145,7 +145,7 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
         assertEquals("graph TB\n" +
                 "  linkStyle default fill:#ffffff\n" +
                 "\n" +
-                "  subgraph diagram [Software System 1 - Containers]\n" +
+                "  subgraph diagram [\"Software System 1 - Containers\"]\n" +
                 "    style diagram fill:#ffffff,stroke:#ffffff\n" +
                 "\n" +
                 "    subgraph 1 [Software System 1]\n" +
@@ -186,7 +186,7 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
         assertEquals("graph TB\n" +
                 "  linkStyle default fill:#ffffff\n" +
                 "\n" +
-                "  subgraph diagram [Software System 1 - Container 1 - Components]\n" +
+                "  subgraph diagram [\"Software System 1 - Container 1 - Components\"]\n" +
                 "    style diagram fill:#ffffff,stroke:#ffffff\n" +
                 "\n" +
                 "    subgraph 2 [Container 1]\n" +
@@ -225,7 +225,7 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
         assertEquals("graph TB\n" +
                 "  linkStyle default fill:#ffffff\n" +
                 "\n" +
-                "  subgraph diagram [System Landscape]\n" +
+                "  subgraph diagram [\"System Landscape\"]\n" +
                 "    style diagram fill:#ffffff,stroke:#ffffff\n" +
                 "\n" +
                 "    subgraph group1 [Group 1]\n" +
@@ -258,7 +258,7 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
         assertEquals("graph TB\n" +
                 "  linkStyle default fill:#ffffff\n" +
                 "\n" +
-                "  subgraph diagram [System Landscape]\n" +
+                "  subgraph diagram [\"System Landscape\"]\n" +
                 "    style diagram fill:#ffffff,stroke:#ffffff\n" +
                 "\n" +
                 "    subgraph group1 [Group 1]\n" +
@@ -302,7 +302,7 @@ public class MermaidDiagramExporterTests extends AbstractExporterTests {
         assertEquals("graph TB\n" +
                 "  linkStyle default fill:#ffffff\n" +
                 "\n" +
-                "  subgraph diagram [Title]\n" +
+                "  subgraph diagram [\"Title\"]\n" +
                 "    style diagram fill:#ffffff,stroke:#ffffff\n" +
                 "\n" +
                 "    1[\"<div style='font-weight: bold'>A</div><div style='font-size: 70%; margin-top: 0px'></div>\"]\n" +

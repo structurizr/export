@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.17.0 (unreleased)
+## 1.17.0 (27th October 2023)
 
 - C4PlantUMLExporter: Adds support for border style and stroke width (#73).
 - C4PlantUMLExporter: Adds support for sequence diagrams (#66).

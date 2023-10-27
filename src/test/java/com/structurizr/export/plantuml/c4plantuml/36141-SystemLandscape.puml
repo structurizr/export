@@ -25,15 +25,15 @@ Enterprise_Boundary(enterprise, "Big Bank plc") {
 
 Person_Ext(PersonalBankingCustomer, "Personal Banking Customer", $descr="A customer of the bank, with personal bank accounts.", $tags="Person", $link="")
 
-Rel_D(ATM, MainframeBankingSystem, "Uses", $techn="", $tags="Relationship", $link="")
-Rel_D(PersonalBankingCustomer, ATM, "Withdraws cash using", $techn="", $tags="Relationship", $link="")
-Rel_D(CustomerServiceStaff, MainframeBankingSystem, "Uses", $techn="", $tags="Relationship", $link="")
-Rel_D(PersonalBankingCustomer, CustomerServiceStaff, "Asks questions to", $techn="Telephone", $tags="Relationship", $link="")
-Rel_D(BackOfficeStaff, MainframeBankingSystem, "Uses", $techn="", $tags="Relationship", $link="")
-Rel_D(PersonalBankingCustomer, InternetBankingSystem, "Views account balances, and makes payments using", $techn="", $tags="Relationship", $link="")
-Rel_D(InternetBankingSystem, MainframeBankingSystem, "Gets account information from, and makes payments using", $techn="", $tags="Relationship", $link="")
-Rel_D(InternetBankingSystem, EmailSystem, "Sends e-mail using", $techn="", $tags="Relationship", $link="")
-Rel_D(EmailSystem, PersonalBankingCustomer, "Sends e-mails to", $techn="", $tags="Relationship", $link="")
+Rel(ATM, MainframeBankingSystem, "Uses", $techn="", $tags="Relationship", $link="")
+Rel(PersonalBankingCustomer, ATM, "Withdraws cash using", $techn="", $tags="Relationship", $link="")
+Rel(CustomerServiceStaff, MainframeBankingSystem, "Uses", $techn="", $tags="Relationship", $link="")
+Rel(PersonalBankingCustomer, CustomerServiceStaff, "Asks questions to", $techn="Telephone", $tags="Relationship", $link="")
+Rel(BackOfficeStaff, MainframeBankingSystem, "Uses", $techn="", $tags="Relationship", $link="")
+Rel(PersonalBankingCustomer, InternetBankingSystem, "Views account balances, and makes payments using", $techn="", $tags="Relationship", $link="")
+Rel(InternetBankingSystem, MainframeBankingSystem, "Gets account information from, and makes payments using", $techn="", $tags="Relationship", $link="")
+Rel(InternetBankingSystem, EmailSystem, "Sends e-mail using", $techn="", $tags="Relationship", $link="")
+Rel(EmailSystem, PersonalBankingCustomer, "Sends e-mails to", $techn="", $tags="Relationship", $link="")
 
 SHOW_LEGEND(true)
 @enduml

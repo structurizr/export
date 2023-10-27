@@ -2,8 +2,10 @@
 
 ## 1.17.0 (unreleased)
 
-- C4PlantUMLExporter: Adds support for border style and stroke width (see https://github.com/structurizr/export/issues/73).
-- MermaidDiagramExporter: Fixes https://github.com/structurizr/export/issues/80
+- C4PlantUMLExporter: Adds support for border style and stroke width (#73).
+- C4PlantUMLExporter: Adds support for sequence diagrams (#66).
+- C4PlantUMLExporter: Relationships are now rendered as `Rel` rather than `Rel_D`.
+- MermaidDiagramExporter: Fixes #80 (Mermaid render error when description contains `(` character).
 
 ## 1.16.1 (11th August 2023)
 

@@ -44,9 +44,9 @@ Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $type="", $tags="
 
 }
 
-Rel_D(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Reads from and writes to", $techn="MySQL Protocol/SSL", $tags="Relationship", $link="")
-Rel_D(Live.AmazonWebServices.USEast1.Route53, Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Forwards requests to", $techn="HTTPS", $tags="Relationship", $link="")
-Rel_D(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Forwards requests to", $techn="HTTPS", $tags="Relationship", $link="")
+Rel(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Reads from and writes to", $techn="MySQL Protocol/SSL", $tags="Relationship", $link="")
+Rel(Live.AmazonWebServices.USEast1.Route53, Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Forwards requests to", $techn="HTTPS", $tags="Relationship", $link="")
+Rel(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Forwards requests to", $techn="HTTPS", $tags="Relationship", $link="")
 
 SHOW_LEGEND(true)
 @enduml

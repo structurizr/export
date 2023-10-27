@@ -6,10 +6,8 @@ import com.structurizr.model.*;
 import com.structurizr.util.StringUtils;
 import com.structurizr.view.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
@@ -23,6 +21,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     public static final String C4PLANTUML_STANDARD_LIBRARY_PROPERTY = "c4plantuml.stdlib";
     public static final String C4PLANTUML_SPRITE = "c4plantuml.sprite";
     public static final String C4PLANTUML_SHADOW = "c4plantuml.shadow";
+    public static final String C4PLANTUML_SEQUENCE_DIAGRAM_PROPERTY = "plantuml.sequenceDiagram";
 
     /**
      * <p>Set this property to <code>true</code> by calling {@link Configuration#addProperty(String, String)} in your
@@ -68,50 +67,58 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
         writeSkinParams(writer);
 
-        if (view.getAutomaticLayout() != null) {
-            switch (view.getAutomaticLayout().getRankDirection()) {
-                case LeftRight:
-                    writer.writeLine("left to right direction");
-                    break;
-                default:
-                    writer.writeLine("top to bottom direction");
-                    break;
+        if (renderAsSequenceDiagram(view)) {
+            if (usePlantUMLStandardLibrary(view)) {
+                writer.writeLine("!include <C4/C4_Sequence>");
+            } else {
+                writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Sequence.puml");
             }
         } else {
-            writer.writeLine("top to bottom direction");
-        }
-
-        writer.writeLine();
-
-        if (usePlantUMLStandardLibrary(view)) {
-            writer.writeLine("!include <C4/C4>");
-            writer.writeLine("!include <C4/C4_Context>");
-        } else {
-            writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml");
-            writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml");
-        }
-
-        if (view.getElements().stream().map(ElementView::getElement).anyMatch(e -> e instanceof Container || e instanceof ContainerInstance)) {
-            if (usePlantUMLStandardLibrary(view)) {
-                writer.writeLine("!include <C4/C4_Container>");
+            if (view.getAutomaticLayout() != null) {
+                switch (view.getAutomaticLayout().getRankDirection()) {
+                    case LeftRight:
+                        writer.writeLine("left to right direction");
+                        break;
+                    default:
+                        writer.writeLine("top to bottom direction");
+                        break;
+                }
             } else {
-                writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml");
+                writer.writeLine("top to bottom direction");
             }
-        }
 
-        if (view.getElements().stream().map(ElementView::getElement).anyMatch(e -> e instanceof Component)) {
+            writer.writeLine();
+
             if (usePlantUMLStandardLibrary(view)) {
-                writer.writeLine("!include <C4/C4_Component>");
+                writer.writeLine("!include <C4/C4>");
+                writer.writeLine("!include <C4/C4_Context>");
             } else {
-                writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml");
+                writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4.puml");
+                writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml");
             }
-        }
 
-        if (view instanceof DeploymentView) {
-            if (usePlantUMLStandardLibrary(view)) {
-                writer.writeLine("!include <C4/C4_Deployment>");
-            } else {
-                writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml");
+            if (view.getElements().stream().map(ElementView::getElement).anyMatch(e -> e instanceof Container || e instanceof ContainerInstance)) {
+                if (usePlantUMLStandardLibrary(view)) {
+                    writer.writeLine("!include <C4/C4_Container>");
+                } else {
+                    writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml");
+                }
+            }
+
+            if (view.getElements().stream().map(ElementView::getElement).anyMatch(e -> e instanceof Component)) {
+                if (usePlantUMLStandardLibrary(view)) {
+                    writer.writeLine("!include <C4/C4_Component>");
+                } else {
+                    writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml");
+                }
+            }
+
+            if (view instanceof DeploymentView) {
+                if (usePlantUMLStandardLibrary(view)) {
+                    writer.writeLine("!include <C4/C4_Deployment>");
+                } else {
+                    writer.writeLine("!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml");
+                }
             }
         }
 
@@ -138,24 +145,28 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
                 relationshipStyles.put(relationshipStyle.getTag(), relationshipStyle);
             }
 
-            // boundaries
-            List<Element> boundaryElements = new ArrayList<>();
-            if (view instanceof ContainerView) {
-                boundaryElements.addAll(getBoundarySoftwareSystems(view));
-            } else if (view instanceof ComponentView) {
-                boundaryElements.addAll(getBoundaryContainers(view));
-            } else if (view instanceof DynamicView) {
-                DynamicView dynamicView = (DynamicView)view;
-                if (dynamicView.getElement() instanceof SoftwareSystem) {
+            if (renderAsSequenceDiagram(view)) {
+                // no boundaries, do nothing
+            } else {
+                // boundaries
+                List<Element> boundaryElements = new ArrayList<>();
+                if (view instanceof ContainerView) {
                     boundaryElements.addAll(getBoundarySoftwareSystems(view));
-                } else if (dynamicView.getElement() instanceof Container) {
+                } else if (view instanceof ComponentView) {
                     boundaryElements.addAll(getBoundaryContainers(view));
+                } else if (view instanceof DynamicView) {
+                    DynamicView dynamicView = (DynamicView) view;
+                    if (dynamicView.getElement() instanceof SoftwareSystem) {
+                        boundaryElements.addAll(getBoundarySoftwareSystems(view));
+                    } else if (dynamicView.getElement() instanceof Container) {
+                        boundaryElements.addAll(getBoundaryContainers(view));
+                    }
                 }
-            }
 
-            for (Element boundaryElement : boundaryElements) {
-                ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(boundaryElement);
-                boundaryStyles.put(elementStyle.getTag(), elementStyle);
+                for (Element boundaryElement : boundaryElements) {
+                    ElementStyle elementStyle = view.getViewSet().getConfiguration().getStyles().findElementStyle(boundaryElement);
+                    boundaryStyles.put(elementStyle.getTag(), elementStyle);
+                }
             }
 
             if (!elementStyles.isEmpty()) {
@@ -407,6 +418,38 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     @Override
+    public Diagram export(DynamicView view, String order) {
+        if (renderAsSequenceDiagram(view)) {
+            IndentingWriter writer = new IndentingWriter();
+            writeHeader(view, writer);
+
+            boolean elementsWritten = false;
+
+            Set<Element> elements = new LinkedHashSet<>();
+            for (RelationshipView relationshipView : view.getRelationships()) {
+                elements.add(relationshipView.getRelationship().getSource());
+                elements.add(relationshipView.getRelationship().getDestination());
+            }
+
+            for (Element element : elements) {
+                writeElement(view, element, writer);
+                elementsWritten = true;
+            }
+
+            if (elementsWritten) {
+                writer.writeLine();
+            }
+
+            writeRelationships(view, writer);
+            writeFooter(view, writer);
+
+            return createDiagram(view, writer.toString());
+        } else {
+            return super.export(view, order);
+        }
+    }
+
+    @Override
     protected void writeElement(ModelView view, Element element, IndentingWriter writer) {
         if (element instanceof CustomElement) {
             return;
@@ -565,8 +608,12 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
         String description = "";
 
-        if (!StringUtils.isNullOrEmpty(relationshipView.getOrder())) {
-            description = relationshipView.getOrder() + ". ";
+        if (renderAsSequenceDiagram(view)) {
+            // do nothing - sequence diagrams don't need the order
+        } else {
+            if (!StringUtils.isNullOrEmpty(relationshipView.getOrder())) {
+                description = relationshipView.getOrder() + ". ";
+            }
         }
 
         description += (hasValue(relationshipView.getDescription()) ? relationshipView.getDescription() : hasValue(relationshipView.getRelationship().getDescription()) ? relationshipView.getRelationship().getDescription() : "");
@@ -583,7 +630,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
         // Rel(from, to, label, ?techn, ?descr, ?sprite, ?tags, ?link)
         writer.writeLine(
-                format("Rel_D(%s, %s, \"%s\", $techn=\"%s\", $tags=\"%s\", $link=\"%s\")",
+                format("Rel(%s, %s, \"%s\", $techn=\"%s\", $tags=\"%s\", $link=\"%s\")",
                         idOf(source), idOf(destination), description, technology, tagsOf(view, relationship), url)
         );
     }
@@ -624,6 +671,10 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
     protected boolean usePlantUMLStandardLibrary(ModelView view) {
         return "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_STANDARD_LIBRARY_PROPERTY, "true"));
+    }
+
+    protected boolean renderAsSequenceDiagram(ModelView view) {
+        return view instanceof DynamicView && "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "false"));
     }
 
 }

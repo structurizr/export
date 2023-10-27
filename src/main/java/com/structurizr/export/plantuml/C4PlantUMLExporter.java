@@ -21,7 +21,6 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     public static final String C4PLANTUML_STANDARD_LIBRARY_PROPERTY = "c4plantuml.stdlib";
     public static final String C4PLANTUML_SPRITE = "c4plantuml.sprite";
     public static final String C4PLANTUML_SHADOW = "c4plantuml.shadow";
-    public static final String C4PLANTUML_SEQUENCE_DIAGRAM_PROPERTY = "plantuml.sequenceDiagram";
 
     /**
      * <p>Set this property to <code>true</code> by calling {@link Configuration#addProperty(String, String)} in your
@@ -674,7 +673,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
     }
 
     protected boolean renderAsSequenceDiagram(ModelView view) {
-        return view instanceof DynamicView && "true".equalsIgnoreCase(getViewOrViewSetProperty(view, C4PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "false"));
+        return view instanceof DynamicView && "true".equalsIgnoreCase(getViewOrViewSetProperty(view, PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "false"));
     }
 
 }

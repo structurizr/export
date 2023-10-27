@@ -14,7 +14,6 @@ import static java.lang.String.format;
 
 public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
 
-    public static final String PLANTUML_SEQUENCE_DIAGRAM_PROPERTY = "plantuml.sequenceDiagram";
     public static final String PLANTUML_SHADOW = "plantuml.shadow";
 
     private int groupId = 0;

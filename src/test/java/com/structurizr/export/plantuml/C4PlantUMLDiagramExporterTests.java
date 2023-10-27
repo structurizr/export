@@ -53,7 +53,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         assertEquals(expected, diagram.getDefinition());
 
         // and the sequence diagram version
-        workspace.getViews().getConfiguration().addProperty(exporter.C4PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "true");
+        workspace.getViews().getConfiguration().addProperty(exporter.PLANTUML_SEQUENCE_DIAGRAM_PROPERTY, "true");
         diagrams = exporter.export(workspace);
         diagram = diagrams.stream().filter(d -> d.getKey().equals("SignIn")).findFirst().get();
         expected = readFile(new File("./src/test/java/com/structurizr/export/plantuml/c4plantuml/36141-SignIn-sequence.puml"));

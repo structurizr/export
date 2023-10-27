@@ -23,6 +23,7 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     public static final String PLANTUML_TITLE_PROPERTY = "plantuml.title";
     public static final String PLANTUML_INCLUDES_PROPERTY = "plantuml.includes";
     public static final String PLANTUML_ANIMATION_PROPERTY = "plantuml.animation";
+    public static final String PLANTUML_SEQUENCE_DIAGRAM_PROPERTY = "plantuml.sequenceDiagram";
 
     private static final double MAX_ICON_SIZE = 30.0;
 

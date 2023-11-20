@@ -473,9 +473,7 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
 
             if (StringUtils.isNullOrEmpty(url)) {
                 url = element.getUrl();
-                if (!StringUtils.isNullOrEmpty(url)) {
-                    url = "[[" + url + "]]";
-                } else {
+                if (StringUtils.isNullOrEmpty(url)) {
                     url = "";
                 }
             }

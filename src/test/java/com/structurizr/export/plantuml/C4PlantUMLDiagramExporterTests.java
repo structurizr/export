@@ -726,4 +726,30 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "@enduml", diagram.getDefinition());
     }
 
+    @Test
+    public void elementWithUrl() {
+        Workspace workspace = new Workspace("Name", "Description");
+        workspace.getModel().addSoftwareSystem("Name").setUrl("https://example.com");
+
+        SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "Description");
+        view.addAllElements();
+
+        Diagram diagram = new C4PlantUMLExporter().export(view);
+        assertEquals("""
+                @startuml
+                set separator none
+                title System Landscape
+                                
+                top to bottom direction
+                                
+                !include <C4/C4>
+                !include <C4/C4_Context>
+                                
+                System(Name, "Name", $descr="", $tags="", $link="https://example.com")
+                                
+                                
+                SHOW_LEGEND(true)
+                @enduml""", diagram.getDefinition());
+    }
+
 }

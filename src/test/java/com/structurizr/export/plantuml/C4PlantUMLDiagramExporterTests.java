@@ -312,7 +312,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
         SystemLandscapeView view = workspace.getViews().createSystemLandscapeView("key", "Description");
         view.addDefaultElements();
 
-        view.getViewSet().getConfiguration().addProperty(C4PlantUMLExporter.PLANTUML_INCLUDES_PROPERTY, "styles.puml");
+        view.addProperty(C4PlantUMLExporter.PLANTUML_INCLUDES_PROPERTY, "styles.puml");
 
         Diagram diagram = new C4PlantUMLExporter().export(view);
         assertEquals("@startuml\n" +

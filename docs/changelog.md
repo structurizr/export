@@ -3,6 +3,7 @@
 ## (unreleased)
 
 - C4PlantUMLExporter: Fixes #83 (C4Plantuml export renders url property in wrong format).
+- Allow `plantuml.includes` property to be defined in individual views (#84).
 
 ## 1.17.0 (27th October 2023)
 

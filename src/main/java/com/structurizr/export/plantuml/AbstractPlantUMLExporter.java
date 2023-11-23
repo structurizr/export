@@ -204,7 +204,7 @@ public abstract class AbstractPlantUMLExporter extends AbstractDiagramExporter {
     }
 
     protected void writeIncludes(ModelView view, IndentingWriter writer) {
-        String[] includes = view.getViewSet().getConfiguration().getProperties().getOrDefault(PLANTUML_INCLUDES_PROPERTY, "").split(",");
+        String[] includes = getViewOrViewSetProperty(view, PLANTUML_INCLUDES_PROPERTY, "").split(",");
         for (String include : includes) {
             if (!StringUtils.isNullOrEmpty(include)) {
                 include = include.trim();

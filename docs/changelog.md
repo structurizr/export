@@ -1,9 +1,10 @@
 # Changelog
 
-## (unreleased)
+## 1.18.0 (26th November 2023)
 
 - C4PlantUMLExporter: Fixes #83 (C4Plantuml export renders url property in wrong format).
 - Allow `plantuml.includes` property to be defined in individual views (#84).
+- Updated dependencies.
 
 ## 1.17.0 (27th October 2023)
 

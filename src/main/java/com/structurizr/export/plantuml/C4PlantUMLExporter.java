@@ -386,13 +386,18 @@ public class C4PlantUMLExporter extends AbstractPlantUMLExporter {
         if (StringUtils.isNullOrEmpty(technology)) {
             technology = "";
         }
+        String description = deploymentNode.getDescription();
+        if (StringUtils.isNullOrEmpty(description)) {
+            description = "";
+        }
 
         // Deployment_Node(alias, label, ?type, ?descr, ?sprite, ?tags, ?link)
         writer.writeLine(
-                format("Deployment_Node(%s, \"%s\", $type=\"%s\", $tags=\"%s\", $link=\"%s\") {",
+                format("Deployment_Node(%s, \"%s\", $type=\"%s\", $descr=\"%s\", $tags=\"%s\", $link=\"%s\") {",
                         idOf(deploymentNode),
                         deploymentNode.getName() + (!"1".equals(deploymentNode.getInstances()) ? " (x" + deploymentNode.getInstances() + ")" : ""),
                         technology,
+                        description,
                         tagsOf(view, deploymentNode),
                         url
                 )

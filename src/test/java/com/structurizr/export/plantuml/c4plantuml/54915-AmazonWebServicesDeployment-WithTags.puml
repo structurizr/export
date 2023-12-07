@@ -22,10 +22,10 @@ AddElementTag("Amazon Web Services - Cloud", $bgColor="#ffffff", $borderColor="#
 
 AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070", $lineStyle = "")
 
-Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $type="", $tags="Amazon Web Services - Cloud", $link="") {
-  Deployment_Node(Live.AmazonWebServices.USEast1, "US-East-1", $type="", $tags="Amazon Web Services - Region", $link="") {
-    Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS, "Amazon RDS", $type="", $tags="Amazon Web Services - RDS", $link="") {
-      Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL, "MySQL", $type="", $tags="Amazon Web Services - RDS MySQL instance", $link="") {
+Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $type="", $descr="", $tags="Amazon Web Services - Cloud", $link="") {
+  Deployment_Node(Live.AmazonWebServices.USEast1, "US-East-1", $type="", $descr="", $tags="Amazon Web Services - Region", $link="") {
+    Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS, "Amazon RDS", $type="", $descr="", $tags="Amazon Web Services - RDS", $link="") {
+      Deployment_Node(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL, "MySQL", $type="", $descr="", $tags="Amazon Web Services - RDS MySQL instance", $link="") {
         ContainerDb(Live.AmazonWebServices.USEast1.AmazonRDS.MySQL.Database_1, "Database", $techn="Relational database schema", $descr="Stores information regarding the veterinarians, the clients, and their pets.", $tags="Container,Database", $link="")
       }
 
@@ -33,8 +33,8 @@ Deployment_Node(Live.AmazonWebServices, "Amazon Web Services", $type="", $tags="
 
     Deployment_Node(Live.AmazonWebServices.USEast1.Route53, "Route 53", $type="", $descr="Highly available and scalable cloud DNS service.", $tags="Amazon Web Services - Route 53", $link="")
     Deployment_Node(Live.AmazonWebServices.USEast1.ElasticLoadBalancer, "Elastic Load Balancer", $type="", $descr="Automatically distributes incoming application traffic.", $tags="Amazon Web Services - Elastic Load Balancing", $link="")
-    Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup, "Autoscaling group", $type="", $tags="Amazon Web Services - Auto Scaling", $link="") {
-      Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2, "Amazon EC2", $type="", $tags="Amazon Web Services - EC2", $link="") {
+    Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup, "Autoscaling group", $type="", $descr="", $tags="Amazon Web Services - Auto Scaling", $link="") {
+      Deployment_Node(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2, "Amazon EC2", $type="", $descr="", $tags="Amazon Web Services - EC2", $link="") {
         Container(Live.AmazonWebServices.USEast1.Autoscalinggroup.AmazonEC2.WebApplication_1, "Web Application", $techn="Java and Spring Boot", $descr="Allows employees to view and manage information regarding the veterinarians, the clients, and their pets.", $tags="Container,Application", $link="")
       }
 

@@ -334,13 +334,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
             String description = element.getDescription();
             String type = typeOf(view, element, true);
             String icon = "";
-
             String url = element.getUrl();
-            if (!StringUtils.isNullOrEmpty(url)) {
-                url = " [[" + url + "]]";
-            } else {
-                url = "";
-            }
 
             if (element instanceof StaticStructureElementInstance) {
                 StaticStructureElementInstance elementInstance = (StaticStructureElementInstance) element;
@@ -348,15 +342,17 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
                 description = elementInstance.getElement().getDescription();
                 type = typeOf(view, elementInstance.getElement(), true);
                 shape = plantUMLShapeOf(view, elementInstance.getElement());
+                url = elementInstance.getUrl();
 
                 if (StringUtils.isNullOrEmpty(url)) {
-                    url = element.getUrl();
-                    if (!StringUtils.isNullOrEmpty(url)) {
-                        url = " [[" + url + "]]";
-                    } else {
-                        url = "";
-                    }
+                    url = elementInstance.getElement().getUrl();
                 }
+            }
+
+            if (!StringUtils.isNullOrEmpty(url)) {
+                url = " [[" + url + "]]";
+            } else {
+                url = "";
             }
 
             if (StringUtils.isNullOrEmpty(description) || false == elementStyle.getDescription()) {

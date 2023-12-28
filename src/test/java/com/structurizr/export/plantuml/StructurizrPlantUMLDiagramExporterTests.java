@@ -947,4 +947,85 @@ public class StructurizrPlantUMLDiagramExporterTests extends AbstractExporterTes
         assertEquals(expectedResult, diagram.getDefinition());
     }
 
+    @Test
+    public void test_ElementInstanceUrl() {
+        Workspace workspace = new Workspace("Name", "Description");
+        SoftwareSystem a = workspace.getModel().addSoftwareSystem("A");
+        a.setUrl("https://example.com/url1");
+        SoftwareSystemInstance aInstance = workspace.getModel().addDeploymentNode("Node").add(a);
+
+        DeploymentView view = workspace.getViews().createDeploymentView("deployment", "Default");
+        view.add(aInstance);
+
+        assertEquals("""
+@startuml
+set separator none
+title Deployment - Default
+
+top to bottom direction
+
+skinparam {
+  arrowFontSize 10
+  defaultTextAlignment center
+  wrapWidth 200
+  maxMessageSize 100
+}
+
+hide stereotype
+
+skinparam rectangle<<Default.Node.A_1>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+  shadowing false
+}
+skinparam rectangle<<Default.Node>> {
+  BackgroundColor #ffffff
+  FontColor #000000
+  BorderColor #888888
+  shadowing false
+}
+
+rectangle "Node\\n<size:10>[Deployment Node]</size>" <<Default.Node>> as Default.Node {
+  rectangle "==A\\n<size:10>[Software System]</size>" <<Default.Node.A_1>> as Default.Node.A_1 [[https://example.com/url1]]
+}
+
+@enduml""", new StructurizrPlantUMLExporter().export(view).getDefinition());
+
+        aInstance.setUrl("https://example.com/url2");
+        assertEquals("""
+@startuml
+set separator none
+title Deployment - Default
+
+top to bottom direction
+
+skinparam {
+  arrowFontSize 10
+  defaultTextAlignment center
+  wrapWidth 200
+  maxMessageSize 100
+}
+
+hide stereotype
+
+skinparam rectangle<<Default.Node.A_1>> {
+  BackgroundColor #dddddd
+  FontColor #000000
+  BorderColor #9a9a9a
+  shadowing false
+}
+skinparam rectangle<<Default.Node>> {
+  BackgroundColor #ffffff
+  FontColor #000000
+  BorderColor #888888
+  shadowing false
+}
+
+rectangle "Node\\n<size:10>[Deployment Node]</size>" <<Default.Node>> as Default.Node {
+  rectangle "==A\\n<size:10>[Software System]</size>" <<Default.Node.A_1>> as Default.Node.A_1 [[https://example.com/url2]]
+}
+
+@enduml""", new StructurizrPlantUMLExporter().export(view).getDefinition());    }
+
 }

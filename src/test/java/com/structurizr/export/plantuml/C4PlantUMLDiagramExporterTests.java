@@ -378,7 +378,7 @@ public class C4PlantUMLDiagramExporterTests extends AbstractExporterTests {
                 "!include <C4/C4_Context>\n" +
                 "!include <C4/C4_Deployment>\n" +
                 "\n" +
-                "Deployment_Node(Default.Deploymentnode, \"Deployment node\", $type=\"\", $tags=\"\", $link=\"\") {\n" +
+                "Deployment_Node(Default.Deploymentnode, \"Deployment node\", $type=\"\", $descr=\"\", $tags=\"\", $link=\"\") {\n" +
                 "  Deployment_Node(Default.Deploymentnode.Infrastructurenode, \"Infrastructure node\", $type=\"technology\", $descr=\"description\", $tags=\"\", $link=\"\")\n" +
                 "}\n" +
                 "\n" +

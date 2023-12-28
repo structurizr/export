@@ -21,45 +21,45 @@ AddElementTag("Container,Web Browser", $bgColor="#438dd5", $borderColor="#2e6295
 AddRelTag("Failover", $textColor="#707070", $lineColor="#707070", $lineStyle = "")
 AddRelTag("Relationship", $textColor="#707070", $lineColor="#707070", $lineStyle = "")
 
-Deployment_Node(Live.Customersmobiledevice, "Customer's mobile device", $type="Apple iOS or Android", $tags="Element", $link="") {
+Deployment_Node(Live.Customersmobiledevice, "Customer's mobile device", $type="Apple iOS or Android", $descr="", $tags="Element", $link="") {
   Container(Live.Customersmobiledevice.MobileApp_1, "Mobile App", $techn="Xamarin", $descr="Provides a limited subset of the Internet banking functionality to customers via their mobile device.", $tags="Container,Mobile App", $link="")
 }
 
-Deployment_Node(Live.Customerscomputer, "Customer's computer", $type="Microsoft Windows or Apple macOS", $tags="Element", $link="") {
-  Deployment_Node(Live.Customerscomputer.WebBrowser, "Web Browser", $type="Chrome, Firefox, Safari, or Edge", $tags="Element", $link="") {
+Deployment_Node(Live.Customerscomputer, "Customer's computer", $type="Microsoft Windows or Apple macOS", $descr="", $tags="Element", $link="") {
+  Deployment_Node(Live.Customerscomputer.WebBrowser, "Web Browser", $type="Chrome, Firefox, Safari, or Edge", $descr="", $tags="Element", $link="") {
     Container(Live.Customerscomputer.WebBrowser.SinglePageApplication_1, "Single-Page Application", $techn="JavaScript and Angular", $descr="Provides all of the Internet banking functionality to customers via their web browser.", $tags="Container,Web Browser", $link="")
   }
 
 }
 
-Deployment_Node(Live.BigBankplc, "Big Bank plc", $type="Big Bank plc data center", $tags="Element", $link="") {
-  Deployment_Node(Live.BigBankplc.bigbankprod001, "bigbank-prod001", $type="", $tags="Element", $link="") {
+Deployment_Node(Live.BigBankplc, "Big Bank plc", $type="Big Bank plc data center", $descr="", $tags="Element", $link="") {
+  Deployment_Node(Live.BigBankplc.bigbankprod001, "bigbank-prod001", $type="", $descr="", $tags="Element", $link="") {
     System(Live.BigBankplc.bigbankprod001.MainframeBankingSystem_1, "Mainframe Banking System", $descr="Stores all of the core banking information about customers, accounts, transactions, etc.", $tags="Software System,Existing System", $link="")
   }
 
-  Deployment_Node(Live.BigBankplc.bigbankweb, "bigbank-web*** (x4)", $type="Ubuntu 16.04 LTS", $tags="Element", $link="") {
-    Deployment_Node(Live.BigBankplc.bigbankweb.ApacheTomcat, "Apache Tomcat", $type="Apache Tomcat 8.x", $tags="Element", $link="") {
+  Deployment_Node(Live.BigBankplc.bigbankweb, "bigbank-web*** (x4)", $type="Ubuntu 16.04 LTS", $descr="A web server residing in the web server farm, accessed via F5 BIG-IP LTMs.", $tags="Element", $link="") {
+    Deployment_Node(Live.BigBankplc.bigbankweb.ApacheTomcat, "Apache Tomcat", $type="Apache Tomcat 8.x", $descr="An open source Java EE web server.", $tags="Element", $link="") {
       Container(Live.BigBankplc.bigbankweb.ApacheTomcat.WebApplication_1, "Web Application", $techn="Java and Spring MVC", $descr="Delivers the static content and the Internet banking single page application.", $tags="Container", $link="")
     }
 
   }
 
-  Deployment_Node(Live.BigBankplc.bigbankapi, "bigbank-api*** (x8)", $type="Ubuntu 16.04 LTS", $tags="Element", $link="") {
-    Deployment_Node(Live.BigBankplc.bigbankapi.ApacheTomcat, "Apache Tomcat", $type="Apache Tomcat 8.x", $tags="Element", $link="") {
+  Deployment_Node(Live.BigBankplc.bigbankapi, "bigbank-api*** (x8)", $type="Ubuntu 16.04 LTS", $descr="A web server residing in the web server farm, accessed via F5 BIG-IP LTMs.", $tags="Element", $link="") {
+    Deployment_Node(Live.BigBankplc.bigbankapi.ApacheTomcat, "Apache Tomcat", $type="Apache Tomcat 8.x", $descr="An open source Java EE web server.", $tags="Element", $link="") {
       Container(Live.BigBankplc.bigbankapi.ApacheTomcat.APIApplication_1, "API Application", $techn="Java and Spring MVC", $descr="Provides Internet banking functionality via a JSON/HTTPS API.", $tags="Container", $link="")
     }
 
   }
 
-  Deployment_Node(Live.BigBankplc.bigbankdb01, "bigbank-db01", $type="Ubuntu 16.04 LTS", $tags="Element", $link="") {
-    Deployment_Node(Live.BigBankplc.bigbankdb01.OraclePrimary, "Oracle - Primary", $type="Oracle 12c", $tags="Element", $link="") {
+  Deployment_Node(Live.BigBankplc.bigbankdb01, "bigbank-db01", $type="Ubuntu 16.04 LTS", $descr="The primary database server.", $tags="Element", $link="") {
+    Deployment_Node(Live.BigBankplc.bigbankdb01.OraclePrimary, "Oracle - Primary", $type="Oracle 12c", $descr="The primary, live database server.", $tags="Element", $link="") {
       ContainerDb(Live.BigBankplc.bigbankdb01.OraclePrimary.Database_1, "Database", $techn="Oracle Database Schema", $descr="Stores user registration information, hashed authentication credentials, access logs, etc.", $tags="Container,Database", $link="")
     }
 
   }
 
-  Deployment_Node(Live.BigBankplc.bigbankdb02, "bigbank-db02", $type="Ubuntu 16.04 LTS", $tags="Failover", $link="") {
-    Deployment_Node(Live.BigBankplc.bigbankdb02.OracleSecondary, "Oracle - Secondary", $type="Oracle 12c", $tags="Failover", $link="") {
+  Deployment_Node(Live.BigBankplc.bigbankdb02, "bigbank-db02", $type="Ubuntu 16.04 LTS", $descr="The secondary database server.", $tags="Failover", $link="") {
+    Deployment_Node(Live.BigBankplc.bigbankdb02.OracleSecondary, "Oracle - Secondary", $type="Oracle 12c", $descr="A secondary, standby database server, used for failover purposes only.", $tags="Failover", $link="") {
       ContainerDb(Live.BigBankplc.bigbankdb02.OracleSecondary.Database_2, "Database", $techn="Oracle Database Schema", $descr="Stores user registration information, hashed authentication credentials, access logs, etc.", $tags="Container,Database,Failover", $link="")
     }
 

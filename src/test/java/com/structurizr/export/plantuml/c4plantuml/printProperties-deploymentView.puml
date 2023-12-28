@@ -10,7 +10,7 @@ top to bottom direction
 
 WithoutPropertyHeader()
 AddProperty("Prop1","Value1")
-Deployment_Node(Default.Deploymentnode, "Deployment node", $type="", $tags="", $link="") {
+Deployment_Node(Default.Deploymentnode, "Deployment node", $type="", $descr="", $tags="", $link="") {
   WithoutPropertyHeader()
   AddProperty("Prop2","Value2")
   Deployment_Node(Default.Deploymentnode.Infrastructurenode, "Infrastructure node", $type="technology", $descr="description", $tags="", $link="")

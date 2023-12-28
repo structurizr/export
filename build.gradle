@@ -23,7 +23,7 @@ targetCompatibility = 17
 
 description = 'Export Structurizr models and views to external formats'
 group = 'com.structurizr'
-version = '1.18.0'
+version = '1.19.0'
 
 test {
     useJUnitPlatform()

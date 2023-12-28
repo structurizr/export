@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.19.0 (unreleased)
+
+- C4PlantUMLExporter: Added `$descr` field in deployment nodes.
+
 ## 1.18.0 (26th November 2023)
 
 - C4PlantUMLExporter: Fixes #83 (C4Plantuml export renders url property in wrong format).

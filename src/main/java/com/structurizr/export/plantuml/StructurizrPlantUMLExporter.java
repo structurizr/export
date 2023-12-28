@@ -258,20 +258,20 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
         }
 
         String url = deploymentNode.getUrl();
+        String nodeName = deploymentNode.getName()
         if (!StringUtils.isNullOrEmpty(url)) {
-            url = " [[" + url + "]]";
+            nodeName = " [[" + url + " " + nodeName + "]]";
         } else {
             url = "";
         }
 
         writer.writeLine(
                 format("rectangle \"%s\\n<size:10>%s</size>%s\" <<%s>> as %s%s {",
-                        deploymentNode.getName() + (!"1".equals(deploymentNode.getInstances()) ? " (x" + deploymentNode.getInstances() + ")" : ""),
+                        nodeName + (!"1".equals(deploymentNode.getInstances()) ? " (x" + deploymentNode.getInstances() + ")" : ""),
                         typeOf(view, deploymentNode, true),
                         icon,
                         idOf(deploymentNode),
-                        idOf(deploymentNode),
-                        url
+                        idOf(deploymentNode)
                 )
         );
         writer.indent();
@@ -350,7 +350,7 @@ public class StructurizrPlantUMLExporter extends AbstractPlantUMLExporter {
                 shape = plantUMLShapeOf(view, elementInstance.getElement());
 
                 if (StringUtils.isNullOrEmpty(url)) {
-                    url = element.getUrl();
+                    url = elementInstance.getUrl();
                     if (!StringUtils.isNullOrEmpty(url)) {
                         url = " [[" + url + "]]";
                     } else {

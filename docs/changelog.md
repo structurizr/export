@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.19.0 (unreleased)
+## 1.19.0 (29th December 2023)
 
 - C4PlantUMLExporter: Added `$descr` field in deployment nodes.
 - StructurizrPlantUMLExporter: Fixes an issue with software system/container instance URLs not being output.

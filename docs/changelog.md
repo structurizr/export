@@ -4,7 +4,7 @@
 
 - C4PlantUMLExporter: Added `$descr` field in deployment nodes.
 - StructurizrPlantUMLExporter: Fixes an issue with software system/container instance URLs not being output.
-- Updated dependencies.
+- Updates structurizr/java to [v1.29.0](https://github.com/structurizr/java/releases/tag/v1.29.0).
 
 ## 1.18.0 (26th November 2023)
 

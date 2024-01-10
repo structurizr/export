@@ -1,8 +1,1 @@
-# Structurizr exporters
-
-This library provides the ability to export the model and views defined in a Structurizr workspace to a number of formats,
-including PlantUML and C4-PlantUML, Mermaid, DOT, WebSequenceDiagrams, and Ilograph.
-
-- [Structurizr DSL demo page](https://structurizr.com/dsl) (demo of export formats)
-- [Documentation](https://docs.structurizr.com/export)
-- [Changelog](docs/changelog.md)
+The code in this repo has been moved to https://github.com/structurizr/java/tree/master/structurizr-export
